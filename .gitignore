@@ -1,0 +1,65 @@
+# ─────────────────────────────────────────────────────────────
+# project-fingerprint .gitignore
+# Rule (lessons-learned §1): never let regenerable bulk into the repo.
+# Track lockfiles; ignore what they regenerate. Last project: 22.8 GB
+# of scaffolding around a few MB of actual research. Not again.
+# ─────────────────────────────────────────────────────────────
+
+# --- Lean / Mathlib ---
+/.lake/
+/lake-packages/
+/build/
+*.olean
+*.ilean
+*.trace
+# KEEP these (reproducible environment — do NOT ignore):
+#   lean-toolchain
+#   lake-manifest.json
+
+# --- Python (search drivers: PSLQ, mpmath, sympy, OpenEvolve) ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+# KEEP: requirements.txt / pyproject.toml / uv.lock (pin the environment)
+
+# --- Node (if any JS tooling) ---
+node_modules/
+# KEEP: package.json, package-lock.json
+
+# --- Model weights & evolved-code artifacts (THE bulk for THIS project) ---
+# Goedel-Prover / Leanstral checkpoints, evolution backups, search dumps.
+# These will dwarf the old 22.8 GB. Never tracked. Store out-of-repo.
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+/models/
+/weights/
+/checkpoints/
+/data/backups/
+/runs/
+/search_dumps/
+
+# --- Caches / IDE / OS ---
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.idea/
+.vscode/        # tracked separately ONLY if a shared config is intended
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- Secrets (NEVER commit) ---
+.env
+.env.*
+*.key
+*_api_key*
+secrets.*
