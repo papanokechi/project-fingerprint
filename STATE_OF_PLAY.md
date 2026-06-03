@@ -15,9 +15,15 @@ several real targets. All runs so far are in the verify/confirm/null register �
 no novel finding yet. NOTABLE PATTERN: the re-verification discipline keeps
 surfacing provenance/substance gaps in the SURROUNDING deposited corpus (the S
 correction, the M10 Lean core, the IndicialPoly stub) — Fingerprint has become
-partly an audit of the corpus that spawned it. Next substantive work: the
-deferred Thread B option-(b) strengthening (make M10's IndicialPoly load-bearing),
-or pause.
+partly an audit of the corpus that spawned it. CAUTION (process lesson): one of
+those "findings" — the S value — turned out to rest on a PHANTOM premise
+introduced in-session (a supposed v1.1 correction to 2pi that the Zenodo check
+proved does not exist). The S value is now DISPUTED, not resolved (see OPEN ITEM
+1). Lesson: an operator/assistant-introduced premise needs the same
+from-definition / from-deposit verification as any transcribed value; the
+re-verification discipline must apply to the TASK'S OWN ASSUMPTIONS, not just to
+the data. Next substantive work: resolve the S prefactor dispute (a Dingle-
+derivation math task), the deferred Thread B option-(b) strengthening, or pause.
 
 ---
 
@@ -74,15 +80,23 @@ Research runs completed (all verify/confirm/null register):
 
 ## OPEN ITEMS (carry forward — not yet resolved)
 
-1. S published-provenance (UNRESOLVED — operator action). The canonical S VALUE
-   is computationally verified (two independent recomputes, 46 digits). But the
-   v1.1 correction (2pi prefactor, 0.45790662...) was NOT located in deposit
-   artifacts — the deposited manuscript PDF found is the v1.0/Gamma version (8
-   digits, "unidentified"). ACTION: check the LIVE Zenodo record (DOI
-   10.5281/zenodo.20455090) — does the latest version carry 0.45790662
-   (corrected, benign access gap) or still 0.43770528 (a real publication
-   correction to push)? Until resolved, S is usable computationally but NOT
-   citation-ready.
+1. S value is DISPUTED (Zenodo check done; outcome changed the picture).
+   The live Zenodo record (DOI 10.5281/zenodo.20455090, LATEST version) carries
+   S = 0.43770528 (8 digits, Dingle formula) with NO 2pi-prefactor correction.
+   The "v1.1 correction to 0.45790662" that the session's canonical file treated
+   as the correct/superseding value DOES NOT EXIST in the deposit — it was a
+   phantom premise (introduced in-session, not from the corpus). So the prior
+   "0.45790662 correct / 0.43770528 retracted" framing is WRONG and has been
+   corrected: S is now DISPUTED. Both values are correctly computed from their
+   respective prefactor conventions (2pi vs Gamma(beta_exp), differing by the
+   ~4.4% prefactor ratio); WHICH prefactor is the correct Dingle normalization
+   for THIS ODE is UNRESOLVED and needs the derivation, not a heuristic. Two
+   outcomes: either 2pi is right (the DEPOSITED PAPER needs a correction) or
+   Gamma is right (the session's canonical framing was the error). S is BARRED
+   from basis use until resolved. The earlier thread-A run used 0.45790662 and
+   must be re-examined (a Gamma/period NULL is likely prefactor-robust, but do
+   not assume). Resolution = a fresh-session math task on the Dingle derivation.
+   See S_canonical_entry_CORRECTED.json for the full dispute record.
 2. Stale repo scripts (A2). pcf-research/vquad/scripts/{t2_iter20,22,23,24,
    jimbo_final} hardcode the retracted Gamma-prefactor S=0.43770528. Need the
    2pi fix or a KNOWN_ISSUE note. External to Fingerprint; operator's call.
