@@ -6,7 +6,9 @@
 # ─────────────────────────────────────────────────────────────
 
 # --- Lean / Mathlib ---
-/.lake/
+# Unanchored so nested project build dirs (e.g. lean/fingerprint-cores/.lake/)
+# are ignored too — .lake/packages/ holds GBs of cloned deps. Not just root.
+.lake/
 /lake-packages/
 /build/
 *.olean
@@ -45,6 +47,15 @@ node_modules/
 /data/backups/
 /runs/
 /search_dumps/
+
+# --- Circle-packing shakedown (regenerable bulk — vendored clone + run outputs) ---
+# Track source artifacts (Dockerfile, lockfile, evaluator, example/*, witness JSON);
+# ignore the cloned OpenEvolve dependency and all run output dirs.
+containers/circle-packing/vendor-openevolve/
+containers/circle-packing/output*/
+
+# --- Cap-sets shakedown (Task 04): ignore run output dirs (regenerable) ---
+containers/cap-sets/output*/
 
 # --- Caches / IDE / OS ---
 .cache/

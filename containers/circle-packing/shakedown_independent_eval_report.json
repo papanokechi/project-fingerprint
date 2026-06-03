@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "containment_ok": true,
+    "count_ok": true,
+    "non_negative_ok": true,
+    "non_overlap_ok": true
+  },
+  "n": 26,
+  "sum_radii": 0.9597642169962064,
+  "tol": 1e-09,
+  "valid": true,
+  "violations": []
+}
