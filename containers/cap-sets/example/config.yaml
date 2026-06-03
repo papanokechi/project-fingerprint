@@ -1,0 +1,57 @@
+# Configuration for cap-set constructor evolution in AG(n,3)  (Task 04).
+# SHAKEDOWN, not discovery: replicate known-exact maximal cap sizes (n=3 -> 9,
+# n=4 -> 20) to validate the evaluator + search wiring in a NEW domain. Same local
+# Ollama substrate as Task 03 (qwen2.5-coder:7b via host.docker.internal). The
+# target dimension n is supplied at runtime via the CAP_N environment variable.
+max_iterations: 50
+checkpoint_interval: 5
+log_level: "INFO"
+
+# LLM configuration -- LOCAL Ollama, OpenAI-compatible endpoint.
+llm:
+  primary_model: "qwen2.5-coder:7b"
+  primary_model_weight: 1.0
+  # Reached from INSIDE the container; NOT localhost. Ollama runs on the host.
+  api_base: "http://host.docker.internal:11434/v1"
+  # Dummy key: Ollama ignores it but the OpenAI client requires a value. NOT a secret.
+  api_key: "ollama"
+  temperature: 0.7
+  top_p: 0.95
+  # CPU-only host: bound generation length so a call completes under the timeout;
+  # raise the timeout so slow CPU calls do not spuriously fail. Hardware-feasibility
+  # knobs only; they do NOT change the 50-iteration budget or any scoring rule.
+  max_tokens: 768
+  timeout: 1800
+
+prompt:
+  system_message: |
+    You are an expert combinatorialist working on the cap set problem in AG(n,3) = (Z/3Z)^n.
+    A cap is a set of points with NO three collinear. Over Z/3Z, three distinct points a, b, c
+    are collinear if and only if (a + b + c) == 0 (mod 3) in every coordinate; equivalently, for
+    any two points a, b the forbidden third point is c = (-a - b) mod 3. Your task is to improve a
+    constructor function `construct_cap(n)` so it returns a LARGER valid cap (a Python list of
+    length-n tuples with entries in {0,1,2}, all distinct, no three collinear).
+
+    Known proven-maximal cap sizes: n=1:2, n=2:4, n=3:9, n=4:20, n=5:45, n=6:112. Do not exceed
+    these maxima -- they are exact; a larger "cap" would be an error. Focus on clean algebraic or
+    combinatorial constructions, not slow exhaustive search (the program is run under a timeout).
+  num_top_programs: 3
+  use_template_stochasticity: true
+
+database:
+  population_size: 40
+  archive_size: 20
+  num_islands: 3
+  elite_selection_ratio: 0.3
+  exploitation_ratio: 0.7
+
+evaluator:
+  timeout: 150
+  cascade_evaluation: false
+  # Single-model CPU Ollama serializes requests; one at a time avoids contention.
+  parallel_evaluations: 1
+  use_llm_feedback: false
+
+# Evolution settings
+diff_based_evolution: false  # full rewrites
+allow_full_rewrites: true

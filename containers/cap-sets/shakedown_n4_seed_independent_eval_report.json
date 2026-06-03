@@ -1,0 +1,6 @@
+{
+  "is_valid_cap": true,
+  "size": 16,
+  "n": 4,
+  "reason": "no three collinear; all points distinct and in {0,1,2}^n"
+}
