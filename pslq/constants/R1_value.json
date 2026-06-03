@@ -1,0 +1,53 @@
+{
+  "constant": "R1",
+  "description": "Novel transcendental constant from the April-26 degree-(4,2) paper 'A Computational Investigation of the 2k-Degree Conjecture at k=2: the Degree-(4,2) Stratum and a Novel Transcendental Constant'. Limit of a polynomial continued fraction.",
+  "source_family": {
+    "type": "polynomial continued fraction (degree-(4,2))",
+    "a_coeffs_leading_first": [
+      1,
+      0,
+      -1,
+      -1,
+      -1
+    ],
+    "a_n": "n^4 - n^2 - n - 1",
+    "b_coeffs_leading_first": [
+      -1,
+      1,
+      -1
+    ],
+    "b_n": "-n^2 + n - 1",
+    "convergent_recurrence": "P_n = b_n P_{n-1} + a_n P_{n-2}; Q_n = b_n Q_{n-1} + a_n Q_{n-2}",
+    "seed": "P_0=b(0), P_1=b(1)b(0)+a(1), Q_0=1, Q_1=b(1)",
+    "limit": "R1 = lim P_n/Q_n"
+  },
+  "provenance": {
+    "paper": "A Computational Investigation of the 2k-Degree Conjecture at k=2 (April-26, 2026)",
+    "zenodo_doi": "10.5281/zenodo.19774029",
+    "family_source_repo": "github.com/papanokechi/siarc-relay-bridge",
+    "family_source_files": [
+      "sessions/2026-04-30/T2A-R1-IDENTIFY/r1_identify.py",
+      "sessions/2026-04-26/T2A-BASIS-IDENTIFY/t2a_basis_identify.py",
+      "sessions/2026-04-30/UMB-T3-PROBE/halt_log.json (id=T2A_R1, a=[1,0,-1,-1,-1], b=[-1,1,-1])"
+    ],
+    "published_30_digit": "-0.10123520070804963"
+  },
+  "recomputation": {
+    "engine": "mpmath 1.3.0",
+    "setting_1": {
+      "dps": 350,
+      "N_iter": 2000,
+      "self_residual": "1.247197e-352"
+    },
+    "setting_2": {
+      "dps": 420,
+      "N_iter": 2600,
+      "self_residual": "9.0353729e-423"
+    },
+    "cross_setting_agreement_digits": Infinity,
+    "report_dps": 300,
+    "first_30_digit_match": true
+  },
+  "value_300sig": "-0.101235200708049633508476624972658354987919991554619847543218428042637090788507807313147396186376938647712192613808088408453219002211536589116911928699062049601243929207703938333143300254347773262520381529610808669270639428668918846214375054527992235500757151239114097472408126362746218564013999944184",
+  "value_sha256": "73f70d11cec4ae1b3f8f7b3a1a6936b05f889ceb37b0385697d9cd5960e45491"
+}
