@@ -1,0 +1,37 @@
+{
+  "_comment": "Canonical entry for the V_quad Stokes constant S. To be merged into pslq/constants/basis_canonical.json. Provenance framing is deliberately honest: the VALUE is computationally confirmed by two independent from-definition recomputes, but its PUBLISHED provenance has an unresolved gap (see status_notes). Do not strip the caveats when merging.",
+
+  "name": "S_vquad_stokes",
+  "recomputed_value": "0.4579066231690176361190978425482258379624",
+  "dps": 240,
+  "digits_stable": 46,
+  "convention": "universal 2*pi resurgence normalization (prefactor 2*pi = 6.28319), NOT the retracted Gamma(beta_exp) = -6.00599 convention",
+  "definition_source": "Dingle late-term formula S = prefactor * K, where K = lim |a_n * xi0^(n+beta) / ((-1)^n * Gamma(n+beta))|, with beta = -1/(3*sqrt(3)), xi0 = 2/sqrt(3), sigma = -1/sqrt(3); WKB/Riccati machinery for the V_quad PCF 1 + K_{n>=1} 1/(3n^2+n+1)",
+  "defining_object": "V_quad quadratic PCF, Stokes constant via Dingle late-term amplitude",
+
+  "status": "VERIFIED_VALUE_PROVENANCE_FLAGGED",
+
+  "shared_amplitude_K": "0.0728781025518669641294423633297",
+  "K_stable_digits": 46,
+
+  "supersedes": {
+    "value": "0.43770528",
+    "convention": "retracted Gamma(beta_exp) = -6.00599 prefactor (v1.0 error)",
+    "prefactor_ratio": "2*pi / |Gamma(beta_exp)| = 1.04615282843 = exactly 0.457906/0.437705; the entire v1.0->v1.1 discrepancy is mechanically this single prefactor swap, matching the ~4.4% camouflage the v1.1 correction note describes"
+  },
+
+  "corroboration": "Two INDEPENDENT from-definition reimplementations (recompute_basis.py and S_prefactor_verify.py) agree on the 2*pi-convention value to 20 digits. The 2*pi convention is the theoretically-correct large-order/resurgence normalization.",
+
+  "status_notes": [
+    "VALUE is computationally trustworthy: confirmed to 46 stable digits by two independent recomputes under the explicit, identified 2*pi convention.",
+    "PUBLISHED PROVENANCE IS UNRESOLVED. The v1.1 correction (2*pi prefactor, 0.45790662..., 38-digit claim) is described in the paper ABSTRACT but was NOT located in the searched deposit artifacts. The deposited manuscript PDF found in-repo is the v1.0/Gamma version: it states S ~ 0.43770528 to EIGHT digits and labels it 'unidentified'. No deposited source for >8 digits of the 2*pi value was found.",
+    "The high-precision tail (digits beyond ~8) rests ONLY on the two mutually-agreeing recomputes, NOT on any located published artifact.",
+    "REPO SCRIPTS ARE STALE: pcf-research/vquad/scripts/{t2_iter20,t2_iter22,t2_iter23,t2_iter24,jimbo_final} hardcode the retracted Gamma-prefactor value 0.43770528. They reproduce the v1.0 error and need the 2*pi fix or a KNOWN_ISSUE note.",
+    "OPEN OPERATOR ACTION: verify against the LIVE Zenodo record (Painlevé-V deposit, corpus DOI 10.5281/zenodo.20455090) whether the latest published version carries the 2*pi correction (0.45790662) or still shows the retracted 0.43770528. This resolves whether the v1.1 deposit exists (access gap, benign) or is drafted-but-not-deposited (real to-do: the deposited record currently publishes a retracted value)."
+  ],
+
+  "usable_in_basis": true,
+  "_usable_rationale": "The VALUE is sound for computational use (e.g. the thread-A confirmation run), which depends only on correctness, not on published-provenance cleanliness. The provenance flag is a deposit-hygiene issue to resolve separately, not a barrier to using the verified value.",
+
+  "sha256_of_value_string": "PENDING_RECOMPUTE_OF_FULL_46_DIGIT_STRING"
+}

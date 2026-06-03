@@ -1,0 +1,20 @@
+{
+  "method": "independent from-definition Dingle late-term; S = prefactor * K",
+  "definition": "K = lim_n |a_n * xi0^(n+beta) / ((-1)^n Gamma(n+beta))|, beta=-1/(3 sqrt3), xi0=2/sqrt3",
+  "dps": 240,
+  "K_setting1": "order=1400 dps=200",
+  "K_setting2": "order=1800 dps=240",
+  "amplitude_K": "0.0728781025518669641294423633297",
+  "K_cross_setting_stable_digits": 83.9,
+  "K_window_spread": "7.75e-47",
+  "beta_exp": "-0.19245008972987525484",
+  "prefactor_a_gamma_beta": "-6.00599179818141753",
+  "prefactor_b_2pi": "6.28318530717958648",
+  "prefactor_ratio_2pi_over_gamma": "1.04615282843",
+  "S_conv_a_gamma_prefactor": "0.4377052861935372212307",
+  "S_conv_b_2pi_prefactor": "0.4579066231690176361191",
+  "anchor_repo_v10_gamma": "0.43770528073458051568",
+  "anchor_paper_v11_2pi_8dig": "0.45790662",
+  "agree_conv_a_with_repo_v10_digits": 8.3,
+  "agree_conv_b_with_paper_v11_digits": 8.5
+}

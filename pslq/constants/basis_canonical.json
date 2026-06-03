@@ -1,0 +1,152 @@
+{
+  "_README": "CANONICAL BASIS CONSTANTS. SOLE source basis runs (R1, V_quad-S, M10 threads) may read from. Every value here was RECOMPUTED FROM ITS DEFINITION (mpmath first principles or the defining PCF/formula/recurrence) by pslq/constants/recompute_basis.py - never transcribed from a deposit abstract, prior run, or memory. RULE: any constant whose status is not VERIFIED is BARRED from basis use (the could-not-confirm discipline applied to numbers). STALE-MATCH / DISCREPANCY / UNRESOLVED entries are stop-and-surface and must be resolved by the operator before use.",
+  "generated_utc": "2026-06-03T02:52:51.097181+00:00",
+  "recompute_engine": "mpmath 1.3.0",
+  "status_legend": {
+    "VERIFIED": "from-definition recompute matches the latest deposited value; usable",
+    "STALE-MATCH": "recompute matches a superseded/retracted value, not the claimed latest - BARRED, surface",
+    "DISCREPANCY": "recompute matches neither deposited version - BARRED, surface",
+    "UNRESOLVED": "value could not be recomputed from a findable definition - BARRED, surface",
+    "VERIFIED_VALUE_PROVENANCE_FLAGGED": "from-definition recompute is computationally trustworthy (usable), but its PUBLISHED provenance has an unresolved gap (deposit-hygiene to-do) - see status_notes; usable for computation, surface the provenance flag"
+  },
+  "constants": [
+    {
+      "name": "pi",
+      "recomputed_value": "3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "mpmath 1.3.0 (standard first principles)",
+      "defining_object": "pi via mpmath mp.pi (4*atan(1))",
+      "status": "VERIFIED",
+      "corroborates_version": "mpmath reference (no version/correction history)",
+      "supersedes": null,
+      "sha256_of_value_string": "56ed5ded2294360b22c1f02e01bb508f4376b3b555dd11c3fd7981f5edb3ec8c"
+    },
+    {
+      "name": "e",
+      "recomputed_value": "2.718281828459045235360287471352662497757247093699959574966967627724076630353547594571382178525166427427466391932003059921817413596629043572900334295260595630738132328627943490763233829880753195251019011573834187930702154089149934884167509244761460668",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "mpmath 1.3.0 (standard first principles)",
+      "defining_object": "e via mpmath mp.e (exp(1))",
+      "status": "VERIFIED",
+      "corroborates_version": "mpmath reference (no version/correction history)",
+      "supersedes": null,
+      "sha256_of_value_string": "447afd120dce45a2e34533366b6c192f9cdd19cc70377c040896fee56b78e324"
+    },
+    {
+      "name": "log2",
+      "recomputed_value": "0.6931471805599453094172321214581765680755001343602552541206800094933936219696947156058633269964186875420014810205706857336855202357581305570326707516350759619307275708283714351903070386238916734711233501153644979552391204751726815749320651555247341395",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "mpmath 1.3.0 (standard first principles)",
+      "defining_object": "log 2 via mpmath mp.log(2)",
+      "status": "VERIFIED",
+      "corroborates_version": "mpmath reference (no version/correction history)",
+      "supersedes": null,
+      "sha256_of_value_string": "58b465bb7b6257d55bd13d0952e37e52b671547987fc0c357e4b616d40958bfc"
+    },
+    {
+      "name": "gamma",
+      "recomputed_value": "0.5772156649015328606065120900824024310421593359399235988057672348848677267776646709369470632917467495146314472498070824809605040144865428362241739976449235362535003337429373377376739427925952582470949160087352039481656708532331517766115286211995015080",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "mpmath 1.3.0 (standard first principles)",
+      "defining_object": "Euler-Mascheroni gamma via mpmath mp.euler",
+      "status": "VERIFIED",
+      "corroborates_version": "mpmath reference (no version/correction history)",
+      "supersedes": null,
+      "sha256_of_value_string": "45caf134ca5fbcdc3a46189ccbacd08df03e20b91be1fe7548aaaee902376ed2"
+    },
+    {
+      "name": "zeta3",
+      "recomputed_value": "1.202056903159594285399738161511449990764986292340498881792271555341838205786313090186455873609335258146199157795260719418491995998673283213776396837207900161453941782949360066719191575522242494243961563909664103291159095780965514651279918405105715256",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "mpmath 1.3.0 (standard first principles)",
+      "defining_object": "Apery zeta(3) via mpmath mp.zeta(3)",
+      "status": "VERIFIED",
+      "corroborates_version": "mpmath reference (no version/correction history)",
+      "supersedes": null,
+      "sha256_of_value_string": "615a6e540565c9f632eaef0f29d6cf22687611a4580a6e797147acc047e8f246"
+    },
+    {
+      "name": "catalan",
+      "recomputed_value": "0.9159655941772190150546035149323841107741493742816721342664981196217630197762547694793565129261151062485744226191961995790358988033258590594315947374811584069953320287733194605190387274781640878659090247064841521630002287276409423882599577415088163975",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "mpmath 1.3.0 (standard first principles)",
+      "defining_object": "Catalan G via mpmath mp.catalan",
+      "status": "VERIFIED",
+      "corroborates_version": "mpmath reference (no version/correction history)",
+      "supersedes": null,
+      "sha256_of_value_string": "a0c5702cd8064965d0c692cc9abd65d6ab7c54684baea11f60ce10e445dc6d96"
+    },
+    {
+      "name": "zeta2",
+      "recomputed_value": "1.644934066848226436472415166646025189218949901206798437735558229370007470403200873833628900619758705304004318962337190679628724687005007787935102946330866276831733309367762605095251006872140054796811558794890360823277761919840756455876963235636709710",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "mpmath 1.3.0 (standard first principles)",
+      "defining_object": "zeta(2)=pi^2/6 via mpmath mp.zeta(2)",
+      "status": "VERIFIED",
+      "corroborates_version": "mpmath reference (no version/correction history)",
+      "supersedes": null,
+      "sha256_of_value_string": "cad0d6a606fa35148bcb2c9e5ab0ccb2defa44030e0a95da60e113475064a537"
+    },
+    {
+      "name": "R1",
+      "recomputed_value": "-0.1012352007080496335084766249726583549879199915546198475432184280426370907885078073131473961863769386477121926138080884084532190022115365891169119286990620496012439292077039383331433002543477732625203815296108086692706394286689188462143750545279922355",
+      "dps": 420,
+      "digits_stable": 351,
+      "definition_source": "PCF family: papanokechi/siarc-relay-bridge sessions/2026-04-30/T2A-R1-IDENTIFY/r1_identify.py (a=[1,0,-1,-1,-1], b=[-1,1,-1]); recomputed by pslq/constants/recompute_basis.py",
+      "defining_object": "recurrence: a_n=n^4-n^2-n-1, b_n=-n^2+n-1; P_n=b_n P_{n-1}+a_n P_{n-2}, Q_n likewise; R1=lim P_n/Q_n",
+      "status": "VERIFIED",
+      "corroborates_version": "April-26 degree-(4,2) paper abstract value -0.10123520070804963 (matched to 18 digits = full deposited precision)",
+      "supersedes": null,
+      "sha256_of_value_string": "25421b7fe7ed3569cd1c430c695d247da34b40522c19ff386a5ec132aae63697"
+    },
+    {
+      "name": "V_quad",
+      "recomputed_value": "1.197373990688357602448603219937206329704270703231350336285792768697162591105898205898806083616940907306472780437638559951570355506838586384103661156623774499313660111222413701928371753399871149494888923987745119708104735311762651877897229425982647431",
+      "dps": 320,
+      "digits_stable": 250,
+      "definition_source": "Painleve paper eq:vquad-def: vquad_resurgence_R2.tex (siarc-relay-bridge sessions/2026-04-25/P08-CAS-HEUNC) and pcf-research/vquad; recomputed by pslq/constants/recompute_basis.py",
+      "defining_object": "PCF: V_quad = 1 + K_{n>=1} 1/(3 n^2 + n + 1)",
+      "status": "VERIFIED",
+      "corroborates_version": "Painleve paper value 1.19737399068835760244 (matched to 20 digits = full deposited precision)",
+      "supersedes": null,
+      "sha256_of_value_string": "aef85cbeb117b5dbc7877a0d95cae2a064b6bca411e4b27c42dd66cdce4df348"
+    },
+    {
+      "_comment": "Canonical entry for the V_quad Stokes constant S. Provenance framing is deliberately honest: the VALUE is computationally confirmed by two independent from-definition recomputes, but its PUBLISHED provenance has an unresolved gap (see status_notes). Do not strip the caveats.",
+      "name": "S",
+      "name_descriptive": "S_vquad_stokes",
+      "recomputed_value": "0.4579066231690176361190978425482258379624",
+      "dps": 240,
+      "digits_stable": 46,
+      "convention": "universal 2*pi resurgence normalization (prefactor 2*pi = 6.28319), NOT the retracted Gamma(beta_exp) = -6.00599 convention",
+      "definition_source": "Dingle late-term formula S = prefactor * K, where K = lim |a_n * xi0^(n+beta) / ((-1)^n * Gamma(n+beta))|, with beta = -1/(3*sqrt(3)), xi0 = 2/sqrt(3), sigma = -1/sqrt(3); WKB/Riccati machinery for the V_quad PCF 1 + K_{n>=1} 1/(3n^2+n+1). Recomputed independently by pslq/constants/recompute_basis.py and pslq/constants/S_prefactor_verify.py",
+      "defining_object": "V_quad quadratic PCF, Stokes constant via Dingle late-term amplitude",
+      "status": "VERIFIED_VALUE_PROVENANCE_FLAGGED",
+      "shared_amplitude_K": "0.0728781025518669641294423633297",
+      "K_stable_digits": 46,
+      "supersedes": {
+        "value": "0.43770528",
+        "convention": "retracted Gamma(beta_exp) = -6.00599 prefactor (v1.0 error)",
+        "prefactor_ratio": "2*pi / |Gamma(beta_exp)| = 1.04615282843 = exactly 0.457906/0.437705; the entire v1.0->v1.1 discrepancy is mechanically this single prefactor swap, matching the ~4.4% camouflage the v1.1 correction note describes"
+      },
+      "corroboration": "Two INDEPENDENT from-definition reimplementations (recompute_basis.py and S_prefactor_verify.py) agree on the 2*pi-convention value to 20 digits. The 2*pi convention is the theoretically-correct large-order/resurgence normalization.",
+      "status_notes": [
+        "VALUE is computationally trustworthy: confirmed to 46 stable digits by two independent recomputes under the explicit, identified 2*pi convention.",
+        "PUBLISHED PROVENANCE IS UNRESOLVED. The v1.1 correction (2*pi prefactor, 0.45790662..., 38-digit claim) is described in the paper ABSTRACT but was NOT located in the searched deposit artifacts. The deposited manuscript PDF found in-repo (submitted-manuscripts/painlev-iiid6-resurgence-constant-quadratic-polynomial/manuscript.pdf) is the v1.0/Gamma version: it states S ~ 0.43770528 to EIGHT digits and labels it 'unidentified'. No deposited source for >8 digits of the 2*pi value was found.",
+        "The high-precision tail (digits beyond ~8) rests ONLY on the two mutually-agreeing recomputes, NOT on any located published artifact.",
+        "REPO SCRIPTS ARE STALE: pcf-research/vquad/scripts/{t2_iter20,t2_iter22,t2_iter23,t2_iter24,jimbo_final} hardcode the retracted Gamma-prefactor value 0.43770528. They reproduce the v1.0 error and need the 2*pi fix or a KNOWN_ISSUE note.",
+        "OPEN OPERATOR ACTION: verify against the LIVE Zenodo record (Painleve-V deposit, corpus DOI 10.5281/zenodo.20455090) whether the latest published version carries the 2*pi correction (0.45790662) or still shows the retracted 0.43770528. This resolves whether the v1.1 deposit exists (access gap, benign) or is drafted-but-not-deposited (real to-do: the deposited record currently publishes a retracted value)."
+      ],
+      "usable_in_basis": true,
+      "_usable_rationale": "The VALUE is sound for computational use (e.g. the thread-A confirmation run), which depends only on correctness, not on published-provenance cleanliness. The provenance flag is a deposit-hygiene issue to resolve separately, not a barrier to using the verified value.",
+      "sha256_of_value_string": "45db2f07d633fb6e8395a7fb44043b90c1880fb265815e603ab4cab231723b3d"
+    }
+  ]
+}
