@@ -1,0 +1,25 @@
+{
+  "bailey_floor_digits": 6.0,
+  "basis": [
+    "zeta(2)",
+    "pi**2"
+  ],
+  "class": "CONJECTURED (numerical match); known identity (Basel problem, Euler 1735); novelty N/A",
+  "coefficients": [
+    -6,
+    1
+  ],
+  "coeffs_identical_all_precisions": true,
+  "generated_utc": "2026-06-03T01:00:00.430069+00:00",
+  "maxcoeff": 1000,
+  "precisions_tested_dps": [
+    100,
+    200,
+    400
+  ],
+  "relation": "-6*zeta(2) + pi**2 = 0  <=>  zeta(2) = pi**2/6",
+  "residual_at_dps400": "1.70673e-400",
+  "residual_below_1e_minus_390": true,
+  "task": "D1 Stage 1 (Basel: zeta(2)=pi^2/6)",
+  "tol": "default (3/4 working precision)"
+}
