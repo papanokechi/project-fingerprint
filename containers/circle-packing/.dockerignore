@@ -1,0 +1,5 @@
+vendor-openevolve/
+example/
+output/
+*.png
+__pycache__/
