@@ -15,15 +15,23 @@ several real targets. All runs so far are in the verify/confirm/null register �
 no novel finding yet. NOTABLE PATTERN: the re-verification discipline keeps
 surfacing provenance/substance gaps in the SURROUNDING deposited corpus (the S
 correction, the M10 Lean core, the IndicialPoly stub) — Fingerprint has become
-partly an audit of the corpus that spawned it. CAUTION (process lesson): one of
-those "findings" — the S value — turned out to rest on a PHANTOM premise
-introduced in-session (a supposed v1.1 correction to 2pi that the Zenodo check
-proved does not exist). The S value is now DISPUTED, not resolved (see OPEN ITEM
-1). Lesson: an operator/assistant-introduced premise needs the same
-from-definition / from-deposit verification as any transcribed value; the
-re-verification discipline must apply to the TASK'S OWN ASSUMPTIONS, not just to
-the data. Next substantive work: resolve the S prefactor dispute (a Dingle-
-derivation math task), the deferred Thread B option-(b) strengthening, or pause.
+partly an audit of the corpus that spawned it. CAUTION (process lesson): the S
+value OSCILLATED VERIFIED -> DISPUTED -> VERIFIED across three turns. Each flip
+was correct on what was known then, but the oscillation itself is the warning.
+The DISPUTED downgrade rested on a phantom premise (a supposed v1.1 2pi
+correction that a Zenodo-abstract check suggested did not exist). It is now
+RESOLVED from-derivation: the deposited manuscript vquad_resurgence.pdf (located
+in pnwork) IS v1.1 and DOES carry the correction (eq (13) + Remark 6.2), and the
+2pi prefactor is forced by the standard Dingle-Berry-Howls late-term form
+(companion of Gamma(n+beta) is the beta-independent 1/2pi*i) and confirmed by
+applying eq (13) to the undisputed K (eq(13) -> 2*pi*K = 0.45790662...). S is
+restored to VERIFIED (see OPEN ITEM 1). Lesson: a constant's status must rest on
+a DERIVATION or from-definition computation, never on any document's stated
+conclusion (mine, an abstract's, or even the manuscript's Remark 6.2) — those are
+all just claims; what settled this was the formula structure plus the from-K
+check. The re-verification discipline must apply to the TASK'S OWN ASSUMPTIONS,
+not just to the data. Next substantive work: the deferred Thread B option-(b)
+strengthening, the S Zenodo deposit-update push (OPEN ITEM 1), or pause.
 
 ---
 
@@ -69,9 +77,11 @@ Research runs completed (all verify/confirm/null register):
   PSLQ null to 165 effective digits, L-filter active. R1 remains unidentified
   against {pi,zeta3,Catalan,log2,gamma} + low-order products.
 - Basis re-verification: 10/10 constants VERIFIED from definition. The S (V_quad
-  Stokes constant) prefactor discrepancy resolved: correct value
-  0.45790662316901763611... under the 2pi resurgence convention (NOT the
-  retracted Gamma-prefactor 0.43770528). See OPEN ITEMS.
+  Stokes constant) prefactor dispute is RESOLVED from-derivation: correct value
+  0.4579066231690176361190978425482258379624 under the 2pi real-Stokes-multiplier
+  convention (S=2*pi*K), NOT the retracted Gamma-prefactor 0.43770528 (which is the
+  Borel singular-amplitude C, not the Stokes multiplier). Restored to VERIFIED via
+  patch_S_resolve_to_verified.py. See OPEN ITEMS for the residual deposit-update gap.
 - xi0 d=3: Borel-radius identity xi0=d/beta_d^(1/d) — the beta_3 != 1 SCALE
   dimension verified at d=3 (the one piece untested; xi0 tracks 3/beta_3^(1/3)
   across beta_3 in {1,2,7}). NOTE: op:xi0-d3-direct was ALREADY closed by D2-NOTE
@@ -80,23 +90,23 @@ Research runs completed (all verify/confirm/null register):
 
 ## OPEN ITEMS (carry forward — not yet resolved)
 
-1. S value is DISPUTED (Zenodo check done; outcome changed the picture).
-   The live Zenodo record (DOI 10.5281/zenodo.20455090, LATEST version) carries
-   S = 0.43770528 (8 digits, Dingle formula) with NO 2pi-prefactor correction.
-   The "v1.1 correction to 0.45790662" that the session's canonical file treated
-   as the correct/superseding value DOES NOT EXIST in the deposit — it was a
-   phantom premise (introduced in-session, not from the corpus). So the prior
-   "0.45790662 correct / 0.43770528 retracted" framing is WRONG and has been
-   corrected: S is now DISPUTED. Both values are correctly computed from their
-   respective prefactor conventions (2pi vs Gamma(beta_exp), differing by the
-   ~4.4% prefactor ratio); WHICH prefactor is the correct Dingle normalization
-   for THIS ODE is UNRESOLVED and needs the derivation, not a heuristic. Two
-   outcomes: either 2pi is right (the DEPOSITED PAPER needs a correction) or
-   Gamma is right (the session's canonical framing was the error). S is BARRED
-   from basis use until resolved. The earlier thread-A run used 0.45790662 and
-   must be re-examined (a Gamma/period NULL is likely prefactor-robust, but do
-   not assume). Resolution = a fresh-session math task on the Dingle derivation.
-   See S_canonical_entry_CORRECTED.json for the full dispute record.
+1. S value RESOLVED: 2pi correct, S=0.4579066231690176361190978425482258379624,
+   restored to VERIFIED. The deposited manuscript vquad_resurgence.pdf (located in
+   pnwork) IS v1.1 and carries the correction: eq (13) states the Dingle late-term
+   formula with the 2pi prefactor, and Remark 6.2 explicitly retracts the v1.0
+   0.43770528. The 2pi is forced by the standard Dingle-Berry-Howls-Ecalle form
+   a_n ~ (S/2pi*i) Gamma(n+beta)/A^(n+beta) (companion of Gamma(n+beta) is the
+   beta-independent 1/2pi*i) and confirmed by applying eq (13) to the undisputed
+   K=0.0728781... (eq(13) -> 2*pi*K). The retracted 0.43770528 = |Gamma(beta_exp)|*K
+   is a DIFFERENT quantity (the Borel singular-amplitude C), mislabeled as S in v1.0.
+   RESIDUAL DEPOSIT-UPDATE GAP (actionable): the live Zenodo deposit (DOI
+   10.5281/zenodo.20455090, latest version) was checked 2026-06-03 and showed v1.0 /
+   0.43770528 with NO 2pi correction — the corrected v1.1 exists locally but appears
+   NOT uploaded, so the published deposit the world sees likely still serves the
+   retracted value. Fix = push the corrected manuscript to Zenodo (does NOT change
+   the math). The phantom-premise warning stands as a process lesson (see One-line
+   status). Full record: agent-tasks/C-S-prefactor-resolution-findings.md and
+   pslq/constants/patch_S_resolve_to_verified.py.
 2. Stale repo scripts (A2). pcf-research/vquad/scripts/{t2_iter20,22,23,24,
    jimbo_final} hardcode the retracted Gamma-prefactor S=0.43770528. Need the
    2pi fix or a KNOWN_ISSUE note. External to Fingerprint; operator's call.
