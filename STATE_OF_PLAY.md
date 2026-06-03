@@ -111,17 +111,25 @@ Research runs completed (all verify/confirm/null register):
    jimbo_final} hardcode the retracted Gamma-prefactor S=0.43770528. Need the
    2pi fix or a KNOWN_ISSUE note. External to Fingerprint; operator's call.
 
-3. M10 Lean core — IndicialPoly is a STUB (substance gap). In
-   wallis-pcf-lean4 (branch vquad/handoff-2026-04-16), Thm66_ApparentSingularity
-   .lean defines IndicialPoly := fun rho => rho^2 ignoring its arguments, so the
-   central theorem is definitionally true (a tautology) and the Frobenius axiom is
-   UNUSED. The deposited "Thm 6.6 formalized in Lean" claim does NOT yet encode
-   its mathematical content. A clean cone here would be PROVEN-but-VACUOUS. May
-   warrant a caveat on the deposited formalization claim (operator/governance
-   call). Full investigation: agent-tasks/B-M10-stage0-findings.md.
-4. M10 Lean core discoverability. The file is on branch vquad/handoff-2026-04-16,
-   NOT on main — anyone cloning wallis-pcf-lean4 normally won't find the Lean core
-   backing the deposited Thm 6.6. Published but not discoverable. Operator's call.
+3. M10 IndicialPoly stub -- CORPUS-INTERNAL, not a publication problem
+   (CORRECTED 2026-06-03 by the M10 decision brief). Earlier framing treated this
+   as a possible caveat on a DEPOSITED formalization claim. That is wrong: the
+   deposited paper (vquad_resurgence_R2.tex, thm:exclusion2) claims a SYMBOLIC +
+   NUMERICAL proof at dps=150 (verify_frobenius_apparent.py), which it has, and
+   makes NO Lean / machine-checked / formally-verified claim. The stub
+   (IndicialPoly := fun rho => rho^2, vacuous; committed proof has 2 sorrys and
+   textually-but-redundantly invokes the Frobenius axiom) lives ONLY in the
+   corpus-internal M10 status tracking ('Thm66 in Lean'), which is where the
+   overstatement is. So: NO publication caveat needed -- this is internal-status
+   cleanup, a much smaller thing than a published overstatement. Confirmed
+   verbatim against the live file (branch vquad/handoff-2026-04-16, blob
+   5b44e690). Full record: agent-tasks/B-M10-decision-brief.md (supersedes the
+   harsher B-M10-stage0-findings.md framing).
+4. M10 Lean core discoverability (unchanged). Thm66_ApparentSingularity.lean is
+   on branch vquad/handoff-2026-04-16, NOT on main -- anyone cloning
+   wallis-pcf-lean4 normally won't find the Lean core. Published but not
+   discoverable; four neutral options (merge / pointer / leave / strengthen-first)
+   in the decision brief. Operator's call.
 
 ## The next move
 
