@@ -4,7 +4,7 @@
 *A fresh session starts from this map, not from git archaeology or chat history.*
 *Update this file at the end of each working session.*
 
-Last updated: after the xi0 d=3 beta-scale commit (HEAD 5f97ac4).
+Last updated: after Thread B (M10) Stage 0 investigation (HEAD e5b1025 + this commit).
 
 ---
 
@@ -12,8 +12,12 @@ Last updated: after the xi0 d=3 beta-scale commit (HEAD 5f97ac4).
 
 The three-pillar discovery factory is built, validated, and has now been run on
 several real targets. All runs so far are in the verify/confirm/null register —
-no novel finding yet. The highest-leverage unrun thread is **Thread B (Lean
-conditional-core / M10)**, the only one that produces PROVEN.
+no novel finding yet. NOTABLE PATTERN: the re-verification discipline keeps
+surfacing provenance/substance gaps in the SURROUNDING deposited corpus (the S
+correction, the M10 Lean core, the IndicialPoly stub) — Fingerprint has become
+partly an audit of the corpus that spawned it. Next substantive work: the
+deferred Thread B option-(b) strengthening (make M10's IndicialPoly load-bearing),
+or pause.
 
 ---
 
@@ -83,27 +87,39 @@ Research runs completed (all verify/confirm/null register):
    jimbo_final} hardcode the retracted Gamma-prefactor S=0.43770528. Need the
    2pi fix or a KNOWN_ISSUE note. External to Fingerprint; operator's call.
 
+3. M10 Lean core — IndicialPoly is a STUB (substance gap). In
+   wallis-pcf-lean4 (branch vquad/handoff-2026-04-16), Thm66_ApparentSingularity
+   .lean defines IndicialPoly := fun rho => rho^2 ignoring its arguments, so the
+   central theorem is definitionally true (a tautology) and the Frobenius axiom is
+   UNUSED. The deposited "Thm 6.6 formalized in Lean" claim does NOT yet encode
+   its mathematical content. A clean cone here would be PROVEN-but-VACUOUS. May
+   warrant a caveat on the deposited formalization claim (operator/governance
+   call). Full investigation: agent-tasks/B-M10-stage0-findings.md.
+4. M10 Lean core discoverability. The file is on branch vquad/handoff-2026-04-16,
+   NOT on main — anyone cloning wallis-pcf-lean4 normally won't find the Lean core
+   backing the deposited Thm 6.6. Published but not discoverable. Operator's call.
+
 ## The next move
 
-Thread B — Lean conditional-core / M10 (the PROVEN-producing thread).
-Highest-leverage unrun work, deliberately NOT picked several times because it is
-harder to start than a PSLQ run. It produces PROVEN (not verify/confirm/null),
-directly strengthens already-deposited papers, and uses the most
-thoroughly-validated capability (D1/C1 cone gate).
+Thread B investigated (Stage 0 done): M10 located, retrievable, but the central
+formalization is a STUB (see OPEN ITEM 3). The valuable next step is the
+DEFERRED option-(b) strengthening: port Thm66 into FingerprintCores AND rewrite
+IndicialPoly to actually COMPUTE the indicial polynomial from the ODE
+coefficients, so the Frobenius axiom becomes load-bearing and the theorem encodes
+real content -> a GENUINE PROVEN-conditional-on-H result. This needs the ODE's
+actual indicial-polynomial definition located from the paper (NOT reconstructed),
+and is substantive Lean work best done fresh, not at the tail of a long session.
 
-Concretely: take ONE specific conditional hypothesis from a deposited Lean core —
-the even-quadratic paper's analytic hypothesis (convergence/exact-error input
-"not available in current Mathlib"), or an M10 sorry from the wallis-pcf-lean4
-repo — and either DISCHARGE it (if Mathlib has since gained the needed lemma) or
-TIGHTEN it (reduce precisely what it assumes, document what remains conditional).
-Cone-gated either way: "discharged, now unconditional, cone clean" or "still
-conditional on H, but H now narrower/precisely stated."
+Alternatives: resolve the OPEN ITEMS (S Zenodo check, the two M10 corpus gaps) as
+a corpus-governance pass; R-constants Trans-stratum sweep (low leverage); the
+hosted-model decision to unlock OpenEvolve discovery (spend call).
 
-First step: locate the specific sorry / hypothesis in a deposited repo, confirm
-the pinned Lean+Mathlib version, scope the single hypothesis to attack.
-
-Lower-priority alternatives: R-constants Trans-stratum sweep (more PSLQ nulls,
-low leverage); hosted-model decision to unlock OpenEvolve discovery (spend call).
+HONEST NOTE: three threads of verify/confirm/null plus a Thread-B investigation
+that found a stub means the session's net NEW mathematics is ~0 — but its net
+findings about the corpus (one stale published value, one mis-branched core, one
+vacuous formalization) are real and arguably more valuable than another clean
+cone. Worth weighing whether the next session is more discovery or more
+corpus-governance/cleanup.
 
 ## Operating reminders
 
