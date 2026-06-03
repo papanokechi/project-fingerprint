@@ -216,7 +216,7 @@ def t6_over_staging_exact():
         write(work, "data.json", '{"a": 999}\n')  # changed but NOT declared
         mpath = manifest(work, ["alpha.txt"], "commit only alpha",
                          {"alpha.txt": "M"}, branch="main")
-        r = run_tool(mpath, work, dry_run=False, stdin="CONFIRM\n")
+        r = run_tool(mpath, work, dry_run=False, stdin="CONFIRM\nCONFIRM-PUSH\n")
         after = head(work)
         committed = git(["show", "--name-only", "--pretty=format:",
                          "HEAD"], cwd=work).stdout.split()
@@ -278,6 +278,66 @@ def t8_yaml_manifest():
         cleanup(root)
 
 
+def t9_commit_then_push_declined():
+    """Two-gate: approve COMMIT, DECLINE push -> local commit exists, nothing
+    pushed, clean exit, commit/tree preserved."""
+    root, work, bare = new_repo()
+    try:
+        before = head(work)
+        remote_before = git(["--git-dir", bare, "rev-parse", "main"],
+                            cwd=work).stdout.strip()
+        write(work, "alpha.txt", "alpha local only\n")
+        mpath = manifest(work, ["alpha.txt"], "local commit, no push",
+                         {"alpha.txt": "M"}, branch="main")
+        # CONFIRM passes the commit gate; "no" declines the push gate
+        r = run_tool(mpath, work, dry_run=False, stdin="CONFIRM\nno\n")
+        after = head(work)
+        remote_after = git(["--git-dir", bare, "rev-parse", "main"],
+                           cwd=work).stdout.strip()
+        committed = git(["show", "--name-only", "--pretty=format:",
+                         "HEAD"], cwd=work).stdout.split()
+        ok = (r.returncode == 0                       # clean exit
+              and before != after                     # local commit DID land
+              and committed == ["alpha.txt"]
+              and remote_after == remote_before       # remote did NOT advance
+              and remote_after != after               # i.e. nothing pushed
+              and "push NOT approved" in r.stdout
+              and index_clean(work))                  # tree clean post-commit
+        record("T9 commit-approved/push-declined", ok,
+               "CONFIRM lands the LOCAL commit; declining the push gate skips "
+               "push, preserves the commit, exits cleanly (exit 0)",
+               r.stdout + r.stderr
+               + f"\nbefore={before} after={after} remote_before="
+               f"{remote_before} remote_after={remote_after}")
+    finally:
+        cleanup(root)
+
+
+def t10_both_approved():
+    """Two-gate: approve BOTH -> local commit lands AND is pushed to origin."""
+    root, work, bare = new_repo()
+    try:
+        before = head(work)
+        write(work, "alpha.txt", "alpha commit and push\n")
+        mpath = manifest(work, ["alpha.txt"], "commit and push",
+                         {"alpha.txt": "M"}, branch="main")
+        r = run_tool(mpath, work, dry_run=False,
+                     stdin="CONFIRM\nCONFIRM-PUSH\n")
+        after = head(work)
+        remote_head = git(["--git-dir", bare, "rev-parse", "main"],
+                          cwd=work).stdout.strip()
+        ok = (r.returncode == 0
+              and before != after            # commit landed
+              and remote_head == after       # AND pushed
+              and "push result:" in r.stdout)
+        record("T10 both-approved (commit+push)", ok,
+               "CONFIRM then CONFIRM-PUSH -> commit lands locally and is "
+               "pushed to origin", r.stdout + r.stderr
+               + f"\nbefore={before} after={after} remote_head={remote_head}")
+    finally:
+        cleanup(root)
+
+
 def main():
     if shutil.which("git") is None:
         print("git not found", file=sys.stderr)
@@ -290,16 +350,19 @@ def main():
     t6_over_staging_exact()
     t7_branch_mismatch()
     t8_yaml_manifest()
+    t9_commit_then_push_declined()
+    t10_both_approved()
 
     print("-" * 70)
     total = len(_results)
     passed = sum(1 for _, ok in _results if ok)
     refusals = ["T2 silent-noop", "T4 broken-json", "T5 non-confirmation",
-                "T6 over-staging/exact + push"]
+                "T6 over-staging/exact + push",
+                "T9 commit-approved/push-declined"]
     refusals_ok = all(ok for name, ok in _results
                       if name in refusals)
     print(f"{passed}/{total} checks passed; "
-          f"refusal/safety cases (T2/T4/T5/T6) "
+          f"refusal/safety cases (T2/T4/T5/T6/T9) "
           f"{'ALL FIRED' if refusals_ok else 'NOT all firing'}")
     return 0 if passed == total else 1
 

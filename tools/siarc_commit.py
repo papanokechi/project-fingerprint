@@ -8,13 +8,19 @@ Usage:
 
 The agent (or operator) writes a MANIFEST declaring the exact files to commit,
 the commit message, and the expected post-stage git status. This tool runs a
-set of safety GATES; if all pass it prints the real diff and PAUSES for one
-explicit typed confirmation. Only on the exact confirm token does it stage
-exactly the declared files, re-verify, commit, and push.
+set of safety GATES; if all pass it prints the real diff and PAUSES for TWO
+independent typed confirmations:
+  1. the COMMIT gate (token CONFIRM): on this token it stages exactly the
+     declared files, re-verifies, and commits LOCALLY (reversible -- no push);
+  2. the PUSH gate (distinct token CONFIRM-PUSH): a separate pause before the
+     irreversible `git push`. Declining it leaves the local commit intact.
+The two tokens are distinct so approving the commit can never accidentally
+approve the push.
 
 There is deliberately NO way to commit/push without (a) all gates passing and
-(b) an interactive confirmation that follows a printed diff. No --yes, no env
-bypass, no --force. --dry-run does everything EXCEPT the confirm + push.
+(b) the interactive confirmations that follow a printed diff. No --yes, no env
+bypass, no --force. --dry-run does everything EXCEPT the confirmations, the
+commit, and the push.
 
 Manifest format (JSON or a small YAML subset):
     files:
@@ -33,12 +39,12 @@ Pure standard library (subprocess + json). No third-party deps.
 import argparse
 import json
 import os
-import shutil
 import subprocess
 import sys
 import tempfile
 
 CONFIRM_TOKEN = "CONFIRM"
+PUSH_TOKEN = "CONFIRM-PUSH"
 
 
 # --------------------------------------------------------------------------
@@ -191,17 +197,24 @@ def load_manifest(path):
 # dry staging into a throwaway index (side-effect free)
 # --------------------------------------------------------------------------
 def stage_into_temp_index(repo_root, files):
-    """Copy the real index to a temp file, `git add` the declared files against
+    """Build a throwaway index from HEAD, `git add` the declared files against
     it, and return (tmp_index_path, env, staged_name_status). Caller must remove
-    the temp index. The real repo/index is never modified."""
-    real_index = git_index_path(repo_root)
+    the temp index. The real repo/index is never modified.
+
+    The temp index is populated via `read-tree HEAD` rather than byte-copying
+    the real index: read-tree entries carry no stat data, so the subsequent
+    `git add` always re-hashes the working file and detects content changes
+    deterministically -- avoiding racy-git false "no diff" when a file was
+    modified within the same filesystem-timestamp second as the index entry.
+    G0 (index-clean) has already guaranteed the real index equals HEAD, so a
+    HEAD-based temp index is equivalent to copying the real one."""
     fd, tmp_index = tempfile.mkstemp(prefix="siarc_idx_")
     os.close(fd)
-    if real_index and os.path.exists(real_index):
-        shutil.copyfile(real_index, tmp_index)
-    else:
-        os.remove(tmp_index)  # let git create a fresh one
+    os.remove(tmp_index)  # let git create the index fresh at this path
     env = {"GIT_INDEX_FILE": tmp_index}
+    rc, _, _ = run_git(["rev-parse", "--verify", "-q", "HEAD"], repo_root, env=env)
+    if rc == 0:
+        run_git(["read-tree", "HEAD"], repo_root, env=env)
     add_args = ["add", "--"] + files
     run_git(add_args, repo_root, env=env)
     rc, out, _ = run_git(
@@ -394,13 +407,18 @@ def print_gate_report(res):
 # execution (only after confirmation)
 # --------------------------------------------------------------------------
 def execute_commit(repo_root, manifest):
+    """Stage exactly the declared files, re-verify, and commit LOCALLY.
+
+    This is the reversible step: it performs `git add` + `git commit` but does
+    NOT push. Returns (rc, head_sha): rc == 0 and head_sha set on success;
+    rc != 0 and head_sha None on failure (with the index reset)."""
     files = manifest["files"]
     expected = manifest.get("expected_status", {})
 
     rc, _, err = run_git(["add", "--"] + files, repo_root)
     if rc != 0:
         print(f"ERROR: git add failed: {err.strip()}", file=sys.stderr)
-        return 1
+        return 1, None
 
     # re-verify the real staged set matches expectation before the permanent step
     _, out, _ = run_git(["diff", "--cached", "--name-status"], repo_root)
@@ -413,7 +431,7 @@ def execute_commit(repo_root, manifest):
             file=sys.stderr,
         )
         run_git(["reset", "-q", "HEAD", "--"] + files, repo_root)
-        return 1
+        return 1, None
     for f, code in staged.items():
         want = (expected.get(f) or "").strip()[:1].upper()
         if want and want != code:
@@ -423,7 +441,7 @@ def execute_commit(repo_root, manifest):
                 file=sys.stderr,
             )
             run_git(["reset", "-q", "HEAD", "--"] + files, repo_root)
-            return 1
+            return 1, None
 
     # commit via message file (safe for multi-line)
     fd, msg_file = tempfile.mkstemp(prefix="siarc_msg_")
@@ -437,11 +455,18 @@ def execute_commit(repo_root, manifest):
         print(f"ERROR: git commit failed: {err.strip() or out.strip()}",
               file=sys.stderr)
         run_git(["reset", "-q", "HEAD", "--"] + files, repo_root)
-        return 1
+        return 1, None
 
     _, head, _ = run_git(["rev-parse", "HEAD"], repo_root)
-    print(f"committed: {head.strip()}")
+    head = head.strip()
+    print(f"committed: {head}")
+    return 0, head
 
+
+def execute_push(repo_root):
+    """Push the current branch. Returns 0 on success, 2 if the push failed.
+    The local commit is already made by the time this runs, so a push failure
+    leaves a landed-but-unpushed commit (reported, not rolled back)."""
     rc, out, err = run_git(["push"], repo_root)
     if rc != 0:
         print(
@@ -513,8 +538,8 @@ def main(argv=None):
         # interactive confirmation -- the load-bearing human gate
         print("=" * 70)
         print("REVIEW THE DIFF ABOVE.")
-        print(f"Type exactly  {CONFIRM_TOKEN}  to stage-exactly, commit, and "
-              "push. Anything else aborts.")
+        print(f"Type exactly  {CONFIRM_TOKEN}  to stage-exactly and commit "
+              "locally (push approved separately). Anything else aborts.")
         print("=" * 70)
         try:
             answer = input("confirm> ")
@@ -528,7 +553,28 @@ def main(argv=None):
         if tmp_index and os.path.exists(tmp_index):
             os.remove(tmp_index)
 
-    return execute_commit(repo_root, manifest)
+    # COMMIT gate passed: perform the local (reversible) commit.
+    rc, _head = execute_commit(repo_root, manifest)
+    if rc != 0:
+        return rc
+
+    # PUSH gate -- a SECOND, independent approval for the irreversible push.
+    # Distinct token so approving the commit can never auto-approve the push.
+    print("=" * 70)
+    print("COMMIT LANDED LOCALLY (reversible). Approve the PUSH separately.")
+    print(f"Type exactly  {PUSH_TOKEN}  to push. Anything else leaves the "
+          "commit local (push skipped).")
+    print("=" * 70)
+    try:
+        push_answer = input("push? type CONFIRM-PUSH> ")
+    except EOFError:
+        push_answer = ""
+    if push_answer.strip() != PUSH_TOKEN:
+        print("Commit landed locally; push NOT approved (working tree/commit "
+              "preserved). Run push manually or re-run to approve.")
+        return 0
+
+    return execute_push(repo_root)
 
 
 if __name__ == "__main__":
