@@ -81,7 +81,9 @@ Research runs completed (all verify/confirm/null register):
   0.4579066231690176361190978425482258379624 under the 2pi real-Stokes-multiplier
   convention (S=2*pi*K), NOT the retracted Gamma-prefactor 0.43770528 (which is the
   Borel singular-amplitude C, not the Stokes multiplier). Restored to VERIFIED via
-  patch_S_resolve_to_verified.py. See OPEN ITEMS for the residual deposit-update gap.
+  patch_S_resolve_to_verified.py. The Zenodo deposit-update gap is now CLOSED: live
+  latest is Version 1.2 (concept DOI 10.5281/zenodo.20455089) already serving the
+  corrected value with a byte-identical PDF (see OPEN ITEM 1).
 - xi0 d=3: Borel-radius identity xi0=d/beta_d^(1/d) — the beta_3 != 1 SCALE
   dimension verified at d=3 (the one piece untested; xi0 tracks 3/beta_3^(1/3)
   across beta_3 in {1,2,7}). NOTE: op:xi0-d3-direct was ALREADY closed by D2-NOTE
@@ -99,13 +101,19 @@ Research runs completed (all verify/confirm/null register):
    beta-independent 1/2pi*i) and confirmed by applying eq (13) to the undisputed
    K=0.0728781... (eq(13) -> 2*pi*K). The retracted 0.43770528 = |Gamma(beta_exp)|*K
    is a DIFFERENT quantity (the Borel singular-amplitude C), mislabeled as S in v1.0.
-   RESIDUAL DEPOSIT-UPDATE GAP (actionable): the live Zenodo deposit (DOI
-   10.5281/zenodo.20455090, latest version) was checked 2026-06-03 and showed v1.0 /
-   0.43770528 with NO 2pi correction — the corrected v1.1 exists locally but appears
-   NOT uploaded, so the published deposit the world sees likely still serves the
-   retracted value. Fix = push the corrected manuscript to Zenodo (does NOT change
-   the math). The phantom-premise warning stands as a process lesson (see One-line
-   status). Full record: agent-tasks/C-S-prefactor-resolution-findings.md and
+   RESIDUAL DEPOSIT-UPDATE GAP: CLOSED (2026-06-03, re-verified). The earlier
+   "likely not uploaded" finding was an artifact of querying the v1.0 VERSION
+   record (DOI 10.5281/zenodo.20455090, which permanently shows v1.0) instead of
+   the concept/latest. The concept DOI 10.5281/zenodo.20455089 already resolves to
+   live Version 1.2 (record 20481592, published 2026-06-01), whose abstract serves
+   the corrected S = 2*pi*K = 0.45790662316901763611... AND whose PDF is
+   byte-identical to the local corrected manuscript (size 612719, md5
+   4d1e4d59072cad0db8edc86280af45a1). v1.1 (Stokes fix) and v1.2 (classification ->
+   Conjecture 4.1) are both published. NO upload needed; the deposit the world sees
+   already serves the corrected value. (Minor cosmetic residual: the v1.2 version
+   LABEL is stored with a comma typo "1,2"; operator may fix via metadata-only Edit,
+   no new version.) The phantom-premise warning stands as a process lesson (see
+   One-line status). Full record: agent-tasks/C-S-prefactor-resolution-findings.md and
    pslq/constants/patch_S_resolve_to_verified.py.
 2. Stale repo scripts (A2). pcf-research/vquad/scripts/{t2_iter20,22,23,24,
    jimbo_final} hardcode the retracted Gamma-prefactor S=0.43770528. Need the
