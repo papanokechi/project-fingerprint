@@ -38,21 +38,57 @@ DEFAULT_MARGIN_DIGITS = 10
 # is evaluated at the CURRENT mp working precision so every constant is
 # recomputed to the run's dps.
 # --------------------------------------------------------------------------
+def _r1_pcf(N: Optional[int] = None):
+    """R1 = limit of the degree-(4,2) PCF (a_n=n^4-n^2-n-1, b_n=-n^2+n-1),
+    evaluated at the CURRENT mp working precision. Family located in
+    papanokechi/siarc-relay-bridge (T2A-R1-IDENTIFY); see pslq/constants/.
+
+    Convergence is ~0.17 decimal digits/iteration, so the iteration count is
+    scaled to the working precision (with margin) unless N is given explicitly.
+    """
+    if N is None:
+        N = int(mp.dps * 7) + 300  # >= dps digits of accuracy, comfortable margin
+    a4, a3, a2, a1, a0 = 1, 0, -1, -1, -1
+    b2, b1, b0 = -1, 1, -1
+    b_at_0 = mpmath.mpf(b0)
+    b_at_1 = mpmath.mpf(b2 + b1 + b0)
+    a_at_1 = mpmath.mpf(a4 + a3 + a2 + a1 + a0)
+    P_prev2, P_prev1 = b_at_0, b_at_1 * b_at_0 + a_at_1
+    Q_prev2, Q_prev1 = mpmath.mpf(1), b_at_1
+    K = None
+    for n in range(2, N + 1):
+        an = a4 * n**4 + a3 * n**3 + a2 * n**2 + a1 * n + a0
+        bn = b2 * n**2 + b1 * n + b0
+        P_curr = bn * P_prev1 + an * P_prev2
+        Q_curr = bn * Q_prev1 + an * Q_prev2
+        K = P_curr / Q_curr
+        if n % 16 == 0:
+            mag = max(abs(P_curr), abs(Q_curr), mpmath.mpf(1))
+            P_curr /= mag; Q_curr /= mag
+            P_prev1 /= mag; Q_prev1 /= mag
+        P_prev2, P_prev1 = P_prev1, P_curr
+        Q_prev2, Q_prev1 = Q_prev1, Q_curr
+    return K
+
+
 def constant(name: str) -> "NamedConstant":
     table = {
         "pi": lambda: +mpmath.pi,
         "e": lambda: +mpmath.e,
         "ln2": lambda: mpmath.log(2),
+        "log2": lambda: mpmath.log(2),
         "ln3": lambda: mpmath.log(3),
         "pi_ln2": lambda: mpmath.pi * mpmath.log(2),
         "gamma": lambda: +mpmath.euler,
         "catalan": lambda: +mpmath.catalan,
         "zeta2": lambda: mpmath.zeta(2),
         "zeta3": lambda: mpmath.zeta(3),
+        "zeta5": lambda: mpmath.zeta(5),
         "pi2": lambda: mpmath.pi ** 2,
         "phi": lambda: +mpmath.phi,
         "one": lambda: mpmath.mpf(1),
         "neg_one": lambda: mpmath.mpf(-1),
+        "R1": _r1_pcf,
     }
     if name.startswith("sqrt"):
         k = int(name[4:])
@@ -109,18 +145,34 @@ class PslqResult:
     maxsteps: int
     margin_digits: int
     coeffs: Optional[List[int]]
+    l_index: Optional[int] = None
     floor: float = field(init=False)
     eff_digits: float = field(init=False)
     clears_floor: bool = field(init=False)
+    passes_l_filter: bool = field(init=False)
     is_candidate: bool = field(init=False)
 
     def __post_init__(self) -> None:
         self.floor = bailey_floor(self.n_entries, self.maxcoeff)
         self.eff_digits = effective_digits(self.dps, self.tol)
         self.clears_floor = self.eff_digits >= self.floor + self.margin_digits
-        # A coefficient vector is a CANDIDATE only if PSLQ returned something
-        # AND the run's effective precision clears the Bailey floor + margin.
-        self.is_candidate = bool(self.coeffs) and self.clears_floor
+        # Phantom-trap (L-coefficient) filter. When an l_index is given, the
+        # entry at that position is the target limit L; a relation whose
+        # coefficient on L is zero is satisfied by ANY value of L and signals
+        # only a linear dependence WITHIN the rest of the basis (e.g. the
+        # zeta(2)=pi^2/6 or 2*phi=sqrt5+1 traps). Such a relation is a PHANTOM,
+        # not an identification of L, and must be rejected. When l_index is None
+        # the filter is inactive (passes by definition).
+        if self.l_index is None or not self.coeffs:
+            self.passes_l_filter = True
+        else:
+            self.passes_l_filter = int(self.coeffs[self.l_index]) != 0
+        # A coefficient vector is a CANDIDATE only if PSLQ returned something,
+        # the run's effective precision clears the Bailey floor + margin, AND
+        # (when an L target is named) it passes the phantom L-filter.
+        self.is_candidate = (
+            bool(self.coeffs) and self.clears_floor and self.passes_l_filter
+        )
 
     def report(self) -> str:
         lines = [
@@ -135,6 +187,21 @@ class PslqResult:
             f"eff. digits  : {self.eff_digits:.3f} (min(dps, -log10(tol)))",
             f"margin req.  : +{self.margin_digits} digits",
             f"clears floor : {self.clears_floor}",
+            f"L index      : {self.l_index}",
+            f"L-filter     : "
+            + (
+                "INACTIVE (no L target named)"
+                if self.l_index is None
+                else (
+                    f"PASS (coeff on L = {self.coeffs[self.l_index]} != 0)"
+                    if (self.coeffs and self.passes_l_filter)
+                    else (
+                        "REJECT (coeff on L = 0 -> PHANTOM)"
+                        if self.coeffs
+                        else "n/a (no relation)"
+                    )
+                )
+            ),
             f"-> verdict   : "
             + (
                 "CANDIDATE (CONJECTURED; re-verify at higher precision)"
@@ -142,7 +209,11 @@ class PslqResult:
                 else (
                     "NULL (no relation within tol/maxcoeff) -- successful null"
                     if not self.coeffs
-                    else "REJECTED -- below precision floor; precision artifact"
+                    else (
+                        "REJECTED -- phantom (L-coefficient is zero)"
+                        if not self.passes_l_filter
+                        else "REJECTED -- below precision floor; precision artifact"
+                    )
                 )
             ),
         ]
@@ -156,8 +227,14 @@ def run_pslq(
     maxcoeff: int = 1000,
     maxsteps: int = 100,
     margin_digits: int = DEFAULT_MARGIN_DIGITS,
+    l_index: Optional[int] = None,
 ) -> PslqResult:
-    """Compute the basis to `dps` digits and run mpmath.pslq on it."""
+    """Compute the basis to `dps` digits and run mpmath.pslq on it.
+
+    `l_index`, when given, marks which basis entry is the target limit L; a
+    returned relation with a zero coefficient on that entry is treated as a
+    phantom (see PslqResult).
+    """
     basis = make_basis(basis_names)
     saved_dps = mp.dps
     try:
@@ -175,6 +252,7 @@ def run_pslq(
         maxsteps=maxsteps,
         margin_digits=margin_digits,
         coeffs=list(coeffs) if coeffs else None,
+        l_index=l_index,
     )
 
 
@@ -213,19 +291,56 @@ def self_test(verbose: bool = True) -> bool:
     return ok
 
 
+def phantom_test(verbose: bool = True) -> bool:
+    """POSITIVE L-filter test: a basis containing a known linear dependence
+    among the NON-L entries must surface a phantom relation (L-coefficient = 0)
+    that the L-filter REJECTS.
+
+    Basis: [R1, pi, zeta2, pi2, log2] with l_index=0 (R1 is the target L).
+    zeta2 = pi^2/6 is an exact dependence among entries 2 and 3, so PSLQ returns
+    a relation with zero coefficient on R1 -- the documented zeta(2)=pi^2/6
+    phantom. The filter must mark it REJECTED (not a candidate).
+    """
+    ok = True
+    basis = ["R1", "pi", "zeta2", "pi2", "log2"]
+    r = run_pslq(basis, dps=120, tol=None, maxcoeff=1000, l_index=0)
+    returned_relation = bool(r.coeffs)
+    l_coeff_zero = returned_relation and int(r.coeffs[0]) == 0
+    rejected = returned_relation and (not r.is_candidate) and (not r.passes_l_filter)
+    ok = returned_relation and l_coeff_zero and rejected
+
+    if verbose:
+        print("=== L-FILTER POSITIVE TEST: zeta(2)=pi^2/6 phantom ===")
+        print(r.report())
+        print(f"relation returned     : {returned_relation}")
+        print(f"L (R1) coefficient = 0: {l_coeff_zero}")
+        print(f"REJECTED as phantom   : {rejected}")
+        print()
+        print(f"PHANTOMTEST {'PASS' if ok else 'FAIL'}")
+
+    return ok
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="PSLQ integer-relation harness (local-only).")
     parser.add_argument("--selftest", action="store_true", help="run the shakedown self-test and exit")
+    parser.add_argument("--phantomtest", action="store_true", help="run the L-filter phantom-rejection test and exit")
     parser.add_argument("--basis", nargs="+", help="named constants to test (e.g. pi e ln2)")
     parser.add_argument("--dps", type=int, default=100)
     parser.add_argument("--tol", type=str, default=None, help="tolerance (default: mpmath 3/4 precision)")
     parser.add_argument("--maxcoeff", type=int, default=1000)
     parser.add_argument("--maxsteps", type=int, default=100)
     parser.add_argument("--margin", type=int, default=DEFAULT_MARGIN_DIGITS)
+    parser.add_argument("--l-index", type=int, default=None, dest="l_index",
+                        help="index of the target limit L in --basis; relations with a zero L-coefficient are rejected as phantoms")
     args = parser.parse_args()
 
     if args.selftest:
         ok = self_test(verbose=True)
+        raise SystemExit(0 if ok else 1)
+
+    if args.phantomtest:
+        ok = phantom_test(verbose=True)
         raise SystemExit(0 if ok else 1)
 
     if args.basis:
@@ -237,6 +352,7 @@ def main() -> None:
             maxcoeff=args.maxcoeff,
             maxsteps=args.maxsteps,
             margin_digits=args.margin,
+            l_index=args.l_index,
         )
         print(res.report())
         return
