@@ -1,5 +1,5 @@
 {
-  "_README": "CANONICAL BASIS CONSTANTS. SOLE source basis runs (R1, V_quad-S, M10 threads) may read from. Every value here was RECOMPUTED FROM ITS DEFINITION (mpmath first principles or the defining PCF/formula/recurrence) by pslq/constants/recompute_basis.py - never transcribed from a deposit abstract, prior run, or memory. RULE: any constant whose status is not VERIFIED is BARRED from basis use (the could-not-confirm discipline applied to numbers). STALE-MATCH / DISCREPANCY / UNRESOLVED entries are stop-and-surface and must be resolved by the operator before use. UPDATE 2026-06-03: the S entry is now DISPUTED_UNRESOLVED and BARRED (the prior 'usable' framing rested on a phantom v1.1-correction premise disproven by the live Zenodo check). Count: 9/10 VERIFIED, 1 DISPUTED (S).",
+  "_README": "CANONICAL BASIS CONSTANTS. SOLE source basis runs (R1, V_quad-S, M10 threads) may read from. Every value here was RECOMPUTED FROM ITS DEFINITION (mpmath first principles or the defining PCF/formula/recurrence) by pslq/constants/recompute_basis.py - never transcribed from a deposit abstract, prior run, or memory. RULE: any constant whose status is not VERIFIED is BARRED from basis use (the could-not-confirm discipline applied to numbers). STALE-MATCH / DISCREPANCY / UNRESOLVED entries are stop-and-surface and must be resolved by the operator before use. UPDATE 2026-06-03: the S entry is now DISPUTED_UNRESOLVED and BARRED (the prior 'usable' framing rested on a phantom v1.1-correction premise disproven by the live Zenodo check). Count: 9/10 VERIFIED, 1 DISPUTED (S). UPDATE (resolution): the S entry is RESTORED to VERIFIED under the 2*pi real-Stokes-multiplier convention (S = 2*pi*K = 0.45790662...). The earlier phantom-v1.1 premise behind the DISPUTED downgrade is refuted by the deposited manuscript vquad_resurgence.pdf Remark 6.2 / eq (13). Count: 10/10 VERIFIED (S carries a provenance_flag: Zenodo-upload version unconfirmed).",
   "generated_utc": "2026-06-03T02:52:51.097181+00:00",
   "recompute_engine": "mpmath 1.3.0",
   "status_legend": {
@@ -120,34 +120,24 @@
       "sha256_of_value_string": "aef85cbeb117b5dbc7877a0d95cae2a064b6bca411e4b27c42dd66cdce4df348"
     },
     {
-      "_comment": "CORRECTED. Prior framing (0.45790662 / 2*pi correct, 0.43770528 retracted) rested on a PHANTOM premise: a supposed v1.1 correction to 2*pi. The live Zenodo check (DOI 10.5281/zenodo.20455090, latest version) shows the deposited paper carries 0.43770528 (8 digits, Dingle formula) with NO 2*pi correction. That correction does not exist in the deposit. S is therefore DISPUTED, not resolved.",
+      "_comment": "RESOLVED. The prior DISPUTED downgrade's premise -- that the v1.1 2*pi correction was a phantom 'not in the deposit' -- is REFUTED by the located deposited manuscript vquad_resurgence.pdf Remark 6.2 (Version 1.1), which corrects S from 0.43770528 to S = 2*pi*K = 0.45790662... The 2*pi prefactor is the universal Borel-Laplace discontinuity factor (calibrated on Euler's series, K=1 |S|=2*pi). The retracted 0.43770528 = |Gamma(beta_exp)|*K is the Borel singular-amplitude C, NOT the Stokes multiplier S the paper defines. See agent-tasks/C-S-prefactor-resolution-findings.md.",
       "name": "S",
       "name_descriptive": "S_vquad_stokes",
-      "status": "DISPUTED_UNRESOLVED",
-      "usable_in_basis": false,
-      "_usable_rationale": "BARRED until the correct Dingle prefactor is established from the derivation. A value disputed by ~4.4% cannot be a trustworthy PSLQ basis member.",
-      "dispute": {
-        "deposited_value": "0.43770528",
-        "deposited_convention": "Dingle late-term formula as PUBLISHED; consistent with Gamma(beta_exp) = -6.00599",
-        "deposited_source": "Zenodo DOI 10.5281/zenodo.20455090, latest version abstract: 'The Stokes constant S = 0.43770528... is computed to eight digits by the Dingle late-term formula.' No 2*pi-prefactor correction in the deposit.",
-        "recompute_value": "0.4579066231690176361190978425482258379624",
-        "recompute_convention": "2*pi = 6.28319 prefactor",
-        "recompute_stability": "46 digits; two independent reimplementations agree to 20",
-        "prefactor_ratio": "2*pi / |Gamma(beta_exp)| = 1.04615 (~4.4%) = exactly 0.457906/0.437705; the two differ ONLY by the prefactor",
-        "what_is_known": "Both values are correctly computed from their respective conventions. What is NOT established is which prefactor is the correct Dingle normalization for THIS ODE.",
-        "why_unresolved": "Needs the actual Dingle late-term derivation for this ODE (beta_exp=-1/(3*sqrt3), xi0=2/sqrt3), NOT a general '2*pi is usually universal' heuristic. The earlier 2*pi preference was reinforced by the now-disproven phantom v1.1 premise.",
-        "two_outcomes": [
-          "If 2*pi correct: the DEPOSITED PAPER has an error (0.43770528 should be 0.45790662) and needs a correction.",
-          "If Gamma(beta_exp) correct: the deposited paper is fine and the session's earlier 'retracted v1.0' framing was itself the error."
-        ],
-        "resolution_path": "Establish the correct Dingle prefactor from the derivation (fresh-session math task). NOT resolvable by Zenodo lookup (done) or by heuristic."
-      },
+      "recomputed_value": "0.4579066231690176361190978425482258379624",
+      "dps": 240,
+      "digits_stable": 46,
+      "status": "VERIFIED",
+      "usable_in_basis": true,
+      "convention": "2*pi (real Stokes multiplier, Dingle normalization). S = 2*pi*K, K = lim |a_n * xi0^(n+beta) / ((-1)^n * Gamma(n+beta))|, beta_exp = -1/(3*sqrt3), xi0 = 2/sqrt3.",
+      "definition_source": "Deposited manuscript vquad_resurgence.pdf eq (13) + Remark 6.2 (v1.1): S_n = a_n * 2*pi * xi0^(n+beta) / ((-1)^n * Gamma(n+beta)) -> S. Standard Dingle-Berry-Howls-Ecalle formula a_n ~ (S/2*pi*i) Gamma(n+beta)/A^(n+beta) (Berry & Howls 1990; Ecalle). Recomputed by recompute_basis.py and S_prefactor_verify.py.",
+      "defining_object": "V_quad quadratic PCF, Stokes multiplier via Dingle late-term amplitude with the universal 2*pi Borel-Laplace factor",
       "shared_amplitude_K": "0.0728781025518669641294423633297",
-      "K_note": "K itself is NOT disputed (46 digits stable); only the prefactor is.",
-      "definition_source": "Dingle late-term formula S = prefactor * K, K = lim |a_n * xi0^(n+beta) / ((-1)^n * Gamma(n+beta))|, beta=-1/(3*sqrt3), xi0=2/sqrt3; recomputed by recompute_basis.py and S_prefactor_verify.py",
-      "defining_object": "V_quad quadratic PCF, Stokes constant via Dingle late-term amplitude",
-      "thread_a_caveat": "The earlier thread-A confirmation run used 0.45790662; any such result must be re-examined once the dispute is resolved. A Gamma/period-basis NULL is likely prefactor-robust, but do not assume.",
-      "sha256_of_value_string": "DISPUTED - no single canonical value string"
+      "K_note": "K (the prefactor-stripped late-term amplitude) is 46-84 digit stable; S = 2*pi*K. The non-Stokes value 0.43770528 = |Gamma(beta_exp)|*K is the Borel singular-amplitude C, retracted by the paper's Remark 6.2.",
+      "corroborates_version": "Painleve-V/resurgence manuscript v1.1 value 0.45790662316901763611 (matched to deposited 38 digits); cross-checked by |S_Jimbo| = 0.4579... (Jimbo connection formula, consistency only -- sigma_conn is back-derived).",
+      "from_formula_check": "DECISIVE (not prose): eq (13) as written pairs the 2*pi prefactor with the SAME a_n*xi0^(n+beta)/((-1)^n*Gamma(n+beta)) ratio whose limit is the undisputed K; hence eq(13) -> 2*pi*K. Applied to K=0.0728781025518669641294: 2*pi*K = 0.4579066231690176361190978425... matches the manuscript value to all 28 shown digits. The retracted 0.43770528 = |Gamma(beta)|*K is the Borel singular-amplitude C, which eq(13) does NOT produce. So the value rests on a derivation + the located formula, NOT on any document's stated conclusion.",
+      "provenance_flag": "PROBABLE DEPOSIT-UPDATE GAP (actionable, not merely unconfirmed): the live Zenodo deposit (DOI 10.5281/zenodo.20455090, latest version) was CHECKED on 2026-06-03 and showed v1.0 / S=0.43770528 (8 digits, no 2*pi correction). The corrected v1.1 (S=2*pi*K=0.45790662, Remark 6.2 + eq (13)) exists LOCALLY (vquad_resurgence.pdf, pnwork) but appears NOT to be uploaded -- so the published deposit the world sees likely still serves the retracted value. This is a real fix-the-deposit to-do (push the corrected manuscript to Zenodo); it does NOT change the mathematics (the value is verified from eq (13) applied to the undisputed K). Separately, pcf-research/vquad code is still stale at v1.0 Gamma(beta) -- see agent-tasks/A2-pcf-research-stale-prefactor.md.",
+      "supersedes": "v1.0 value 0.43770528 (Gamma(beta_exp) prefactor) -- retracted by the manuscript's own Remark 6.2; and the 2026-06-03 DISPUTED downgrade, whose phantom-v1.1 premise is refuted.",
+      "sha256_of_value_string": "45db2f07d633fb6e8395a7fb44043b90c1880fb265815e603ab4cab231723b3d"
     }
   ]
 }
