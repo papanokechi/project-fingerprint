@@ -1,0 +1,86 @@
+{
+  "task": "op:xi0-d3-direct STAGE 1 (beta_3 scale dimension)",
+  "dps_algebraic": 80,
+  "dps_numeric": 160,
+  "objects": [
+    {
+      "label": "synth_beta3_2",
+      "kind": "constructed",
+      "description": "b(n)=2n^3+n^2-n+1, beta_3=2",
+      "coeffs_a3_a2_a1_a0": [
+        2,
+        1,
+        -1,
+        1
+      ],
+      "beta_3": 2,
+      "xi0_conjecture_3_over_beta3_cbrt": "2.3811015779522992121275584589084623905872399918498",
+      "xi0_algebraic_dps80": "2.3811015779522992121275584589084623905872399918498",
+      "algebraic_agreement_digits": 80.0,
+      "numeric_raw_ratio_xi0": "2.37978459667365363206682324323",
+      "numeric_raw_agreement_digits": 3.26,
+      "numeric_neville_xi0": "2.381101577952299212127558458908462390587",
+      "numeric_neville_agreement_digits": 42.6,
+      "neville_nodes_n": [
+        60,
+        300,
+        21
+      ],
+      "Nmax": 300
+    },
+    {
+      "label": "synth_beta3_7",
+      "kind": "constructed",
+      "description": "b(n)=7n^3+n, beta_3=7 (parity w/ d=4 alpha_4=7)",
+      "coeffs_a3_a2_a1_a0": [
+        7,
+        0,
+        1,
+        0
+      ],
+      "beta_3": 7,
+      "xi0_conjecture_3_over_beta3_cbrt": "1.56827387572413065024488856147974639863733014379",
+      "xi0_algebraic_dps80": "1.56827387572413065024488856147974639863733014379",
+      "algebraic_agreement_digits": 80.0,
+      "numeric_raw_ratio_xi0": "1.56827304595047128249773171882",
+      "numeric_raw_agreement_digits": 6.28,
+      "numeric_neville_xi0": "1.568273875724130650244888561479746398637",
+      "numeric_neville_agreement_digits": 44.5,
+      "neville_nodes_n": [
+        60,
+        300,
+        21
+      ],
+      "Nmax": 300
+    },
+    {
+      "label": "catalogue_fam19",
+      "kind": "catalogue_family_19",
+      "description": "b(n)=n^3-3n^2+1, beta_3=1 (+_C3_real)",
+      "coeffs_a3_a2_a1_a0": [
+        1,
+        -3,
+        0,
+        1
+      ],
+      "beta_3": 1,
+      "xi0_conjecture_3_over_beta3_cbrt": "3.0",
+      "xi0_algebraic_dps80": "3.0",
+      "algebraic_agreement_digits": 80.0,
+      "numeric_raw_ratio_xi0": "3.01006715200726660257956911472",
+      "numeric_raw_agreement_digits": 2.47,
+      "numeric_neville_xi0": "2.999999999999999999999999999999999999933",
+      "numeric_neville_agreement_digits": 37.6,
+      "neville_nodes_n": [
+        60,
+        300,
+        21
+      ],
+      "Nmax": 300
+    }
+  ],
+  "chi3_symbolic_fresh": "beta3*c**3/27 + 1",
+  "chi3_only_beta3_on_edge": true,
+  "chi3_matches_conjecture_radius": true,
+  "odd_degree_note": "operator gives chi_3 = 1 + (beta_3/27)c^3 (real root c = -3/beta_3^(1/3)); conjecture form 1 - (beta_3/27)c^3 is the exp(-c/u) convention; identical Borel radius |c| = 3/beta_3^(1/3). q=(d+2)/2=5/2 half-integer regime."
+}
