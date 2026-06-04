@@ -1,0 +1,45 @@
+== A. full operator chi_d for d=2..6 ==
+  d=2: chi_d = -beta2*c**2/4 + 1
+        only_beta_d_on_edge=True  matches_formula=True
+  d=3: chi_d = beta3*c**3/27 + 1
+        only_beta_d_on_edge=True  matches_formula=True
+  d=4: chi_d = -beta4*c**4/256 + 1
+        only_beta_d_on_edge=True  matches_formula=True
+  d=5: chi_d = beta5*c**5/3125 + 1
+        only_beta_d_on_edge=True  matches_formula=True
+  d=6: chi_d = -beta6*c**6/46656 + 1
+        only_beta_d_on_edge=True  matches_formula=True
+
+== B. symbolic-in-d leading-symbol lemma (k=0..8, d symbolic) ==
+  k=0: deg_w=0 lead=1 (=(-c/d)^0? True)
+  k=1: deg_w=1 lead=-c/d (=(-c/d)^1? True)
+  k=2: deg_w=2 lead=c**2/d**2 (=(-c/d)^2? True)
+  k=3: deg_w=3 lead=-c**3/d**3 (=(-c/d)^3? True)
+  k=4: deg_w=4 lead=c**4/d**4 (=(-c/d)^4? True)
+  k=5: deg_w=5 lead=-c**5/d**5 (=(-c/d)^5? True)
+  k=6: deg_w=6 lead=c**6/d**6 (=(-c/d)^6? True)
+  k=7: deg_w=7 lead=-c**7/d**7 (=(-c/d)^7? True)
+  k=8: deg_w=8 lead=c**8/d**8 (=(-c/d)^8? True)
+
+== C. symbolic covariance from the edge (d=2..6) ==
+  d=2: lead(b.phi)=alpha**2*beta2  ratio=1/alpha  =1/alpha? True  gamma-free? True
+  d=3: lead(b.phi)=alpha**3*beta3  ratio=1/alpha  =1/alpha? True  gamma-free? True
+  d=4: lead(b.phi)=alpha**4*beta4  ratio=1/alpha  =1/alpha? True  gamma-free? True
+  d=5: lead(b.phi)=alpha**5*beta5  ratio=1/alpha  =1/alpha? True  gamma-free? True
+  d=6: lead(b.phi)=alpha**6*beta6  ratio=1/alpha  =1/alpha? True  gamma-free? True
+
+== D. numeric cross-check vs in-repo pipeline (d=2..6) ==
+  [d2_b3] d=2 beta_d=3: edge=1.154700538379251529 pipeline=1.154700538379251529  42.7dig OK
+  [d2_b1] d=2 beta_d=1: edge=2.0 pipeline=2.0  40.1dig OK
+  [d3_b2] d=3 beta_d=2: edge=2.3811015779522992121 pipeline=2.3811015779522992121  42.6dig OK
+  [d3_b1] d=3 beta_d=1: edge=3.0 pipeline=3.0  41.5dig OK
+  [d4_b1] d=4 beta_d=1: edge=4.0 pipeline=4.0  42.4dig OK
+  [d4_b7] d=4 beta_d=7: edge=2.4591526118050574609 pipeline=2.4591526118050574609  45.7dig OK
+  [d5_b1] d=5 beta_d=1: edge=5.0 pipeline=5.0  43.4dig OK
+  [d5_b2] d=5 beta_d=2: edge=4.3527528164806206957 pipeline=4.3527528164806206957  44.1dig OK
+  [d6_b1] d=6 beta_d=1: edge=6.0 pipeline=6.0  44.0dig OK
+  [d6_b3] d=6 beta_d=3: edge=4.9960990659336259177 pipeline=4.9960990659336259177  44.8dig OK
+
+A_all_match=True  B_symbolic_in_d=True  C_all_covariant=True  D_match_pipeline=True
+ALL_GREEN = True
+Wrote lemma31_edge_derivation_results.json  sha256=d0738b5d8a9488667c9b1a18754fa6438098945c5e1b6d4ab5d75469d45e9897

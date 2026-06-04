@@ -1,0 +1,266 @@
+{
+  "task": "Lemma 3.1 general-d in-repo derivation (discharge D2-NOTE conditionality)",
+  "method": "extends pslq/xi0_d3 derive_chi3_symbolic to general d; symbolic-in-d leading-symbol lemma; symbolic covariance; numeric cross-check vs in-repo pipeline",
+  "A_full_operator_d2_to_6": [
+    {
+      "d": 2,
+      "chi_d": "-beta2*c**2/4 + 1",
+      "expected": "1 + (-1)^3(beta2/4) c^2",
+      "only_beta_d_on_edge": true,
+      "matches_formula": true
+    },
+    {
+      "d": 3,
+      "chi_d": "beta3*c**3/27 + 1",
+      "expected": "1 + (-1)^4(beta3/27) c^3",
+      "only_beta_d_on_edge": true,
+      "matches_formula": true
+    },
+    {
+      "d": 4,
+      "chi_d": "-beta4*c**4/256 + 1",
+      "expected": "1 + (-1)^5(beta4/256) c^4",
+      "only_beta_d_on_edge": true,
+      "matches_formula": true
+    },
+    {
+      "d": 5,
+      "chi_d": "beta5*c**5/3125 + 1",
+      "expected": "1 + (-1)^6(beta5/3125) c^5",
+      "only_beta_d_on_edge": true,
+      "matches_formula": true
+    },
+    {
+      "d": 6,
+      "chi_d": "-beta6*c**6/46656 + 1",
+      "expected": "1 + (-1)^7(beta6/46656) c^6",
+      "only_beta_d_on_edge": true,
+      "matches_formula": true
+    }
+  ],
+  "A_all_match": true,
+  "B_leading_symbol_lemma": [
+    {
+      "k": 0,
+      "degree_in_w": 0,
+      "leading_coeff": "1",
+      "expected_leading_coeff": "1",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 1,
+      "degree_in_w": 1,
+      "leading_coeff": "-c/d",
+      "expected_leading_coeff": "-c/d",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 2,
+      "degree_in_w": 2,
+      "leading_coeff": "c**2/d**2",
+      "expected_leading_coeff": "c**2/d**2",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 3,
+      "degree_in_w": 3,
+      "leading_coeff": "-c**3/d**3",
+      "expected_leading_coeff": "-c**3/d**3",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 4,
+      "degree_in_w": 4,
+      "leading_coeff": "c**4/d**4",
+      "expected_leading_coeff": "c**4/d**4",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 5,
+      "degree_in_w": 5,
+      "leading_coeff": "-c**5/d**5",
+      "expected_leading_coeff": "-c**5/d**5",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 6,
+      "degree_in_w": 6,
+      "leading_coeff": "c**6/d**6",
+      "expected_leading_coeff": "c**6/d**6",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 7,
+      "degree_in_w": 7,
+      "leading_coeff": "-c**7/d**7",
+      "expected_leading_coeff": "-c**7/d**7",
+      "leading_matches": true,
+      "degree_matches_k": true
+    },
+    {
+      "k": 8,
+      "degree_in_w": 8,
+      "leading_coeff": "c**8/d**8",
+      "expected_leading_coeff": "c**8/d**8",
+      "leading_matches": true,
+      "degree_matches_k": true
+    }
+  ],
+  "B_symbolic_in_d_holds": true,
+  "C_symbolic_covariance_d2_to_6": [
+    {
+      "d": 2,
+      "leading_coeff_b_phi": "alpha**2*beta2",
+      "leading_coeff_matches_betad_alpha_d": true,
+      "degree_preserved": true,
+      "gamma_absent_from_leading_coeff": true,
+      "xi0_ratio_simplified": "1/alpha",
+      "ratio_equals_inv_alpha": true
+    },
+    {
+      "d": 3,
+      "leading_coeff_b_phi": "alpha**3*beta3",
+      "leading_coeff_matches_betad_alpha_d": true,
+      "degree_preserved": true,
+      "gamma_absent_from_leading_coeff": true,
+      "xi0_ratio_simplified": "1/alpha",
+      "ratio_equals_inv_alpha": true
+    },
+    {
+      "d": 4,
+      "leading_coeff_b_phi": "alpha**4*beta4",
+      "leading_coeff_matches_betad_alpha_d": true,
+      "degree_preserved": true,
+      "gamma_absent_from_leading_coeff": true,
+      "xi0_ratio_simplified": "1/alpha",
+      "ratio_equals_inv_alpha": true
+    },
+    {
+      "d": 5,
+      "leading_coeff_b_phi": "alpha**5*beta5",
+      "leading_coeff_matches_betad_alpha_d": true,
+      "degree_preserved": true,
+      "gamma_absent_from_leading_coeff": true,
+      "xi0_ratio_simplified": "1/alpha",
+      "ratio_equals_inv_alpha": true
+    },
+    {
+      "d": 6,
+      "leading_coeff_b_phi": "alpha**6*beta6",
+      "leading_coeff_matches_betad_alpha_d": true,
+      "degree_preserved": true,
+      "gamma_absent_from_leading_coeff": true,
+      "xi0_ratio_simplified": "1/alpha",
+      "ratio_equals_inv_alpha": true
+    }
+  ],
+  "C_all_covariant": true,
+  "D_numeric_crosscheck": [
+    {
+      "label": "d2_b3",
+      "d": 2,
+      "beta_d": 3,
+      "xi0_edge_d_over_betad_cbrt": "1.154700538379251529018297561003914911295",
+      "xi0_pipeline_measured": "1.154700538379251529018297561003914911295",
+      "agreement_digits": 42.7,
+      "pass": true
+    },
+    {
+      "label": "d2_b1",
+      "d": 2,
+      "beta_d": 1,
+      "xi0_edge_d_over_betad_cbrt": "2.0",
+      "xi0_pipeline_measured": "2.0",
+      "agreement_digits": 40.1,
+      "pass": true
+    },
+    {
+      "label": "d3_b2",
+      "d": 3,
+      "beta_d": 2,
+      "xi0_edge_d_over_betad_cbrt": "2.381101577952299212127558458908462390587",
+      "xi0_pipeline_measured": "2.381101577952299212127558458908462390587",
+      "agreement_digits": 42.6,
+      "pass": true
+    },
+    {
+      "label": "d3_b1",
+      "d": 3,
+      "beta_d": 1,
+      "xi0_edge_d_over_betad_cbrt": "3.0",
+      "xi0_pipeline_measured": "3.0",
+      "agreement_digits": 41.5,
+      "pass": true
+    },
+    {
+      "label": "d4_b1",
+      "d": 4,
+      "beta_d": 1,
+      "xi0_edge_d_over_betad_cbrt": "4.0",
+      "xi0_pipeline_measured": "4.0",
+      "agreement_digits": 42.4,
+      "pass": true
+    },
+    {
+      "label": "d4_b7",
+      "d": 4,
+      "beta_d": 7,
+      "xi0_edge_d_over_betad_cbrt": "2.459152611805057460865357222120751252114",
+      "xi0_pipeline_measured": "2.459152611805057460865357222120751252114",
+      "agreement_digits": 45.7,
+      "pass": true
+    },
+    {
+      "label": "d5_b1",
+      "d": 5,
+      "beta_d": 1,
+      "xi0_edge_d_over_betad_cbrt": "5.0",
+      "xi0_pipeline_measured": "5.0",
+      "agreement_digits": 43.4,
+      "pass": true
+    },
+    {
+      "label": "d5_b2",
+      "d": 5,
+      "beta_d": 2,
+      "xi0_edge_d_over_betad_cbrt": "4.352752816480620695681350087398730494896",
+      "xi0_pipeline_measured": "4.352752816480620695681350087398730494896",
+      "agreement_digits": 44.1,
+      "pass": true
+    },
+    {
+      "label": "d6_b1",
+      "d": 6,
+      "beta_d": 1,
+      "xi0_edge_d_over_betad_cbrt": "6.0",
+      "xi0_pipeline_measured": "6.0",
+      "agreement_digits": 44.0,
+      "pass": true
+    },
+    {
+      "label": "d6_b3",
+      "d": 6,
+      "beta_d": 3,
+      "xi0_edge_d_over_betad_cbrt": "4.996099065933625917652718175053014539972",
+      "xi0_pipeline_measured": "4.996099065933625917652718175053014539972",
+      "agreement_digits": 44.8,
+      "pass": true
+    }
+  ],
+  "D_all_match_pipeline": true,
+  "D_pipeline_source": "C:\\LocalWork\\project-fingerprint\\pslq\\m9_bridge\\m9_1_covariance_check.py",
+  "D_dps_numeric": 160,
+  "VERDICT": {
+    "algebraic_edge_polynomial": "DISCHARGED IN-REPO symbolic-in-d (B) + full-operator instance-verified d=2..6 (A)",
+    "covariance_law_from_edge": "DISCHARGED IN-REPO symbolically (C), no D2-NOTE appeal",
+    "analytic_edge_to_radius_step": "RESIDUAL: remains conditional on Wasow S19 / Birkhoff-Trjitzinsky (cited by D2-NOTE Thm 4.1); numerically corroborated d=2..6 (D), not re-derived"
+  },
+  "ALL_GREEN": true
+}
