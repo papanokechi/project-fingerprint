@@ -4,8 +4,8 @@
 *A fresh session starts from this map, not from git archaeology or chat history.*
 *Update this file at the end of each working session.*
 
-Last updated: after M9 bridge-Φ deposit prep — ξ₀ affine-reindexing covariance
-(Proposition M9.1) numerically VERIFIED@d∈{2,3,4} (HEAD a0f8e31 + this commit).
+Last updated: after the M9 lemma31 companion — M9.1⁺ algebraic core PROVEN in-repo for
+all d≥2 (symbolic-in-d edge lemma); analytic radius step cited-conditional (HEAD 914c518).
 
 ---
 
@@ -101,6 +101,17 @@ Research runs completed (all verify/confirm/null register):
   M9.0 (object-level invariant triple, ξ₀=d/β_d^{1/d}). FRONTIER (open/unverified): the
   disc(b) and Δ_d transformation laws under reindexing are deposit-only; the Δ_d axis is
   EMPIRICAL (ρ=+0.638). No d≥5 claim. Artifacts: pslq/m9_bridge/. M9 remains PARTIAL.
+  UPDATE (lemma31 companion): the M9.1⁺ all-d covariance lift's ALGEBRAIC CORE is now
+  PROVEN IN-REPO for all d≥2 — the slope-1/d Newton edge χ_d(c)=1+(−1)^(d+1)(β_d/d^d)c^d
+  (only β_d) and the resulting ξ₀(b∘φ)=α⁻¹·ξ₀(b) — carried by a SYMBOLIC-IN-d
+  leading-symbol lemma (NOT the d≤6 numerics, which only corroborate), extending the d=3
+  χ₃ method. The ANALYTIC edge⇒Borel-radius step (ξ₀=|c|=d/β_d^{1/d}; Wasow §19 rank
+  q=(d+2)/2 / Birkhoff–Trjitzinsky) stays CITED-CONDITIONAL on D2-NOTE Thm 4.1 — NOT
+  discharged. So M9.1⁺ conditionality shrinks from "all of Thm 4.1 + Lemma 3.1" to "only
+  the analytic radius step." VERIFIED restricted to computed (d,β_d,φ); no d≥7 claim. The
+  deposited pslq/m9_bridge/M9_bridge_stratification.md is UNTOUCHED; the discharge lands as
+  a separate companion note pslq/xi0_d3/lemma31_general_d_derivation.md (+ derivation
+  script + lemma31_claims.jsonl C53–C57).
 
 ## OPEN ITEMS (carry forward — not yet resolved)
 
