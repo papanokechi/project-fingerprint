@@ -4,7 +4,8 @@
 *A fresh session starts from this map, not from git archaeology or chat history.*
 *Update this file at the end of each working session.*
 
-Last updated: after Thread B (M10) Stage 0 investigation (HEAD e5b1025 + this commit).
+Last updated: after M9 bridge-Φ deposit prep — ξ₀ affine-reindexing covariance
+(Proposition M9.1) numerically VERIFIED@d∈{2,3,4} (HEAD a0f8e31 + this commit).
 
 ---
 
@@ -89,6 +90,17 @@ Research runs completed (all verify/confirm/null register):
   across beta_3 in {1,2,7}). NOTE: op:xi0-d3-direct was ALREADY closed by D2-NOTE
   v2.1 Thm 4.1 (general-d proof) and a prior 2026-05-02 sweep; this run only
   filled the untested scale dimension. Not a new op closure.
+- M9 (Bridge Φ): the cross-degree "bridge functor" is recorded HONESTLY as an
+  invariant-triple STRATIFICATION MAP, not a functor (decision B) — PCF(1,·) has no
+  cross-degree morphism class, so full-triple functoriality is UNPOSED, not merely
+  unproved. One grounded positive result is deposit-ready: Proposition M9.1, the ξ₀
+  affine-reindexing covariance ξ₀(b∘φ)=α⁻¹·ξ₀(b) for φ(n)=αn+γ, shift-invariant —
+  grounded by the in-repo β_d-only slope-1/d Newton edge fact (chi3_only_beta3_on_edge),
+  and numerically VERIFIED@d∈{2,3,4}, α∈{2,3}, γ∈{0,1} (37–46 digit agreement, 5
+  families) by REUSING the xi0_d3 pipeline (imports its neville_zero). Plus Proposition
+  M9.0 (object-level invariant triple, ξ₀=d/β_d^{1/d}). FRONTIER (open/unverified): the
+  disc(b) and Δ_d transformation laws under reindexing are deposit-only; the Δ_d axis is
+  EMPIRICAL (ρ=+0.638). No d≥5 claim. Artifacts: pslq/m9_bridge/. M9 remains PARTIAL.
 
 ## OPEN ITEMS (carry forward — not yet resolved)
 
