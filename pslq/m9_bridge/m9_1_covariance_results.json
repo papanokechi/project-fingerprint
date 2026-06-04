@@ -1,0 +1,389 @@
+{
+  "proposition": "M9.1: xi0(b.phi)=alpha^-1 xi0(b); phi(n)=alpha n+gamma",
+  "method_provenance": "reuses pslq/xi0_d3/xi0_d3_scale_test.py (neville_zero IMPORTED; same compute_Q recurrence + Q_n/(Q_{n-1} n^d) estimator), generalized from hardcoded d=3 to degree d",
+  "dps_numeric": 160,
+  "dps_algebraic": 80,
+  "nodes": [
+    60,
+    300,
+    21
+  ],
+  "pass_criteria": {
+    "numeric_ratio_digits_min": 8,
+    "algebraic_ratio_digits_min": 70,
+    "shift_invariance_digits_min": 8
+  },
+  "families": [
+    {
+      "label": "vquad_d2",
+      "d": 2,
+      "beta_d": 3,
+      "description": "in-repo V_quad PCF denominator b=3n^2+n+1, beta_2=3",
+      "xi0_b_numeric": "1.15470053837925152901829756100391491129520325",
+      "xi0_b_algebraic": "1.1547005383792515290182975610039149112952035",
+      "phis": [
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 12,
+          "xi0_b_phi_numeric": "0.577350269189625764509148780501957455647601751",
+          "xi0_b_phi_algebraic": "0.577350269189625764509148780501957455647601751",
+          "ratio_numeric": "0.50000000000000000000000000000000000000000011",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 42.7,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 12,
+          "xi0_b_phi_numeric": "0.577350269189625764509148780501957455647601751",
+          "xi0_b_phi_algebraic": "0.577350269189625764509148780501957455647601751",
+          "ratio_numeric": "0.50000000000000000000000000000000000000000011",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 42.7,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 27,
+          "xi0_b_phi_numeric": "0.384900179459750509672765853667971637098401168",
+          "xi0_b_phi_algebraic": "0.384900179459750509672765853667971637098401168",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333407",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 42.7,
+          "ratio_algebraic_agreement_digits": 101.2,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 27,
+          "xi0_b_phi_numeric": "0.384900179459750509672765853667971637098401168",
+          "xi0_b_phi_algebraic": "0.384900179459750509672765853667971637098401168",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333407",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 42.7,
+          "ratio_algebraic_agreement_digits": 101.2,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        }
+      ],
+      "shift_invariance": [
+        {
+          "alpha": 2,
+          "agreement_digits": 45.5,
+          "pass": true
+        },
+        {
+          "alpha": 3,
+          "agreement_digits": 46.6,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "label": "fam19_d3",
+      "d": 3,
+      "beta_d": 1,
+      "description": "in-repo catalogue family 19 b=n^3-3n^2+1, beta_3=1",
+      "xi0_b_numeric": "2.99999999999999999999999999999999999993263339",
+      "xi0_b_algebraic": "3.0",
+      "phis": [
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 8,
+          "xi0_b_phi_numeric": "1.49999999999999999999999999999999999999999932",
+          "xi0_b_phi_algebraic": "1.5",
+          "ratio_numeric": "0.500000000000000000000000000000000000011227544",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 37.6,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 8,
+          "xi0_b_phi_numeric": "1.49999999999999999999999999999999999999999999",
+          "xi0_b_phi_algebraic": "1.5",
+          "ratio_numeric": "0.500000000000000000000000000000000000011227767",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 37.6,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 27,
+          "xi0_b_phi_numeric": "0.999999999999999999999999999999999999999999998",
+          "xi0_b_phi_algebraic": "1.0",
+          "ratio_numeric": "0.333333333333333333333333333333333333340818512",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 37.6,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 27,
+          "xi0_b_phi_numeric": "1.0",
+          "xi0_b_phi_algebraic": "1.0",
+          "ratio_numeric": "0.333333333333333333333333333333333333340818513",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 37.6,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        }
+      ],
+      "shift_invariance": [
+        {
+          "alpha": 2,
+          "agreement_digits": 42.4,
+          "pass": true
+        },
+        {
+          "alpha": 3,
+          "agreement_digits": 44.7,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "label": "synth_b3_2_d3",
+      "d": 3,
+      "beta_d": 2,
+      "description": "in-repo synth b=2n^3+n^2-n+1, beta_3=2",
+      "xi0_b_numeric": "2.38110157795229921212755845890846239058724061",
+      "xi0_b_algebraic": "2.38110157795229921212755845890846239058723999",
+      "phis": [
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 16,
+          "xi0_b_phi_numeric": "1.19055078897614960606377922945423119529362",
+          "xi0_b_phi_algebraic": "1.19055078897614960606377922945423119529362",
+          "ratio_numeric": "0.499999999999999999999999999999999999999999871",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 42.6,
+          "ratio_algebraic_agreement_digits": 100.9,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 16,
+          "xi0_b_phi_numeric": "1.19055078897614960606377922945423119529362",
+          "xi0_b_phi_algebraic": "1.19055078897614960606377922945423119529362",
+          "ratio_numeric": "0.499999999999999999999999999999999999999999871",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 42.6,
+          "ratio_algebraic_agreement_digits": 100.9,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 54,
+          "xi0_b_phi_numeric": "0.793700525984099737375852819636154130195746664",
+          "xi0_b_phi_algebraic": "0.793700525984099737375852819636154130195746664",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333247",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 42.6,
+          "ratio_algebraic_agreement_digits": 101.2,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 54,
+          "xi0_b_phi_numeric": "0.793700525984099737375852819636154130195746664",
+          "xi0_b_phi_algebraic": "0.793700525984099737375852819636154130195746664",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333247",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 42.6,
+          "ratio_algebraic_agreement_digits": 101.2,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        }
+      ],
+      "shift_invariance": [
+        {
+          "alpha": 2,
+          "agreement_digits": 46.1,
+          "pass": true
+        },
+        {
+          "alpha": 3,
+          "agreement_digits": 48.4,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "label": "synth_b4_1_d4",
+      "d": 4,
+      "beta_d": 1,
+      "description": "constructed quartic b=n^4+1, beta_4=1",
+      "xi0_b_numeric": "4.00000000000000000000000000000000000000000144",
+      "xi0_b_algebraic": "4.0",
+      "phis": [
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 16,
+          "xi0_b_phi_numeric": "2.0",
+          "xi0_b_phi_algebraic": "2.0",
+          "ratio_numeric": "0.499999999999999999999999999999999999999999819",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 42.4,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 16,
+          "xi0_b_phi_numeric": "2.0",
+          "xi0_b_phi_algebraic": "2.0",
+          "ratio_numeric": "0.499999999999999999999999999999999999999999819",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 42.4,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 81,
+          "xi0_b_phi_numeric": "1.33333333333333333333333333333333333333333333",
+          "xi0_b_phi_algebraic": "1.33333333333333333333333333333333333333333333",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333213",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 42.4,
+          "ratio_algebraic_agreement_digits": 101.4,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 81,
+          "xi0_b_phi_numeric": "1.33333333333333333333333333333333333333333333",
+          "xi0_b_phi_algebraic": "1.33333333333333333333333333333333333333333333",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333213",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 42.4,
+          "ratio_algebraic_agreement_digits": 101.4,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        }
+      ],
+      "shift_invariance": [
+        {
+          "alpha": 2,
+          "agreement_digits": 46.9,
+          "pass": true
+        },
+        {
+          "alpha": 3,
+          "agreement_digits": 48.2,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "label": "synth_b4_7_d4",
+      "d": 4,
+      "beta_d": 7,
+      "description": "constructed quartic b=7n^4+n, beta_4=7",
+      "xi0_b_numeric": "2.45915261180505746086535722212075125211430041",
+      "xi0_b_algebraic": "2.45915261180505746086535722212075125211430041",
+      "phis": [
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 112,
+          "xi0_b_phi_numeric": "1.2295763059025287304326786110603756260571502",
+          "xi0_b_phi_algebraic": "1.2295763059025287304326786110603756260571502",
+          "ratio_numeric": "0.5",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 45.7,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 2,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 112,
+          "xi0_b_phi_numeric": "1.2295763059025287304326786110603756260571502",
+          "xi0_b_phi_algebraic": "1.2295763059025287304326786110603756260571502",
+          "ratio_numeric": "0.5",
+          "ratio_target_1_over_alpha": "0.5",
+          "ratio_numeric_agreement_digits": 45.7,
+          "ratio_algebraic_agreement_digits": 80.0,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 0,
+          "beta_d_of_b_phi": 567,
+          "xi0_b_phi_numeric": "0.819717537268352486955119074040250417371433469",
+          "xi0_b_phi_algebraic": "0.819717537268352486955119074040250417371433469",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333333",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 45.7,
+          "ratio_algebraic_agreement_digits": 101.5,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        },
+        {
+          "phi_alpha": 3,
+          "phi_gamma": 1,
+          "beta_d_of_b_phi": 567,
+          "xi0_b_phi_numeric": "0.819717537268352486955119074040250417371433469",
+          "xi0_b_phi_algebraic": "0.819717537268352486955119074040250417371433469",
+          "ratio_numeric": "0.333333333333333333333333333333333333333333333",
+          "ratio_target_1_over_alpha": "0.33333333333333333333",
+          "ratio_numeric_agreement_digits": 45.7,
+          "ratio_algebraic_agreement_digits": 101.5,
+          "numeric_pass": true,
+          "algebraic_pass": true
+        }
+      ],
+      "shift_invariance": [
+        {
+          "alpha": 2,
+          "agreement_digits": 48.5,
+          "pass": true
+        },
+        {
+          "alpha": 3,
+          "agreement_digits": 49.8,
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "all_pass": true
+}
