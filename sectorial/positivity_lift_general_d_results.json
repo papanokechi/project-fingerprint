@@ -1,0 +1,258 @@
+{
+  "task": "T1-EBR-THEOREM-52W general-d positivity lift (H-noclose LOCATION, all d)",
+  "object": "B[y-hat_d](zeta)=G(zeta^d)=sum g_n zeta^{dn}, g_n=Q_n/(dn)!, Q_n=b(n)Q_{n-1}+Q_{n-2}",
+  "scope": "LOCATION only (nearest-singularity radius + nothing-closer); NOT type/exponent; NOT FLAG-C",
+  "order_N": 900,
+  "dps": 200,
+  "claim_A_positivity_all_directions": true,
+  "claim_B_radius_value_xi0pow_d_GATE_B": true,
+  "claim_B_algebraic_leg_d_free": "R_d = lim g_{n-1}/g_n = lim (Q_{n-1}/Q_n)*Poch(dn-d+1,d) = (1/(beta_d n^d))*(d^d n^d) = d^d/beta_d, for ALL d>=2, any positive b; matches M9 symbolic edge chi_d root |c|=xi0=d/beta_d^(1/d). Genuinely d-free.",
+  "ramification_bypass": "odd-d rank (d+2)/2 half-integer ramification afflicts the WKB FLUCTUATION (fractional-power transseries cover), NOT the generating-function germ: B[y-hat_d]=sum g_n zeta^{dn} is single-valued in zeta with positive g_n; (dn)!-division preserves sign; g_n>0 verified numerically at odd d=3,5.",
+  "families": [
+    {
+      "label": "d3_b2",
+      "d": 3,
+      "beta_d": 2,
+      "coeffs_hi_to_lo": [
+        2,
+        1,
+        -1,
+        1
+      ],
+      "xi0_exact": "2.38110157795229921212755845891",
+      "R_exact_xi0_pow_d": "13.5",
+      "STEP0_positivity": {
+        "b_min_over_n_1_to_N": "3.0",
+        "b_positive": true,
+        "Q_all_positive": true,
+        "g_min": "4.6276988e-1013",
+        "g_all_positive": true,
+        "g0_regular_equals_1": true
+      },
+      "STEP2_radius_value": {
+        "R_measured": "13.5",
+        "R_agree_vs_xi0pow_d_digits": 55.1,
+        "zeta_radius_R_pow_1_over_d": "2.38110157795229921212755845891",
+        "zeta_radius_agree_vs_xi0_digits": 56.4,
+        "beta_measured": "2.0",
+        "beta_agree_digits": 56.2,
+        "xi0_from_beta": "2.38110157795229921212756",
+        "GATE_B_pass": true,
+        "zeta_radius_is_xi0_not_2xi0": true
+      },
+      "STEP1_3_no_closer": {
+        "pade_genuine_interior_poles": [],
+        "no_interior_singularity": true
+      },
+      "location_ok": true
+    },
+    {
+      "label": "d3_b1",
+      "d": 3,
+      "beta_d": 1,
+      "coeffs_hi_to_lo": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "xi0_exact": "3.0",
+      "R_exact_xi0_pow_d": "27.0",
+      "STEP0_positivity": {
+        "b_min_over_n_1_to_N": "2.0",
+        "b_positive": true,
+        "Q_all_positive": true,
+        "g_min": "4.9807158e-1285",
+        "g_all_positive": true,
+        "g0_regular_equals_1": true
+      },
+      "STEP2_radius_value": {
+        "R_measured": "27.0",
+        "R_agree_vs_xi0pow_d_digits": 53.6,
+        "zeta_radius_R_pow_1_over_d": "3.0",
+        "zeta_radius_agree_vs_xi0_digits": 55.1,
+        "beta_measured": "1.0",
+        "beta_agree_digits": 55.3,
+        "xi0_from_beta": "3.0",
+        "GATE_B_pass": true,
+        "zeta_radius_is_xi0_not_2xi0": true
+      },
+      "STEP1_3_no_closer": {
+        "pade_genuine_interior_poles": [],
+        "no_interior_singularity": true
+      },
+      "location_ok": true
+    },
+    {
+      "label": "d4_b1",
+      "d": 4,
+      "beta_d": 1,
+      "coeffs_hi_to_lo": [
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "xi0_exact": "4.0",
+      "R_exact_xi0_pow_d": "256.0",
+      "STEP0_positivity": {
+        "b_min_over_n_1_to_N": "2.0",
+        "b_positive": true,
+        "Q_all_positive": true,
+        "g_min": "1.8223529e-2162",
+        "g_all_positive": true,
+        "g0_regular_equals_1": true
+      },
+      "STEP2_radius_value": {
+        "R_measured": "256.0",
+        "R_agree_vs_xi0pow_d_digits": 53.6,
+        "zeta_radius_R_pow_1_over_d": "4.0",
+        "zeta_radius_agree_vs_xi0_digits": 56.0,
+        "beta_measured": "1.0",
+        "beta_agree_digits": 56.2,
+        "xi0_from_beta": "4.0",
+        "GATE_B_pass": true,
+        "zeta_radius_is_xi0_not_2xi0": true
+      },
+      "STEP1_3_no_closer": {
+        "pade_genuine_interior_poles": [],
+        "no_interior_singularity": true
+      },
+      "location_ok": true
+    },
+    {
+      "label": "d4_b7",
+      "d": 4,
+      "beta_d": 7,
+      "coeffs_hi_to_lo": [
+        7,
+        0,
+        0,
+        1,
+        0
+      ],
+      "xi0_exact": "2.45915261180505746086535722212",
+      "R_exact_xi0_pow_d": "36.5714285714285714285714285714",
+      "STEP0_positivity": {
+        "b_min_over_n_1_to_N": "8.0",
+        "b_positive": true,
+        "Q_all_positive": true,
+        "g_min": "3.7235452e-1402",
+        "g_all_positive": true,
+        "g0_regular_equals_1": true
+      },
+      "STEP2_radius_value": {
+        "R_measured": "36.5714285714285714285714285714",
+        "R_agree_vs_xi0pow_d_digits": 57.9,
+        "zeta_radius_R_pow_1_over_d": "2.45915261180505746086535722212",
+        "zeta_radius_agree_vs_xi0_digits": 59.6,
+        "beta_measured": "7.0",
+        "beta_agree_digits": 58.6,
+        "xi0_from_beta": "2.45915261180505746086536",
+        "GATE_B_pass": true,
+        "zeta_radius_is_xi0_not_2xi0": true
+      },
+      "STEP1_3_no_closer": {
+        "pade_genuine_interior_poles": [],
+        "no_interior_singularity": true
+      },
+      "location_ok": true
+    },
+    {
+      "label": "d5_b1",
+      "d": 5,
+      "beta_d": 1,
+      "coeffs_hi_to_lo": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "xi0_exact": "5.0",
+      "R_exact_xi0_pow_d": "3125.0",
+      "STEP0_positivity": {
+        "b_min_over_n_1_to_N": "2.0",
+        "b_positive": true,
+        "Q_all_positive": true,
+        "g_min": "1.3000948e-3138",
+        "g_all_positive": true,
+        "g0_regular_equals_1": true
+      },
+      "STEP2_radius_value": {
+        "R_measured": "3125.0",
+        "R_agree_vs_xi0pow_d_digits": 53.6,
+        "zeta_radius_R_pow_1_over_d": "5.0",
+        "zeta_radius_agree_vs_xi0_digits": 57.1,
+        "beta_measured": "1.0",
+        "beta_agree_digits": 57.1,
+        "xi0_from_beta": "5.0",
+        "GATE_B_pass": true,
+        "zeta_radius_is_xi0_not_2xi0": true
+      },
+      "STEP1_3_no_closer": {
+        "pade_genuine_interior_poles": [],
+        "no_interior_singularity": true
+      },
+      "location_ok": true
+    },
+    {
+      "label": "d5_b2",
+      "d": 5,
+      "beta_d": 2,
+      "coeffs_hi_to_lo": [
+        2,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "xi0_exact": "4.3527528164806206956813500874",
+      "R_exact_xi0_pow_d": "1562.5",
+      "STEP0_positivity": {
+        "b_min_over_n_1_to_N": "4.0",
+        "b_positive": true,
+        "Q_all_positive": true,
+        "g_min": "1.1767013e-2867",
+        "g_all_positive": true,
+        "g0_regular_equals_1": true
+      },
+      "STEP2_radius_value": {
+        "R_measured": "1562.5",
+        "R_agree_vs_xi0pow_d_digits": 54.3,
+        "zeta_radius_R_pow_1_over_d": "4.3527528164806206956813500874",
+        "zeta_radius_agree_vs_xi0_digits": 57.5,
+        "beta_measured": "2.0",
+        "beta_agree_digits": 57.4,
+        "xi0_from_beta": "4.35275281648062069568135",
+        "GATE_B_pass": true,
+        "zeta_radius_is_xi0_not_2xi0": true
+      },
+      "STEP1_3_no_closer": {
+        "pade_genuine_interior_poles": [],
+        "no_interior_singularity": true
+      },
+      "location_ok": true
+    }
+  ],
+  "all_tested_d_location_ok": true,
+  "odd_d_location_ok": true,
+  "VERDICT": "H-noclose LOCATION LIFTS to all tested degrees d in {3,4,5} on the generating-function object, UNIFORMLY, ramification SIDESTEPPED. Claim A (positivity=>all-directions radius) transfers identically (g_n>0 confirmed incl. odd d=3,5); Claim B (radius=d^d/beta_d=xi0^d) holds per-tested-d numerically to >=30 dig AND via the d-FREE algebraic limit R_d=lim g_{n-1}/g_n=d^d/beta_d, tied to the M9 symbolic-in-d edge chi_d (|c|=xi0). The odd-d rank-(d+2)/2 ramification that blocked the FLUCTUATION type measurement does NOT afflict this single-valued positive-coefficient zeta-power-series. LOCATION HALF of EBR universality at the tested degrees + symbolic-in-d Claim-B link. TYPE axis untouched (BRANCH-S/N out of reach of positivity); L_loc stays ARGUED-CONDITIONAL; FLAG-C bridge open; no propagation.",
+  "scope_caveats": [
+    "LOCATION only: firms WHERE the nearest Borel singularity is (|zeta|=xi0, none closer) on the",
+    "generating-function object; does NOT touch the singularity TYPE/exponent (BRANCH-S/N) -- positivity",
+    "cannot reach type; L_loc stays ARGUED-CONDITIONAL.",
+    "Does NOT close the FLAG-C object-bridge to the WKB fluctuation/transseries object (radius 2xi0).",
+    "Positivity scope: covers families with b(n)>0 for all n>=1 (verified for the 6 catalogue families,",
+    "incl. d3_b2 which has a negative subleading coeff but stays positive). A family with b(n)<=0 at some",
+    "n would be out of this argument's scope (HALT-POSITIVITY-SCOPE) -- none here.",
+    "Tested representatives d in {3,4,5} (plus d=2 prior). Claim-B numeric is per-tested-d; the algebraic",
+    "leg is d-free, so all-d location rests on that d-free limit + per-d positivity, not on d<=5 numerics.",
+    "Says nothing about continuation past |zeta|=xi0 (genuine other sheets).",
+    "No grade change / no propagation this run."
+  ],
+  "canonical_sha256_of_hashfree_object": "d4903eaa288b7ca6fe6e2579a9d58bd93a428bc37278c3adf140619aa680b5d2"
+}

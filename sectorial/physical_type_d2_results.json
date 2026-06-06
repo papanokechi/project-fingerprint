@@ -1,0 +1,63 @@
+{
+  "task": "T1-EBR-THEOREM-52W v2 Q1' W5-9: d=2 PHYSICAL type at xi0 (BRANCH-S/N fork)",
+  "object": "G(s)=sum g_n s^n, g_n=Q_n/(2n)!, Q_n=(3n^2+n+1)Q_{n-1}+Q_{n-2}; s=zeta^2; R=4/3=xi0^2",
+  "scope": "d=2 type ONLY on physical object; NOT d>=3, NOT FLAG-C, NOT location",
+  "dps": 260,
+  "order_N": 1300,
+  "model": "g_n ~ C n^{gamma-1} R^{-n}, G~(1-s/R)^{-gamma}, alpha_s=-gamma; (s-R)^{alpha_s}",
+  "R_exact": "1.33333333333333333333333333333",
+  "xi0_exact": "1.154700538379251529018297561",
+  "method_a_dombsykes_noR": {
+    "R_recovered": "1.33333333333333333333333",
+    "R_recovered_ok_eq_4_3": true,
+    "gamma_hi_window": "1.8333333333333333333",
+    "gamma_lo_window": "1.8333333333333333333",
+    "order_stable_digits": 49.8
+  },
+  "method_b_anchored_R": {
+    "gamma_hi_window": "1.8333333333333333333",
+    "gamma_lo_window": "1.8333333333333333333",
+    "order_stable_digits": 53.3
+  },
+  "method_c_logdetect": {
+    "gamma": "1.833409501924882",
+    "loglog_coeff_delta": "-0.00062373091",
+    "log_factor_present": false
+  },
+  "agreement": {
+    "a_vs_b_digits": 56.2,
+    "matches_11_over_6_digits": 60.1,
+    "gate_pass": true
+  },
+  "pade_branch_test": {
+    "M": 70,
+    "nearest_real_pole_to_R": "1.333232168786",
+    "real_poles_beyond_R": [
+      "1.335375521",
+      "1.338520166",
+      "1.343027152",
+      "1.348915782",
+      "1.356210222",
+      "1.364940414",
+      "1.375142454",
+      "1.386858949"
+    ],
+    "branch_cut_accumulation": true
+  },
+  "measured": {
+    "gamma": "1.8333333333333333333",
+    "alpha_s_eq_minus_gamma": "-1.8333333333333333333",
+    "alpha_zeta_eq_alpha_s": "-1.8333333333333333333",
+    "s_to_zeta_map": "(s-R)=(zeta-xi0)(zeta+xi0)~2 xi0 (zeta-xi0): regular factor, alpha_zeta=alpha_s"
+  },
+  "VERDICT": "BRANCH-N",
+  "VERDICT_text": "alpha_s NON-integer = -1.833333333333333 (gamma=1.833333333333333): physical d=2 singularity is a BRANCH POINT of exponent alpha_s. Recorded to converged precision. Pade corroboration: poles beyond R = ['1.335375521', '1.338520166', '1.343027152', '1.348915782', '1.356210222', '1.364940414'] (branch-cut accumulation=True).",
+  "scope_caveats": [
+    "TYPE at d=2 alone does NOT close L_loc -- stays ARGUED-CONDITIONAL.",
+    "Measured alpha_s is the PHYSICAL generating-function exponent; the fluctuation type at 2*xi0",
+    "is a DIFFERENT object (FLAG-C) -- a numeric coincidence with 11/6 is NOT a claimed identity here.",
+    "Location banked (xi0), unchanged. d>=3 type = Q2', not this run.",
+    "No grade change, no propagation, git untouched."
+  ],
+  "canonical_sha256_of_hashfree_object": "ad17cf25f1eb7a600cbf6f09c967948e707fe20a6c0d72369b49704d0706adbe"
+}
