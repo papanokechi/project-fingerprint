@@ -1,0 +1,94 @@
+{
+  "task": "T1-EBR-THEOREM-52W other-sheet check (complete d=2 H-noclose LOCATION)",
+  "object": "B[y-hat_2](zeta)=G(zeta^2)=sum g_n zeta^{2n}, g_n=Q_n/(2n)!, Q_n=b(n)Q_{n-1}+Q_{n-2}, b=3n^2+n+1",
+  "d": 2,
+  "beta_d": 3,
+  "order_N": 900,
+  "dps": 200,
+  "neville_nodes": [
+    660,
+    900,
+    21
+  ],
+  "xi0_exact_2_over_sqrt3": "1.154700538379251529018297561003915",
+  "R_exact_xi0_sq": "1.333333333333333333333333333333333",
+  "STEP1_s_interior": {
+    "R_measured": "1.333333333333333333333333333333333",
+    "R_agree_digits": 56.5,
+    "radius_closes_open_s_disc_all_directions": true,
+    "note": "radius of convergence = nearest-singularity distance in ANY s-direction; sign of g_n irrelevant for the interior. s=+R is a genuine singularity (Pringsheim); s=-R and the rest of |s|=R are BOUNDARY, not closer.",
+    "negative_s_axis_modulus_radius": "1.333333333333333333333333333333333",
+    "negative_s_axis_no_closer_singularity": true
+  },
+  "STEP2_cover_argument": {
+    "B_is_even_single_valued_zeta_power_series": true,
+    "zeta_radius_sqrt_R": "1.154700538379251529018297561003915",
+    "zeta_radius_agree_vs_xi0_digits": 56.9,
+    "zeta0_regular_g0_equals_1": true,
+    "zeta_disc_maps_into_cleared_s_disc": true,
+    "no_second_sheet_inside_disc": true,
+    "reasoning": "B singular at zeta_0 with |zeta_0|<xi0 => G singular at s=zeta_0^2 with |s|<R, contradicting STEP 1. Cover map zeta->zeta^2 entire (only critical point zeta=0, where B is regular). Hence none."
+  },
+  "STEP3_zeta_directional": {
+    "directions": {
+      "real_axis_arg0": {
+        "zeta_radius": "1.154700538379251529018297561003915",
+        "agree_vs_xi0_digits": 56.9
+      },
+      "ray_pi_over_6": {
+        "zeta_radius": "1.154700538379251529018297561003915",
+        "agree_vs_xi0_digits": 56.9
+      },
+      "ray_pi_over_4": {
+        "zeta_radius": "1.154700538379251529018297561003915",
+        "agree_vs_xi0_digits": 56.9
+      },
+      "ray_pi_over_3": {
+        "zeta_radius": "1.154700538379251529018297561003915",
+        "agree_vs_xi0_digits": 56.9
+      },
+      "imag_axis_arg_pi_over_2": {
+        "zeta_radius": "1.154700538379251529018297561003915",
+        "agree_vs_xi0_digits": 56.9
+      }
+    },
+    "imag_axis_zeta_eq_it_is_G_minus_t2": {
+      "t_radius": "1.154700538379251529018297561003915",
+      "agree_vs_xi0_digits": 56.9,
+      "note": "B(it)=G(-t^2) probes the negative-s direction; nearest at |zeta|=xi0, none closer."
+    },
+    "all_directions_nearest_at_xi0": true,
+    "pade_min_pole_per_M": {
+      "40": "0.9997664281",
+      "55": "0.9998760807",
+      "70": "0.9999241266",
+      "85": "0.3063341913"
+    },
+    "pade_genuine_interior_after_doublet_filter_per_M": {
+      "40": [],
+      "55": [],
+      "70": [],
+      "85": []
+    },
+    "pade_stable_interior_singularity": false,
+    "pade_nearest_pole_to_negative_axis_per_M": {
+      "40": "0.99976643",
+      "55": "0.99987608",
+      "70": "0.99992413",
+      "85": "-0.87049639"
+    },
+    "boundary_picture": "both real saddles +-xi0 map to s=+R (positive real); s=-R (zeta=+-i*xi0) carries no chi_2 saddle, so the nearest singularities sit on the real zeta-axis at +-xi0."
+  },
+  "location_unconditional_d2": true,
+  "VERDICT": "H-noclose LOCATION at d=2 is UNCONDITIONAL (whole disc |zeta|<xi0, every direction / both notional sheets). The 'other-sheet' worry RESOLVES TRIVIALLY: B[y-hat_2](zeta)=sum g_n zeta^{2n} is a single-valued EVEN zeta-power-series with radius exactly xi0, so by definition it is analytic in the OPEN disc |zeta|<xi0 in ALL directions; there is no second sheet inside the disc (sheets of s=zeta^2 only arise on continuation PAST the boundary |zeta|=xi0). radius(G)=R already closes the entire s-interior (incl. negative axis) -- it is NOT a residual the radius argument left open. The prior principal-sheet qualifier is upgraded to whole-disc at d=2. Type axis untouched; FLAG-C object-bridge, continuation past the boundary, and d>=3 remain open/out-of-scope.",
+  "scope_caveats": [
+    "LOCATION only: this firms WHERE the nearest Borel singularity is (|zeta|=xi0, none closer), on the",
+    "whole disc/both sheets. It does NOT touch the singularity TYPE/exponent (BRANCH-S/N), still open.",
+    "Does NOT close the FLAG-C object-bridge to the WKB single-saddle fluctuation/transseries object",
+    "(radius 2*xi0); that is a different object and remains open.",
+    "Says nothing about continuation PAST |zeta|=xi0 (genuine other sheets of the Borel surface).",
+    "d=2 only; odd-d ramified case (d=3, q=5/2) NOT done -- separate dispatch.",
+    "No grade change / no propagation this run."
+  ],
+  "canonical_sha256_of_hashfree_object": "89b706670e8459bd525b1c655f2d94c35c760fcd8f85fe5bf10484ac486bcc29"
+}

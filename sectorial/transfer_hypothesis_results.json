@@ -1,0 +1,320 @@
+{
+  "task": "T1-EBR-THEOREM-52W v3 Q1'': transfer hypothesis (coefficient law => local type), general d",
+  "object": "G(s)=sum g_n s^n, g_n=Q_n/(dn)!, D-finite; singularities among roots of ODE leading coeff",
+  "scope": "transfer hypothesis on physical object, positive-b; NOT amplitude, NOT non-positive-b, NOT fluctuation",
+  "method": "EXACT Weyl-algebra normal form for the ODE leading coefficient a_{2d}(s); Pade + ripple corroboration",
+  "ODE_operator": "[P_{2d}(theta) - s c(theta+1) - s^2] G = boundary; P_{2d}(n)=prod_{j=0}^{2d-1}(dn-j), c(n)=b(n)prod_{j=0}^{d-1}(dn-d-j)",
+  "predicted_leading_coeff": "a_{2d}(s) = d^d s^{2d} (d^d - beta_d s);  finite roots s=0 (mult 2d), s=R=d^d/beta_d",
+  "parity_split_prefinding": "edge image s=c^d=(-1)^d R: even d -> +R (=Pringsheim), odd d -> -R (candidate 2nd point)",
+  "dps": 120,
+  "leading_coefficient_per_degree": [
+    {
+      "degree": 2,
+      "parity": "even",
+      "b_coeffs_hi_to_lo": [
+        3,
+        1,
+        1
+      ],
+      "beta_d": 3,
+      "ODE_order": 4,
+      "a_top_factored": "-4*s**4*(3*s - 4)",
+      "a_top_roots_with_mult": {
+        "4/3": 1,
+        "0": 4
+      },
+      "R_exact": "4/3",
+      "edge_image_s_eq_(-1)^d_R": "4/3",
+      "leadingcoeff_has_root_at_+R": true,
+      "leadingcoeff_has_root_at_-R": false,
+      "only_finite_singularities_are_0_and_R": true,
+      "s_minus_R_is_ordinary_point": true,
+      "R_is_simple_zero_of_leadingcoeff": true,
+      "label": "d2"
+    },
+    {
+      "degree": 3,
+      "parity": "odd",
+      "b_coeffs_hi_to_lo": [
+        2,
+        1,
+        -1,
+        1
+      ],
+      "beta_d": 2,
+      "ODE_order": 6,
+      "a_top_factored": "-27*s**6*(2*s - 27)",
+      "a_top_roots_with_mult": {
+        "27/2": 1,
+        "0": 6
+      },
+      "R_exact": "27/2",
+      "edge_image_s_eq_(-1)^d_R": "-27/2",
+      "leadingcoeff_has_root_at_+R": true,
+      "leadingcoeff_has_root_at_-R": false,
+      "only_finite_singularities_are_0_and_R": true,
+      "s_minus_R_is_ordinary_point": true,
+      "R_is_simple_zero_of_leadingcoeff": true,
+      "label": "d3"
+    },
+    {
+      "degree": 4,
+      "parity": "even",
+      "b_coeffs_hi_to_lo": [
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "beta_d": 1,
+      "ODE_order": 8,
+      "a_top_factored": "-256*s**8*(s - 256)",
+      "a_top_roots_with_mult": {
+        "256": 1,
+        "0": 8
+      },
+      "R_exact": "256",
+      "edge_image_s_eq_(-1)^d_R": "256",
+      "leadingcoeff_has_root_at_+R": true,
+      "leadingcoeff_has_root_at_-R": false,
+      "only_finite_singularities_are_0_and_R": true,
+      "s_minus_R_is_ordinary_point": true,
+      "R_is_simple_zero_of_leadingcoeff": true,
+      "label": "d4"
+    },
+    {
+      "degree": 5,
+      "parity": "odd",
+      "b_coeffs_hi_to_lo": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "beta_d": 1,
+      "ODE_order": 10,
+      "a_top_factored": "-3125*s**10*(s - 3125)",
+      "a_top_roots_with_mult": {
+        "3125": 1,
+        "0": 10
+      },
+      "R_exact": "3125",
+      "edge_image_s_eq_(-1)^d_R": "-3125",
+      "leadingcoeff_has_root_at_+R": true,
+      "leadingcoeff_has_root_at_-R": false,
+      "only_finite_singularities_are_0_and_R": true,
+      "s_minus_R_is_ordinary_point": true,
+      "R_is_simple_zero_of_leadingcoeff": true,
+      "label": "d5"
+    },
+    {
+      "degree": 6,
+      "parity": "even",
+      "b_coeffs_hi_to_lo": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "beta_d": 1,
+      "ODE_order": 12,
+      "a_top_factored": "-46656*s**12*(s - 46656)",
+      "a_top_roots_with_mult": {
+        "46656": 1,
+        "0": 12
+      },
+      "R_exact": "46656",
+      "edge_image_s_eq_(-1)^d_R": "46656",
+      "leadingcoeff_has_root_at_+R": true,
+      "leadingcoeff_has_root_at_-R": false,
+      "only_finite_singularities_are_0_and_R": true,
+      "s_minus_R_is_ordinary_point": true,
+      "R_is_simple_zero_of_leadingcoeff": true,
+      "label": "d6"
+    }
+  ],
+  "pade_corroboration": [
+    {
+      "label": "d2",
+      "M": 40,
+      "R": "1.33333333333333333",
+      "pade_status": "ok",
+      "n_poles_near_+1": 8,
+      "n_poles_near_-1": 0,
+      "nearest_pole_to_+1_reldist": "0.000233572",
+      "nearest_pole_to_-1_reldist": "1.99977",
+      "poles_accumulate_at_+R": true,
+      "poles_accumulate_at_-R": false
+    },
+    {
+      "label": "d3",
+      "M": 40,
+      "R": "13.5",
+      "pade_status": "ok",
+      "n_poles_near_+1": 9,
+      "n_poles_near_-1": 0,
+      "nearest_pole_to_+1_reldist": "0.000597527",
+      "nearest_pole_to_-1_reldist": "1.99968",
+      "poles_accumulate_at_+R": true,
+      "poles_accumulate_at_-R": false
+    },
+    {
+      "label": "d5",
+      "M": 40,
+      "R": "3125.0",
+      "pade_status": "ok",
+      "n_poles_near_+1": 8,
+      "n_poles_near_-1": 0,
+      "nearest_pole_to_+1_reldist": "1.92953e-5",
+      "nearest_pole_to_-1_reldist": "1.99998",
+      "poles_accumulate_at_+R": true,
+      "poles_accumulate_at_-R": false
+    }
+  ],
+  "ripple_corroboration": [
+    {
+      "label": "d2",
+      "tail_window": [
+        540,
+        600
+      ],
+      "alt_amp_over_t_magnitude": "4.01107e-11",
+      "second_diff_sign_alternations": 0,
+      "len": 60,
+      "interpretation": "ratio ~ machine-noise / not fully alternating sign => NO -R ripple",
+      "no_minusR_ripple": true
+    },
+    {
+      "label": "d3",
+      "tail_window": [
+        540,
+        600
+      ],
+      "alt_amp_over_t_magnitude": "2.97887e-9",
+      "second_diff_sign_alternations": 0,
+      "len": 60,
+      "interpretation": "ratio ~ machine-noise / not fully alternating sign => NO -R ripple",
+      "no_minusR_ripple": true
+    },
+    {
+      "label": "d5",
+      "tail_window": [
+        540,
+        600
+      ],
+      "alt_amp_over_t_magnitude": "2.29059e-12",
+      "second_diff_sign_alternations": 0,
+      "len": 60,
+      "interpretation": "ratio ~ machine-noise / not fully alternating sign => NO -R ripple",
+      "no_minusR_ripple": true
+    }
+  ],
+  "boundary_growth_corroboration": [
+    {
+      "label": "d2",
+      "samples": [
+        {
+          "eps": "0.05",
+          "G_at_+R(1-eps)": "667.96934",
+          "G_at_-R(1-eps)": "-0.057250503",
+          "ratio_|G(-)/G(+)|": "8.57083e-5"
+        },
+        {
+          "eps": "0.02",
+          "G_at_+R(1-eps)": "3678.2456",
+          "G_at_-R(1-eps)": "-0.064479546",
+          "ratio_|G(-)/G(+)|": "1.753e-5"
+        },
+        {
+          "eps": "0.01",
+          "G_at_+R(1-eps)": "13223.498",
+          "G_at_-R(1-eps)": "-0.066771227",
+          "ratio_|G(-)/G(+)|": "5.04944e-6"
+        }
+      ],
+      "minusR_regular_boundedwhile+blowsup": true
+    },
+    {
+      "label": "d3",
+      "samples": [
+        {
+          "eps": "0.05",
+          "G_at_+R(1-eps)": "7910.2515",
+          "G_at_-R(1-eps)": "-0.57138876",
+          "ratio_|G(-)/G(+)|": "7.2234e-5"
+        },
+        {
+          "eps": "0.02",
+          "G_at_+R(1-eps)": "79491.227",
+          "G_at_-R(1-eps)": "-0.57133218",
+          "ratio_|G(-)/G(+)|": "7.18736e-6"
+        },
+        {
+          "eps": "0.01",
+          "G_at_+R(1-eps)": "452087.33",
+          "G_at_-R(1-eps)": "-0.57115992",
+          "ratio_|G(-)/G(+)|": "1.26338e-6"
+        }
+      ],
+      "minusR_regular_boundedwhile+blowsup": true
+    },
+    {
+      "label": "d5",
+      "samples": [
+        {
+          "eps": "0.05",
+          "G_at_+R(1-eps)": "24269433.0",
+          "G_at_-R(1-eps)": "1.4766974",
+          "ratio_|G(-)/G(+)|": "6.0846e-8"
+        },
+        {
+          "eps": "0.02",
+          "G_at_+R(1-eps)": "9.9400872e+8",
+          "G_at_-R(1-eps)": "1.6479688",
+          "ratio_|G(-)/G(+)|": "1.6579e-9"
+        },
+        {
+          "eps": "0.01",
+          "G_at_+R(1-eps)": "1.6152971e+10",
+          "G_at_-R(1-eps)": "1.7029556",
+          "ratio_|G(-)/G(+)|": "1.05427e-10"
+        }
+      ],
+      "minusR_regular_boundedwhile+blowsup": true
+    }
+  ],
+  "all_minusR_ordinary_point": true,
+  "all_only_finite_sing_0_and_R": true,
+  "R_simple_zero_all": true,
+  "odd_d_uniqueness_ok": true,
+  "even_d_uniqueness_ok": true,
+  "pade_no_minusR_accumulation": true,
+  "ripple_no_minusR_component": true,
+  "boundary_minusR_regular": true,
+  "VERDICT": "TRANSFER-GENERAL-D",
+  "VERDICT_text": "UNIQUENESS ON |s|=R (the decisive, airtight part): the D-finite ODE for G(s), L=[P_{2d}(theta)-s c(theta+1)-s^2], has leading-derivative coefficient a_{2d}(s) = d^d s^{2d}(d^d - beta_d s), whose ONLY finite roots are s=0 (apparent; G regular there) and s=R=d^d/beta_d. The closed form is d-FREE (only theta^{2d} feeds D^{2d}, via the Stirling expansion theta^k=sum_j S(k,j)s^j D^j with j<=k), verified EXACTLY for d=2..6. Since L*G=p with p a polynomial (entire) and a_{2d}(-R)!=0, s=-R is an ORDINARY point, so G is ANALYTIC at s=-R for ALL d, BOTH parities (inhomogeneous ordinary-point theorem; a nonminimal annihilator suffices -- it cannot hide a genuine singularity at its ordinary point). Hence the odd-d formal edge image at s=-R is NOT a singularity of the convergent physical G; the UNIQUE singularity on |s|=R is the Pringsheim point s=+R. This resolves the odd/even worry in favour of uniqueness, GENERAL-D. LOCAL TYPE (scoped per the standard machinery): R is a SIMPLE zero of the order-2d leading coeff => regular singular (Fuchsian) point => G has a FINITE Frobenius/log local expansion near R; with no other boundary singularity, singularity-analysis of that finite expansion must match the banked SHARP asymptotic g_n ~ C R^{-n} n^{gamma-1} (pure power, no log -- excluded by Q2's O(1/n^2) ratio expansion). For gamma NOT a nonpositive integer (holds for positive-b: gamma=(d+1)/2+b_{d-1}/beta_d >= 3/2 in every tested family; positive-integer gamma => a pole, still algebraic), the dominant nonanalytic term is A(1-s/R)^{-gamma} with LOCAL amplitude A = C*Gamma(gamma) (an INDEPENDENT constant; A is NOT computed here -- the amplitude/connection datum F is deferred to Q2''). Numeric corroboration (d=2 even, d=3,5 odd): rescaled-Pade poles cluster ONLY at x=+1 (none within reldist 0.1 of x=-1; nearest ~2.0); the (-1)^n ripple probe finds no -R component (~1e-9..1e-12, 0 sign alternations); boundary-growth |G(-R(1-eps))/G(+R(1-eps))|->0 (-R bounded while +R blows up). NET: uniqueness on |s|=R is PROVEN general-d both parities; the local type is the regular-singular algebraic form A(1-s/R)^{-gamma} modulo (a) the standard Frobenius/singularity-analysis transfer and (b) the uncomputed amplitude A=F. L_loc's TYPE+LOCATION lift to all positive-b d; L_loc as a whole stays ARGUED-CONDITIONAL pending the amplitude F and Q4' assembly.",
+  "scope_caveats": [
+    "DECISIVE part = UNIQUENESS on |s|=R (s=-R ordinary, all-d both parities): EXACT and airtight.",
+    "Local AMPLITUDE: the singular term is A(1-s/R)^{-gamma} with A = C*Gamma(gamma) (nonresonant),",
+    "an INDEPENDENT constant -- NOT the coefficient constant C; A (=connection datum F) is NOT",
+    "computed here (deferred to Q2''). The exponent gamma is what is established, not A.",
+    "RESONANCE: pure algebraic local type needs gamma not in {0,-1,-2,...}. Holds for positive-b",
+    "(gamma=(d+1)/2+b_{d-1}/beta_d >= 3/2 in every tested family); positive-INTEGER gamma => a pole",
+    "(still algebraic). Nonpositive-integer gamma (would force logs) does not occur for positive-b.",
+    "LOGIC: this is Frobenius (finite regular-singular local expansion) + singularity-analysis",
+    "MATCHING to the banked SHARP asymptotic, NOT the Flajolet-Odlyzko converse alone. The banked",
+    "g_n ~ C R^{-n} n^{gamma-1} (pure power, Q2' O(1/n^2) ratio excludes a leading log) pins the",
+    "dominant local exponent to -gamma; subdominant logs (if any) do not affect the leading type.",
+    "Positive-b families only (b(n)>0 all n>=1); non-positive-b out of scope (named residual).",
+    "a_{2d}=d^d s^{2d}(d^d-beta_d s) verified EXACTLY d=2..6; general-d by the leading-coeff algebra",
+    "(only theta^{2d} feeds D^{2d}; Stirling theta^k=sum_{j<=k} S(k,j)s^j D^j).",
+    "No grade change, no propagation, git untouched. Banked location+exponent laws UNAFFECTED."
+  ],
+  "canonical_sha256_of_hashfree_object": "a5e079a6bd1912c215d81c6a435928640aa5505fe4bf11b25257de2aa8b91a3b"
+}
