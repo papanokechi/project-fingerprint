@@ -1,0 +1,8 @@
+# EBR (positive-b) reproducibility artifacts — preserve exact on-disk bytes so a
+# reader's sha256 of each file matches the deposited paper §8 / AEAL-ledger
+# provenance (Zenodo 10.5281/zenodo.20564080). Disabling text normalization keeps
+# the recorded CRLF line endings (e.g. lean/EBR_uplift.lean = 7acb1a58,
+# transfer_hypothesis.py = 3e84f22d); without this, core.autocrlf=true rewrites
+# them to LF and the published shas drift.
+/lean/EBR_uplift.lean -text
+/sectorial/** -text
