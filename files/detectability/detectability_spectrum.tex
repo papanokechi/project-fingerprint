@@ -1,0 +1,591 @@
+\documentclass[11pt]{article}
+
+% =====================================================================
+%  The Detectability Spectrum of Imaginary-Quadratic Invariants
+%  in Isomonodromy Data
+%  STAGED DRAFT — NO deposit, NO submission. Conservative evidence classes.
+% =====================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Kr}[2]{\left(\tfrac{#1}{#2}\right)}
+\newcommand{\Dc}{\mathsf{D}}
+\newcommand{\Tch}{\mathsf{T}}
+\newcommand{\Mch}{\mathsf{M}}
+\newcommand{\Stch}{\mathsf{S}}
+
+% evidence-class tags
+\newcommand{\PROVEN}{\textsf{[PROVEN]}}
+\newcommand{\VERIFIED}{\textsf{[VERIFIED]}}
+\newcommand{\STRUCTURAL}{\textsf{[STRUCTURAL]}}
+\newcommand{\CONJ}{\textsf{[CONJECTURED]}}
+\newcommand{\UNK}{\textsf{[UNKNOWN]}}
+\newcommand{\VAC}{\textsf{[VACUOUS]}}
+
+\title{The Detectability Spectrum of Imaginary-Quadratic Invariants\\
+in Isomonodromy Data}
+\author{(staged draft --- author/affiliation withheld pending operator)}
+\date{Draft compiled \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the self-adjoint degree-two polynomial-continued-fraction (PCF) family with
+linear ODE $(a y')'-x^2y=0$, $a=\beta_2x^2+\beta_1x+\beta_0$, we organise the
+question \emph{which arithmetic invariants of the imaginary quadratic field
+$K=\Q(\sqrt{\Delta})$, $\Delta=\disc(a)$, leave a trace in the associated
+Painlev\'e/isomonodromy data} into a \emph{detectability spectrum} indexed by
+(invariant $\times$ channel) pairs, with channels surface type, monodromy, and
+Stokes data. Our headline result is a \emph{$\Delta$-tower no-channel theorem}: under
+the standard Sakai/Okamoto premise that the surface type is a function of the local
+jet, the discrete Sakai surface type $T$ is selected by $\beta_0$-free local data and is
+therefore constant on the locus $L=\{\beta_2,\beta_1,a_n\text{ fixed};\ \beta_0\
+\text{free};\ \Delta\neq0\}$, so $T$ detects \emph{no} non-trivial arithmetic
+invariant of $K$ --- not the class number $h$, the class group $\Cl(K)$, the unit
+order $w$, the set of ramified primes, nor the splitting type of any fixed prime.
+This strictly strengthens the previously recorded ``CM field, not class number''
+observation from an empirical statement about one channel to a structural theorem
+about the discrete invariant. We make precise the distinction between
+\emph{recoverable-in-principle} (R) and \emph{intrinsic-channel-trace} (C)
+detectability, express the spectrum through a functor $F$ from isomonodromy
+structures to arithmetic invariants, and characterise $\ker F$: trivial-as-a-channel
+for surface type (it forgets everything), and --- for the richer connection
+channel --- trivial in sense (R) but conjecturally equal to the $L$-value stratum
+$\{h,\Cl\}$ in sense (C). All symbolic and numerical claims are reproducible from a
+single self-contained script. We separate cleanly what is proven, verified,
+structural, and conjectural.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}
+% =====================================================================
+
+Polynomial continued fractions (PCFs) attach to a recurrence
+$P_n=b_nP_{n-1}+a_nP_{n-2}$ a second-order linear ODE whose isomonodromic
+deformation carries a Sakai surface type, Stokes data at its irregular point, and a
+monodromy representation. A recurring empirical theme in this corpus is that the
+\emph{class number} of the imaginary quadratic field naturally attached to such a
+family appears to be \emph{invisible}: in the degree-two case, six $\Delta<0$
+families with class numbers spanning $h=1$ and $h=2$ exhibit identical Stokes
+($S<1$) and PSLQ-non-detection behaviour, evidence that ``the controlling invariant
+is the sign of $\Delta$ \ldots\ and not the class number'', sharpened by the pair
+in the \emph{same} field $\Q(\sqrt{-7})$ at $h=1$ versus $h=2$ which identifies
+``the CM field, not the class number'' as the structural carrier
+\cite{PCF1}.
+
+That observation is empirical and channel-specific. The present paper asks the
+structural question in full generality. We fix the self-adjoint degree-two family
+\begin{equation}\label{eq:ode}
+  (a(x)\,y')'-x^2y=0,\qquad a(x)=\beta_2x^2+\beta_1x+\beta_0,\qquad
+  b:=a',\quad c:=-x^2,
+\end{equation}
+with $\Delta=\disc(a)=\beta_1^2-4\beta_2\beta_0$ and $K=\Q(\sqrt{\Delta})$, and we
+study \emph{every} standard arithmetic invariant of $K$ against \emph{each} of three
+information channels. The organising object is a partition: each channel induces a
+partition of the parameter space, and an arithmetic invariant is detectable through a
+channel exactly when it is constant on the channel's fibres.
+
+\paragraph{Contributions.}
+\begin{enumerate}[leftmargin=2em]
+\item A \emph{$\Delta$-tower no-channel theorem} (Theorem~\ref{thm:main}): the
+discrete surface type $T$ is constant on $L$, hence detects no non-trivial arithmetic
+invariant of $K$. The class-number case is the headline corollary; the proof is a
+symbolic computation that every type-selector is $\beta_0$-free, and is reproducible
+(\S\ref{sec:repro}, anchor module \texttt{nochannel/}).
+\item A precise formalisation of the \emph{(R) vs.\ (C)} distinction
+(\S\ref{sec:RC}): recoverable-in-principle versus intrinsic-channel-trace, the
+conceptual spine that explains how the connection channel can recover the field $K$
+yet leave the deep $L$-value invariants $\{h,\Cl\}$ with no known intrinsic reading.
+\item A functor $F$ from isomonodromy structures to arithmetic invariants and a
+characterisation of $\ker F$ per channel (\S\ref{sec:functor}).
+\item A quick-results section (\S\ref{sec:quick}): the regulator is vacuous for
+imaginary quadratic $K$; unit-order detectability reduces to a finite reachability
+check of $\Delta\in\{-3,-4\}$; and the $\Delta$-tower invisibility is essentially
+free from the main theorem.
+\item Open problems (\S\ref{sec:open}): the intrinsic $h$-trace in monodromy/Stokes
+data, with its conjectural link to $L(1,\chi_\Delta)$, and class-group structure
+detection.
+\end{enumerate}
+
+\paragraph{Evidence discipline.} We tag every assertion with an evidence class:
+\PROVEN\ (a complete argument, given clearly-stated standard premises),
+\VERIFIED\ (exact machine computation), \STRUCTURAL\ (a precise statement supported
+by the structure but without a written proof here), \CONJ, \UNK, and \VAC\ (vacuously
+constant, no content). A reconciliation table (\S\ref{sec:reconcile}) maps each
+numbered result to its \texttt{claims.jsonl} entry and flags any place where prose
+risks over-stating the recorded class.
+
+% =====================================================================
+\section{Setup: channels, invariants, and the detectability map}\label{sec:setup}
+% =====================================================================
+
+\subsection{The parameter space and the field}
+Fix $\beta_2>0$ and a numerator polynomial $a_n$ (the PCF data; $a_n\equiv1$ for the
+V\_quad anchor, $a_n=n$ for the family QL15). The parameter space is
+\[
+  \mathcal P=\{p=(\beta_2,\beta_1,\beta_0)\in\Q^3:\ \Delta(p)\neq0\},\qquad
+  \Delta(p)=\beta_1^2-4\beta_2\beta_0 .
+\]
+Each $p$ determines~\eqref{eq:ode}, its singular set $\{x_-,x_+,\infty\}$ with
+$x_\pm=(-\beta_1\pm\sqrt{\Delta})/(2\beta_2)$, and the field $K(p)=\Q(\sqrt{\Delta(p)})$.
+
+\begin{remark}[discriminant normalisation \STRUCTURAL]\label{rmk:disc}
+We write $\Delta$ for $\disc(a)$. The field invariant is the squarefree core: $K$
+depends only on the squarefree part of $\Delta$, and $\disc(a)$ may differ from the
+\emph{fundamental} discriminant $d_K$ by a square. When $\Delta$ is itself a
+fundamental discriminant (e.g.\ $\Delta=-20$ for QL15) the order $\mathcal O_\Delta$
+is the maximal order and the form class number coincides with $h_K$. In general we
+take $H(\Delta)$ to be the class number of the order $\mathcal O_\Delta$ (the number
+of $SL_2(\Z)$-classes of primitive positive-definite forms of discriminant $\Delta$);
+this is the invariant that varies along our loci.
+\end{remark}
+
+\subsection{Channels}
+A \emph{channel} is a map $c\colon\mathcal P\to \Dc_c$ that factors through the
+isomonodromic/gauge equivalence appropriate to its data type. We consider three.
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Surface type} $\Tch\colon\mathcal P\to\{\text{Sakai surface types}\}$:
+the discrete label of the space of initial conditions of the isomonodromic
+deformation of~\eqref{eq:ode}, in the sense of Sakai \cite{Sakai2001} and Okamoto.
+\item \textbf{Monodromy / connection} $\Mch$: the full Riemann--Hilbert datum --- the
+linear monodromy representation, the connection (Stokes-completed) matrices, and the
+\emph{positions} $x_\pm$ of the singular points --- modulo simultaneous conjugacy.
+\item \textbf{Stokes} $\Stch$: the Stokes multipliers / constants at the rank-one
+irregular point at $\infty$ (for the V\_quad anchor the relevant scalar is
+$S=2\pi K$, the late-term resurgence constant).
+\end{itemize}
+These are listed in increasing fineness in the sense relevant below: $\Tch$ is a
+coarse discrete invariant, $\Mch$ retains continuous moduli, and $\Stch$ refines the
+local analytic data at $\infty$.
+
+\subsection{Arithmetic invariants and detectability}
+Let $\mathcal K$ be the set of imaginary quadratic fields. We consider the invariants
+\[
+  \Delta,\quad h=h_K,\quad \Cl(K),\quad w=\#\mathcal O_K^\times,\quad
+  \mathrm{Ram}(K)=\{p:\ p\mid d_K\},\quad
+  \mathrm{Spl}_p(K)=\Kr{d_K}{p},\quad R_K,
+\]
+each a map $\iota\colon\mathcal K\to S_\iota$. Composing with $K\colon\mathcal P\to
+\mathcal K$ gives $\iota\circ K\colon\mathcal P\to S_\iota$.
+
+\begin{definition}[detectability through a channel]\label{def:detect}
+An arithmetic invariant $\iota$ is \emph{detectable through the channel $c$} if
+$\iota\circ K$ factors through $c$: there exists $\varphi$ with
+$\iota\circ K=\varphi\circ c$ on $\mathcal P$; equivalently $\iota\circ K$ is constant
+on every fibre $c^{-1}(\delta)$. It is \emph{invisible through $c$} if no such
+$\varphi$ exists, i.e.\ some fibre of $c$ carries at least two values of $\iota\circ K$.
+\end{definition}
+
+The \emph{detectability spectrum} is the table of (invariant, channel) pairs together
+with the status of Definition~\ref{def:detect}. Section~\ref{sec:RC} refines
+``factors through'' into the (R)/(C) dichotomy.
+
+% =====================================================================
+\section{The $\Delta$-tower no-channel theorem}\label{sec:main}
+% =====================================================================
+
+The engine is a symbolic fact about~\eqref{eq:ode}. All four parts are verified by
+exact computation in the anchor module (\S\ref{sec:repro}).
+
+\begin{lemma}[$\beta_0$-free local jet \PROVEN/\VERIFIED]\label{lem:jet}
+For~\eqref{eq:ode} with $\Delta\neq0$:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+\item $b=a'=\beta_1+2\beta_2x$ and $c=-x^2$ are polynomial identities; $b$ is
+$\beta_0$-free.
+\item At each finite root $x_0$ of $a$ the ODE $y''+(a'/a)y'+(c/a)y=0$ has a regular
+singular point with indicial polynomial $r(r-1)+p_0r+q_0=r^2$, where
+$p_0=\Res_{x_0}(a'/a)=1$ (because $a'/a=\frac{d}{dx}\log a$) and
+$q_0=\lim_{x\to x_0}(x-x_0)^2(c/a)=0$. Hence the local exponents are $\{0,0\}$ at both
+finite roots, independently of $\beta_0$; the resonance resolves to an
+\emph{apparent} (no-logarithm) singularity, forced by $b=a'$ for all coefficients.
+\item At $x=\infty$, $x\,(a'/a)\to2$ (so $a'/a\sim2/x$) and $c/a\to-1/\beta_2$; the
+point is irregular of Poincar\'e rank $1$ with leading exponential rate
+$\lambda=\pm1/\sqrt{\beta_2}$ ($=\pm\theta_\infty$, $\theta_\infty=2/\sqrt{\beta_2}$),
+independent of $\beta_0$.
+\item $a(0)=\beta_0$, so $x=0$ is an ordinary point iff $\beta_0\neq0$.
+\end{enumerate}
+Consequently the entire type-selecting jet --- pole orders, local/formal exponents,
+and apparent-singularity conditions --- is independent of $\beta_0$; the only
+$\beta_0$-dependence of the configuration is through the positions
+$x_\pm=(-\beta_1\pm\sqrt\Delta)/(2\beta_2)$.
+\end{lemma}
+
+\begin{proof}[Proof (premise and computation)]
+Parts (i)--(iv) are the exact symbolic computations of the anchor verifier
+(\texttt{nochannel/surface\_type\_nochannel\_verify.py}, results recorded in
+\texttt{surface\_type\_nochannel\_results.json}). The residue $p_0=1$ is the
+logarithmic-derivative identity; $q_0=0$ because $c/a$ has only a simple pole at a
+simple root; the indicial polynomial is then $r^2$. At $\infty$ the stated limits give
+$\lambda^2=1/\beta_2$. The reduction ``surface type is a function of this local jet''
+is the standard Sakai/Okamoto theory of spaces of initial conditions
+\cite{Sakai2001}; we take it as the (clearly stated) premise.
+\end{proof}
+
+\begin{theorem}[$\Delta$-tower no-channel \PROVEN, given the Sakai premise]\label{thm:main}
+Let $L=\{\beta_2,\beta_1,a_n\text{ fixed};\ \beta_0\in\Z;\ \Delta\neq0\}\subset
+\mathcal P$. Then the surface type is constant on $L$,
+\[
+  \Tch(\beta_2,\beta_1,\beta_0,a_n)=\Tch(\beta_2,\beta_1,a_n)=:T_0 ,
+\]
+while $H(\Delta(\beta_0))$ takes at least two distinct values on $L$. Consequently
+$\Tch$ does not factor through $H$, and more strongly: for \emph{every} arithmetic
+invariant $\iota$ of $K$ that is non-constant on $\{K(p):p\in L\}$ --- in particular
+$\iota\in\{\Delta,\,h,\,\Cl,\,w,\,\mathrm{Ram},\,\mathrm{Spl}_p\}$ --- $\iota$ is
+\emph{invisible through $\Tch$}. The only arithmetic distinction $\Tch$ makes is the
+non-arithmetic confluence dichotomy $\Delta=0$ vs.\ $\Delta\neq0$.
+\end{theorem}
+
+\begin{proof}
+Constancy of $\Tch$ on $L$ is Lemma~\ref{lem:jet}. For the second clause it suffices
+that $H$ is non-constant on $L$: by exact reduced-form count, on the worked locus
+$\beta_2=3,\beta_1=1$ ($\Delta=1-12\beta_0$, all fundamental) one has
+$H(\beta_0{=}1{:}10)=1,3,2,5,3,7,3,8,3,10$, already two distinct values at
+$\beta_0=1,2$. If $\iota\circ K=\varphi\circ\Tch$ held on $L$ then $\iota\circ K$
+would be constant on $L$ (as $\Tch$ is), contradicting non-constancy of any such
+$\iota$; for $h$ this is immediate, and $\Delta,\Cl,w,\mathrm{Ram},\mathrm{Spl}_p$ are
+non-constant along $L$ as well (\S\ref{sec:quick}). The confluence remark is
+Lemma~\ref{lem:jet}(iv) together with $\Delta=0\Leftrightarrow x_+=x_-$.
+\end{proof}
+
+\begin{corollary}[class number; the headline \PROVEN]\label{cor:h}
+$\Tch$ does not factor through the class number $h$. On the QL15 locus
+$\beta_2=3,\beta_1=-2$ ($\Delta=4-12\beta_0$, which passes through the QL15 field at
+$\beta_0=2$, $\Delta=-20=\disc\Q(\sqrt{-5})$, $h=2$) the type is constant while
+$H$ takes the distinct values $\{1,2,3,4,6\}$ (these are order class numbers, some at
+non-fundamental $\Delta$); the points $\beta_0=1$
+($K=\Q(\sqrt{-2})$, $\Delta=-8$, $h=1$) and $\beta_0=2$ ($K=\Q(\sqrt{-5})$,
+$\Delta=-20$, $h=2$) --- \emph{both fundamental}, so here $h$ is the field class
+number $h_K$ --- lie on the same surface $T_0$ with $\Delta\neq0$ and different $h$.
+The class-number conclusion thus rests only on fundamental discriminants; the
+non-fundamental orders enter no part of the argument.
+\end{corollary}
+
+\begin{remark}[what is, and is not, used \PROVEN]
+The proof uses only (a) constancy of $\Tch$ (Lemma~\ref{lem:jet}, symbolic) and (b)
+a finite computation that $H$ takes $\ge2$ values. It does \emph{not} use the
+identity of the constant surface $T_0$, nor any asymptotic growth of $H$; in
+particular it carries no exposure to the ineffectivity of the Siegel lower bound.
+The deposited determination $T_0=\Q$-isomorphism class $D_5^{(1)}$ (Painlev\'e~V,
+symmetry $W(A_3^{(1)})$, $\delta=-\tfrac12$) is \VERIFIED\ but lies \emph{outside} the
+proof's critical path.
+\end{remark}
+
+% =====================================================================
+\section{The (R)/(C) distinction}\label{sec:RC}
+% =====================================================================
+
+Definition~\ref{def:detect} conflates two phenomena that Theorem~\ref{thm:main} forces
+us to separate. The connection channel $\Mch$ retains the singular positions $x_\pm$,
+hence $\sqrt\Delta$, hence the field $K$; so \emph{once $K$ is recovered, every
+invariant of $K$ is computable}. That is a weak, almost tautological sense of
+detection. The sharp content of a ``spectrum'' lives in a stronger sense.
+
+\begin{definition}[recoverable-in-principle, (R)]\label{def:R}
+$\iota$ is \emph{(R)-recoverable through $c$} if $\iota\circ K$ factors through $c$ in
+the sense of Definition~\ref{def:detect}. Equivalently $c$ refines the partition of
+$\mathcal P$ induced by $\iota\circ K$.
+\end{definition}
+
+\begin{definition}[intrinsic-channel-trace, (C)]\label{def:C}
+Fix for each channel $c$ an \emph{admissible reading class} $\Phi_c$ of maps out of
+$\Dc_c$: the features one is permitted to ``read off''. For $\Mch$ we take $\Phi_\Mch$
+to be the maps given by $\overline\Q$-algebraic functions of the entries of the
+monodromy/connection matrices and of the singular positions $x_\pm$ (the Riemann--Hilbert
+coordinates), \emph{excluding} the arithmetic evaluation $K\mapsto\iota(K)$ itself. Then
+$\iota$ is \emph{(C)-detectable through $c$} if $\iota\circ K=\varphi\circ c$ for some
+$\varphi\in\Phi_c$.
+\end{definition}
+
+By construction $(\mathrm C)\Rightarrow(\mathrm R)$. The admissible class $\Phi_\Mch$
+formalises ``read, do not solve'': a $(C)$-trace is a bounded-complexity feature of the
+datum, not the result of recovering $K$ and then invoking an oracle for $h(K)$. The
+boundary of $\Phi_\Mch$ is a modelling choice; the conjectures below are robust to any
+reasonable choice because no reading of the monodromy datum is \emph{known} to produce
+$h$ other than via $K$.
+
+\begin{proposition}[field recovery \STRUCTURAL]\label{prop:Krec}
+$K$ is (C)-detectable through $\Mch$: the unordered pair $\{x_-,x_+\}$ of singular
+positions is part of the datum, and $\sqrt\Delta=\beta_2(x_+-x_-)$ is an algebraic
+function of it, so $K=\Q(\sqrt\Delta)$ is read off. Consequently \emph{every}
+invariant of $K$ is (R)-recoverable through $\Mch$.
+\end{proposition}
+This is \STRUCTURAL: the map ``RH datum $\mapsto\{x_\pm\}\mapsto\sqrt\Delta$'' is
+forced by~\eqref{eq:ode}, but a fully written Riemann--Hilbert reconstruction theorem
+for this family is not part of the present corpus.
+
+\begin{remark}[the spectrum is a property of the pair, on one axis]
+Combining Theorem~\ref{thm:main} and Proposition~\ref{prop:Krec}: for $\Tch$ even (R)
+fails for every non-trivial $\iota$ (the strongest invisibility); for $\Mch$, (R)
+holds for all $\iota$, but (C) splits the invariants into a \emph{geometric stratum}
+$\{\Delta,\mathrm{Ram},\mathrm{Spl}_p,w\}$ that are algebraic functions of $x_\pm$
+(hence (C)-detectable) and an \emph{$L$-value stratum} $\{h,\Cl\}$ for which no
+admissible reading is known (\S\ref{sec:open}).
+\end{remark}
+
+% =====================================================================
+\section{The functor $F$ and its kernel}\label{sec:functor}
+% =====================================================================
+
+Let $\mathcal S$ be the groupoid of isomonodromy structures of the
+family~\eqref{eq:ode} (objects: ODEs on $\mathcal P$; isomorphisms: isomonodromic
+deformations and gauge equivalences). A channel $c$ is a functor $\mathcal S\to
+\Dc_c$ to a discrete (for $\Tch$) or moduli (for $\Mch$) target; an invariant
+$\iota$ is a functor $\mathcal S\to S_\iota$ via $K$. Write $F_c$ for the induced map
+on objects and define the \emph{indistinguishability kernel}
+$\ker F_c=\{(p,p'):c(p)=c(p')\}$, the equivalence relation collapsed by $c$.
+
+\begin{proposition}[surface-type functor \PROVEN, given the Sakai premise]\label{prop:kerT}
+$F_{\Tch}$ is constant on each locus $L$ (Theorem~\ref{thm:main}, under the standard
+Sakai/Okamoto premise that $\Tch$ is a function of the local jet), so
+$\ker F_{\Tch}\supseteq L\times L$.
+Hence the composite $\iota\circ K$ is constant on $L$ for the partition induced by
+$\Tch$, and the entire arithmetic spectrum
+$\{\Delta,h,\Cl,w,\mathrm{Ram},\mathrm{Spl}_p\}$ lies in the part of $\mathcal P$ that
+$F_{\Tch}$ cannot separate. In words: \emph{the discrete isomonodromy invariant is
+arithmetically blind} --- it detects no invariant of $K$ beyond the non-arithmetic
+dichotomy $\Delta=0/\!\neq\!0$.
+\end{proposition}
+
+\begin{proposition}[connection functor \STRUCTURAL/\CONJ]\label{prop:kerM}
+$F_{\Mch}$ factors through $K$ (Proposition~\ref{prop:Krec}). Therefore:
+\begin{itemize}[leftmargin=2em]
+\item the \emph{provable} kernel is trivial in sense (R): $\ker F_{\Mch}$ separates any
+two parameters with $K(p)\neq K(p')$, so no invariant of $K$ lies in $\ker F_{\Mch}$
+(every invariant is a function of the recovered $K$); \STRUCTURAL;
+\item the \emph{effective} kernel in sense (C) --- the invariants with no admissible
+reading $\varphi\in\Phi_\Mch$ beyond ``recover $K$, then evaluate'' --- contains the
+$L$-value stratum: $\ker^{(C)}F_{\Mch}\supseteq\{h,\Cl\}$ is the content of
+Conjecture~\ref{conj:h}. \CONJ
+\end{itemize}
+\end{proposition}
+
+Thus $\ker F$ has a clean two-tier description: for the discrete channel it swallows
+the whole arithmetic spectrum; for the connection channel it is trivial in (R) and
+conjecturally exactly the $L$-value stratum in (C). This is the strongest general
+statement the corpus currently supports.
+
+% =====================================================================
+\section{Quick results}\label{sec:quick}
+% =====================================================================
+
+\subsection{The regulator is vacuous \VAC/\PROVEN}
+For every imaginary quadratic $K$ the unit group has rank $0$, so by the Dirichlet
+unit theorem the regulator is the empty determinant $R_K=1$. A constant function
+carries no information: ``invisibility'' of $R_K$ is vacuous, not a no-channel
+phenomenon. Content appears only for \emph{real} quadratic fields, where
+$R_K=\log\varepsilon_0$ varies; we note that QL15's field $\Q(\sqrt{-5})$ is
+imaginary, so this axis is dormant here and marks the natural next domain.
+
+\subsection{Ramification, splitting, and the geometric stratum \PROVEN(to $\Tch$)/\STRUCTURAL(to $\Mch$)}
+$\mathrm{Ram}(K)=\{p\mid d_K\}$ and $\mathrm{Spl}_p(K)=\Kr{d_K}{p}$ are functions of
+$\Delta$. By Theorem~\ref{thm:main} they are invisible through $\Tch$ \PROVEN. Through
+$\Mch$ they are (C)-detectable as algebraic functions of $\sqrt\Delta$
+(Proposition~\ref{prop:Krec}) \STRUCTURAL. We record the arithmetic nuance: the full
+splitting pattern over \emph{all} primes equals the character $\chi_\Delta$, which
+determines $\Delta$ (a primitive real Dirichlet character determines its modulus), so
+all-prime splitting is equivalent to $K$; but finitely many small primes
+under-determine $K$.
+
+\subsection{Unit order and the reachability of $\Delta\in\{-3,-4\}$ \VERIFIED}
+The unit order satisfies $w=6\iff\Delta=-3$, $w=4\iff\Delta=-4$, else $w=2$; thus $w$
+is a function of $\Delta$ and is invisible through $\Tch$ \PROVEN. Whether the
+extra-symmetry fields $\Q(i),\Q(\sqrt{-3})$ (with CM $j=1728,0$) are realised on a
+given locus is a finite check: on $a=x^2+\beta_0$ one reaches $\Delta=-4$ at
+$\beta_0=1$; on $a=3x^2+3x+\beta_0$ one reaches $\Delta=-3$ at $\beta_0=1$; but on the
+QL15 locus $a=3x^2-2x+\beta_0$ one reaches \emph{neither} for integer $\beta_0$, since
+$\Delta=-4$ requires $3\beta_0-1$ to be a perfect square, impossible as $3\beta_0-1
+\equiv2\pmod 3$. \VERIFIED\ (reproduce, \S\ref{sec:repro}). Whether $w>2$ leaves an
+extra-symmetry trace in $\Mch$ is \STRUCTURAL.
+
+% =====================================================================
+\section{Open problems}\label{sec:open}
+% =====================================================================
+
+\begin{conjecture}[no intrinsic $h$-trace \CONJ]\label{conj:h}
+$h$ is (C)-invisible through $\Mch$ and through $\Stch$: there is no admissible reading
+$\varphi\in\Phi_\Mch$ (resp.\ $\Phi_\Stch$) with $h=\varphi\circ\Mch$ on the family.
+Equivalently, $h$ is recoverable only via the field $K$, not as a bounded-complexity
+feature of the monodromy or Stokes datum.
+\end{conjecture}
+The heuristic is the class-number formula
+$h=\dfrac{w\sqrt{|d_K|}}{2\pi}\,L(1,\chi_\Delta)$: $h$ is a \emph{global} $L$-value,
+whereas $\Phi_\Mch$ comprises local algebraic features. A first concrete probe is to
+sweep the Stokes constant $S=2\pi K$ across the $\beta_0$-family and test for any
+correlation with $h$; currently only a single data point ($S$ at the V\_quad anchor)
+is computed, so the Stokes case is \UNK\ rather than \CONJ. Proving
+Conjecture~\ref{conj:h} (invisibility) would require a theorem that \emph{no} algebraic
+function of the RH coordinates equals $h$ along the family; exhibiting a trace
+(detectability) would require constructing the channel --- e.g.\ relating an invariant
+trace field or a monodromy-group arithmetic invariant to $L(1,\chi_\Delta)$. Either
+direction needs machinery beyond the present corpus.
+
+\begin{problem}[class-group structure \UNK]\label{prob:Cl}
+Detect $\Cl(K)$ (the group, not merely $h=\#\Cl$) through $\Mch$ or $\Stch$. This is
+strictly harder than Conjecture~\ref{conj:h}: it asks for the group structure, and is
+recoverable in sense (R) via $K$ but has no known intrinsic reading.
+\end{problem}
+
+\begin{problem}[real-quadratic extension \STRUCTURAL]
+Repeat the analysis for parameter regimes with $\Delta>0$, where the regulator
+acquires content ($R_K=\log\varepsilon_0$) and the unit group becomes infinite. The
+self-adjoint structure $b=a'$ persists, so Lemma~\ref{lem:jet} carries over and the
+surface-type invisibility should hold verbatim; the new question is whether the
+regulator or fundamental unit leaves a trace in $\Mch/\Stch$.
+\end{problem}
+
+% =====================================================================
+\section{The spectrum, summarised}\label{sec:summary}
+% =====================================================================
+
+\begin{center}\small
+\begin{tabular}{l l l l}
+\hline
+Invariant & vs.\ $\Tch$ & vs.\ $\Mch$ & vs.\ $\Stch$\\
+\hline
+$\Delta$ (field $K$)     & invisible \PROVEN              & detectable \STRUCTURAL & moduli-dep.\ \STRUCTURAL\\
+$\mathrm{Ram}$, $\mathrm{Spl}_p$ & invisible \PROVEN     & detectable \STRUCTURAL & \UNK\\
+unit order $w$           & invisible \PROVEN             & extra-symmetry \STRUCTURAL & \UNK\\
+class number $h$         & invisible \PROVEN             & (R) yes / (C) \CONJ\ no    & \UNK\\
+class group $\Cl$        & invisible \PROVEN\ (a fortiori)& (R) yes / (C) \UNK         & \UNK\\
+regulator $R_K$          & vacuous \VAC                  & vacuous \VAC               & vacuous \VAC\\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent In the ``vs.\ $\Tch$'' column, every \PROVEN\ entry is \PROVEN\ \emph{modulo}
+the standard Sakai/Okamoto premise of Theorem~\ref{thm:main} (surface type a function
+of the local jet); none is asserted unconditionally.
+
+\noindent The one-axis reading: a \emph{geometric stratum} ($\Delta$ and its
+elementary functions) is invisible to the discrete type but faithful to $K$ in the
+connection moduli; an \emph{$L$-value stratum} ($h,\Cl$) is invisible to the discrete
+type and conjecturally has no intrinsic trace anywhere; the regulator is vacuous for
+imaginary quadratic $K$.
+
+% =====================================================================
+\section{Reconciliation with the claims ledger}\label{sec:reconcile}
+% =====================================================================
+
+Every numbered result maps to a recorded claim; we flag any prose that might be read
+above its recorded class.
+
+\begin{center}\small
+\begin{tabular}{l l l l}
+\hline
+Result & Ledger entry & Recorded class & Note\\
+\hline
+Lemma~\ref{lem:jet}        & \texttt{nochannel} NC-2..NC-5 & \VERIFIED\ (symbolic) & exact sympy\\
+Theorem~\ref{thm:main}     & \texttt{nochannel} NC-7       & \PROVEN$^\ast$        & $\ast$ given Sakai premise\\
+Corollary~\ref{cor:h}      & \texttt{nochannel} NC-6, DS-H-ST & \PROVEN/\VERIFIED  & QL15 locus, $h(-20)=2$\\
+Prop.~\ref{prop:Krec}      & DS-DISC-MON                   & \STRUCTURAL           & not a written RH theorem\\
+Prop.~\ref{prop:kerT}      & DS-FUNCTOR-T                  & \PROVEN               & from Thm~\ref{thm:main}\\
+Prop.~\ref{prop:kerM}      & DS-FUNCTOR-M                  & \STRUCTURAL/\CONJ     & (R) trivial, (C) conj.\\
+\S\ref{sec:quick} regulator& DS-REG-ALL                    & \VAC/\PROVEN          & $R_K\equiv1$\\
+\S\ref{sec:quick} $w$ reach.& DS-UNIT-MON                  & \VERIFIED             & finite check\\
+Conj.~\ref{conj:h}         & DS-H-MON, DS-H-STK            & \CONJ/\UNK            & $L$-value heuristic only\\
+Prob.~\ref{prob:Cl}        & DS-CL-MON                     & \UNK                  & harder than Conj.~\ref{conj:h}\\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Flags (prose vs.\ ledger).}
+\begin{itemize}[leftmargin=2em]
+\item Theorem~\ref{thm:main} is \PROVEN\ \emph{only modulo} the Sakai/Okamoto premise
+that $\Tch$ is a function of the local jet; the qualifier is stated at every
+occurrence of the result --- abstract, contribution list (via back-reference to
+Theorem~\ref{thm:main}), the theorem and its proof, Proposition~\ref{prop:kerT}, and
+the summary table note. Do not cite Theorem~\ref{thm:main} as unconditional.
+\item Proposition~\ref{prop:Krec} (``$\Mch$ recovers $K$'') is \STRUCTURAL, not
+\PROVEN: it relies on a Riemann--Hilbert reconstruction that is asserted, not written.
+Any downstream use of ``$\Mch$ detects $\Delta$'' inherits \STRUCTURAL.
+\item The phrase ``$\Mch$ detects everything'' (sense (R)) must never be softened into
+``$\Mch$ detects $h$ intrinsically''; the latter is exactly Conjecture~\ref{conj:h},
+recorded \CONJ.
+\item The surface label $D_5^{(1)}$ is \VERIFIED\ (deposited, MEDIUM band) and is kept
+\emph{off} the critical path; the paper must not present it as first-principles
+\PROVEN.
+\end{itemize}
+
+% =====================================================================
+\section{Reproducibility}\label{sec:repro}
+% =====================================================================
+
+All symbolic and numerical claims are reproduced by a single self-contained script
+(CAS: \texttt{sympy}, exact symbolic for the ODE algebra; exact integer
+form-counts for class numbers, cross-checked against twelve classical anchors
+including $h(-20)=2$, $h(-3)=h(-4)=1$ with unit orders $6,4$).
+
+\begin{verbatim}
+# foundational anchor (surface-type no-channel, Lemma 3.1 / Theorem 3.2):
+python nochannel/surface_type_nochannel_verify.py
+# detectability spectrum numerics (class numbers, splitting, reachability):
+python files/detectability/detect_spectrum_verify.py
+\end{verbatim}
+
+The anchor verifier exits $0$ iff: the indicial polynomial is $r^2$ at both finite
+roots, $\lambda=\pm1/\sqrt{\beta_2}$ at $\infty$ (all $\beta_0$-free); the QL15-locus
+class numbers are $\{1,2,3,4,6\}$ with $\Delta=-20,h=2$ at $\beta_0=2$; and the
+prior-anchor sequence $1,3,2,5,3,7,3,8,3,10$ is reproduced exactly.
+
+% =====================================================================
+\section*{Venue scan (editorial note, not for publication)}
+% =====================================================================
+Three candidate venues consistent with the corpus history, \emph{excluding}
+Experimental Mathematics (blacklisted) and \emph{Notes on Number Theory and Discrete
+Mathematics} (blocked):
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{SIGMA (Symmetry, Integrability and Geometry: Methods and Applications)}
+--- open access; strong on Painlev\'e/isomonodromy and Sakai-surface classification;
+the surface-type framing fits squarely. Foreground the isomonodromy structure.
+\item \textbf{The Ramanujan Journal} --- continued fractions and arithmetic; the
+PCF/class-number framing and computer-assisted evidence are within scope. Foreground
+the no-channel theorem as a continued-fraction/arithmetic statement.
+\item \textbf{Journal of Physics A: Mathematical and Theoretical} --- isomonodromy,
+Stokes phenomena, Painlev\'e; the channel/Stokes framing and open problems fit.
+Foreground the detectability spectrum and the $L$-value open problem.
+\end{enumerate}
+Fit caveats: SIGMA and J.\ Phys.\ A expect an integrable-systems narrative; the
+Ramanujan Journal expects the arithmetic angle foregrounded. The result is structural
+and conservative, which suits all three.
+
+% =====================================================================
+\begin{thebibliography}{9}
+\bibitem{PCF1} \emph{A CM predicate for degree-two polynomial continued fractions}
+(PCF-1), corpus manuscript \texttt{p12\_pcf1\_main.tex}; the empirical
+``sign of $\Delta$ / CM field, not the class number'' statement and the
+$\Q(\sqrt{-7})$ pair (QL06, QL26).
+\bibitem{Sakai2001} H.~Sakai, \emph{Rational surfaces associated with affine root
+systems and geometry of the Painlev\'e equations}, Comm.\ Math.\ Phys.\ \textbf{220}
+(2001), 165--229.
+\bibitem{Takeuchi1977} K.~Takeuchi, \emph{Arithmetic triangle groups}, J.\ Math.\
+Soc.\ Japan \textbf{29} (1977), 91--106.
+\bibitem{Vquad} V\_quad anchor, Zenodo \texttt{10.5281/zenodo.20455090}
+(Painlev\'e~V on Sakai $D_5^{(1)}$; verdict VQ-N1).
+\end{thebibliography}
+
+\end{document}
