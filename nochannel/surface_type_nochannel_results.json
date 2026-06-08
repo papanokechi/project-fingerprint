@@ -1,0 +1,234 @@
+{
+  "lemma": "surface-type no-channel (symbolic)",
+  "ode": "(a y')' - x^2 y = 0, a=beta2 x^2+beta1 x+beta0, b=a', c=-x^2",
+  "cas": "sympy 1.14.0; exact symbolic + exact integer form-counts",
+  "symbolic": {
+    "b_equals_aprime": true,
+    "b": "beta1 + 2*beta2*x",
+    "b_beta0_free": true,
+    "c": "-x**2",
+    "Delta": "-4*beta0*beta2 + beta1**2",
+    "p0_root0": "1",
+    "p0_root1": "1",
+    "q0_root0": "0",
+    "q0_root1": "0",
+    "indicial_root0": "r**2",
+    "indicial_root1": "r**2",
+    "indices_are_00": true,
+    "indicial_beta0_free": true,
+    "xP_at_infinity": "2",
+    "Q_at_infinity": "-1/beta2",
+    "infinity_irregular_rank1": true,
+    "exp_rates_infinity": [
+      "-1/sqrt(beta2)",
+      "1/sqrt(beta2)"
+    ],
+    "exp_rates_beta0_free": true,
+    "origin_ordinary_iff": "a(0) = beta0 != 0",
+    "a_at_0": "beta0",
+    "finite_singular_positions": [
+      "(-beta1 - sqrt(-4*beta0*beta2 + beta1**2))/(2*beta2)",
+      "(-beta1 + sqrt(-4*beta0*beta2 + beta1**2))/(2*beta2)"
+    ]
+  },
+  "selectors_beta0_free": true,
+  "anchors_ok": true,
+  "ql15_locus": {
+    "beta2": 3,
+    "beta1": -2,
+    "rows": [
+      {
+        "beta0": 1,
+        "Delta": -8,
+        "h": 1,
+        "fundamental": true
+      },
+      {
+        "beta0": 2,
+        "Delta": -20,
+        "h": 2,
+        "fundamental": true
+      },
+      {
+        "beta0": 3,
+        "Delta": -32,
+        "h": 2,
+        "fundamental": false
+      },
+      {
+        "beta0": 4,
+        "Delta": -44,
+        "h": 3,
+        "fundamental": false
+      },
+      {
+        "beta0": 5,
+        "Delta": -56,
+        "h": 4,
+        "fundamental": true
+      },
+      {
+        "beta0": 6,
+        "Delta": -68,
+        "h": 4,
+        "fundamental": true
+      },
+      {
+        "beta0": 7,
+        "Delta": -80,
+        "h": 4,
+        "fundamental": false
+      },
+      {
+        "beta0": 8,
+        "Delta": -92,
+        "h": 3,
+        "fundamental": false
+      },
+      {
+        "beta0": 9,
+        "Delta": -104,
+        "h": 6,
+        "fundamental": true
+      },
+      {
+        "beta0": 10,
+        "Delta": -116,
+        "h": 6,
+        "fundamental": true
+      },
+      {
+        "beta0": 11,
+        "Delta": -128,
+        "h": 4,
+        "fundamental": false
+      },
+      {
+        "beta0": 12,
+        "Delta": -140,
+        "h": 6,
+        "fundamental": false
+      }
+    ],
+    "distinct_h": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "h_nonconstant": true,
+    "h_sequence": [
+      1,
+      2,
+      2,
+      3,
+      4,
+      4,
+      4,
+      3,
+      6,
+      6,
+      4,
+      6
+    ]
+  },
+  "prior_paper_locus": {
+    "beta2": 3,
+    "beta1": 1,
+    "rows": [
+      {
+        "beta0": 1,
+        "Delta": -11,
+        "h": 1,
+        "fundamental": true
+      },
+      {
+        "beta0": 2,
+        "Delta": -23,
+        "h": 3,
+        "fundamental": true
+      },
+      {
+        "beta0": 3,
+        "Delta": -35,
+        "h": 2,
+        "fundamental": true
+      },
+      {
+        "beta0": 4,
+        "Delta": -47,
+        "h": 5,
+        "fundamental": true
+      },
+      {
+        "beta0": 5,
+        "Delta": -59,
+        "h": 3,
+        "fundamental": true
+      },
+      {
+        "beta0": 6,
+        "Delta": -71,
+        "h": 7,
+        "fundamental": true
+      },
+      {
+        "beta0": 7,
+        "Delta": -83,
+        "h": 3,
+        "fundamental": true
+      },
+      {
+        "beta0": 8,
+        "Delta": -95,
+        "h": 8,
+        "fundamental": true
+      },
+      {
+        "beta0": 9,
+        "Delta": -107,
+        "h": 3,
+        "fundamental": true
+      },
+      {
+        "beta0": 10,
+        "Delta": -119,
+        "h": 10,
+        "fundamental": true
+      }
+    ],
+    "distinct_h": [
+      1,
+      2,
+      3,
+      5,
+      7,
+      8,
+      10
+    ],
+    "h_nonconstant": true,
+    "h_sequence": [
+      1,
+      3,
+      2,
+      5,
+      3,
+      7,
+      3,
+      8,
+      3,
+      10
+    ]
+  },
+  "prior_sequence_matches": true,
+  "ql15_distinct_h": [
+    1,
+    2,
+    3,
+    4,
+    6
+  ],
+  "no_channel_verified": true,
+  "premise": "Sakai/Okamoto: T is a function of the local jet (pole orders, exponents, no-log/apparent conditions); verified beta0-free here."
+}
