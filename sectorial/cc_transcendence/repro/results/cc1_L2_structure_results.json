@@ -1,0 +1,200 @@
+{
+  "op": "cc-1",
+  "degree_d": 2,
+  "object": "G(s)=sum g_n s^n, g_n=Q_n/(2n)!, Q_n=(3n^2+n+1)Q_{n-1}+Q_{n-2}; beta_2=3, R=4/3, gamma=11/6",
+  "family_note": "EBR positive-b family (NOT V(1,0,1)/pcf-delta; same flavor, distinct ODE per EBR-II sec5)",
+  "operator_form": "L = P0(theta) - s P1(theta+1) - s^2,  theta=s d/ds",
+  "operator_coeffs_a_k": {
+    "0": "-s**2",
+    "1": "-30*s**2",
+    "2": "-156*s**3 + 12*s**2",
+    "3": "-94*s**4 + 48*s**3",
+    "4": "-12*s**5 + 16*s**4"
+  },
+  "leading_coeff": {
+    "a_4_factored": "-4*s**4*(3*s - 4)",
+    "matches_EBR_I_d^d s^{2d}(d^d - beta_d s)": true,
+    "value_4 s^4 (4 - 3 s)": true
+  },
+  "annihilator_remainder_after_extraction_is_zero": true,
+  "finite_singular_points": [
+    "0",
+    "4/3"
+  ],
+  "singular_set": [
+    "0",
+    "4/3",
+    "oo"
+  ],
+  "riemann_scheme": {
+    "exp_at_0": [
+      "0",
+      "1/2",
+      "1",
+      "3/2"
+    ],
+    "exp_at_0_equals_{j/d}": true,
+    "exp_at_R": [
+      "-11/6",
+      "0",
+      "1",
+      "2"
+    ],
+    "exp_at_R_equals_{0,1,2,-gamma}": true
+  },
+  "point_at_infinity": {
+    "irregular": true,
+    "fuchs_bound_rows": [
+      {
+        "k": 0,
+        "deg_a_k": 2,
+        "fuchs_bound": 1,
+        "regular_ok": false
+      },
+      {
+        "k": 1,
+        "deg_a_k": 2,
+        "fuchs_bound": 2,
+        "regular_ok": true
+      },
+      {
+        "k": 2,
+        "deg_a_k": 3,
+        "fuchs_bound": 3,
+        "regular_ok": true
+      },
+      {
+        "k": 3,
+        "deg_a_k": 4,
+        "fuchs_bound": 4,
+        "regular_ok": true
+      },
+      {
+        "k": 4,
+        "deg_a_k": 5,
+        "fuchs_bound": 5,
+        "regular_ok": true
+      }
+    ],
+    "fuchs_violation_at_k": [
+      0
+    ],
+    "cause": "a_0 = -s^2 (deg 2 > Fuchsian bound 1) -- the -s^2 term",
+    "newton_polygon_upper_hull_(k,deg)": [
+      [
+        0,
+        2
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "newton_edges": [
+      {
+        "from": [
+          0,
+          2
+        ],
+        "to": [
+          4,
+          5
+        ],
+        "slope": "3/4",
+        "run": 4,
+        "root_valuation_rho": "-3/4"
+      }
+    ],
+    "single_slope": true,
+    "slope_in_symbol_(w~s^{-slope})": "3/4",
+    "ramification": 4,
+    "determining_factor": "exp(C * s^{1/4}); 4 Galois-conjugates ~ s^{-3/4} in w",
+    "irregular_slope_at_infinity": "1/4",
+    "integer_poincare_rank": 1,
+    "exact_edge_polynomial": {
+      "slope_sigma": "3/4",
+      "edge_terms_lead_coeff": {
+        "0": "-1",
+        "4": "-12"
+      },
+      "edge_polynomial_in_c": "-12*c**4 - 1",
+      "c_power_relation": "c^4 = -1/12",
+      "abs_c": "0.53728496591177",
+      "single_transitive_cycle_ramification": 4,
+      "roots_c": [
+        "-3**(3/4)/6 - 3**(3/4)*I/6",
+        "-3**(3/4)/6 + 3**(3/4)*I/6",
+        "3**(3/4)/6 - 3**(3/4)*I/6",
+        "3**(3/4)/6 + 3**(3/4)*I/6"
+      ]
+    },
+    "numeric_symbol_roots_w*S^{3/4}_(abs,arg/pi)_S=1e6": [
+      [
+        "0.582865926611",
+        "-0.7766123138"
+      ],
+      [
+        "0.582865926611",
+        "0.7766123138"
+      ],
+      [
+        "0.495268832617",
+        "0.2753218183"
+      ],
+      [
+        "0.495268832617",
+        "-0.2753218183"
+      ]
+    ],
+    "numeric_symbol_roots_w*S^{3/4}_(abs,arg/pi)_S=1e14": [
+      [
+        "0.537723041012",
+        "0.7502594927"
+      ],
+      [
+        "0.537723041012",
+        "-0.7502594927"
+      ],
+      [
+        "0.536847247705",
+        "0.2502593636"
+      ],
+      [
+        "0.536847247705",
+        "-0.2502593636"
+      ]
+    ],
+    "numeric_note": "abs -> (1/12)^{1/4}=0.5372849659, arg/pi -> odd/4 (+-0.25,+-0.75) as S->oo (slow)"
+  },
+  "reducibility_falsification": {
+    "target": "L_2 is reducible over C(s)",
+    "verdict": "REFUTED (irreducible)",
+    "argument": "formal module at irregular infinity has a single slope 1/4 with full ramification 4; cyclic order-4 ramification acts transitively on the 4 determining factors -> no proper sub-module -> globally irreducible AND minimal (order 4 = 2d).",
+    "ramification_transitive_order": 4,
+    "rational_polynomial_solution_search": {
+      "searched_degree": 6,
+      "nontrivial_polynomial_solution": false,
+      "num_solution_branches": 1
+    },
+    "irreducible_structural": true,
+    "tool_gap": "full DFactor over C(s) via Sage ore_algebra / Maple DEtools[DFactor] not available on host; the transitive-ramification argument is the in-host route, graded STRUCTURAL (relies on van der Put-Singer local-to-global)."
+  },
+  "accessory_rigidity_count": {
+    "old_EBR_II_v1.0_formula_N_acc": "(2d-1)(d-1) = 3 at d=2  [ASSUMED 3 regular singular points]",
+    "old_formula_status": "INAPPLICABLE -- its hypothesis (infinity regular) is FALSE (proved above)",
+    "corrected_count_P": "d-1 = 1 at d=2  [index of rigidity WITH irregular infinity]",
+    "corrected_count_status": "cited from cross-session erratum (per memory ebr-inf-type-*); NOT independently re-derived here (Katz index + Jordan data = residual gap)",
+    "robust_conclusion": "count is POSITIVE either way (3 or 1) -> connection problem NON-RIGID at d=2",
+    "discipline_line": "non-rigid does NOT imply C transcendental (single entry may simplify)"
+  },
+  "grades": {
+    "L_2 explicit operator + a_4 factorization + finite singular set": "VERIFIED (exact symbolic; cross-checks EBR-I 3e84f22d)",
+    "Riemann-scheme rows at 0 and R": "VERIFIED (exact symbolic)",
+    "infinity is irregular (single slope 1/4, ramification 4, Poincare rank 1)": "VERIFIED (exact symbolic + numeric roots)",
+    "L_2 irreducible & minimal over C(s)": "STRUCTURAL (transitive-ramification + van der Put-Singer locator)",
+    "corrected accessory count P=d-1": "VERIFIED-by-citation (cross-session erratum); independent recompute = residual gap",
+    "non-rigidity at d=2 is robust": "VERIFIED",
+    "transcendence of C": "CONJECTURED (unchanged; op:cc-2 differential Galois is the next gate)"
+  },
+  "canonical_sha256_of_hashfree_object": "bfb91bdeef251be00b770f486ec53d2304f4c1064f85d907a82951a49f5f227e"
+}

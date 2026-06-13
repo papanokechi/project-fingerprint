@@ -1,0 +1,786 @@
+%
+% EBR-III -- op:ebr3-assemble / ebr3-c full draft (local artifact).
+% Portable amsart (venue class swapped per ebr3-f runbook; etna.cls/J.Algebra
+% style applied only at the operator's chosen venue). Compile: pdflatex twice
+% (inline thebibliography, no bibtex/latexmk needed on host).
+% NOTHING in this file is deposited, committed, or submitted.
+%
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{microtype}
+
+\setlength{\emergencystretch}{2em}
+
+% Reproducible-PDF settings: omit embedded timestamps and fix the trailer /ID
+% so the PDF byte-hash is stable across builds (used by the repro manifest;
+% combine with SOURCE_DATE_EPOCH at build time).
+\ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=-1\fi
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Fp}{\mathbb{F}_{p}}
+\newcommand{\GGal}{G_{\mathrm{Gal}}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\DeclareMathOperator{\Det}{det}
+\newcommand{\Ltwo}{L_{2}}
+\newcommand{\Cebr}{C_{\mathrm{EBR}}}
+\newcommand{\claim}[1]{\textsf{\small[#1]}}
+
+\begin{document}
+
+\title[The EBR operator at $d=2$ has Galois group $\SL_4$]{The EBR operator
+at $d=2$ is not a $G$-operator and its differential Galois group is
+$\SL(4)$: arithmetic, irreducibility, and the non-Liouvillian corollary}
+
+\author{Papanokechi}
+\thanks{Independent Researcher (ORCID 0009-0000-6192-8273). This is a
+preprint; nothing herein is a claim of priority. Every load-bearing statement
+is graded \textsc{proven}/\textsc{structural}/\textsc{verified}/%
+\textsc{conjectured} (\S\ref{sec:grades}); \textsc{proven} is reserved for
+the Lean~4 cores of \S\ref{sec:lean}.}
+
+\date{\today}
+
+\subjclass[2020]{34M35, 12H05, 34M03, 33C20, 68V20, 11J81}
+
+\keywords{differential Galois theory, connection coefficient, irregular
+singularity, $G$-function, $p$-curvature, Aschbacher classes, Liouvillian
+solutions, integer relation, PSLQ, Lean, Mathlib}
+
+\begin{abstract}
+For the positive-coefficient polynomial continued fraction with
+$b(n)=3n^{2}+n+1$, the Edge--Borel object $G(s)=\sum_{n\ge0}Q_{n}s^{n}/(2n)!$
+is annihilated by an explicit order-$4$ linear differential operator $\Ltwo$
+over $\C(s)$ with regular singular points at $s=0$ and $s=R=4/3$ and an
+\emph{irregular} singularity at $s=\infty$ of slope $1/4$. We establish four
+things about $\Ltwo$ at increasing evidential strength. First, in the Borel
+normalization $g_{n}=Q_{n}/(2n)!$ the operator is \emph{not} the minimal
+operator of a $G$-function: the Taylor denominators retain essentially the
+full factorial, the $p$-curvature is non-nilpotent for every tested prime,
+and the irregular point at infinity is incompatible with the
+Andr\'e--Chudnovsky--Katz trichotomy. Second, $\Ltwo$ is irreducible and
+minimal, by two independent arguments. Third, its local monodromy at $R$ is a
+\emph{semisimple} complex pseudo-reflection with spectrum
+$\{1,1,1,e^{i\pi/3}\}$ --- correcting an earlier ``resonance logarithm''
+reading, consistent with the criterion that a $-\gamma$ logarithm requires
+$\gamma\in\Z$ whereas here $\gamma=11/6$. Fourth, and centrally, the identity
+component of the differential Galois group is
+$\GGal(\Ltwo)^{\circ}=\SL_{4}$; we obtain this by eliminating every class of
+the maximal-subgroup (Aschbacher) classification of algebraic subgroups of
+$\SL_{4}$, with the imprimitive class closed unconditionally through a unique
+quadratic-character analysis and an \emph{a priori} degree bound that makes
+the underlying rational-solution searches complete. The immediate corollary is
+that $\Ltwo$ has no Liouvillian solutions. The connection coefficient is
+computed by a third independent channel to $169$ stable digits; a
+positive-control-validated integer-relation battery finds, to that precision,
+that it is neither an elementary $\Gamma$-quotient nor a low-height
+combination of standard constants nor algebraic of small degree. We state with
+care what these results do \emph{not} give: a large Galois group does not
+imply the connection coefficient is transcendental, connection coefficients
+are not differential-Galois invariants, and the transcendence question
+therefore remains a conjecture whose only route is a separate period analysis.
+The degree-bound arithmetic, the pullback exponent arithmetic, the
+eigenvalue-parity bookkeeping, and the parity of the relevant $4$-cycle are
+formalized in Lean~4/Mathlib with audited axiom cones.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{Background and the object of study}
+This paper continues the Edge--Borel Radius (EBR) program. EBR-I established
+that for a positive-coefficient polynomial continued fraction
+$Q_{n}=b(n)Q_{n-1}+Q_{n-2}$ with $b(n)=\beta_{d}n^{d}+\dots$, the physical
+Borel transform $G(s)=\sum_{n\ge0}Q_{n}s^{n}/(dn)!$ is holonomic with a
+dominant singularity at $s=R=d^{d}/\beta_{d}$ and local form
+$G(s)\sim A\,(1-s/R)^{-\gamma}$, with $\gamma=(d+1)/2+b_{d-1}/\beta_{d}$
+\cite{EBRI}. EBR-II identified the amplitude $A$ as a \emph{connection
+coefficient} of the order-$2d$ operator annihilating $G$ --- the entry of the
+connection matrix linking the exponent-$0$ local solution at the origin to the
+dominant exponent-$(-\gamma)$ solution at $s=R$ --- and conjectured that this
+coefficient is generically transcendental, with a ``rigidity dividing line''
+separating the rigid case $d=1$ from the non-rigid cases $d\ge2$
+\cite{EBRII}.
+
+We fix the smallest non-rigid case. Throughout, $d=2$ and
+\begin{equation}\label{eq:family}
+  b(n)=3n^{2}+n+1,\qquad \beta_{2}=3,\qquad
+  g_{n}=\frac{Q_{n}}{(2n)!},\qquad G(s)=\sum_{n\ge0}g_{n}s^{n},
+\end{equation}
+so that $R=4/3$ and $\gamma=11/6$. The annihilating operator, written with
+$\theta=s\,d/ds$ as $L=P_{0}(\theta)-s\,P_{1}(\theta+1)-s^{2}$ and cleared to
+the form $\sum_{k=0}^{4}a_{k}(s)\,d^{k}/ds^{k}$, has
+\begin{equation}\label{eq:operator}
+\begin{gathered}
+  a_{4}=4s^{4}(4-3s),\quad a_{3}=48s^{3}-94s^{4},\quad a_{2}=12s^{2}-156s^{3},\\
+  a_{1}=-30s^{2},\quad a_{0}=-s^{2}.
+\end{gathered}
+\end{equation}
+We call this operator $\Ltwo$. Its leading coefficient
+$a_{4}=d^{d}s^{2d}(d^{d}-\beta_{d}s)$ matches EBR-I, and its finite singular
+locus is exactly $\{0,R\}$ \claim{CC1-OP-L2}.
+
+\subsection{Results and their evidential status}\label{sec:grades}
+We organize the paper by a four-class evidence discipline, stated here so that
+the reader can audit each assertion against the kind of evidence that supports
+it. \textsc{proven} is reserved for results carrying a machine-checked Lean~4
+proof with an audited axiom cone; \textsc{structural} denotes a complete
+mathematical argument verified by hand and computer algebra but not
+formalized; \textsc{verified} denotes a reproducible high-precision or exact
+symbolic computation; \textsc{conjectured} denotes an open statement. A grade
+table appears in \S\ref{sec:gradetable}. The principal results are:
+
+\begin{itemize}
+\item[(R1)] \emph{Arithmetic nature.} In the normalization \eqref{eq:family},
+$\Ltwo$ is not the minimal operator of a $G$-function (\S\ref{sec:gfun};
+\textsc{verified}/\textsc{structural}).
+\item[(R2)] \emph{Irreducibility.} $\Ltwo$ is irreducible and is the minimal
+annihilator of $G$ (\S\ref{sec:irred}; \textsc{structural}, two routes).
+\item[(R3)] \emph{Local monodromy.} The monodromy at $R$ is a semisimple
+pseudo-reflection with spectrum $\{1,1,1,e^{i\pi/3}\}$ (\S\ref{sec:local};
+\textsc{verified}), correcting an earlier reading (\S\ref{sec:erratum}).
+\item[(R4)] \emph{Main theorem.} $\GGal(\Ltwo)^{\circ}=\SL_{4}$
+(\S\ref{sec:main}; \textsc{structural}, bound-complete).
+\item[(R5)] \emph{Corollary.} $\Ltwo$ has no Liouvillian solutions
+(\S\ref{sec:bridge}; \textsc{verified}-by-citation applied to (R4)).
+\item[(R6)] \emph{Connection data and a null.} The connection coefficient is
+computed to $169$ digits and is, to that precision, not an elementary
+$\Gamma$-quotient, not a low-height constant combination, and not algebraic of
+small degree (\S\ref{sec:numerics}; \textsc{verified}).
+\end{itemize}
+
+\subsection{What we do not claim}\label{sec:nonclaim}
+We are explicit about the limits of the method, since the temptation to
+overread a large Galois group is precisely the error the EBR program guards
+against.
+\begin{quote}\itshape
+Non-rigidity ($P=d-1>0$) does not imply that the connection coefficient is
+transcendental; a large differential Galois group does not imply that the
+connection coefficient is transcendental. The present work targets the
+\emph{group} only. Connection coefficients are not differential-Galois
+invariants, and the transcendence of the connection coefficient remains a
+conjecture whose only route is a separate period analysis.
+\end{quote}
+Accordingly the abstract and this introduction state the $\SL_{4}$ theorem and
+the not-a-$G$-function result, and no transcendence claim of any kind. The
+$G$-function statement is always qualified by its normalization scope; the
+group statement is for $d=2$, with general $d$ flagged open
+(\S\ref{sec:open}); the explicit numerical Stokes multipliers at the ramified
+irregular point are out of scope, for the reason given in
+\S\ref{sec:stokes}.
+
+\section{The operator and its singular structure}\label{sec:operator}
+
+\subsection{Riemann data at the regular points}
+At $s=0$ and $s=R=4/3$ the operator $\Ltwo$ is regular singular. The
+indicial computation gives
+\begin{equation}\label{eq:riemann}
+\begin{gathered}
+  \exp_{0}=\Big\{\tfrac{j}{d}:j=0,\dots,2d-1\Big\}=\{0,\tfrac12,1,\tfrac32\},\\
+  \exp_{R}=\{0,1,2,-\gamma\}=\{0,1,2,-\tfrac{11}{6}\},
+\end{gathered}
+\end{equation}
+with $\gamma=(d+1)/2+b_{d-1}/\beta_{d}=11/6$ \claim{CC1-RIEMANN}. The dominant
+exponent $-\gamma$ differs from each of the integers $\{0,1,2\}$ by a
+non-integer, a fact that will decide the local monodromy type in
+\S\ref{sec:local}.
+
+\subsection{The irregular point at infinity}\label{sec:inf}
+The point at infinity is irregular. The Fuchs degree bound
+$\deg a_{k}\le \deg a_{4}-(4-k)$ holds for $k=1,\dots,4$ but \emph{fails} at
+$k=0$, where $\deg a_{0}=2>1$; the violation is caused exactly by the term
+$a_{0}=-s^{2}$. The Newton polygon at infinity has a single edge from $(0,2)$
+to $(4,5)$ of slope $3/4$, with exact edge polynomial $-12c^{4}-1$; its roots
+$c^{4}=-1/12$ have $|c|=(1/12)^{1/4}=0.53728\ldots$ and arguments an odd
+multiple of $\pi/4$. There is a single Puiseux cycle of length $4$, so the
+ramification is exactly $4$, the slope is $1/4$, the integer Poincar\'e rank is
+$1$, and the four determining factors
+\begin{equation}\label{eq:detfactors}
+  E_{k}(s)=\exp\!\big(4c\,\zeta_{4}^{k}\,s^{1/4}\big),\qquad
+  c^{4}=-\tfrac{1}{12},\quad \zeta_{4}=i,\quad k=0,1,2,3,
+\end{equation}
+form one transitive orbit under the cyclic order-$4$ ramification group. The
+prediction is corroborated numerically: at $s=10^{14}$ the four scaled
+symbol-roots $w\,s^{3/4}$ have modulus tending to $0.53728$ and arguments
+tending to $\{\pm\pi/4,\pm3\pi/4\}$ \claim{CC1-INF-IRREGULAR}. This corrects
+the earlier ``three regular singular points'' reading of the operator.
+
+\subsection{Accessory count and non-rigidity}
+Because infinity is irregular, the Fuchsian accessory count
+$N_{\mathrm{acc}}=(2d-1)(d-1)$ of EBR-II is inapplicable; the corrected
+index-of-rigidity count is $P=d-1$, which at $d=2$ equals $1$. We do not
+re-derive the full Katz rigidity index with the irregular point here; this is
+flagged as a residual gap (\S\ref{sec:open}). The point that matters
+downstream is robust to the discrepancy: the count is positive at $d=2$ on
+either reading, so the connection problem is non-rigid \claim{CC1-ACCESSORY}.
+
+\section{Arithmetic nature: not a $G$-operator}\label{sec:gfun}
+
+We emphasize at the outset the \emph{normalization scope} of this section: all
+statements are about the Borel normalization $g_{n}=Q_{n}/(2n)!$ of
+\eqref{eq:family} and do not extend to arbitrary rescalings of the coefficient
+sequence (multiplying by $(2n)!$, for instance, returns the integer series
+$\sum Q_{n}s^{n}$ of radius $0$, a different object). With that scope fixed:
+
+\subsection{Integrality and denominator growth}
+The numerators are integers: $Q_{0}=1$, $Q_{1}=5$, and
+$Q_{n}=(3n^{2}+n+1)Q_{n-1}+Q_{n-2}$ has integer coefficients, so $Q_{n}\in\Z$
+(checked to $n\le2000$), whence $\operatorname{denom}(g_{n})\mid(2n)!$ and
+$q_{N}:=\operatorname{lcm}_{n\le N}\operatorname{denom}(g_{n})\mid(2N)!$
+\claim{CC2-0-QINT}. The content of the section is that this divisibility is
+\emph{not} far from an equality: $q_{N}$ grows superlinearly, the fit
+$q_{N}\sim N\log N$ giving $R^{2}=0.9999983$ against $R^{2}=0.998858$ for a
+linear law, and $\log_{10}q_{N}/\log_{10}(2N)!\approx1.0000$. The Taylor
+denominators retain essentially the entire factorial; there is no geometric
+denominator collapse, so $G$ is not a $G$-function in the
+Andr\'e--Bombieri sense, but a Gevrey/Borel object \claim{CC2-0-GFUNC}.
+
+\subsection{Two confirming channels}
+The $p$-curvature $\psi_{p}$ of $\Ltwo$ over $\Fp(s)$ is non-nilpotent for
+every tested prime $p\in\{5,7,11,13,17,19,23,29\}$, at three generic
+specializations each (the primes $2,3$ are excluded as degenerate for the
+leading coefficient). Since global nilpotence is equivalent to nilpotence of
+$\psi_{p}$ for almost all $p$, the operator is not globally nilpotent, which by
+the Chudnovsky--Andr\'e theorem again excludes the $G$-function property and
+matches the irregular-infinity prediction of Katz \claim{CC2-0-PCURV}. Indeed
+the Andr\'e--Chudnovsky--Katz results yield a clean trichotomy: of the three
+statements ``$G$ is a $G$-function'', ``$\Ltwo$ is minimal/irreducible'', and
+``$\infty$ is irregular'', at most two can hold. We establish the latter two
+(\S\ref{sec:irred} and \S\ref{sec:inf}), so the first fails
+\claim{CC2-0-TRICHOTOMY}.
+
+\subsection{Consequence for the period route}
+A direct corollary concerns the transcendence question. Because $G$ itself is
+not a $G$-function, no unconditional transcendence statement about the
+connection coefficient can be drawn from ``$G$ is a $G$-function with the right
+growth''. The $G$-function/period machinery may still bear on the coefficient
+as a connection datum of the order-$4$ operator that is Fuchsian at $\{0,R\}$
+and irregular at infinity, but establishing that is the burden of the separate
+period analysis and cannot be inherited as assumed \claim{CC2-0-CC3-AMEND}.
+
+\section{Irreducibility and minimality}\label{sec:irred}
+
+The falsification target ``$\Ltwo$ is reducible over $\C(s)$'' is refuted by
+two independent arguments.
+
+\subsection{Formal module at infinity}
+At the irregular point the formal $\C((s^{-1}))$-module of $\Ltwo$ has a single
+slope $1/4$ whose four determining factors \eqref{eq:detfactors} form one
+transitive orbit under the cyclic order-$4$ ramification group. A proper right
+factor over $\C(s)$ would have a $\C(s)$-rational, hence ramification-stable,
+set of determining factors; but the only subsets of a transitive size-$4$
+orbit stable under the generating $4$-cycle are the empty set and the whole
+set. Hence $\Ltwo$ has no proper right factor and is the minimal annihilator of
+$G$ (order $4=2d$). The local-to-global inference uses Turrittin's formal
+classification and the formal-module description of
+\cite[Ch.~3]{vdPutSinger}, and is graded \textsc{structural} (computer algebra
+and hand argument; an independent \texttt{DFactor}-style confirmation was
+unavailable on the host) \claim{CC1-IRREDUCIBLE}.
+
+\subsection{Exhaustive low-order factor exclusion}
+Independently, slope additivity at infinity (the Newton polygon of a product is
+the concatenation of the factors' polygons) reduces the existence of an
+order-$m$ right factor to the existence of a $\sigma$-stable size-$m$ subset of
+the determining-factor orbit, where $\sigma=(0\,1\,2\,3)$ generates the
+ramification group. A finite enumeration shows the stable subset sizes are
+$\{0,4\}$, so no order-$1$, $2$, or $3$ right factor exists; for order $1$,
+each factor in \eqref{eq:detfactors} is ramified, so there is no single-valued
+$\exp\!\int r$ with $r\in\C(s)$. This recovers irreducibility by an
+independent route \claim{CC2-0-FACTOR}. The two routes are logically
+independent --- one local-analytic at infinity, one a finite combinatorial
+enumeration of $\sigma$-stable orbits --- and neither relies on a
+decision-procedure factorization; we grade irreducibility \textsc{structural}
+on the strength of their agreement, and it is this irreducibility that the
+degree-bound completeness of \S\ref{sec:bounds} later makes load-bearing.
+
+\section{Local monodromy and the semisimple correction}\label{sec:local}
+
+\subsection{The monodromy at $R$ is a semisimple pseudo-reflection}
+The local monodromy at $R$ has eigenvalues $e^{2\pi i\rho}$ for
+$\rho\in\exp_{R}=\{0,1,2,-\tfrac{11}{6}\}$, that is $\{1,1,1,e^{i\pi/3}\}$
+(using $e^{-2\pi i\cdot11/6}=e^{i\pi/3}$). Although the eigenvalue $1$ occurs
+with multiplicity $3$ and there is an integer-exponent resonance among
+$\{0,1,2\}$, no logarithm forms: an exact symbolic Frobenius solve at $R$ shows
+that all resonance obstructions on the eigenvalue-$1$ tower vanish, giving
+three independent logarithm-free solutions, while an independent numerical
+computation gives $\operatorname{rank}(M_{R}-I)=1$ (one singular value
+$2.159$, the rest below $10^{-30}$). Thus $M_{R}$ is a semisimple complex
+pseudo-reflection of order $6$ with spectrum $\{1,1,1,e^{i\pi/3}\}$, and
+$M_{0}$ is semisimple with spectrum $\{1,-1,1,-1\}$
+\claim{CC2-2D-JORDAN}\claim{CC4-1-MONODROMY}. The exact-arithmetic resonance
+residuals were subsequently pushed to $169$ digits, confirming the absence of
+a logarithm to that precision \claim{CC4-1-NOLOG}.
+
+\subsection{Erratum}\label{sec:erratum}
+This corrects an earlier narration that spoke of a ``unipotent part'' or
+``resonance logarithm'' at $R$. The corrected statement is that $M_{R}$ is a
+semisimple pseudo-reflection with no logarithm, consistent with the criterion
+of \cite{EBRII} that a $-\gamma$ resonance logarithm requires $\gamma\in\Z$;
+here $\gamma=11/6\notin\Z$. The superseded reading appeared in the narration of
+EBR-II (concept DOI \texttt{10.5281/zenodo.20566465}, current version
+\texttt{10.5281/zenodo.20571232}, v1.2); the load-bearing claims of that work
+--- the exponents, the irreducibility, and the irregularity at infinity --- are
+unaffected, only the adjective on $M_{R}$ \claim{CC4-ERR-1}.
+
+\section{The differential Galois group}\label{sec:main}
+
+We compute $\GGal(\Ltwo)$ over $\C(s)$. The strategy is the
+maximal-subgroup classification of algebraic subgroups of $\SL_{4}$ in the
+differential-Galois setting, following the formulation of
+\cite[Ch.~4]{vdPutSinger}; we use the Aschbacher class labels
+$C_{1},\dots,C_{8},S$ as organizing vocabulary for the maximal closed subgroups
+of $\SL_{4}$, and we stress that this is the algebraic-group classification,
+not an application of Aschbacher's finite-group theorem. In the geometric
+(Kleidman--Liebeck) numbering the classical-form subgroups $\SO_{4},\Sp_{4}$
+are class $C_{8}$, the subfield class is $C_{5}$, the extraspecial-normalizer
+class is $C_{6}$, and the tensor-induced class is $C_{7}$. Over the
+algebraically closed field of constants in characteristic zero the subfield
+class $C_{5}$ is empty; the tensor-induced class $C_{7}$ for the $2\otimes2$
+decomposition shares its identity component $\SL_{2}\otimes\SL_{2}$ with $C_{4}$
+and is excluded with it; and the extraspecial-type class $C_{6}$ is finite,
+hence killed together with the other finite primitive classes by the
+exponential torus. The operative algebraic classes are therefore
+$C_{1},C_{2},C_{3},C_{4},C_{8},S$ together with the finite classes.
+
+\subsection{Determinant and the $\SL_{4}$ normalization}
+The Wronskian satisfies $w'/w=-a_{3}/a_{4}=(24-47s)/(2s(3s-4))
+=-3/s+(29/2)/(4-3s)$, so $W=s^{-3}(4-3s)^{-29/6}$, with determinant exponents
+$-3$ at $0$ and $-29/6$ at $R$ (each cross-checked by
+$W_{\exp}=\sum\exp-\binom{4}{2}$ with residual $0$). The $\SL_{4}$-normalizing
+twist $\chi=\Det^{1/4}=s^{-3/4}(4-3s)^{-29/24}$ is algebraic over $\C(s)$ (a
+product of rational powers; not rational, not properly Liouvillian). After
+twisting by $\chi$ the regular-point exponent multisets become
+$\{3/4,5/4,7/4,9/4\}$ at $0$ and $\{29/24,53/24,77/24,-5/8\}$ at $R$, each
+summing to $6$ \claim{CC2-1-TWIST}. The four determining-factor leading units
+$c\cdot\{1,i,-1,-i\}$ at infinity generate a rank-$2$ lattice
+$\Z\cdot1+\Z\cdot i$, so the formal exponential torus has dimension $2$; in
+particular $\GGal(\Ltwo)^{\circ}$ contains a $2$-dimensional torus and is
+infinite \claim{CC2-1-EXPTORUS}.
+
+\subsection{No invariant form: $C_{8}$ ($\SO_{4}$, $\Sp_{4}$)}
+\label{sec:selfdual}
+A nondegenerate $G$-invariant bilinear form, even up to a rank-$1$ twist
+$V\cong V^{*}\otimes\kappa$, would force the local eigenvalue multiset at $R$ to
+equal $\kappa\cdot\{\text{inverses}\}$. The multiplicity-$3$ eigenvalue $1$
+pins $\kappa=1$, and then $e^{i\pi/3}\ne e^{-i\pi/3}$. Hence the multiset
+$\{1,1,1,e^{i\pi/3}\}$ is not inversion-closed up to any scalar, so $\Ltwo$
+carries no invariant symmetric or alternating form, even up to twist: the group
+lies in neither $\SO_{4}$ nor $\Sp_{4}$. This argument is exact and uses only
+the $-11/6$ exponent \claim{CC2-2A-SELFDUAL}. It is confirmed constructively:
+the exterior square $\Lambda^{2}\Ltwo$ has order $6$ (no symplectic
+order-drop), splitting at infinity into a rank-$2$ slope-$0$ piece --- the
+cancelling pairs $(0,2)$ and $(1,3)$, since $i^{0}+i^{2}=0$ and
+$i^{1}+i^{3}=0$ --- and a rank-$4$ slope-$1/4$ remainder; the search for a
+rational antisymmetric solution of $P'=-A^{\!\top}P-PA$ returns nullspace
+dimension $0$ in two ansatz boxes (denominator $s^{a}(4-3s)^{b}$, numerator
+degree $d$; $(a,b,d)=(4,4,10)$ and $(3,3,8)$), so the group is not in
+$\Sp_{4}$ \claim{CC2-2B-SP4}. The same search for a symmetric solution returns
+nullspace dimension $0$ in the same boxes, so the group is not in $\SO_{4}$
+\claim{CC2-2C-SO4}.
+
+\subsection{Tensor and tensor-induced classes: $C_{4}$, $C_{7}$, $S$}
+A symmetric cube $\Sym^{3}W$ of a rank-$2$ module is self-dual up to twist,
+contradicting \S\ref{sec:selfdual}; moreover a rank-$2$ module has ramification
+at most $2$ and cannot carry slope $1/4$, and $\Sym^{3}$ would produce factors
+$\{3\phi,\phi,-\phi,-3\phi\}$ of two distinct magnitudes rather than the single
+equal-magnitude transitive $\Z/4$ orbit of $\Ltwo$. Hence the $\Sym^{3}\SL_{2}$
+class $S$ is excluded. A tensor product $V_{1}\otimes V_{2}$ of two rank-$2$
+modules (class $C_{4}$) is likewise self-dual up to twist and again cannot
+produce slope $1/4$, so it too is excluded; the tensor-induced class $C_{7}$
+(the wreath $\SL_{2}\wr S_{2}$ acting on the $2\otimes2$ decomposition) has the
+same identity component $\SL_{2}\otimes\SL_{2}$ and is excluded by the same
+argument \claim{CC2-2D-TENSOR}.
+
+\subsection{The imprimitive classes $C_{2},C_{3}$ and primitivity}
+\label{sec:primitive}
+The remaining obstruction is imprimitivity: the monomial/$2$-block class
+$C_{2}$ and the field-extension class $C_{3}$. These are not separable from the
+local data alone, because the connected exponential torus fixes every block of
+any system of imprimitivity, forcing blocks to be spans of weight lines, and
+both the $4$-cycle formal monodromy and the semisimple pseudo-reflection
+$M_{R}$ preserve the $2$-block system $\{\{L_{1},L_{3}\},\{L_{2},L_{4}\}\}$
+\claim{CC2-2D-IMPRIM}. We close the class globally.
+
+A quadratic character $\eta$ realizing an imprimitive structure ramifies at an
+even number of singular points. Since the $R$-spectrum $\{1,1,1,e^{i\pi/3}\}$
+is not negation-closed (no $-1$), $\eta$ must be unramified at $R$; evenness
+then forces ramification exactly at $\{0,\infty\}$, i.e.\ $\eta=\sqrt{s}$, which
+passes the necessary local tests because the spectra at $0$ ($\{1,-1,1,-1\}$)
+and at $\infty$ (units $\{1,i,-1,-i\}$) are negation-closed. Thus $\sqrt{s}$ is
+the unique candidate character \claim{CC4-A1-ETA-UNIQUE}. Furthermore the
+formal monodromy at infinity is the $4$-cycle $(q_{0}\,q_{1}\,q_{2}\,q_{3})$ on
+the determining factors (since $s^{1/4}\mapsto i\,s^{1/4}$), an odd permutation;
+any induced structure embeds the permutation action in a transitive subgroup of
+$S_{4}$ containing this $4$-cycle, hence in $\{C_{4},D_{4},S_{4}\}$, each of
+which has an index-$2$ subgroup, i.e.\ a quadratic character, which by
+uniqueness is $\sqrt{s}$. This reduces the $2$-block, the $4$-line monomial,
+and the degree-$2/4$ field-extension classes all to the single $\sqrt{s}$ test
+\claim{CC4-A1B-MONOMIAL-CLOSURE}.
+
+That test is negative, by two independent searches. Over $\C(s)$, the search
+for a rational intertwiner $\Phi$ realizing $M\cong M\otimes\sqrt{s}$ (solving
+$\Phi'=A\Phi-\Phi A+(1/2s)\Phi$) returns nullspace dimension $0$ across boxes
+$s^{a}(4-3s)^{b}$ of degree up to $20$ ($336$ unknowns at the largest); as a
+calibration, the untwisted search returns $\End_{\C(s)}(M)=1$ (scalars only),
+confirming absolute irreducibility and that the pipeline detects solutions when
+they exist \claim{CC4-0-ROUTE2-PRIMITIVE}. Independently, the pullback under
+$s=t^{2}$ gives $\tilde A(t)=2t\,A(t^{2})$, with $t=0$ exponents doubling to
+$\{0,1,2,3\}$, slope $1/2$ at infinity, and two unramified points $\pm t_{R}$
+swapped by the deck map; the eigenring of the pullback is $1$-dimensional
+(scalars), so the pullback is irreducible over $\C(t)$ and $M$ is not induced
+from the quadratic cover \claim{CC4-0-ROUTE1-PRIMITIVE}. The two routes agree
+on primitivity.
+
+\subsection{Completeness of the searches}\label{sec:bounds}
+The two rational-solution searches are made complete by an \emph{a priori}
+degree bound. Because $M_{0}$ and $M_{R}$ are semisimple (no logarithm), a
+rational horizontal section is single-valued and every non-integer
+$\End$-exponent branch is killed, so the pole order at a finite singular point
+$p$ is at most $-\min$ of the integer $\End$-exponents at $p$ (these exponents
+being pairwise differences of the $M$-exponents, shifted by the $\eta$-twist),
+and the growth at infinity is bounded by the minimal integer slope-$0$ exponent
+of the ramified formal monodromy. Computed exactly, the numerator-degree bound
+for Route~2 is $B_{2}=1+2+0=3$ (pole $\le1$ at $0$, $\le2$ at $R$, no growth at
+infinity), and for Route~1 it is $B_{1}=3+2+2=7$ (pole $\le3$ at $t=0$, $\le2$
+at each $\pm t_{R}$). Both are at most $20$, and the boxes actually run ---
+$[s(4-3s)^{2},\deg\le8]$ and $[t^{3}(3t^{2}-4)^{2},\deg\le10]$ --- strictly
+contain $B_{2}$ and $B_{1}$. Hence the nulls of \S\ref{sec:primitive} are
+bound-complete, not merely empirical \claim{CC4-0B-BOUNDS}.
+
+\subsection{The classification and the main theorem}
+\label{sec:asch}
+We collect the eliminations.
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll>{\raggedright\arraybackslash}p{0.42\textwidth}l@{}}
+\toprule
+Class & Description & Eliminated by & Grade \\
+\midrule
+$C_{1}$ & reducible & \S\ref{sec:irred} (\claim{CC1-IRREDUCIBLE},
+  \claim{CC2-0-FACTOR}) & S \\
+$C_{6}$/fin. & extraspecial-type / finite & \S\ref{sec:main} torus (\claim{CC2-1-EXPTORUS}) & S \\
+$C_{8}$ & orthogonal $\SO_{4}$ & \S\ref{sec:selfdual} (\claim{CC2-2C-SO4},
+  \claim{CC2-2A-SELFDUAL}) & V/S \\
+$C_{8}$ & symplectic $\Sp_{4}$ & \S\ref{sec:selfdual} (\claim{CC2-2B-SP4},
+  \claim{CC2-2A-SELFDUAL}) & V/S \\
+$S$ & $\Sym^{3}\SL_{2}$ & tensor/slope (\claim{CC2-2D-TENSOR}) & S \\
+$C_{4},C_{7}$ & $\SL_{2}\otimes\SL_{2}$ & tensor/slope (\claim{CC2-2D-TENSOR}) & S \\
+$C_{2}$ & monomial / $2$-block & $\sqrt{s}$ test (\claim{CC4-0-ROUTE2-PRIMITIVE},
+  \claim{CC4-0-ROUTE1-PRIMITIVE}) & S \\
+$C_{3}$ & field extension & $4$-cycle closure (\claim{CC4-A1B-MONOMIAL-CLOSURE})
+  & S \\
+$C_{5}$ & subfield & vacuous over $\overline{\C}$, char $0$ & S \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{theorem}\label{thm:main}
+For the operator $\Ltwo$ of \eqref{eq:operator}, the identity component of the
+differential Galois group over $\C(s)$ is
+\[
+  \GGal(\Ltwo)^{\circ}=\SL_{4}.
+\]
+\end{theorem}
+
+\begin{proof}[Evidential status of the proof]
+The two imprimitivity-excluding routes ($\Hom(M,M\otimes\sqrt{s})=0$ over
+$\C(s)$; eigenring $=$ scalars on the $s=t^{2}$ cover) agree and are
+bound-complete by \S\ref{sec:bounds}; the unique-character analysis
+(\claim{CC4-A1-ETA-UNIQUE}) and the $4$-cycle closure
+(\claim{CC4-A1B-MONOMIAL-CLOSURE}) reduce every imprimitive class to the single
+$\sqrt{s}$ test; the remaining maximal classes are excluded as tabulated. With
+$C_{1},\dots,C_{8},S$ exhausted and the torus forcing the group to be infinite
+and reductive, the identity component is $\SL_{4}$. The graded inputs are
+\textsc{structural} (the routes, the character analysis, the bound) and
+\textsc{verified}-by-citation (the classification framework of
+\cite{vdPutSinger}); the theorem is therefore \textsc{structural} and, with the
+bound of \S\ref{sec:bounds}, unconditional \claim{CC4-0-SL4-VERDICT}.
+\end{proof}
+
+\section{The non-Liouvillian corollary and the bridge}\label{sec:bridge}
+
+\begin{corollary}\label{cor:liouville}
+$\Ltwo$ has no Liouvillian solutions.
+\end{corollary}
+
+\begin{proof}
+A linear operator has a Liouvillian solution if and only if the identity
+component of its differential Galois group is solvable
+\cite[Ch.~1,4]{vdPutSinger}. By Theorem~\ref{thm:main} the identity component
+is $\SL_{4}$, which is connected, semisimple, and non-solvable; hence no
+Liouvillian solution exists. This is a citation applied to (R4) and is graded
+\textsc{verified}-by-citation $+$ \textsc{structural} application
+\claim{CC4-2-BRIDGE}.
+\end{proof}
+
+We restate the discipline of \S\ref{sec:nonclaim} as the bridge to the open
+problem. The group computation licenses exactly the non-Liouvillian corollary
+and nothing about the arithmetic nature of the connection coefficient.
+Connection coefficients are not differential-Galois invariants; the
+transcendence of the connection coefficient remains a conjecture, and its only
+route is the separate period analysis, which must be argued afresh because the
+$G$-function clause is retired by \S\ref{sec:gfun}.
+
+\section{Connection data and the integer-relation null}\label{sec:numerics}
+
+\subsection{The connection coefficient to $169$ digits}
+We computed the connection coefficient by a third independent channel --- a
+full $4\times4$ local fundamental system at $R$ in the basis
+$\{u_{-11/6},u_{0},u_{1},u_{2}\}$, matched to the continued series $G$ and its
+first three derivatives at an interior point --- obtaining the amplitude
+\[
+  A=2.87436850995728075034795582039806005699192841843121\ldots
+\]
+and the coefficient-asymptotics prefactor
+\[
+  \Cebr=\frac{A}{\Gamma(11/6)}
+       =3.055706807890481365701912201727\ldots,
+\]
+the latter appearing in $g_{n}\sim\Cebr\,R^{-n}n^{\gamma-1}$. The channel is
+self-validated by multi-point agreement ($s^{*}=1.0$ versus $0.9$, agreeing to
+$169$ digits) and multi-precision agreement (working precision $170$ versus
+$210$, agreeing to $169$ digits); a Richardson channel on the coefficient
+asymptotics independently confirms $77$ digits, the clean $1/n$ extrapolation
+being itself a re-confirmation of the absence of a logarithmic tower at $R$. We
+state honestly that these are \texttt{mpmath} floating values, not formal
+interval enclosures; the grade is \textsc{verified}, not \textsc{proven}
+\claim{CC4-1-C-120D}.
+
+\subsection{Stokes structure, and what is out of scope}\label{sec:stokes}
+At the irregular point the four determining factors $q_{k}=\gamma_{k}s^{1/4}$
+with $\gamma_{k}^{4}=-1/12$ give eight singular directions in the
+$w=s^{1/4}$ plane, spaced $\pi/4$, and a formal monodromy equal to a single
+$4$-cycle (permutation sign $-1$) times $\operatorname{diag}(e^{2\pi i\mu_{k}})$.
+Determinant consistency of the cyclic relation $M_{0}M_{R}M_{\infty}=I$ forces
+$\Det M_{\infty}=e^{-i\pi/3}$, i.e.\ $\sum_{k}\mu_{k}\equiv1/3\pmod 1$, a
+constraint any Stokes computation must satisfy. We are explicit that the
+\emph{numerical} Stokes multipliers at the ramified slope $1/4$ require
+Borel--Laplace multisummation that we did not complete on the host; we report
+the layout and the determinant constraint and do not substitute a weaker proxy
+for the multipliers \claim{CC4-1-STOKES}. This is the one computational leg of
+the program left open here (\S\ref{sec:open}).
+
+\subsection{The integer-relation null as exclusion bounds}\label{sec:null}
+We tested the falsification target ``the connection coefficient is an
+elementary $\Gamma$-quotient, a low-height constant combination, or
+algebraic''. The targets $\Cebr$ and $A$ are known to $169$ digits; we ran a
+PSLQ battery at working precision $169$ with acceptance tolerance $10^{-150}$,
+leaving roughly $19$ guard digits. The battery's validity is demonstrated by
+three positive controls, all detected with the expected integer vectors: the
+$\Gamma$-reflection $\Gamma(1/3)\Gamma(2/3)=2\pi/\sqrt3$, the algebraic relation
+$x^{2}-2=0$ for $\sqrt2$, and the linear relation $2\pi+3\log2$.
+
+For a basis of $n$ terms, a spurious relation of integer height $H$ produces a
+residual of order $H^{-(n-1)}$; for the search to be limited by the searched
+height rather than by precision we require $H^{-(n-1)}$ to remain above the
+tolerance, i.e.\ the precision-detection ceiling is
+$H_{\max}\approx10^{150/(n-1)}$. In every tier below the searched height lies
+well within this ceiling, so each null is a genuine exclusion bound: \emph{any}
+integer relation must have height exceeding the searched $H$.
+
+\begin{center}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.32\textwidth}lll@{}}
+\toprule
+Tier & basis ($n$ terms) & searched $H$ & ceiling $10^{150/(n-1)}$ & verdict \\
+\midrule
+$\Gamma$-monomial & reflection-normalized $\Gamma$ at $(1/24)\Z$, indep.\ ($n{=}8$)
+  & $10^{9}$ & $10^{21.4}$ & null \\
+$\Gamma$-monomial & overcomplete $11$-$\Gamma$ basis ($n{=}15$)
+  & $10^{9}$ & $10^{10.7}$ & inter-$\Gamma$ only \\
+constants & $\{1,\pi,\log2,\log3,$ $\gamma_{E},\text{Cat},\zeta_3,\zeta_5\}$ ($n{=}9$)
+  & $10^{12}$ & $10^{18.8}$ & null \\
+algebraic & minimal polynomial $\deg\le8$ ($n\le9$)
+  & $10^{6}$ & $10^{18.8}$ & null \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In the reflection-normalized independent $\Gamma$-basis there is no relation at
+all; in the overcomplete $11$-$\Gamma$ basis PSLQ recovers only genuine Gauss
+multiplication/reflection identities among the $\Gamma$-values, each with
+\emph{coefficient zero on the target} (residuals $\sim10^{-170}$) --- an
+internal control showing the battery sees real $\Gamma$-structure without
+entangling the target. To $169$ digits, then, $\Cebr$ and $A$ are not
+elementary $\Gamma$-quotients \claim{EBR3-B-GAMMA}, not integer-linear
+combinations of $\{1,\pi,\log2,\log3,\gamma_{E},\text{Catalan},\zeta(3),
+\zeta(5)\}$ \claim{EBR3-B-CONST}, and not algebraic of degree $\le8$ and height
+$\le10^{6}$ \claim{EBR3-B-ALG}. This strengthens the $\ge33$-digit
+$\Gamma$-quotient null of EBR-II to $169$ digits. It is evidence of
+non-elementarity; it is not a proof of transcendence, and we do not present it
+as one.
+
+\section{Lean cores and the axiom audit}\label{sec:lean}
+
+The finitary, arithmetic sub-claims that admit machine-checked proofs are
+formalized in Lean~4 with Mathlib (\texttt{leanprover/lean4} v4.30.0; Mathlib
+rev \texttt{c5ea0035}). Four cores are proved: the degree-bound arithmetic
+$B_{2}=1+2+0=3$, $B_{1}=3+2+2=7$, both $\le20$ (\claim{CC4-LEAN-BOUNDS}); the
+pullback exponent integrality, that $s=t^{2}$ doubles
+$\{0,\tfrac12,1,\tfrac32\}$ to the integers $\{0,1,2,3\}$
+(\claim{CC4-LEAN-PULLBACK}); the eigenvalue-parity bookkeeping, that the
+$R$-spectrum is not negation-closed while the $0$-spectrum is, encoded by angles
+in $\Z/6$ with negation $k\mapsto k+3$ (\claim{CC4-LEAN-PARITY}); and the parity
+core, that the $4$-cycle \texttt{finRotate 4} is odd and so lies outside the
+alternating group, the group-theoretic heart of the $4$-cycle closure
+(\claim{CC4-LEAN-A1B}). A \verb|#print axioms| audit confirms that every
+declaration depends only on a cone contained in
+$\{\texttt{propext},\texttt{Classical.choice},\texttt{Quot.sound}\}$, with no
+\texttt{sorryAx}; three of the bound lemmas depend on no axioms at all. These
+are the only \textsc{proven} results in the paper.
+
+\section{Four-class grade table}\label{sec:gradetable}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.42\textwidth}l>{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+\toprule
+Result & Grade & Evidence \\
+\midrule
+$\Ltwo$ explicit, singular locus $\{0,R\}$ & V & \claim{CC1-OP-L2} \\
+Riemann data \eqref{eq:riemann} & V & \claim{CC1-RIEMANN} \\
+$\infty$ irregular, slope $1/4$ & V & \claim{CC1-INF-IRREGULAR} \\
+Not a $G$-function (normalization-scoped) & V & \claim{CC2-0-GFUNC},
+  \claim{CC2-0-QINT} \\
+$p$-curvature non-nilpotent & V & \claim{CC2-0-PCURV} \\
+Trichotomy excludes $G$-function & S & \claim{CC2-0-TRICHOTOMY} \\
+Irreducible/minimal (two routes) & S & \claim{CC1-IRREDUCIBLE},
+  \claim{CC2-0-FACTOR} \\
+$M_{R}$ semisimple pseudo-reflection & V & \claim{CC2-2D-JORDAN},
+  \claim{CC4-1-NOLOG} \\
+No invariant form ($\not\le\SO_{4},\Sp_{4}$) & V/S & \claim{CC2-2A-SELFDUAL},
+  \claim{CC2-2B-SP4}, \claim{CC2-2C-SO4} \\
+Tensor classes excluded & S & \claim{CC2-2D-TENSOR} \\
+$\eta=\sqrt{s}$ unique; $4$-cycle closure & S & \claim{CC4-A1-ETA-UNIQUE},
+  \claim{CC4-A1B-MONOMIAL-CLOSURE} \\
+Primitive (two agreeing routes) & S & \claim{CC4-0-ROUTE1-PRIMITIVE},
+  \claim{CC4-0-ROUTE2-PRIMITIVE} \\
+Degree bounds $B_2{=}3,B_1{=}7\le20$ & S & \claim{CC4-0B-BOUNDS} \\
+\textbf{Main:} $\GGal(\Ltwo)^{\circ}=\SL_{4}$ & S & \claim{CC4-0-SL4-VERDICT} \\
+No Liouvillian solutions & V/S & \claim{CC4-2-BRIDGE} \\
+Connection coefficient to $169$ digits & V & \claim{CC4-1-C-120D} \\
+$\Gamma$-quotient / constant / algebraic nulls & V & \claim{EBR3-B-GAMMA},
+  \claim{EBR3-B-CONST}, \claim{EBR3-B-ALG} \\
+Lean cores (4) & P & \claim{CC4-LEAN-BOUNDS}, \claim{CC4-LEAN-PULLBACK},
+  \claim{CC4-LEAN-PARITY}, \claim{CC4-LEAN-A1B} \\
+Transcendence of the connection coefficient & C & \claim{CC1-DISCIPLINE} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Open problems}\label{sec:open}
+
+We list the open directions, each tagged with the program op-code under which
+it is being pursued.
+\begin{enumerate}
+\item \emph{Transcendence of the connection coefficient} (\texttt{op:cc-3}).
+The sole route is via a period-theoretic analysis, argued from first principles since
+the $G$-function clause is retired (\S\ref{sec:gfun}). The $169$-digit null of
+\S\ref{sec:null} is the current evidence of non-elementarity; the
+$169$-digit value, the exact monodromy, and the Stokes layout are the inputs.
+\item \emph{Numerical Stokes multipliers} at the ramified slope $1/4$, via
+Borel--Laplace multisummation (\S\ref{sec:stokes}).
+\item \emph{General $d$.} Only $d=2$ is settled here; the irreducibility and
+the group computation at $d\ge3$ require the order-$2d$ analogues of every step.
+Three ingredients are specific to $d=2$ and do not transfer for free: the
+determining-factor orbit at infinity is a single $4$-cycle (a transitive
+$\Z/2d$-orbit at general $d$, so the slope-additivity factor enumeration grows),
+the target group becomes $\SL_{2d}$ with its own and larger maximal-subgroup
+list, and the \emph{a priori} degree bounds of \S\ref{sec:bounds} must be
+recomputed from the order-$2d$ exponent data. The arithmetic conclusions are
+expected to persist but are not established here.
+\item \emph{The rigidity index} with the irregular point, completing the
+accessory count beyond the robust positivity used in
+\S\ref{sec:operator}.
+\item \emph{The rigidity dividing-line conjecture.} The precise statement ---
+that the connection coefficient is elementary exactly on the rigid ($d=1$) or
+resonant/reducible members and a genuine transcendental period generically for
+$d\ge2$ --- remains conjectural; the present work supplies the group side at
+$d=2$ but not the arithmetic side.
+\end{enumerate}
+
+\section*{Reproducibility}
+All computations are reproducible from the accompanying package: the symbolic
+operator and singular-structure scripts, the $p$-curvature and factor-exclusion
+scripts, the twist and invariant-form searches, the primitivity routes and
+degree bounds, the $169$-digit connection computation, the Stokes layout, and
+the integer-relation battery, each with a canonical content hash recorded in
+full in \texttt{HASH\_MANIFEST.json}; together with
+the Lean project (buildable, with the axiom-audit file) and a snapshot of the
+claims ledger. A \texttt{README} gives a one-command verification path per
+artifact, and \texttt{verify.py} re-derives every embedded self-hash and file
+hash against the manifest (exit code~$0$).
+
+\medskip\noindent
+The load-bearing frozen inputs are pinned here by SHA-256 prefix (full
+$64$-hex digests in \texttt{HASH\_MANIFEST.json}). The $169$-digit
+integer-relation null
+\texttt{ebr3\_b\_pslq\_results.json} begins
+\texttt{9a3f942def64737d{\dots}};
+the connection coefficient
+\texttt{cc4\_1\_connection\_results.json} begins
+\texttt{f3400831cc964464{\dots}};
+and the claims-ledger snapshot begins
+\texttt{9e6f3fa5a2986cce{\dots}}.
+(The ledger hash is non-circular: no claim references the bytes of this
+document.)
+
+\begin{thebibliography}{9}
+\bibitem{EBRI} Papanokechi, \emph{An Edge--Borel Radius Theorem for Positive
+Polynomial Continued Fractions}, Zenodo,
+\href{https://doi.org/10.5281/zenodo.20564079}{10.5281/zenodo.20564079} (v1.0:
+\texttt{20564080}).
+\bibitem{EBRII} Papanokechi, \emph{The EBR Amplitude as a Connection
+Coefficient: Characterization and a Rigidity Dividing-Line Conjecture},
+Zenodo, \href{https://doi.org/10.5281/zenodo.20566465}{10.5281/zenodo.20566465}
+(v1.2: \texttt{20571232}).
+\bibitem{vdPutSinger} M.~van der Put and M.~F.~Singer, \emph{Galois Theory of
+Linear Differential Equations}, Grundlehren der mathematischen Wissenschaften
+\textbf{328}, Springer, 2003.
+\bibitem{Andre} Y.~Andr\'e, \emph{$G$-functions and Geometry}, Aspects of
+Mathematics \textbf{E13}, Vieweg, 1989.
+\bibitem{Katz} N.~M.~Katz, \emph{Nilpotent connections and the monodromy
+theorem: applications of a result of Turrittin}, Publ.\ Math.\ IH\'ES
+\textbf{39} (1970), 175--232.
+\bibitem{Kovacic} J.~J.~Kovacic, \emph{An algorithm for solving second order
+linear homogeneous differential equations}, J.\ Symbolic Comput.\ \textbf{2}
+(1986), 3--43.
+\bibitem{PSLQ} H.~R.~P.~Ferguson, D.~H.~Bailey, and S.~Arno, \emph{Analysis of
+PSLQ, an integer relation finding algorithm}, Math.\ Comp.\ \textbf{68} (1999),
+351--369.
+\bibitem{Mathlib} The Mathlib Community, \emph{The Lean Mathematical Library},
+CPP 2020, 367--381.
+\end{thebibliography}
+
+\end{document}

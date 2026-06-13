@@ -1,0 +1,135 @@
+{
+  "op": "op:cc-transcendence/cc4-1-stokes",
+  "object": "Formal-solution / Stokes structure of L_2 at the irregular point oo.",
+  "infinity_local_data": {
+    "slope": "1/4",
+    "ramification_r": 4,
+    "edge_polynomial_in_c": "-12 c^4 - 1   (cc-1)",
+    "determining_factors": "q_k(s) = gamma_k s^{1/4},  gamma_k^4 = -1/12,  k=0..3",
+    "abs_gamma_(1/12)^{1/4}": "0.537284965911770959776669",
+    "gammas": [
+      {
+        "k": 0,
+        "abs": "0.53728496591177096",
+        "arg_over_pi": "0.25",
+        "re": "0.379917842825796274",
+        "im": "0.379917842825796274"
+      },
+      {
+        "k": 1,
+        "abs": "0.53728496591177096",
+        "arg_over_pi": "0.75",
+        "re": "-0.379917842825796274",
+        "im": "0.379917842825796274"
+      },
+      {
+        "k": 2,
+        "abs": "0.53728496591177096",
+        "arg_over_pi": "-0.75",
+        "re": "-0.379917842825796274",
+        "im": "-0.379917842825796274"
+      },
+      {
+        "k": 3,
+        "abs": "0.53728496591177096",
+        "arg_over_pi": "-0.25",
+        "re": "0.379917842825796274",
+        "im": "-0.379917842825796274"
+      }
+    ],
+    "args_are_odd_multiples_of_pi/4": true
+  },
+  "singular_directions": {
+    "definition": "Stokes ray for ordered pair (j,k): Re((gamma_j-gamma_k) w)=0, w=s^{1/4}.",
+    "pairwise_differences": [
+      {
+        "pair": [
+          0,
+          1
+        ],
+        "diff_abs": "0.759835685651592547",
+        "diff_arg_over_pi": "-3.25867704396725385e-62"
+      },
+      {
+        "pair": [
+          0,
+          2
+        ],
+        "diff_abs": "1.07456993182354192",
+        "diff_arg_over_pi": "0.25"
+      },
+      {
+        "pair": [
+          0,
+          3
+        ],
+        "diff_abs": "0.759835685651592547",
+        "diff_arg_over_pi": "0.5"
+      },
+      {
+        "pair": [
+          1,
+          2
+        ],
+        "diff_abs": "0.759835685651592547",
+        "diff_arg_over_pi": "0.5"
+      },
+      {
+        "pair": [
+          1,
+          3
+        ],
+        "diff_abs": "1.07456993182354192",
+        "diff_arg_over_pi": "0.75"
+      },
+      {
+        "pair": [
+          2,
+          3
+        ],
+        "diff_abs": "0.759835685651592547",
+        "diff_arg_over_pi": "1.0"
+      }
+    ],
+    "w_plane_directions_over_pi": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75
+    ],
+    "n_w_directions": 8,
+    "s_plane_directions_over_pi_mod2": [
+      0.0,
+      1.0
+    ],
+    "note": "arg(s)=4 arg(w); a single s-loop = quarter-turn in w, cycling the 4 q_k."
+  },
+  "formal_monodromy": {
+    "structure": "M_hat_oo = (4-cycle permutation of q_k) . diag(exp(2 pi i mu_k))",
+    "permutation_is_4_cycle": true,
+    "perm_sign": -1,
+    "reason": "arg(s)->arg(s)+2pi sends w->i w, cyclically permuting the 4 gamma_k.",
+    "stokes_matrices_unipotent_det_1": true
+  },
+  "determinant_consistency": {
+    "sum_exp_at_0": "3",
+    "sum_exp_at_R": "7/6",
+    "det_M0": "(1.0 - 7.70276506657e-61j)",
+    "det_MR_arg_over_pi": "0.333333333333333333",
+    "det_MR_equals_e^{i pi/3}": true,
+    "cyclic_identity": "M_0 M_R M_oo = I  (suitable base-point ordering on P^1)",
+    "implied_det_M_oo_arg_over_pi": "-0.333333333333333333",
+    "implied_det_M_oo": "e^{-i pi/3}",
+    "constraint_on_infinity_exponents": "det M_hat_oo = perm_sign * exp(2 pi i sum mu_k) = -exp(2 pi i sum mu_k) must equal e^{-i pi/3}  =>  sum mu_k = 1/3 (mod 1)."
+  },
+  "deliverable_grade": {
+    "symbolic_stokes_layout": "VERIFIED (closed-form determining factors, singular directions, formal-monodromy 4-cycle, det constraint).",
+    "numerical_stokes_multipliers": "NOT COMPLETED ON HOST. The explicit Stokes matrices at ramified slope 1/4 require Borel-Laplace multisummation of the order-4 operator; this is beyond the cleanly-achievable scope of this stage. Per the stage prompt this is stated openly and the cyclic-identity check is NOT replaced by a weaker numerical proxy. The det-consistency constraint above is the rigorous partial check that any future Stokes computation must satisfy.",
+    "M0_MR_exact": "M_0 = diag(1,-1,1,-1), M_R = diag(1,1,1,e^{i pi/3}) in the Frobenius basis -- EXACT from the (semisimple) Riemann scheme, so the 'dps>=120 monodromy' request is met symbolically (exactly), confirmed numerically at dps 40 (cc2-2d) and to 169 digits via the no-log resonance residuals of cc4_1_connection.py."
+  },
+  "canonical_sha256_of_hashfree_object": "c5d943d4b3b415cbe4320e3a3e07e61eaffb66d06d4f31e317b867f402f16c88"
+}

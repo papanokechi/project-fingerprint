@@ -1,0 +1,10 @@
+'Cc4Cores.Bound.B2_eq' does not depend on any axioms
+'Cc4Cores.Bound.B1_eq' does not depend on any axioms
+'Cc4Cores.Bound.bounds_le_twenty' does not depend on any axioms
+'Cc4Cores.Pullback.pulled_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Cc4Cores.Pullback.pulled_all_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Cc4Cores.Parity.angles0_neg_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Cc4Cores.Parity.anglesR_not_neg_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Cc4Cores.FourCycle.c4_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Cc4Cores.FourCycle.c4_not_mem_alternating' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== axiom audit (cc4-3 cores), lean v4.30.0 + mathlib v4.30.0 (rev c5ea0035) ===

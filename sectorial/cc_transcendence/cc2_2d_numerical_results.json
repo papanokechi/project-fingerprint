@@ -1,0 +1,99 @@
+{
+  "op": "cc2-2d-numerical",
+  "dps": 40,
+  "method": "RK4 numerical continuation of companion system around each puncture",
+  "M_0": {
+    "label": "M_0 (around s=0)",
+    "eigenvalues": [
+      "(1.0 + 1.3561649998014e-30j)",
+      "(1.0 + 4.1156759219761e-15j)",
+      "(-1.0 + 7.398580050596e-15j)",
+      "(-1.0 - 1.4783723538415e-13j)"
+    ],
+    "eigenvalue_abs": [
+      "1.0",
+      "1.0",
+      "1.0",
+      "1.0"
+    ],
+    "eigenvalue_arg_over_pi": [
+      "4.3168073e-31",
+      "1.3100603e-15",
+      "1.0",
+      "-1.0"
+    ],
+    "singular_values_of_(M-I)": [
+      "2620.57",
+      "2.49357",
+      "4.72857e-18",
+      "7.22597e-31"
+    ],
+    "rank_(M-I)": 2,
+    "per_eigenvalue": [
+      {
+        "eigenvalue": "(1.0 + 1.3561649998e-30j)",
+        "alg_mult": 2,
+        "rank(M-lambda I)": 2,
+        "geom_mult": 2,
+        "semisimple_here": true
+      },
+      {
+        "eigenvalue": "(-1.0 + 7.3985800506e-15j)",
+        "alg_mult": 2,
+        "rank(M-lambda I)": 2,
+        "geom_mult": 2,
+        "semisimple_here": true
+      }
+    ],
+    "semisimple_(no_log)": true
+  },
+  "M_R": {
+    "label": "M_R (around s=4/3)",
+    "eigenvalues": [
+      "(1.0 + 6.2580356440774e-40j)",
+      "(1.0 - 1.6115720370109e-32j)",
+      "(1.0 + 3.4640693386603e-30j)",
+      "(0.49999999999776 + 0.86602540378573j)"
+    ],
+    "eigenvalue_abs": [
+      "1.0",
+      "1.0",
+      "1.0",
+      "1.0"
+    ],
+    "eigenvalue_arg_over_pi": [
+      "1.9919946e-40",
+      "-5.1297931e-33",
+      "1.1026475e-30",
+      "0.33333333"
+    ],
+    "singular_values_of_(M-I)": [
+      "2.15868",
+      "1.89163e-30",
+      "2.4616e-32",
+      "4.66737e-40"
+    ],
+    "rank_(M-I)": 1,
+    "per_eigenvalue": [
+      {
+        "eigenvalue": "(1.0 + 6.25803564408e-40j)",
+        "alg_mult": 3,
+        "rank(M-lambda I)": 1,
+        "geom_mult": 3,
+        "semisimple_here": true
+      },
+      {
+        "eigenvalue": "(0.499999999998 + 0.866025403786j)",
+        "alg_mult": 1,
+        "rank(M-lambda I)": 3,
+        "geom_mult": 1,
+        "semisimple_here": true
+      }
+    ],
+    "semisimple_(no_log)": true
+  },
+  "verdict": "BOTH M_0 and M_R SEMISIMPLE (rank(M-I)<=1 => geometric=algebraic multiplicity for every eigenvalue => NO logarithm / NO unipotent block). M_R = semisimple complex pseudo-reflection {1,1,1,e^{i pi/3}} of order 6 (fixes a 3-dim hyperplane, scales one line by e^{i pi/3}). M_0 = {1,-1,1,-1} semisimple.",
+  "audit": "CORRECTS the inherited-state narration 'resonance log at R': there is NO log at R for this operator. Consistent with EBR-II's own criterion (a -gamma log requires gamma in Z; here gamma=11/6 not in Z). Eigenvalues unchanged; the 'unipotent/pseudo-reflection-with-log' adjective is the only thing corrected.",
+  "scope_note": "Jordan-structure cross-check ONLY. The global imprimitivity/primitivity determination (invariant block systems for <M_0,M_R,Stokes,torus>) is op:cc-4, DEFERRED.",
+  "canonical_sha256": "03e4292669c861ddd3815d3179a876828a83e22702a517de43411a06fe625118"
+}

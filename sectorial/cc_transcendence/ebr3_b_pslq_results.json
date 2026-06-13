@@ -1,0 +1,239 @@
+{
+  "op": "ebr3-b",
+  "task_id": "op:ebr3-assemble/ebr3-b",
+  "objective": "169-digit integer-relation NULL battery on the EBR d=2 connection data; falsify 'C is an elementary Gamma-quotient / low-height constant / algebraic'.",
+  "precision_policy": {
+    "reliable_digits": 169,
+    "mp_dps": 169,
+    "tol": "1e-150",
+    "guard_digits": 19,
+    "note": "targets known to 169 digits (CC4-1-C-120D, self-validated); a TRUE relation has residual ~1e-168, a height-H spurious relation among k terms has residual ~H^-k; for every tier k*log10(maxcoeff) << 169 so no false positive is detectable."
+  },
+  "targets": {
+    "C_EBR": "3.05570680789048136570191220172768136887554277497383057467638",
+    "A": "2.87436850995728075034795582039806005699192841843121198072656",
+    "C_EBR_eq_A_over_Gamma_11_6_residual": "0.0"
+  },
+  "positive_controls": {
+    "gamma_reflection_1_3": {
+      "relation": [
+        -2,
+        -2,
+        2,
+        2,
+        -1
+      ],
+      "residual": "0.0",
+      "expected": "[2,2,-2,-2,1] (2logG(1/3)+2logG(2/3)-2logpi-2log2+log3=0)",
+      "detected": true
+    },
+    "algebraic_sqrt2": {
+      "relation": [
+        2,
+        0,
+        -1
+      ],
+      "residual": "0.0",
+      "expected": "[-2,0,1] (x^2-2=0)",
+      "detected": true
+    },
+    "linear_2pi_plus_3log2": {
+      "relation": [
+        1,
+        0,
+        -2,
+        -3,
+        0,
+        0
+      ],
+      "residual": "6.6243373e-170",
+      "expected": "[-1,0,2,3,0,0]",
+      "detected": true
+    },
+    "ALL_DETECTED": true
+  },
+  "tier_i_gamma_monomial": {
+    "C_EBR_indep4": {
+      "basis": [
+        "log(C_EBR)",
+        "logG(1/24)",
+        "logG(5/24)",
+        "logG(7/24)",
+        "logG(11/24)",
+        "log(pi)",
+        "log2",
+        "log3"
+      ],
+      "args_grid": "(1/24)Z, reflection-normalized",
+      "height_maxcoeff": 1000000000,
+      "dps": 169,
+      "relation": null,
+      "residual": null,
+      "verdict": "NULL (no relation at this height/dps)"
+    },
+    "C_EBR_full11": {
+      "basis": [
+        "log(C_EBR)",
+        "logG(1/24)",
+        "logG(5/24)",
+        "logG(7/24)",
+        "logG(11/24)",
+        "logG(1/12)",
+        "logG(5/12)",
+        "logG(1/8)",
+        "logG(3/8)",
+        "logG(1/6)",
+        "logG(1/4)",
+        "logG(1/3)",
+        "log(pi)",
+        "log2",
+        "log3"
+      ],
+      "args_grid": "(1/24)Z + multiplication extension",
+      "height_maxcoeff": 1000000000,
+      "dps": 169,
+      "relation": [
+        0,
+        2,
+        -2,
+        -2,
+        2,
+        -2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        4,
+        -2,
+        -1,
+        0
+      ],
+      "residual": "9.1084638e-170",
+      "verdict": "inter-Gamma identity (coeff 0 on target) -- does NOT involve the target"
+    },
+    "A_indep4": {
+      "basis": [
+        "log(A)",
+        "logG(1/24)",
+        "logG(5/24)",
+        "logG(7/24)",
+        "logG(11/24)",
+        "log(pi)",
+        "log2",
+        "log3"
+      ],
+      "args_grid": "(1/24)Z, reflection-normalized",
+      "height_maxcoeff": 1000000000,
+      "dps": 169,
+      "relation": null,
+      "residual": null,
+      "verdict": "NULL (no relation at this height/dps)"
+    },
+    "A_full11": {
+      "basis": [
+        "log(A)",
+        "logG(1/24)",
+        "logG(5/24)",
+        "logG(7/24)",
+        "logG(11/24)",
+        "logG(1/12)",
+        "logG(5/12)",
+        "logG(1/8)",
+        "logG(3/8)",
+        "logG(1/6)",
+        "logG(1/4)",
+        "logG(1/3)",
+        "log(pi)",
+        "log2",
+        "log3"
+      ],
+      "args_grid": "(1/24)Z + multiplication extension",
+      "height_maxcoeff": 1000000000,
+      "dps": 169,
+      "relation": [
+        0,
+        0,
+        0,
+        -2,
+        2,
+        -3,
+        -1,
+        2,
+        -2,
+        2,
+        2,
+        0,
+        0,
+        1,
+        0
+      ],
+      "residual": "4.1402108e-170",
+      "verdict": "inter-Gamma identity (coeff 0 on target) -- does NOT involve the target"
+    }
+  },
+  "tier_ii_constants": {
+    "C_EBR": {
+      "basis": [
+        "C_EBR",
+        "1",
+        "pi",
+        "log2",
+        "log3",
+        "gamma_E",
+        "Catalan",
+        "zeta3",
+        "zeta5"
+      ],
+      "degree": 1,
+      "height_maxcoeff": 1000000000000,
+      "dps": 169,
+      "relation": null,
+      "residual": null,
+      "verdict": "NULL"
+    },
+    "A": {
+      "basis": [
+        "A",
+        "1",
+        "pi",
+        "log2",
+        "log3",
+        "gamma_E",
+        "Catalan",
+        "zeta3",
+        "zeta5"
+      ],
+      "degree": 1,
+      "height_maxcoeff": 1000000000000,
+      "dps": 169,
+      "relation": null,
+      "residual": null,
+      "verdict": "NULL"
+    }
+  },
+  "tier_iii_algebraicity": {
+    "C_EBR": {
+      "search": "min-poly sum_k c_k kappa^k = 0",
+      "max_degree": 8,
+      "height_maxcoeff": 1000000,
+      "dps": 169,
+      "verdict": "NULL: not algebraic of degree <= 8, height <= 1000000",
+      "relation": null
+    },
+    "A": {
+      "search": "min-poly sum_k c_k kappa^k = 0",
+      "max_degree": 8,
+      "height_maxcoeff": 1000000,
+      "dps": 169,
+      "verdict": "NULL: not algebraic of degree <= 8, height <= 1000000",
+      "relation": null
+    }
+  },
+  "verdict": {
+    "status": "ALL-NULL",
+    "summary": "No integer relation involving C_EBR or A was found in any tier at the declared heights and dps=169; positive controls all fired. C_EBR and A are, to 169 digits, not elementary Gamma-quotients, not low-height combinations of {1,pi,log2,log3,gamma_E,Catalan,zeta3,zeta5}, and not algebraic of degree<=8/height<=1e6.",
+    "grade": "VERIFIED (high-precision null, positive-control-validated)"
+  },
+  "canonical_sha256_of_hashfree_object": "9a3f942def64737dd0bfc00495077f99ea7fe1ae5110982e343d8e12d5f7bcaf"
+}
