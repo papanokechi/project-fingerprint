@@ -1,0 +1,57 @@
+{
+  "op": "cc4-1",
+  "task_id": "op:cc-transcendence/cc4-1",
+  "quantity": "EBR connection data of L2: amplitude A = coeff of the dominant local solution (1-s/R)^{-gamma} in G at s=R; prefactor C_EBR = A/Gamma(gamma) in g_n ~ C_EBR R^-n n^{gamma-1}. (G-row, dominant-column of the 0->R connection matrix.)",
+  "definition": "EBR-II Def 2.2; gamma=11/6, R=4/3; A = C_EBR*Gamma(gamma).",
+  "dps_working": 210,
+  "amplitude_A": "2.87436850995728075034795582039806005699192841843121198072655670692642936813582139819881630479477765175202687695123356019080472755828375822207150700314215203570979653636376",
+  "prefactor_C_EBR": "3.055706807890481365701912201727681368875542774973830574676375050047173604353962458288292799650089998918200014506258804205163411515501549494446823017585278488893394706741693",
+  "channel_III_connection_matrix": {
+    "method": "full 4x4 local fundamental system at R {u_-11/6,u_0,u_1,u_2}; match continued G and 3 s-derivatives at interior s*; A=alpha.",
+    "A_s1.0": "2.8743685099572807503479558203980600569919284184312",
+    "A_s0.9": "2.8743685099572807503479558203980600569919284184312",
+    "relative_solve_residual_s1": "0.0",
+    "multi_point_agreement_digits": 169,
+    "multi_precision_agreement_digits": 169,
+    "self_validated_digits": 169,
+    "Nfrob": 360,
+    "NG": 1500
+  },
+  "channel_I_coefficient_asymptotics": {
+    "method": "C_EBR = lim g_n R^n n^{1-gamma}; Neville in 1/n, widely spaced n.",
+    "C_EBR": "3.05570680789048136570191220172768136887554277",
+    "base": 150,
+    "levels": 26,
+    "n_max": 3900,
+    "confirms_channel_III_digits": 77,
+    "note": "a clean pure-1/n extrapolation is possible only with NO n^{-11/6} (log) tower; agreement is an independent re-confirmation of M_R SEMISIMPLE (no log), cf cc2-2d."
+  },
+  "no_log_resonance_check": {
+    "resonance_residuals_(N,rest)": {
+      "0": [
+        [
+          1,
+          "0.0"
+        ],
+        [
+          2,
+          "0.0"
+        ]
+      ],
+      "1": [
+        [
+          1,
+          "0.0"
+        ]
+      ]
+    },
+    "all_residuals_below_1e-120": true,
+    "interpretation": "exact-arithmetic confirmation that the integer-exponent resonances {0->1,0->2,1->2} carry NO logarithm => M_R semisimple; retires EBR-II 'log at R' narration."
+  },
+  "achieved_stable_digits": 169,
+  "validation": "channel III self-validated by multi-point (s*=1.0 vs 0.9) + multi-precision (dps 170 vs 210); channel I (coefficient asymptotics) independently confirms the leading digits. mpmath mpf, NOT formal Arb intervals (stated honestly).",
+  "grade": "VERIFIED (high-precision numeric, dual-channel + self-consistency)",
+  "feeds": "op:cc-3 period rebuild (PSLQ against period/Gamma bases at >=120 digits).",
+  "discipline_line": "non-rigidity (P=d-1>0) does NOT imply C transcendental; a large G_Gal does NOT imply C transcendental. op:cc-2/4 targets the GROUP only; C's transcendence is op:cc-3's burden via periods.",
+  "canonical_sha256_of_hashfree_object": "f3400831cc9644641e44de7bcb69e4ec9c8fc69654ab46eb9768067ac2aa13fd"
+}

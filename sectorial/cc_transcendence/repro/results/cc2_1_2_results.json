@@ -1,0 +1,226 @@
+{
+  "op": "cc2-1+cc2-2",
+  "inherits": {
+    "cc-1": "bfb91bdeef251be00b770f486ec53d2304f4c1064f85d907a82951a49f5f227e",
+    "cc2-0": "dc54bbedd961649e3807406f4a0882022c8856d07460820cb2581a4282e3b5eb"
+  },
+  "cc2_1_determinant_twist": {
+    "minus_a3_over_a4": "(24 - 47*s)/(2*s*(3*s - 4))",
+    "minus_a3_over_a4_partial_fractions": "-29/(2*(3*s - 4)) - 3/s",
+    "logW": "-3*log(s) - 29*log(s - 4/3)/6",
+    "W_det": "s**(-3) * (s-4/3)**(-29/6)  [~ s^-3 (4-3s)^(-29/6)]",
+    "det_exponents": {
+      "at_0": "-3",
+      "at_R": "-29/6",
+      "at_oo": "47/6"
+    },
+    "wronskian_crosscheck_(sumExp-6-detExp==0)": {
+      "at_0": "0",
+      "at_R": "0"
+    },
+    "chi=det^{1/4}_exponents": {
+      "at_0": "-3/4",
+      "at_R": "-29/24",
+      "at_oo": "47/24"
+    },
+    "chi_nature": "ALGEBRAIC over C(s) (rational powers s^{-3/4}(4-3s)^{-29/24}); not rational, not properly Liouvillian",
+    "twisted_exponents_at_0": [
+      "3/4",
+      "5/4",
+      "7/4",
+      "9/4"
+    ],
+    "twisted_exponents_at_R": [
+      "29/24",
+      "53/24",
+      "77/24",
+      "-5/8"
+    ],
+    "twisted_sum_at_0": "6",
+    "twisted_sum_at_R": "6",
+    "twisted_note": "after twist by chi=det^{1/4} all regular-point exponent sums = 6 = n(n-1)/2 (SL4 normalization, Wronskian constant); exp parts at oo unchanged (algebraic twist), rational-exponent part shifts by -chi_oo",
+    "grade": "VERIFIED (exact symbolic)"
+  },
+  "cc2_2a_adjoint_selfduality": {
+    "adjoint_Lstar_coeffs": {
+      "0": "-s**2 - 60*s + 120",
+      "1": "6*s*(120 - 67*s)",
+      "2": "s**2*(732 - 468*s)",
+      "3": "s**3*(208 - 146*s)",
+      "4": "s**4*(16 - 12*s)"
+    },
+    "Lstar_leading_equals_L_leading": true,
+    "L_indicial_at_R_roots": [
+      "-11/6",
+      "0",
+      "1",
+      "2"
+    ],
+    "Lstar_indicial_at_R_roots": [
+      "0",
+      "1",
+      "2",
+      "23/6"
+    ],
+    "L_vs_Lstar_exponents_differ": true,
+    "R_monodromy_eigenvalues": [
+      "1",
+      "1",
+      "1",
+      "1/2 + sqrt(3)*I/2"
+    ],
+    "inversion_closed_up_to_scalar": false,
+    "verdict": "NEGATIVE: L2 is NOT self-dual up to a rank-1 twist (confirms P2)",
+    "hand_proof": "R-eigenvalue multiset {1,1,1,e^{-2pi i*11/6}} = {1,1,1,e^{i pi/3}}. Any V ~ V* (x) kappa forces multiset = kappa*{1,1,1,e^{-i pi/3}}; the value of multiplicity 3 fixes kappa=1, then e^{i pi/3} != e^{-i pi/3} (since e^{2i pi/3}!=1). => NOT inversion-closed up to any scalar => NO invariant nondegenerate bilinear form (symmetric or alternating), even up to a rank-1 twist.",
+    "grade": "STRUCTURAL (exact R-eigenvalue hand proof) + VERIFIED (adjoint symbolic)"
+  },
+  "cc2_2bc_invariant_forms": {
+    "exterior_square_dim_(order)": 6,
+    "exterior_order_note": "Lambda^2 of order-4 is 6-dimensional; order 6 (no symplectic drop) consistent with P2",
+    "infinity_determining_factor_sums_(units_of_c s^{1/4})": {
+      "(0,1)": "1 + I",
+      "(0,2)": "0",
+      "(0,3)": "1 - I",
+      "(1,2)": "-1 + I",
+      "(1,3)": "0",
+      "(2,3)": "-1 - I"
+    },
+    "slope0_pairs_(sum=0)": [
+      "(0,2)",
+      "(1,3)"
+    ],
+    "P1_confirmed_rank2_slope0_piece": true,
+    "P1_note": "pairs (0,2),(1,3) cancel -> rank-2 slope-0; other 4 pairs -> rank-4 slope-1/4 (one Z/4 orbit)",
+    "exterior_rational_form_search_box1": {
+      "kind": "antisym",
+      "ansatz": "N/(s^4(4-3s)^4), degN<=10",
+      "num_unknowns": 66,
+      "num_equations": 143,
+      "nullspace_dim": 0,
+      "nontrivial_rational_form": false
+    },
+    "exterior_rational_form_search_box2": {
+      "kind": "antisym",
+      "ansatz": "N/(s^3(4-3s)^3), degN<=8",
+      "num_unknowns": 54,
+      "num_equations": 119,
+      "nullspace_dim": 0,
+      "nontrivial_rational_form": false
+    },
+    "symmetric_rational_form_search_box1": {
+      "kind": "sym",
+      "ansatz": "N/(s^4(4-3s)^4), degN<=10",
+      "num_unknowns": 110,
+      "num_equations": 239,
+      "nullspace_dim": 0,
+      "nontrivial_rational_form": false
+    },
+    "symmetric_rational_form_search_box2": {
+      "kind": "sym",
+      "ansatz": "N/(s^3(4-3s)^3), degN<=8",
+      "num_unknowns": 90,
+      "num_equations": 199,
+      "nullspace_dim": 0,
+      "nontrivial_rational_form": false
+    },
+    "Sp4_verdict": "G NOT in Sp4: no invariant alternating form (Lambda^2 rational search NULL in both boxes; closed unconditionally by the R-eigenvalue inversion-closure hand proof)",
+    "SO4_verdict": "G NOT in SO4: no invariant symmetric form (Sym^2 rational search NULL in both boxes; closed by the same hand proof)",
+    "grade": "VERIFIED (bounded rational search) + STRUCTURAL (eigenvalue closure; vdP-Singer ch.4)"
+  },
+  "cc2_2d_imprimitive_tensor": {
+    "indicial_at_R_factored": "-512*r*(r - 2)*(r - 1)*(6*r + 11)/81",
+    "obstruction_exp0->1_(Ptil1(0))": "0",
+    "obstruction_exp1->2_(Ptil1(1))": "0",
+    "obstruction_exp0->2_(Ptil2(0))": "0",
+    "log_free_solution_count_eig1": 3,
+    "max_jordan_block_eig1": 1,
+    "M_R_semisimple": true,
+    "jordan_structure_eig1": "SEMISIMPLE: 3 independent log-free Frobenius solutions on the eigenvalue-1 space (geometric mult = algebraic mult = 3); NO logarithm",
+    "M_R_type": "semisimple complex pseudo-reflection of order 6: eigenvalues {1,1,1,e^{i pi/3}}, fixes a 3-dim hyperplane, scales one line by e^{i pi/3}",
+    "M_0_obstruction_0->1": "0",
+    "M_0_obstruction_half->3half": "0",
+    "M_0_semisimple": true,
+    "M_0_type": "semisimple: eigenvalues {1,-1,1,-1}, no logarithm (both resonance obstructions vanish)",
+    "numerical_crosscheck": {
+      "script": "cc2_2d_numerical_monodromy.py",
+      "output_hash": "03e4292669c861ddd3815d3179a876828a83e22702a517de43411a06fe625118",
+      "dps": 40,
+      "M_R": "eig {1,1,1,e^{i pi/3}}; rank(M_R-I)=1 -> geom mult eig1 = 3 = alg mult -> SEMISIMPLE",
+      "M_0": "eig {1,-1,1,-1}; rank(M_0-I)=2, rank(M_0+I)=2 -> all geom=alg -> SEMISIMPLE",
+      "agrees_with_symbolic": true
+    },
+    "AUDIT_inherited_state": "REFUTES the inherited-state narration 'resonance log / unipotent part at R'. M_R is SEMISIMPLE (two independent channels). Consistent with EBR-II's OWN criterion: a -gamma resonance log requires gamma in Z; here gamma = 11/6 not in Z, so NO log is expected. The R-eigenvalues {1,1,1,e^{i pi/3}} are unchanged; only the 'unipotent' adjective is corrected to 'semisimple pseudo-reflection'. cc-1's load-bearing claims (irreducibility, exponents, irregular-oo) are UNAFFECTED. Recommend a one-line cc-1 narration erratum.",
+    "Sym3_SL2_excluded": true,
+    "Sym3_SL2_reason": "(i) Sym^3 of a rank-2 W is self-dual up to twist (Sym^3 W ~ Sym^3 W* (x) (det W)^3), contradicting cc2-2a (not self-dual up to any rank-1 twist); (ii) SLOPE: a rank-2 module has ramification <=2, cannot carry slope 1/4 (needs ramification 4); Sym^3 of slope-phi rank-2 gives factors {3phi,phi,-phi,-3phi} with TWO magnitudes, not L2's single equal-magnitude transitive Z/4 orbit {c i^k}.",
+    "SL2_tensor_SL2_excluded": true,
+    "SL2_tensor_SL2_reason": "(i) V1 (x) V2 with rank-2 factors is self-dual up to twist (each rank-2 is, via V_i ~ V_i* (x) det V_i), contradicting cc2-2a; (ii) SLOPE: rank-2 factors have ramification <=2, cannot produce slope 1/4. This is the Aschbacher TENSOR class C4, distinct from the imprimitive class C2 below.",
+    "exponential_torus_dim": 2,
+    "exponential_torus_weights": "{+e1,-e1,+e2,-e2} (the 4 determining factors c*{1,i,-1,-i}; Z-module rank 2)",
+    "monomial_4line_excluded_locally": false,
+    "imprimitive_2block_excluded_locally": false,
+    "imprimitive_status": "OPEN -- NOT excludable from local data. The connected exponential torus T (dim 2) lies in G^0 and fixes each block (blocks must be spans of weight-lines). The formal monodromy at oo is a single 4-cycle on the 4 weight-lines; it preserves the 2-block system {{L1,L3},{L2,L4}} (swapping the two blocks). The SEMISIMPLE pseudo-reflection M_R = diag(1,1,1,e^{i pi/3}) in the weight basis preserves that same 2-block system (and the 4-line system). M_0 is also semisimple. Hence local data at {0,R,oo} are fully COMPATIBLE with an imprimitive 2-block (and a fortiori monomial) structure. Excluding it requires the GLOBAL monodromy relation M_0 M_R M_oo = I together with the connection/Stokes data at oo -- i.e. op:cc-4 (DEFERRED per the stage rules).",
+    "imprimitive_meaning": "The imprimitive C2 case (V = W1 (+) W2, blocks swapped) has G^0 block-diagonal (<= GL2 x GL2), and the monomial case has G^0 a torus -- both give a solvable or non-simple G^0, equivalently L2 WOULD have Liouvillian solutions. So the residual dichotomy is exactly: primitive (G^0 = SL4, NO Liouvillian solutions) vs imprimitive (G^0 reducible/torus, Liouvillian solutions exist). cc2-4 is the decider.",
+    "grade": "STRUCTURAL (Frobenius obstruction exact + numerical cross-check + slope/self-dual hand proofs); imprimitive exclusion DEFERRED to cc2-4"
+  },
+  "cc2_2e_elimination_table": {
+    "finite": {
+      "killed_by": "oo irregular: G^0 contains the 2-dim exponential torus (infinite, connected) [cc2-3 input/cc-1]",
+      "grade": "STRUCTURAL",
+      "status": "killed"
+    },
+    "reducible": {
+      "killed_by": "cc-1 irreducibility (transitive Z/4 slope orbit) + cc2-0 order-<4 factor exclusion",
+      "grade": "STRUCTURAL",
+      "status": "killed"
+    },
+    "Sp4 (C8 alt form)": {
+      "killed_by": "cc2-2b: no invariant alternating form (Lambda^2 rational search NULL; R-eigenvalues not inversion-closed up to twist)",
+      "grade": "STRUCTURAL",
+      "status": "killed"
+    },
+    "SO4 (C8 sym form)": {
+      "killed_by": "cc2-2c: no invariant symmetric form (Sym^2 rational search NULL; same eigenvalue closure)",
+      "grade": "STRUCTURAL",
+      "status": "killed"
+    },
+    "Sym^3 SL2 (class S)": {
+      "killed_by": "cc2-2d: self-dual up to twist (contra cc2-2a) + slope (rank-2 ramif <=2 != 4)",
+      "grade": "STRUCTURAL",
+      "status": "killed"
+    },
+    "SL2 (x) SL2 (C4 tensor)": {
+      "killed_by": "cc2-2d: self-dual up to twist (contra cc2-2a) + slope (rank-2 ramif <=2 != 4)",
+      "grade": "STRUCTURAL",
+      "status": "killed"
+    },
+    "monomial (C2, 4 lines)": {
+      "killed_by": "NOT excluded locally: M_0,M_R semisimple; torus+pseudo-reflection compatible with 4-line system",
+      "grade": "--",
+      "status": "OPEN -> cc2-4"
+    },
+    "imprimitive (C2, 2+2)": {
+      "killed_by": "NOT excluded locally: local data compatible with block system {{L1,L3},{L2,L4}} (gamma_oo swaps blocks; M_R preserves them)",
+      "grade": "--",
+      "status": "OPEN -> cc2-4"
+    },
+    "SL4 (C1 primitive)": {
+      "killed_by": "-- survivor IFF imprimitive/monomial excluded (cc2-4) --",
+      "grade": "STRUCTURAL-CONDITIONAL",
+      "status": "candidate (pending cc2-4 primitivity)"
+    }
+  },
+  "P1_local_self_duality_at_infinity": {
+    "status": "CONFIRMED",
+    "evidence": "determining factors c*{1,i,-1,-i} closed under negation; Lambda^2 has rank-2 slope-0 piece at oo (pairs (0,2),(1,3) cancel); exp-torus weights {+e1,-e1,+e2,-e2}"
+  },
+  "P2_global_non_self_duality": {
+    "computational_predictions": "ALL CONFIRMED (R-eigenvalues {1,1,1,e^{i pi/3}}=={mu,mu,mu,mu e^{i pi/3}} with mu=1; Lambda^2 and Sym^2 rational searches NULL; adjoint NEGATIVE)",
+    "conclusion_status": "REFINED, not refuted. P2's stated leap 'non-self-dual => survivor SL4' is INCOMPLETE: non-self-duality kills Sp4/SO4/tensor/Sym^3 but NOT the imprimitive C2 class (monomial / 2-block), which need not be self-dual. So the honest survivor set is {SL4, imprimitive-C2}, and cc2-4 decides between them. No early-HALT: P2's computational legs all passed."
+  },
+  "P1_P2_consistency": "P1 (local self-duality at oo) and P2 (global non-self-duality) are CONSISTENT: the negation-closed weight pairing at oo does NOT globalize to a G-invariant form because M_R's e^{i pi/3} eigenvalue (unpaired with e^{-i pi/3}) breaks inversion-closure.",
+  "AUDIT_correction": "REFUTES the inherited-state narration 'resonance log / unipotent part at R'. M_R is SEMISIMPLE (two independent channels). Consistent with EBR-II's OWN criterion: a -gamma resonance log requires gamma in Z; here gamma = 11/6 not in Z, so NO log is expected. The R-eigenvalues {1,1,1,e^{i pi/3}} are unchanged; only the 'unipotent' adjective is corrected to 'semisimple pseudo-reflection'. cc-1's load-bearing claims (irreducibility, exponents, irregular-oo) are UNAFFECTED. Recommend a one-line cc-1 narration erratum.",
+  "G_Gal_verdict": "CONDITIONAL: 6 of 8 proper candidates are killed (finite, reducible, Sp4, SO4, Sym^3SL2, SL2(x)SL2). The residual dichotomy is PRIMITIVE (G_Gal(L2)^0 = SL4, no Liouvillian solutions) vs IMPRIMITIVE (C2: monomial torus or 2-block <= GL2xGL2, Liouvillian solutions exist). This is NOT decidable from the local data at {0,R,oo} (all of M_0, M_R semisimple; 2-dim exp torus and the oo 4-cycle + the R pseudo-reflection are all compatible with the block system {{L1,L3},{L2,L4}}). It is decided by op:cc-4 (global monodromy M_0 M_R M_oo = I + connection at oo). G_Gal(L2)^0 = SL4 is therefore STRUCTURAL-CONDITIONAL on the cc2-4 primitivity check.",
+  "G_Gal_grade": "STRUCTURAL-CONDITIONAL (conditional on cc2-4 primitivity; not Lean-checked)",
+  "discipline_line": "non-rigidity (P=d-1>0) does NOT imply C transcendental; a large G_Gal does NOT imply C transcendental. op:cc-2 targets the GROUP only; C's transcendence is op:cc-3's burden via periods. Even a confirmed G_Gal^0=SL4 (non-solvable) would license only 'no Liouvillian solutions' (cc2-5), NOT transcendence of C, which remains CONJECTURED.",
+  "canonical_sha256_of_hashfree_object": "7d102ddcf95f89a2939223741770cb01c73e747862239a9c36eb3526e203877c"
+}

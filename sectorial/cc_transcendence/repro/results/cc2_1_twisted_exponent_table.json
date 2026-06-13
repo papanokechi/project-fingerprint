@@ -1,0 +1,50 @@
+{
+  "artifact": "cc2-1 twisted-exponent table",
+  "operator": "L2 (cc-1 sha bfb91bd...)",
+  "determinant_W": "s**(-3) * (s-4/3)**(-29/6)  [~ s^-3 (4-3s)^(-29/6)]",
+  "det_exponents": {
+    "at_0": "-3",
+    "at_R": "-29/6",
+    "at_oo": "47/6"
+  },
+  "chi=det^{1/4}_exponents": {
+    "at_0": "-3/4",
+    "at_R": "-29/24",
+    "at_oo": "47/24"
+  },
+  "chi_nature": "ALGEBRAIC over C(s) (rational powers s^{-3/4}(4-3s)^{-29/24}); not rational, not properly Liouvillian",
+  "original_exponents": {
+    "at_0": [
+      "0",
+      "1/2",
+      "1",
+      "3/2"
+    ],
+    "at_R": [
+      "0",
+      "1",
+      "2",
+      "-11/6"
+    ]
+  },
+  "twisted_exponents": {
+    "at_0": [
+      "3/4",
+      "5/4",
+      "7/4",
+      "9/4"
+    ],
+    "at_R": [
+      "29/24",
+      "53/24",
+      "77/24",
+      "-5/8"
+    ]
+  },
+  "twisted_sums_(=6=SL4_norm)": {
+    "at_0": "6",
+    "at_R": "6"
+  },
+  "note": "after twist by chi=det^{1/4} all regular-point exponent sums = 6 = n(n-1)/2 (SL4 normalization, Wronskian constant); exp parts at oo unchanged (algebraic twist), rational-exponent part shifts by -chi_oo",
+  "sha256": "7891572431673b7393f3c2885df9f2604414bf92e417376ef3e00d4c857f31c9"
+}

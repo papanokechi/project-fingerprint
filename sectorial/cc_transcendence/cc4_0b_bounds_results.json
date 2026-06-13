@@ -1,0 +1,235 @@
+{
+  "op": "cc4-0b",
+  "task_id": "op:cc-transcendence/cc4-0b",
+  "inherits": {
+    "cc4_0_sha": "a378b781809b4e26caf353cbd4196f7669c557ee1c3a7ef03adaf5ed4ed9fe64"
+  },
+  "objective": "Derive a priori numerator-degree / pole bounds B for the two cc4-0 rational-solution searches; confirm the bound-complete box was run (B<=20) so the SL4 verdict is rigorous.",
+  "method": "M0,M_R semisimple (no logs) => single-valuedness kills non-integer exponent branches => pole_p <= -min{integer End(x)eta exps}; oo growth <= -min achievable integer u-exponent. Exact symbolic.",
+  "route2": {
+    "label": "Route 2: End(M)(x)sqrt(s) over C(s)",
+    "finite_pole_bounds": {
+      "s=0": 1,
+      "s=R=4/3": 2
+    },
+    "finite_detail": {
+      "s=0": {
+        "End_exps_with_shift": [
+          "-1",
+          "-1/2",
+          "0",
+          "1/2",
+          "1",
+          "3/2",
+          "2"
+        ],
+        "integer_exps": [
+          -1,
+          0,
+          1,
+          2
+        ],
+        "pole_bound": 1
+      },
+      "s=R=4/3": {
+        "End_exps_with_shift": [
+          "-23/6",
+          "-17/6",
+          "-2",
+          "-11/6",
+          "-1",
+          "0",
+          "1",
+          "11/6",
+          "2",
+          "17/6",
+          "23/6"
+        ],
+        "integer_exps": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "pole_bound": 2
+      }
+    },
+    "oo_slope0_exps_with_shift": [
+      "-1/2",
+      "-1/4",
+      "0",
+      "1/4"
+    ],
+    "oo_degree_growth_g": 0,
+    "oo_e_min": 0,
+    "oo_note": "min achievable integer u-exponent e_min=0, growth g=0",
+    "deg_denominator_bound": 3,
+    "numerator_degree_bound_B": 3,
+    "denominator": "s^{p0}(4-3s)^{pR}",
+    "boxes_run_in_cc4_0": [
+      {
+        "denom": "s^1(4-3s)^2",
+        "pole_orders": [
+          1,
+          2
+        ],
+        "deg_max": 8,
+        "hom_dim": 0,
+        "note": "twist box (1,2,8)"
+      },
+      {
+        "denom": "s^2(4-3s)^3",
+        "pole_orders": [
+          2,
+          3
+        ],
+        "deg_max": 12,
+        "hom_dim": 0,
+        "note": "twist box (2,3,12)"
+      }
+    ]
+  },
+  "route1": {
+    "label": "Route 1: End(M~) eigenring over C(t)",
+    "finite_pole_bounds": {
+      "t=0": 3,
+      "t=+t_R": 2,
+      "t=-t_R": 2
+    },
+    "finite_detail": {
+      "t=0": {
+        "End_exps_with_shift": [
+          "-3",
+          "-2",
+          "-1",
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "integer_exps": [
+          -3,
+          -2,
+          -1,
+          0,
+          1,
+          2,
+          3
+        ],
+        "pole_bound": 3
+      },
+      "t=+t_R": {
+        "End_exps_with_shift": [
+          "-23/6",
+          "-17/6",
+          "-2",
+          "-11/6",
+          "-1",
+          "0",
+          "1",
+          "11/6",
+          "2",
+          "17/6",
+          "23/6"
+        ],
+        "integer_exps": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "pole_bound": 2
+      },
+      "t=-t_R": {
+        "End_exps_with_shift": [
+          "-23/6",
+          "-17/6",
+          "-2",
+          "-11/6",
+          "-1",
+          "0",
+          "1",
+          "11/6",
+          "2",
+          "17/6",
+          "23/6"
+        ],
+        "integer_exps": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ],
+        "pole_bound": 2
+      }
+    },
+    "oo_slope0_exps_with_shift": [
+      "0",
+      "0",
+      "1/2",
+      "1/2"
+    ],
+    "oo_degree_growth_g": 0,
+    "oo_e_min": 0,
+    "oo_note": "min achievable integer u-exponent e_min=0, growth g=0",
+    "deg_denominator_bound": 7,
+    "numerator_degree_bound_B": 7,
+    "denominator": "t^{p0}(3t^2-4)^{pR}  (the two factors of 3t^2-4 are +-t_R)",
+    "boxes_run_in_cc4_0": [
+      {
+        "denom": "t^2(3t^2-4)^1",
+        "pole_orders": [
+          2,
+          1,
+          1
+        ],
+        "deg_max": 6,
+        "eigenring_dim": 1,
+        "note": "UNDER-bounded box (2,1,6): denom too small, not bound-complete on its own"
+      },
+      {
+        "denom": "t^3(3t^2-4)^2",
+        "pole_orders": [
+          3,
+          2,
+          2
+        ],
+        "deg_max": 10,
+        "eigenring_dim": 1,
+        "note": "bound-complete box (3,2,10)"
+      }
+    ]
+  },
+  "bound_completeness": {
+    "route2_B": 3,
+    "route2_pole_bounds": [
+      1,
+      2
+    ],
+    "route2_boundcomplete_box": "s^1(4-3s)^2 deg<= 8",
+    "route2_box_covers_bound": true,
+    "route2_hom_dim_in_box": 0,
+    "route1_B": 7,
+    "route1_pole_bounds": [
+      3,
+      2,
+      2
+    ],
+    "route1_boundcomplete_box": "t^3(3t^2-4)^2 deg<= 10",
+    "route1_box_covers_bound": true,
+    "route1_eigenring_dim_in_box": 1,
+    "all_bounds_le_20": true
+  },
+  "verdict": {
+    "B_route2": 3,
+    "B_route1": 7,
+    "rerun_needed": false,
+    "statement": "Route 2 numerator-degree bound B2=3 (poles <=1 at 0, <=2 at R, no growth at oo); Route 1 bound B1=7 (poles <=3 at t=0, <=2 at +-t_R, no growth). Both <= 20. The bound-complete boxes [s(4-3s)^2 deg<=8] (Hom dim 0) and [t^3(3t^2-4)^2 deg<=10] (eigenring dim 1) STRICTLY contain B2,B1 and match the pole bounds, so the cc4-0 PRIMITIVE verdict is bound-complete (rigorous). CC4-0-ROUTE2-PRIMITIVE / ROUTE1-PRIMITIVE upgrade to bound-complete; G_Gal(L2)^0 = SL4 is citable as UNCONDITIONAL STRUCTURAL.",
+    "grade": "STRUCTURAL (exact integer-exponent extraction + single-valuedness degree bound; van Hoeij/Barkatou + van der Put-Singer ch.4)"
+  },
+  "hand_proof": "Let f be a rational horizontal section of N (= End(M)(x)eta, Route 2; = End(M~), Route 1). N is regular-singular at the finite points with End-exponents equal to the pairwise differences of the M-exponents there (residue of End = ad of residue of M), shifted by eta's exponent. Since M0 and M_R are SEMISIMPLE there are no logarithmic terms, so near a finite singular point p, f = sum_i c_i (s-p)^{rho_i} h_i(s-p) with h_i holomorphic units and rho_i the End-exponents. f single-valued (rational) forces c_i=0 whenever rho_i not in Z. Hence the pole order of f at p is at most -min{ rho_i in Z }. At oo, f rational has slope 0, so its leading u=1/s exponent e lies in the slope-0 spectrum of N; the slope-0 part of End(M) is the rank-(deg) cyclic piece of the ramified formal monodromy with exponents {0,1/r,...,(r-1)/r} (r=4 Route 2, r=2 Route 1), shifted by eta. e must be an integer (f rational) and >= the minimal exponent, giving the growth bound. The numerator degree is then bounded by deg(denominator) - e_min. Computed: B2=3, B1=7.",
+  "canonical_sha256_of_hashfree_object": "b37fb6ead7064b7454670ca3431903a1993f277ad0878e3badf78916b3ce1509"
+}

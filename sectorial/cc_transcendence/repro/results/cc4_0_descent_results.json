@@ -1,0 +1,206 @@
+{
+  "op": "cc4-0",
+  "inherits": {
+    "cc1_sha": "bfb91bdeef251be00b770f486ec53d2304f4c1064f85d907a82951a49f5f227e",
+    "cc2_12_sha": "7d102ddcf95f89a2939223741770cb01c73e747862239a9c36eb3526e203877c"
+  },
+  "objective": "Decide primitive (G_Gal^0=SL4, no Liouvillian) vs imprimitive (C2, induced from a quadratic cover) for L2.",
+  "A1_eta_uniqueness": {
+    "M0_eigs": [
+      "1",
+      "-1",
+      "1",
+      "-1"
+    ],
+    "MR_eigs": [
+      "1",
+      "1",
+      "1",
+      "1/2 + sqrt(3)*I/2"
+    ],
+    "M0_negation_closed": true,
+    "MR_negation_closed": false,
+    "oo_units_negation_closed": true,
+    "candidates": [
+      {
+        "e0": 0,
+        "eR": 0,
+        "ramified_at": [],
+        "even_branch_count": true,
+        "unramified_at_R": true,
+        "viable_nontrivial": false,
+        "character": "trivial"
+      },
+      {
+        "e0": 0,
+        "eR": 1,
+        "ramified_at": [
+          "R",
+          "oo"
+        ],
+        "even_branch_count": true,
+        "unramified_at_R": false,
+        "viable_nontrivial": false,
+        "character": "sqrt(s-4/3)"
+      },
+      {
+        "e0": 1,
+        "eR": 0,
+        "ramified_at": [
+          "0",
+          "oo"
+        ],
+        "even_branch_count": true,
+        "unramified_at_R": true,
+        "viable_nontrivial": true,
+        "character": "sqrt(s)"
+      },
+      {
+        "e0": 1,
+        "eR": 1,
+        "ramified_at": [
+          "0",
+          "R"
+        ],
+        "even_branch_count": true,
+        "unramified_at_R": false,
+        "viable_nontrivial": false,
+        "character": "sqrt(s(s-4/3))"
+      }
+    ],
+    "viable_nontrivial_characters": [
+      "sqrt(s)"
+    ],
+    "unique_candidate": true,
+    "verdict": "eta = sqrt(s) is the UNIQUE nontrivial quadratic character compatible with the local data (ramified {0,oo}, unramified at R). Imprimitivity <=> M ~= M(x)sqrt(s).",
+    "hand_proof": "A quadratic character can ramify only at singular points {0,R,oo} and at an EVEN number of them. At R the monodromy multiset {1,1,1,e^{i pi/3}} is NOT closed under negation (no -1 present), so M(x)eta has different R-monodromy unless eta is UNRAMIFIED at R. Hence ramification subset of {0,oo}; evenness forces {0,oo} (=> eta=sqrt(s)) or {} (trivial). At 0 the multiset {1,-1,1,-1} and at oo the unit set {1,i,-1,-i} ARE negation-closed, so sqrt(s) clears the necessary local tests; sufficiency is decided by the global intertwiner below.",
+    "grade": "STRUCTURAL (finite eigenvalue/parity bookkeeping; exact)"
+  },
+  "A1b_monomial_closure": {
+    "oo_formal_monodromy_permutation": "(q0 q1 q2 q3) 4-cycle on the 4 determining factors",
+    "permutation_is_odd": true,
+    "transitive_subgroups_of_S4": {
+      "C4": {
+        "contains_4cycle": true,
+        "has_index2_subgroup": true
+      },
+      "V4": {
+        "contains_4cycle": false,
+        "has_index2_subgroup": true
+      },
+      "D4": {
+        "contains_4cycle": true,
+        "has_index2_subgroup": true
+      },
+      "A4": {
+        "contains_4cycle": false,
+        "has_index2_subgroup": false
+      },
+      "S4": {
+        "contains_4cycle": true,
+        "has_index2_subgroup": true
+      }
+    },
+    "permutation_types_containing_a_4cycle": [
+      "C4",
+      "D4",
+      "S4"
+    ],
+    "A4_and_V4_excluded_by_4cycle": true,
+    "every_allowed_type_has_quadratic_character": true,
+    "verdict": "Any IMPRIMITIVE/INDUCED structure makes G_Gal permute the 4 determining factors; the oo formal monodromy is the 4-cycle (q0 q1 q2 q3), an ODD permutation. A transitive subgroup of S4 containing a 4-cycle lies in {C4,D4,S4} (NOT A4, NOT V4), each of which has an index-2 subgroup, hence a quadratic character eta. By A1 that eta is sqrt(s). Route 2 refutes M ~= M(x)sqrt(s). Therefore BOTH the 2-block AND the 4-line (monomial) imprimitive classes -- and the degree-2/4 C3 field-extension classes, which reduce to the same cover -- are EXCLUDED. Primitivity is UNCONDITIONAL.",
+    "grade": "STRUCTURAL (permutation-group + formal-monodromy hand argument; exact)"
+  },
+  "route2_eta_twist": {
+    "description": "Route 2: M -> M(x)sqrt(s) intertwiner over C(s); Phi' = [A,Phi] + (1/(2s)) Phi.",
+    "calibration_End_M_dim": [
+      1,
+      1
+    ],
+    "calibration_detail": [
+      {
+        "label": "End(M) calib s^1(4-3s)^1 d6",
+        "ansatz": "N/(s*(4 - 3*s)), degN<=6",
+        "num_unknowns": 112,
+        "num_equations": 223,
+        "nullspace_dim": 1
+      },
+      {
+        "label": "End(M) calib s^2(4-3s)^2 d8",
+        "ansatz": "N/(s**2*(4 - 3*s)**2), degN<=8",
+        "num_unknowns": 144,
+        "num_equations": 287,
+        "nullspace_dim": 1
+      }
+    ],
+    "twist_Hom_dim": [
+      0,
+      0
+    ],
+    "twist_detail": [
+      {
+        "label": "Hom(M,M(x)sqrt s) s^1(4-3s)^2 d8",
+        "ansatz": "N/(s*(4 - 3*s)**2), degN<=8",
+        "num_unknowns": 144,
+        "num_equations": 271,
+        "nullspace_dim": 0
+      },
+      {
+        "label": "Hom(M,M(x)sqrt s) s^2(4-3s)^3 d12",
+        "ansatz": "N/(s**2*(4 - 3*s)**3), degN<=12",
+        "num_unknowns": 208,
+        "num_equations": 367,
+        "nullspace_dim": 0
+      }
+    ],
+    "End_M_is_scalars": true,
+    "intertwiner_exists": false,
+    "verdict": "PRIMITIVE (no sqrt(s)-intertwiner)",
+    "bounds_note": "pole order <=1 at 0, <=2 at R from End(M)(x)eta integer exponents; two boxes confirm stability of the null."
+  },
+  "route1_pullback": {
+    "description": "Route 1: pullback s=t^2; A~(t)=2t*A(t^2); eigenring dim of M~ over C(t).",
+    "A2_local_data": {
+      "exp_at_t0_pred_{0,1,2,3}": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "exp_at_t0_matches": true,
+      "t_R_squared": "4/3",
+      "deck_map": "sigma: t -> -t; swaps +-t_R, fixes t=0 and t=oo",
+      "oo_slope_on_cover": "1/2 (s^{1/4}=t^{1/2}); determining units c*{1,i,-1,-i} t^{1/2}",
+      "oo_split_if_imprimitive": "{+-c t^{1/2}} (+) {+-c i t^{1/2}} (deck-swapped)"
+    },
+    "eigenring_dim": [
+      1,
+      1
+    ],
+    "eigenring_detail": [
+      {
+        "label": "eigenring t^2(3t^2-4)^1 d6",
+        "ansatz": "N/(t**2*(3*t**2 - 4)), degN<=6",
+        "num_unknowns": 112,
+        "num_equations": 350,
+        "nullspace_dim": 1
+      },
+      {
+        "label": "eigenring t^3(3t^2-4)^2 d10",
+        "ansatz": "N/(t**3*(3*t**2 - 4)**2), degN<=10",
+        "num_unknowns": 176,
+        "num_equations": 462,
+        "nullspace_dim": 1
+      }
+    ],
+    "pullback_irreducible": true,
+    "verdict": "PRIMITIVE (eigenring = scalars, M~ irreducible)",
+    "bounds_note": "End(M~) integer exponents: pole <=3 at t=0 (exps {0,1,2,3}), <=2 at +-t_R; identity I is always a solution so dim>=1; dim==1 (scalars only) <=> irreducible cover."
+  },
+  "routes_agree": true,
+  "both_say_primitive": true,
+  "verdict": "PRIMITIVE. No sqrt(s)-intertwiner (Route 2 Hom dim 0) AND pullback eigenring = scalars (Route 1 dim 1). With A1 (eta=sqrt(s) the unique candidate) the 2-block imprimitive class is excluded; with A1b (oo 4-cycle is odd => any induced permutation type is in {C4,D4,S4}, all with a quadratic character => caught by the sqrt(s) test) the 4-line monomial and C3 field-extension classes are ALSO excluded. Combined with cc2-1/2 (reducible, Sp4, SO4, Sym^3SL2, SL2(x)SL2 all dead) the differential Galois group satisfies G_Gal(L2)^0 = SL4  (UNCONDITIONAL at grade STRUCTURAL).",
+  "grade": "STRUCTURAL (two independent symbolic routes agree + A1/A1b; van der Put-Singer)",
+  "discipline_line": "non-rigidity (P=d-1>0) does NOT imply C transcendental; a large G_Gal does NOT imply C transcendental. op:cc-2/4 targets the GROUP only; C's transcendence is op:cc-3's burden via periods.",
+  "canonical_sha256_of_hashfree_object": "a378b781809b4e26caf353cbd4196f7669c557ee1c3a7ef03adaf5ed4ed9fe64"
+}
