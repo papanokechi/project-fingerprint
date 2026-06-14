@@ -1,0 +1,193 @@
+{
+  "op": "cc3-1c-4-pcurvature",
+  "task_id": "op:cc-transcendence/cc3-1c",
+  "operator_L": "z^4(1-3z) D^4 + (4z^3-25z^4) D^3 + (2z^2-47z^3) D^2 - 15 z^2 D - z^2",
+  "engine": "same as cc2_0_arithmetic_gate.py Leg C (F_p(z)-linear d^p; nilpotent <=> M^4=0 at generic z0)",
+  "primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29
+  ],
+  "per_prime": {
+    "5": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 4,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    },
+    "7": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 2,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    },
+    "11": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 2,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    },
+    "13": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 2,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    },
+    "17": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 2,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    },
+    "19": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 2,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    },
+    "23": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 2,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    },
+    "29": {
+      "computed": true,
+      "specializations": [
+        {
+          "z0": 1,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 2,
+          "nonzero": true,
+          "nilpotent": false
+        },
+        {
+          "z0": 3,
+          "nonzero": true,
+          "nilpotent": false
+        }
+      ],
+      "nilpotent": false
+    }
+  },
+  "any_prime_non_nilpotent": true,
+  "all_primes_non_nilpotent": true,
+  "globally_nilpotent_excluded": true,
+  "verdict": "p-curvature NON-nilpotent at EVERY tested prime => NOT globally nilpotent => (Chudnovsky-Andre/Katz) CONSISTENT with irregular infinity. Corroboration PASS.",
+  "role": "DEMOTED to corroboration: non-nilpotence already follows from irregular infinity by citation (Katz); this is an independent arithmetic consistency check.",
+  "ceiling": "A Fuchsian relocation does not make K a classical period; provenance, not singularity type, is what the period conjectures see. Unconditional transcendence of C is NOT a deliverable of op:cc-3 at any grade.",
+  "canonical_sha256_of_hashfree_object": "0a3ff3f45fd528b597fbcee19c1658ed05886fbbe44ad03a74e274a2b30663d5"
+}

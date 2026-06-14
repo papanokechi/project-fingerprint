@@ -1,0 +1,99 @@
+{
+  "op": "ebr4-0-hypothesis-independence-audit",
+  "task_id": "op:ebr4-assemble/ebr4-0",
+  "claim_id": "EBR4-0-HYP",
+  "grade": "VERIFIED (logical audit; no mathematical grade upgraded)",
+  "Q1_H2_perp_H3_verdict": "(iii)",
+  "Q1_text": "H2 (dim G_mot(M) >= 3) is dependent on a SEPARATE comparison step -- the differential-to-motivic dimension comparison dim G_mot >= dim G_Gal -- NOT on the period conjecture H3, and NOT (fully) independently established. It factors as [VERIFIED: G_Gal(H2)=SL2, dim 3, exact Kovacic e71e915f] + [comparison: dim G_mot >= dim G_Gal; theorem-grade in the classical motivic setting (Andre), here CONTINGENT on G4-realisation and the irregular/exponential form of the comparison].  Since the comparison is neither H3 nor automatic, the honest verdict is (iii).",
+  "differential_to_motivic_comparison": {
+    "name": "differential-Galois -> motivic-Galois dimension comparison",
+    "statement": "For a motive M with de Rham realisation carrying the Gauss-Manin connection, the differential Galois group G_Gal of that connection (equivalently the Zariski closure of the geometric monodromy) injects into the motivic Galois group G_mot(M) as (the identity component of) a normal subgroup; consequently dim G_mot(M) >= dim G_Gal.",
+    "classical_status": "THEOREM in the classical (pure, regular-singular) motivic setting: the geometric monodromy group is a normal subgroup of the derived motivic Galois group, and the differential Galois group of the Gauss-Manin connection is its Zariski closure.",
+    "classical_locators": [
+      "Y. Andre, 'Pour une theorie inconditionnelle des motifs', Publ. Math. IHES 83 (1996), 5-49 (motivic Galois group; monodromy).",
+      "Y. Andre, 'Une introduction aux motifs (motifs purs, motifs mixtes, periodes)', SMF Panoramas et Syntheses 17 (2004), Ch. on Galois groups and the comparison G_Gal(Gauss-Manin) subset G_mot.",
+      "Y. Andre, 'Differentielles non commutatives et theorie de Galois differentielle ou aux differences', Ann. Sci. ENS 34 (2001), 685-739 (Tannakian differential Galois formalism)."
+    ],
+    "our_status": "Here M is an EXPONENTIAL motive and the connection (order-4 L for Phi, z=inf irregular slope 1/4) is IRREGULAR; the comparison in this case is part of the Fresan-Jossen exponential-motives framework and its application is CONTINGENT on (G4) realising M as a genuine object of that category with a verified irregular Riemann-Hilbert / Stokes-aware realisation comparison.  So the comparison is theorem-grade classically but CONJECTURAL-in-application here.",
+    "exponential_locator": "J. Fresan, P. Jossen, 'Exponential Motives' (book in preparation): the exponential motivic Galois group and its realisations.  NB this is the SAME source as H3 but a DIFFERENT statement -- the comparison/realisation, NOT the period conjecture -- so H2 and H3 remain logically independent."
+  },
+  "drop_one_necessity_analysis": {
+    "drop_H1": {
+      "kept": [
+        "H2",
+        "H3",
+        "H4"
+      ],
+      "failure_model": "If kappa is not known to be a period of M, then H3 (FJ, about the periods OF M) constrains kappa not at all; kappa could be anything. Conclusion kappa not in Qbar does not follow.",
+      "verdict": "H1 NECESSARY; not implied by {H2,H3,H4}."
+    },
+    "drop_H2": {
+      "kept": [
+        "H1",
+        "H3",
+        "H4"
+      ],
+      "failure_model": "If dim G_mot(M) is allowed to be small (e.g. 0 or a 1-dim torus), then by H3 (FJ) trdeg<periods> equals that small number; the period algebra could be algebraic (dim 0) or a single Gamma-quotient line (torus) -- kappa could be algebraic.  Conclusion fails.  Crucially H3 (trdeg = dim) does NOT supply dim >= 3: FJ converts dim into trdeg but never bounds dim from below.",
+      "verdict": "H2 NECESSARY; NOT a consequence of H3 (this is the Q1 core)."
+    },
+    "drop_H3": {
+      "kept": [
+        "H1",
+        "H2",
+        "H4"
+      ],
+      "failure_model": "Without the period conjecture, dim G_mot(M) >= 3 (H2) is a purely group-theoretic fact with NO transcendence content: there is no unconditional theorem deducing trdeg of periods from the size of the motivic Galois group (that bridge IS FJ).  Conclusion fails.  This shows H2 (about the GROUP) and H3 (the period bridge) carry disjoint content.",
+      "verdict": "H3 NECESSARY; not implied by {H1,H2,H4}."
+    },
+    "drop_H4": {
+      "kept": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "failure_model": "Even with dim G_mot >= 3 and FJ giving trdeg<periods> >= 3, the transcendence could live entirely in OTHER period entries while the specific entry kappa is algebraic (a diagonal / normalisation entry). The conclusion is about kappa SPECIFICALLY, so it fails without the non-degeneracy/identification of kappa as the non-trivial off-diagonal entry.  Conclusion fails.",
+      "verdict": "H4 NECESSARY; not implied by {H1,H2,H3}."
+    }
+  },
+  "collapse_hypothesis_list": false,
+  "Q2_regrade": {
+    "H1": {
+      "old": "STRUCTURAL",
+      "new": "STRUCTURAL",
+      "lowered": false,
+      "evidence": "CC3-S6-CLOSE (2cc2f6fb) + CC3-S6-1 (56adcb10): kappa constructively realised as connection coefficient A_Phi to 129 d.  Constructive exponential-period membership = STRUCTURAL (full motivic membership remains G4)."
+    },
+    "H2": {
+      "old": "CONJECTURED (H-aux); differential side VERIFIED",
+      "new": "CONJECTURED (motivic); differential anchor VERIFIED",
+      "lowered": false,
+      "evidence": "G_Gal(H2)=SL2 VERIFIED (e71e915f).  Motivic dim>=3 rests on the comparison step (see COMPARISON_STEP), contingent on G4.  Tag unchanged -- only RESTATED to expose the comparison."
+    },
+    "H3": {
+      "old": "CONJECTURED (external, named)",
+      "new": "CONJECTURED (external, named)",
+      "lowered": false,
+      "evidence": "Fresan-Jossen exponential period conjecture; open."
+    },
+    "H4": {
+      "old": "VERIFIED",
+      "new": "VERIFIED",
+      "lowered": false,
+      "evidence": "dim H^1_dR(H2)=2 (e71e915f); irreducible (SL2); off classical locus (a6b8d588, hardened by ebr4-1); kappa is the identified non-vanishing off-diagonal connection entry A_Phi != 0 to 129 d (56adcb10)."
+    }
+  },
+  "Q2_any_grade_lowered": false,
+  "regrade_halt_triggered": false,
+  "theorem_restated_verbatim": "THEOREM (CONDITIONAL, ebr4-0 re-stated form).  Let M be the exponential motive attached to the rank-2 connection H2 (realised on the convergent Borel-2 transform Phi; order-4 operator L, singular {0,1/3}, z=inf irregular of slope 1/4).  Assume:\n  (H1, STRUCTURAL) kappa is an exponential period of M -- constructively the connection coefficient A_Phi = kappa (S6 closure, 129 d).\n  (H2, CONJECTURED motivic / VERIFIED differential) dim G_mot(M) >= 3, via G_Gal(H2) = SL2 (exact Kovacic, dim 3) TRANSPORTED to the motivic group by the comparison dim G_mot >= dim G_Gal (theorem-grade classically [Andre, IHES 83 (1996); SMF Panoramas 17 (2004)]; here contingent on the G4 realisation and the irregular/exponential form of the comparison).\n  (H3, CONJECTURED external) the Fresan-Jossen period conjecture for exponential motives: trdeg_Q <periods(M)> = dim G_mot(M).\n  (H4, VERIFIED) the period-count / non-degeneracy data: dim H^1_dR(H2)=2, the connection is irreducible (SL2 Zariski-dense) and lies off the algebraic PIII(D8) locus, and kappa is the non-vanishing off-diagonal connection entry (A_Phi != 0), not a diagonal normalisation factor.\nTHEN trdeg_Q <periods(M)> = dim G_mot(M) >= 3 and the off-diagonal entry kappa is not algebraic:  kappa not in Qbar.  Consequently the EBR-I/EBR-II connection coefficient C = kappa * sqrt(pi) / Gamma(4/3) is transcendental as well (an elementary Gamma-multiple of kappa).\nThe conclusion is LICENSED ONLY under the full conjunction H1 & H2 & H3 & H4 (drop-one analysis: each hypothesis is necessary).  Dropping H3 leaves the unconditional residue ONLY: kappa is a non-classical exponential period off the algebraic PIII(D8) locus -- which says nothing about Qbar.",
+  "correction_note": "CORRECTION (recorded, not silent): the cc3-3-2 statement folded the differential-to-motivic comparison implicitly into H2's 'H-aux' tag.  ebr4-0 makes that comparison step EXPLICIT (its own clause, with classical theorem locator and the G4 contingency).  No grade is lowered; the hypothesis COUNT is unchanged at 4 (all necessary, mutually independent); H2 and H3 are confirmed logically independent (Q1 verdict (iii)).",
+  "hypothesis_count_honest": 4,
+  "ceiling": "This audit upgrades NOTHING. Unconditional transcendence of C/kappa is NOT a deliverable. A larger motivic group or a closed form would argue elementarity-in-extended-class; a null proves neither.",
+  "references": [
+    "Y. Andre, 'Pour une theorie inconditionnelle des motifs', Publ. Math. IHES 83 (1996), 5-49 (motivic Galois group; monodromy).",
+    "Y. Andre, 'Une introduction aux motifs (motifs purs, motifs mixtes, periodes)', SMF Panoramas et Syntheses 17 (2004), Ch. on Galois groups and the comparison G_Gal(Gauss-Manin) subset G_mot.",
+    "Y. Andre, 'Differentielles non commutatives et theorie de Galois differentielle ou aux differences', Ann. Sci. ENS 34 (2001), 685-739 (Tannakian differential Galois formalism).",
+    "J. Fresan, P. Jossen, Exponential Motives (book in preparation)",
+    "M. Kontsevich, D. Zagier, Periods (2001)"
+  ],
+  "canonical_sha256_of_hashfree_object": "d86256cc460e0a45b3c67e2a43b101bcd84402609c06bf1e2c2ecc239156bc87"
+}

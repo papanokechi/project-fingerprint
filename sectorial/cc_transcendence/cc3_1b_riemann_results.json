@@ -1,0 +1,101 @@
+{
+  "op": "cc3-1b-riemann",
+  "task_id": "op:cc-transcendence/cc3-1b",
+  "operator_L": "z^4(1-3z) D^4 + (4z^3-25z^4) D^3 + (2z^2-47z^3) D^2 - 15 z^2 D - z^2",
+  "ceiling": "A Fuchsian relocation does not imply K is a classical period; provenance, not singularity type, is what the period conjectures see. Unconditional transcendence of C is NOT a deliverable of op:cc-3 at any grade.",
+  "exponents_at_0": [
+    "0",
+    "0",
+    "1",
+    "1"
+  ],
+  "exponents_at_1_3": [
+    "-4/3",
+    "0",
+    "1",
+    "2"
+  ],
+  "indicial_0": "r**2*(r - 1)**2",
+  "indicial_1_3": "-r*(r - 2)*(r - 1)*(3*r + 4)/81",
+  "frobenius_z0": {
+    "block_low": "0",
+    "indicial_offset": 0,
+    "resonance_obstructions": {
+      "0": "0",
+      "1": "0"
+    },
+    "logs_forced": [],
+    "has_log": false
+  },
+  "frobenius_z13": {
+    "block_low": "0",
+    "indicial_offset": -3,
+    "resonance_obstructions": {
+      "0": "0",
+      "1": "0",
+      "2": "0"
+    },
+    "logs_forced": [],
+    "has_log": false
+  },
+  "z0_repeated_root_logs": "z=0 indicial r^2(r-1)^2 has DOUBLE roots at 0 and 1; the second solution at each exponent carries a logarithm (Frobenius repeated-root theorem). Phi (the holomorphic exp-0 solution, 1+5z+...) is log-free; it is the solution we continue to z=1/3.",
+  "note_isolated_exponent": "z=1/3 exponent -4/3 is isolated (non-integer gap to {0,1,2}) => its (1-3z)^{-4/3} solution is log-free; K (its amplitude in the continuation of Phi) is cleanly defined and unaffected by any logs inside the {0,1,2} block.",
+  "infinity": {
+    "deg_p_j": {
+      "0": 2,
+      "1": 2,
+      "2": 3,
+      "3": 4,
+      "4": 5
+    },
+    "deg_p_j_minus_j": {
+      "0": 2,
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 1
+    },
+    "fuchsian_bound_(deg_p4_minus_4)": 1,
+    "violations_(j: deg-j)": {
+      "0": 2
+    },
+    "is_regular_singular_at_infinity": false,
+    "newton_Dw_valuations_(j: val)": {
+      "0": -2,
+      "1": 0,
+      "2": 1,
+      "3": 2,
+      "4": 3
+    },
+    "newton_regular_condition_val_j>=val_n-(n-j)": {
+      "0": -1,
+      "1": 0,
+      "2": 1,
+      "3": 2,
+      "4": 3
+    },
+    "newton_violations": {
+      "0": -2
+    },
+    "newton_is_regular_singular": false,
+    "slope_at_infinity": "1/4",
+    "balance_attaining_j": [
+      0,
+      4
+    ],
+    "exponential_factor": "y ~ exp(lambda z^{1/4}), lambda^4 = -256/3",
+    "culprit": "p_0 = -z^2 (deg 2 > Fuchsian bound 1) / b_0 = -1/w^2 (val -2 < -1): the phi_{n-2} recurrence term, exact analogue of EBR's -s^2 term and matching the inherited L2 slope-1/4"
+  },
+  "fuchs_audit": {
+    "sum_exps_0": "2",
+    "sum_exps_1_3": "5/3",
+    "finite_exponent_sum": "11/3",
+    "fuchsian_total_required": "6",
+    "infinity_sum_if_fuchsian": "7/3",
+    "note": "Since infinity is IRREGULAR, the Fuchsian Fuchs relation does NOT apply: there is no full set of 4 finite exponents at infinity; the budget is absorbed by the irregularity (slope 1/4)."
+  },
+  "GATE0_infinity_regular_singular": false,
+  "GATE0_verdict": "FAIL: infinity IRREGULAR (slope 1/4) -> L is NOT globally Fuchsian -> RESCOPE 'Fuchsian relocation' and HALT before cc3-1c",
+  "rescope": "The cc3-1a 'Fuchsian relocation' is OVERCLAIMED. Correct statement: L is regular-singular at z=0 and z=1/3 (so the dominant-singularity connection problem 0 -> 1/3 is regular-to-regular and K is well-defined by Frobenius), but L is IRREGULAR at z=infinity (slope 1/4, from the -z^2 term) -- the irregular structure of the original problem at s=infinity is PRESERVED under the Borel-2 transform, not removed. K is therefore a connection coefficient of a NON-Fuchsian (Stokes-carrying) operator; its natural period home is exponential periods, not classical KZ periods. cc3-1c must use the index of rigidity for IRREGULAR connections (Bloch-Esnault / Arinkin / Jakob-Yun), not the Fuchsian Katz formula.",
+  "canonical_sha256_of_hashfree_object": "2d98e7623dc7dea6f149303fa708270c3ccc48ae3215e573d2dbd4b7eae9ba81"
+}

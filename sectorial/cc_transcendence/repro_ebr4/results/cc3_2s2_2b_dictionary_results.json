@@ -1,0 +1,49 @@
+{
+  "op": "cc3-2s2-2b-dictionary",
+  "task_id": "op:cc-transcendence/cc3-2s2-2",
+  "chain": {
+    "i_scalar_gauge": {
+      "map": "y = t^{-5/3} u",
+      "result": "u'' = r u",
+      "r": "1/(3 t^3) - 5/(9 t^2) - 1/(3 t)",
+      "derivation": "r = (1/4)P^2 + (1/2)P' - Q, P=10/(3t), Q=(t^2+5t-1)/(3 t^3)",
+      "residual_r": "0",
+      "direct_gauge_residual": "0"
+    },
+    "ii_ramified_pullback": {
+      "map": "t = x^2, then Ytil = x^{1/2} w",
+      "result": "w'' = R w",
+      "R": "4/(3 x^4) - 53/(36 x^2) - 4/3",
+      "intermediate_eq": "Ytil'' - (1/x) Ytil' - 4 x^2 r(x^2) Ytil = 0",
+      "residual_R": "0",
+      "intermediate_residual": "0",
+      "local_shape": "two rank-1 irregular points (x=0 order-4 pole, x=inf const -4/3); symmetric DCHE = D8 local shape"
+    },
+    "iii_companion_system": {
+      "map": "W=(w,w')^T, dW/dx = B W, B=[[0,1],[R,0]]",
+      "shape": "2x2 first-order, irregular Poincare rank 1 at x=0 and x=infinity = standard PIII(D8) Lax SHAPE",
+      "composite_gauge_y_to_w": "y = x^{-17/6} w  (t=x^2)",
+      "composite_check": true
+    }
+  },
+  "dictionary_statement": {
+    "kappa_is": "an off-diagonal Stokes multiplier s_* of the companion D8 system B at x=0, at the 2a monodromy point tr(M0) = -51.06556313995466226983167460994566...",
+    "elementary_factor": "kappa = s_*(B; x=0) x F; F = Gamma-quotient in formal exponents alpha_pm (alpha_+ + alpha_- = 3/2), from the Borel-amplitude<->Stokes-multiplier normalization. Scalar gauges leave Stokes MATRICES invariant, so s_* is intrinsic to the t=0 / x=0 irregular point.",
+    "grade": "STRUCTURAL for the gauge chain (i)-(iii) (symbolic, residual 0); the amplitude<->multiplier factor F is derivable (Gamma in alpha_pm); the named-published-coordinate match is OBSTRUCTED (below)."
+  },
+  "obstruction": {
+    "statement": "Matching B(x) to a specific published parametrized PIII(D8) Lax A(lambda,s) requires fixing the isomonodromy time s and the transcendent value for which the isomonodromic A(lambda,s) equals our FROZEN non-deforming B(x): an inverse-monodromy (Riemann-Hilbert) determination, TRANSCENDENTAL, not a finite gauge.",
+    "consequence": "dictionary lands rigorously at companion-system (D8-shape) level; 2c proceeds in SURVEY mode (inventory coverage, no parametrized match asserted)."
+  },
+  "named_hazard_tau_vs_lax": "kappa is a LAX-side Stokes multiplier (linear-problem monodromy data). ILT/Gavrylenko-Lisovyy theorems compute a TAU-side connection constant. Different objects on the same D8 monodromy manifold; the bridge is the 2c question. Named in every crossing step.",
+  "standard_form_locators_SHAPE_only": [
+    "Ohyama-Kawamuko-Sakai-Okamoto, J. Math. Sci. Univ. Tokyo 13 (2006) 145-204 (PIII(D8) Lax pair)",
+    "Fokas-Its-Kapaev-Novokshenov, AMS Surveys Monogr. 128 (2006), PIII chapter (2x2 linear system)",
+    "Its-Lisovyy-Prokhorov, Comm. Math. Phys. (2018) (tau connection constants -- tau-side, 2c hazard)",
+    "van der Put & Saito, Ann. Inst. Fourier 59 (2009) 2611-2667 (moduli of Painleve linear problems)"
+  ],
+  "exact_matrix_transcription": "DEFERRED to 2c (where a formula is used numerically and must be transcribed verbatim from the located source).",
+  "ceiling": "A gauge dictionary placing kappa as a D8 Stokes multiplier proves NOTHING about transcendence; a closed form would argue the OPPOSITE (elementarity in an extended class). Unconditional transcendence of C/kappa is NOT a deliverable at any grade.",
+  "all_symbolic_residuals_zero": true,
+  "canonical_sha256_of_hashfree_object": "87be6028174634f7253818cbb709ed5ac99199a035cec18160d0bdb21cc5eeff"
+}

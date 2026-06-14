@@ -1,0 +1,164 @@
+{
+  "op": "cc3-3-3-epistemic-closeout",
+  "task_id": "op:cc-transcendence/cc3-3",
+  "claim_id": "CC3-3-CLOSEOUT",
+  "grade": "VERIFIED",
+  "ledger_claims_read": 84,
+  "new_claims_this_stage": [
+    [
+      "CC3-S6-PMAT",
+      "STRUCTURAL+VERIFIED"
+    ],
+    [
+      "CC3-S6-CLOSE",
+      "STRUCTURAL"
+    ],
+    [
+      "CC3-3-LOCUS",
+      "STRUCTURAL+VERIFIED"
+    ],
+    [
+      "CC3-3-CONDITIONAL",
+      "CONJECTURED (conditional theorem)"
+    ],
+    [
+      "CC3-3-CLOSEOUT",
+      "VERIFIED"
+    ]
+  ],
+  "program_four_class_table": {
+    "PROVEN": {
+      "count": 4,
+      "claim_ids": [
+        "CC4-LEAN-BOUNDS",
+        "CC4-LEAN-PULLBACK",
+        "CC4-LEAN-PARITY",
+        "CC4-LEAN-A1B"
+      ]
+    },
+    "STRUCTURAL": {
+      "count": 34,
+      "claim_ids": [
+        "CC1-IRREDUCIBLE",
+        "CC2-0-TRICHOTOMY",
+        "CC2-0-FACTOR",
+        "CC2-0-CC3-AMEND",
+        "CC2-1-EXPTORUS",
+        "CC2-2A-SELFDUAL",
+        "CC2-2D-TENSOR",
+        "CC2-2D-IMPRIM",
+        "CC2-2E-VERDICT",
+        "CC4-A1-ETA-UNIQUE",
+        "CC4-A1B-MONOMIAL-CLOSURE",
+        "CC4-0-ROUTE2-PRIMITIVE",
+        "CC4-0-ROUTE1-PRIMITIVE",
+        "CC4-0-SL4-VERDICT",
+        "CC4-0B-BOUNDS",
+        "CC4-2-BRIDGE",
+        "CC3-0-P3",
+        "CC3-0-TECHGAP",
+        "CC3-1-OGF-ODE",
+        "CC3-1-PHI",
+        "CC3-1-INTREP",
+        "CC3-1-CRED",
+        "CC3-1B-INFTY-IRREG",
+        "CC3-1B-CRED-HARD",
+        "CC3-1B-ROUTEB",
+        "CC3-1C-LvsL2",
+        "CC3-1C-RIGIDITY",
+        "CC3-2-KOV",
+        "CC3-2-NF",
+        "CC3-2S2-KAPPA-RES",
+        "CC3-2S2-2B-DICT",
+        "CC3-S6-PMAT",
+        "CC3-S6-CLOSE",
+        "CC3-3-LOCUS"
+      ]
+    },
+    "VERIFIED": {
+      "count": 48,
+      "claim_ids": [
+        "CC1-OP-L2",
+        "CC1-RIEMANN",
+        "CC1-INF-IRREGULAR",
+        "CC1-ACCESSORY",
+        "CC2-0-GFUNC",
+        "CC2-0-PCURV",
+        "CC2-0-QINT",
+        "CC2-1-TWIST",
+        "CC2-2B-SP4",
+        "CC2-2C-SO4",
+        "CC2-2D-JORDAN",
+        "CC4-1-C-120D",
+        "CC4-1-NOLOG",
+        "CC4-1-MONODROMY",
+        "CC4-1-STOKES",
+        "CC4-ERR-1",
+        "CC4-ERR-2",
+        "EBR3-B-GAMMA",
+        "EBR3-B-CONST",
+        "EBR3-B-ALG",
+        "EBR3-C-DRAFT",
+        "EBR3-D-REFEREE",
+        "EBR3-E-REPRO",
+        "EBR3-F-VENUE",
+        "CC3-1-OBSTR",
+        "CC3-1B-RIEMANN",
+        "CC3-1B-LOGFREE",
+        "CC3-1B-K-120D",
+        "CC3-1B-RESCOPE",
+        "CC3-1C-Z0-JORDAN",
+        "CC3-1C-MONODROMY",
+        "CC3-1C-PCURV",
+        "CC3-1C-BRANCH",
+        "CC3-4A-KPSLQ",
+        "CC3-2-ERR-1",
+        "CC3-2-CONV-1",
+        "CC3-2-CORE-LOCAL",
+        "CC3-2-CORE-CHAIN",
+        "CC3-2-DIM",
+        "CC3-2S2-REN",
+        "CC3-2S2-RIG",
+        "CC3-2S2-RULES",
+        "CC3-2S2-KAPPA-NUM",
+        "CC3-2S2-2A-COORDS",
+        "CC3-2S2-2A-METH",
+        "CC3-2S2-2C-VERDICT",
+        "CC3-2S2-3-BARNES",
+        "CC3-3-CLOSEOUT"
+      ]
+    },
+    "CONJECTURED": {
+      "count": 3,
+      "claim_ids": [
+        "CC1-DISCIPLINE",
+        "CC3-2S2-EXPPER",
+        "CC3-3-CONDITIONAL"
+      ]
+    }
+  },
+  "discipline_line_final": "DISCIPLINE LINE (FINAL FORM): the transcendence of the EBR connection coefficient C, equivalently of the Stokes constant kappa = Gamma(4/3) C / sqrt(pi), remains CONJECTURED UNCONDITIONALLY -- it is NOT established at any grade by this program.  The op:cc3-3-2 conditional theorem (kappa not in Qbar under the Fresan-Jossen exponential period conjecture + the SL2 motivic-Galois identification + non-degeneracy) is the PROGRAM'S CEILING and says so.  The ceiling cuts both ways: the NOT-COVERED coverage verdict and the two extended PSLQ nulls prove nothing about transcendence, and a closed form (had one fired) would have argued ELEMENTARITY-in-extended-class, not transcendence.",
+  "readiness_for_ebr4_assemble": {
+    "target": "op:ebr4-assemble (EBR-IV paper)",
+    "result_inventory": [
+      "(1) REDUCTION: EBR generating function G / connection coefficient C reduces, via the OGF y(t) (3t^3 y''+10t^2 y'+(t^2+5t-1)y=-1) and its Borel-2 transform Phi (radius 1/3), to the rank-2 core H2 = 3t^3 D^2 + 10t^2 D + (t^2+5t-1) [cc3-1/1b/1c/2].",
+      "(2) D8(1) SURFACE IDENTIFICATION under RULE S (selectors + Pade screen): VERIFIED, first VERIFIED Painleve-surface label in cc-3 [CC3-2S2-RULES, 6c8dd5ee].",
+      "(3) SL2 / RIG-0: G_Gal(H2)=SL2 non-Liouvillian (exact Kovacic) [CC3-2-KOV]; rig(H2)=0 non-rigid, moduli dim 2 (Painleve phase space) [CC3-2S2-RIG].",
+      "(4) RESURGENCE BRIDGE: kappa = Gamma(4/3) A0, A0 = C/sqrt(pi) (transfer theorem), exact [CC3-2S2-KAPPA-RES]; Channel A independent 60 d [CC3-2S2-KAPPA-NUM].",
+      "(5) MONODROMY POINT on the dim-2 D8 character variety: (tr M0, kappa), tr M0 = -51.0655... hyperbolic/irreducible [CC3-2S2-2A-COORDS], kappa now computed to 129 d as the connection coefficient [CC3-S6-PMAT].",
+      "(6) NOT-COVERED coverage verdict (ILT tau / GL Fredholm are tau-side; kappa is a Lax-side input never output) [CC3-2S2-2C-VERDICT].",
+      "(7) TWO EXTENDED NULLS: 169-digit elementary/Gamma-quotient null on C [EBR3-B-*, 9a3f942d]; Barnes-G/Glaisher log-space null on log kappa, log A0 [CC3-2S2-3-BARNES, 1887c410].",
+      "(8) S6 CLOSURE to STRUCTURAL: kappa is a CONSTRUCTIVE exponential period -- the connection coefficient A_Phi of the order-4 Borel operator L, computed to 129 d with 208/204 witnesses [CC3-S6-PMAT 56adcb10, CC3-S6-CLOSE 2cc2f6fb].",
+      "(9) CONDITIONAL THEOREM + GAP LIST: kappa not in Qbar under the named conjecture + SL2 motivic identification + non-degeneracy; five-item graded gap list [CC3-3-CONDITIONAL 1b15e7ac]; off-locus exclusion [CC3-3-LOCUS a6b8d588]."
+    ],
+    "lean_core_candidates_flagged": [
+      "L-OPERATOR DATA: the explicit order-4 operator L (p0..p4) annihilating Phi, its singular set {0,1/3, inf-irregular slope 1/4}, and the indicial polynomials at 0 and 1/3 ({0,0,1,1} / {-4/3,0,1,2}) -- a finitary symbolic identity, Lean-formalizable.",
+      "GAUGE-CHAIN IDENTITY: the residual-0 chain H2 -> u''=ru -> (t=x^2) w''=Rw -> companion B, an exact rational-function identity [CC3-2S2-2B-DICT, 87be6028].",
+      "KOVACIC CASE ARITHMETIC: the exhaustive emptiness of the Riccati polynomial system over Q(sqrt 3) (Case-2 imprimitive exclusion) -- a finite arithmetic certificate [CC3-2-KOV].",
+      "DIM COUNTS: dim H^1_dR(H2)=2, dim H^1_dR(L)=5 (Deligne-Malgrange index) -- integer identities [CC3-2-DIM].",
+      "TEMPLATE: the four cc4 Lean cores (CC4-LEAN-BOUNDS/PULLBACK/PARITY/A1B, PROVEN, Lean v4.30.0 + Mathlib rev c5ea0035) are the formalisation template."
+    ],
+    "epistemic_delta_this_stage": "S6 moved CONJECTURED-with-architecture -> STRUCTURAL (constructive exponential-period realisation of kappa, 129 d); the program acquired its CEILING artifact (the conditional theorem) and its off-locus exclusion. No grade was upgraded to PROVEN (PROVEN remains the four cc4 Lean cores only). Unconditional transcendence unchanged: OPEN."
+  },
+  "canonical_sha256_of_hashfree_object": "7c5d38e92d9fb835cfb5e3ca4be2faaad1db0a884382620ce116e0205ef822f1"
+}

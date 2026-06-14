@@ -1,0 +1,184 @@
+{
+  "op": "cc3-1c-monodromy",
+  "task_id": "op:cc-transcendence/cc3-1c",
+  "operator_L": "z^4(1-3z) D^4 + (4z^3-25z^4) D^3 + (2z^2-47z^3) D^2 - 15 z^2 D - z^2",
+  "dps": 80,
+  "method": "RK4 numerical continuation around z=0 and z=1/3; ROBUST output is rank(M-I) (clear SVD gap) + det checks. The fine block sizes of the DEFECTIVE z=0 block sit at the RK4 noise floor (see sv-ladder) and are deferred to the EXACT Frobenius script; mp.eig avoided (defective).",
+  "M_0": {
+    "label": "M_0 (around z=0; exponents {0,0,1,1})",
+    "det(M)": "(1.0 + 1.525637301718269e-16j)",
+    "det(M)_expected": "1.0",
+    "det_rel_err": "1.526e-16",
+    "det_matches": true,
+    "sv(M-I)": [
+      "292567.0",
+      "0.224446",
+      "5.1153e-21",
+      "8.6547e-34"
+    ],
+    "rank(M-I)": 2,
+    "ladders": {
+      "1.0": {
+        "alg_mult": 4,
+        "debug": {
+          "nullities_n_k": [
+            0,
+            2,
+            3,
+            3,
+            4
+          ],
+          "blocks_ge_k": [
+            2,
+            1,
+            0,
+            1
+          ]
+        },
+        "sv_ladder": [
+          [
+            1,
+            [
+              "2.926e+5",
+              "0.2244",
+              "5.115e-21",
+              "8.655e-34"
+            ]
+          ],
+          [
+            2,
+            [
+              "4.678e-11",
+              "4.042e-17",
+              "2.702e-21",
+              "1.655e-50"
+            ]
+          ],
+          [
+            3,
+            [
+              "4.631e-11",
+              "6.499e-33",
+              "2.067e-37",
+              "3.949e-67"
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "M_1_3": {
+    "label": "M_{1/3} (around z=1/3; exponents {-4/3,0,1,2})",
+    "det(M)": "(-0.49999999999998 - 0.8660254037844502j)",
+    "det(M)_expected": "(-0.5 - 0.8660254037844386j)",
+    "det_rel_err": "2.309e-14",
+    "det_matches": true,
+    "sv(M-I)": [
+      "21.6489",
+      "9.23907e-32",
+      "2.51252e-34",
+      "1.35913e-43"
+    ],
+    "rank(M-I)": 1,
+    "ladders": {
+      "1.0": {
+        "alg_mult": 3,
+        "debug": {
+          "nullities_n_k": [
+            0,
+            3,
+            3,
+            3
+          ],
+          "blocks_ge_k": [
+            3,
+            0,
+            0
+          ]
+        },
+        "sv_ladder": [
+          [
+            1,
+            [
+              "21.65",
+              "9.239e-32",
+              "2.513e-34",
+              "1.359e-43"
+            ]
+          ],
+          [
+            2,
+            [
+              "37.5",
+              "9.331e-63",
+              "6.579e-67",
+              "1.106e-81"
+            ]
+          ],
+          [
+            3,
+            [
+              "64.95",
+              "4.616e-81",
+              "2.621e-82",
+              "2.03e-82"
+            ]
+          ]
+        ]
+      },
+      "(-0.5 - 0.8660254j)": {
+        "alg_mult": 1,
+        "debug": {
+          "nullities_n_k": [
+            0,
+            0
+          ],
+          "blocks_ge_k": [
+            0
+          ]
+        },
+        "sv_ladder": [
+          [
+            1,
+            [
+              "21.65",
+              "1.732",
+              "1.732",
+              "1.847e-15"
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "robust_interpretation": {
+    "z=0": {
+      "label": "z=0",
+      "alg_mult_eig1": 4,
+      "rank(M-I)": 2,
+      "geom_mult_eig1": 2,
+      "eig1_semisimple": false,
+      "interpretation": "eig 1: alg mult 4, geom mult 2 (#blocks=2 (DEFECTIVE; fine sizes via exact Frobenius))"
+    },
+    "z=1/3": {
+      "label": "z=1/3",
+      "alg_mult_eig1": 3,
+      "rank(M-I)": 1,
+      "geom_mult_eig1": 3,
+      "eig1_semisimple": true,
+      "interpretation": "eig 1: alg mult 3, geom mult 3 (SEMISIMPLE [1]*3); + 1 isolated simple eigenvalue (block [1])"
+    }
+  },
+  "robust_conclusions": {
+    "z=0_apparent": false,
+    "z=0_num_jordan_blocks_eig1": 2,
+    "z=0_fine_type": "[2,2] (exact Frobenius cc3_1c_frobenius_z0_v2.py 4482b99af1c1f673a80cdebc768f808b431f37b2958ddf8c7173f1def608b8ee)",
+    "z=0_dimZ": 8,
+    "z=1/3_eig1_semisimple": true,
+    "z=1/3_dimZ": 10,
+    "rigidity": "assembled in cc3_1c_rigidity.py 845ee916336d834a5ee0d7c6cd86eb7c48914e03d8e27733a09affca36ea9d22 => rig(L)=0, NON-RIGID, accessory 2"
+  },
+  "supersedes": "cc3-1b asserted z=0 log-free/apparent; the monodromy shows rank(M_0-I)=2 (genuine logarithmic point, 2 Jordan blocks). z=1/3 integer block IS semisimple (cc3-1b correct there).",
+  "ceiling": "A Fuchsian relocation does not imply K is a classical period; provenance, not singularity type, is what the period conjectures see. Unconditional transcendence of C is NOT a deliverable of op:cc-3 at any grade.",
+  "canonical_sha256_of_hashfree_object": "1547689b8b7026d8b3199ce164e72e396c7d3935c93238ffcbe08562810d15f4"
+}

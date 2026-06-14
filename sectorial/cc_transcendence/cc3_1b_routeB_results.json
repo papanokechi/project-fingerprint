@@ -1,0 +1,23 @@
+{
+  "op": "cc3-1b-routeB",
+  "task_id": "op:cc-transcendence/cc3-1b",
+  "factor_identity_A_minus_B": "0",
+  "gamma_recurrence_check": "0",
+  "factor_A": "(4/3)*sqrt(pi)/Gamma(7/3)",
+  "factor_B": "sqrt(pi)/Gamma(4/3)",
+  "factors_identical": true,
+  "K_used": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489339104480998050700836788949155678059584666993222",
+  "routeA_C_from_K": "3.0557068078904813657019122017276813688755427749738",
+  "routeB_C_from_K": "3.0557068078904813657019122017276813688755427749738",
+  "routeA_rel_err": "1.62e-60",
+  "routeB_rel_err": "1.62e-60",
+  "routeB_numeric_N": 4000,
+  "routeB_raw_estimator_at_N": "3.05571744864723015",
+  "routeB_richardson_extrap": "3.05570680789048137",
+  "routeB_richardson_rel_err": "9.185e-45",
+  "routeB_law": "g_n ~ C_EBR (3/4)^n n^{5/6}  (R=4/3, gamma=11/6) confirmed",
+  "routes_agree": true,
+  "verdict": "PASS: Route A and Route B define the SAME K (the (1-3z)^{-4/3} amplitude of Phi) and elementary factors that are ALGEBRAICALLY IDENTICAL (Gamma(7/3)=(4/3)Gamma(4/3)); both reproduce frozen C_EBR to >50 digits, and an independent g_n Richardson fit confirms the (3/4)^n n^{5/6} law and the C_EBR value. NO disagreement -> no HALT trigger.",
+  "ceiling": "A Fuchsian relocation does not imply K is a classical period; provenance, not singularity type, is what the period conjectures see. Unconditional transcendence of C is NOT a deliverable of op:cc-3 at any grade.",
+  "canonical_sha256_of_hashfree_object": "78fceeea4d200a3ba8fe54d87dd103ed0e330abd758aa4d70b0da223f52fe3bf"
+}

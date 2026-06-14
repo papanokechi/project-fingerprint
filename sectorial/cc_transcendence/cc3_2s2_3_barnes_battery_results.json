@@ -1,0 +1,268 @@
+{
+  "op": "cc3-2s2-3-barnes-battery",
+  "task_id": "op:cc-transcendence/cc3-2s2-3",
+  "settings": {
+    "dps": 200,
+    "detect_digits": 150,
+    "Hmax": 1000000000000,
+    "kappa_bridge_vs_frozen_digits": 129
+  },
+  "targets": {
+    "log_kappa": "0.4314543422102986584476244556345724995098",
+    "log_A0": "0.5446459839506412806556956555791368124218",
+    "kappa_def": "kappa = Gamma(4/3) C_EBR/sqrt(pi); A0 = C_EBR/sqrt(pi)"
+  },
+  "positive_control": {
+    "identity": "G(1/2) = 2^(1/24) pi^(-1/4) e^(1/8) A^(-3/2)  <=>  24 logG(1/2) - log2 + 6 logpi + 36 logA - 3 = 0",
+    "basis": [
+      "logG(1/2)",
+      "log2",
+      "logpi",
+      "logA",
+      "1"
+    ],
+    "pslq_relation": [
+      -24,
+      1,
+      -6,
+      -36,
+      3
+    ],
+    "fired": true
+  },
+  "skipped_by_argument": "pure {logGamma(j/m), logpi, log2, log3} (no Barnes G, no Glaisher) = log-image of the Gamma-quotient test; ALREADY NULLED for C to 169 digits (frozen 9a3f942d); kappa is a Gamma-quotient iff C_EBR is. SKIPPED by argument.",
+  "tiers": {
+    "tier2_m2346": [
+      "logG(1/2)",
+      "logG(1/3)",
+      "logG(2/3)",
+      "logG(1/4)",
+      "logG(3/4)",
+      "logG(1/6)",
+      "logG(5/6)",
+      "logGam(1/3)",
+      "logGam(1/4)",
+      "logGam(1/6)",
+      "logpi",
+      "log2",
+      "log3",
+      "logA",
+      "1"
+    ],
+    "tier3_m234612": [
+      "logG(1/2)",
+      "logG(1/3)",
+      "logG(2/3)",
+      "logG(1/4)",
+      "logG(3/4)",
+      "logG(1/6)",
+      "logG(5/6)",
+      "logG(1/12)",
+      "logG(5/12)",
+      "logG(7/12)",
+      "logG(11/12)",
+      "logGam(1/3)",
+      "logGam(1/4)",
+      "logGam(1/6)",
+      "logpi",
+      "log2",
+      "log3",
+      "logA",
+      "1"
+    ]
+  },
+  "runs": [
+    {
+      "target": "log_kappa|tier2_m2346",
+      "status": "NULL",
+      "final_independent_basis": [
+        "logG(3/4)",
+        "logG(5/6)",
+        "logGam(1/4)",
+        "logGam(1/6)",
+        "logpi",
+        "log2",
+        "log3",
+        "logA",
+        "1"
+      ],
+      "deflations": [
+        {
+          "removed": "logG(1/2)",
+          "via_relation_height": 6
+        },
+        {
+          "removed": "logGam(1/3)",
+          "via_relation_height": 12
+        },
+        {
+          "removed": "logG(2/3)",
+          "via_relation_height": 48
+        },
+        {
+          "removed": "logG(1/4)",
+          "via_relation_height": 36
+        },
+        {
+          "removed": "logG(1/3)",
+          "via_relation_height": 48
+        },
+        {
+          "removed": "logG(1/6)",
+          "via_relation_height": 120
+        }
+      ],
+      "relation": null
+    },
+    {
+      "target": "log_kappa|tier3_m234612",
+      "status": "NULL",
+      "final_independent_basis": [
+        "logG(5/6)",
+        "logG(5/12)",
+        "logG(7/12)",
+        "logG(11/12)",
+        "logGam(1/4)",
+        "logGam(1/6)",
+        "logpi",
+        "log2",
+        "log3",
+        "logA",
+        "1"
+      ],
+      "deflations": [
+        {
+          "removed": "logG(1/2)",
+          "via_relation_height": 6
+        },
+        {
+          "removed": "logG(1/3)",
+          "via_relation_height": 8
+        },
+        {
+          "removed": "logG(2/3)",
+          "via_relation_height": 11
+        },
+        {
+          "removed": "logGam(1/3)",
+          "via_relation_height": 12
+        },
+        {
+          "removed": "logG(1/4)",
+          "via_relation_height": 36
+        },
+        {
+          "removed": "logG(3/4)",
+          "via_relation_height": 96
+        },
+        {
+          "removed": "logG(1/6)",
+          "via_relation_height": 120
+        },
+        {
+          "removed": "logG(1/12)",
+          "via_relation_height": 552
+        }
+      ],
+      "relation": null
+    },
+    {
+      "target": "log_A0|tier2_m2346",
+      "status": "NULL",
+      "final_independent_basis": [
+        "logG(3/4)",
+        "logG(5/6)",
+        "logGam(1/4)",
+        "logGam(1/6)",
+        "logpi",
+        "log2",
+        "log3",
+        "logA",
+        "1"
+      ],
+      "deflations": [
+        {
+          "removed": "logG(1/2)",
+          "via_relation_height": 12
+        },
+        {
+          "removed": "logGam(1/3)",
+          "via_relation_height": 12
+        },
+        {
+          "removed": "logG(1/4)",
+          "via_relation_height": 36
+        },
+        {
+          "removed": "logG(1/3)",
+          "via_relation_height": 36
+        },
+        {
+          "removed": "logG(2/3)",
+          "via_relation_height": 48
+        },
+        {
+          "removed": "logG(1/6)",
+          "via_relation_height": 120
+        }
+      ],
+      "relation": null
+    },
+    {
+      "target": "log_A0|tier3_m234612",
+      "status": "NULL",
+      "final_independent_basis": [
+        "logG(5/6)",
+        "logG(5/12)",
+        "logG(7/12)",
+        "logG(11/12)",
+        "logGam(1/4)",
+        "logGam(1/6)",
+        "logpi",
+        "log2",
+        "log3",
+        "logA",
+        "1"
+      ],
+      "deflations": [
+        {
+          "removed": "logG(1/3)",
+          "via_relation_height": 8
+        },
+        {
+          "removed": "logG(2/3)",
+          "via_relation_height": 13
+        },
+        {
+          "removed": "logGam(1/3)",
+          "via_relation_height": 12
+        },
+        {
+          "removed": "logG(1/2)",
+          "via_relation_height": 36
+        },
+        {
+          "removed": "logG(1/4)",
+          "via_relation_height": 36
+        },
+        {
+          "removed": "logG(1/6)",
+          "via_relation_height": 120
+        },
+        {
+          "removed": "logG(1/12)",
+          "via_relation_height": 552
+        },
+        {
+          "removed": "logG(3/4)",
+          "via_relation_height": 1152
+        }
+      ],
+      "relation": null
+    }
+  ],
+  "any_FIRE": false,
+  "verdict": "ALL-NULL: log kappa and log A0 NOT integer-linear in the Barnes-G/Glaisher-extended basis (heights <= 1e12) to 150 digits; kappa not elementary in the extended Barnes class at this height/precision. Honest null.",
+  "ceiling": "A FIRE would argue ELEMENTARITY in the extended Barnes class (OPPOSITE of transcendence); a NULL proves neither. Unconditional transcendence of C/kappa is NOT a deliverable of op:cc-3 at any grade.",
+  "canonical_sha256_of_hashfree_object": "1887c4103ba5e20a54bed3a45fbcea04acc810406b19510eb0b15e4a3aae6e02"
+}

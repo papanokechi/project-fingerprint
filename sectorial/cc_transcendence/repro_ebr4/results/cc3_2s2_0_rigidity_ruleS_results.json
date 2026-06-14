@@ -1,0 +1,127 @@
+{
+  "op": "cc3-2s2-0-rigidity-ruleS",
+  "task_id": "op:cc-transcendence/cc3-2s2",
+  "operator_H2": "3 t^3 D^2 + 10 t^2 D + (t^2 + 5 t - 1)",
+  "rigidity": {
+    "controls": {
+      "Airy": 2,
+      "Gauss_2F1": 2,
+      "Bessel": 2,
+      "all_pass": true
+    },
+    "rig": 0,
+    "verdict": "NON-RIGID",
+    "moduli_dim": 2,
+    "accessory_P": "1",
+    "term_breakdown": {
+      "(2-#S)n^2": 0,
+      "sum dimZ_formal": 2,
+      "sum irr_End": "2",
+      "#S": 2,
+      "n": 2
+    },
+    "local_data": {
+      "0": {
+        "slope": "1/2",
+        "ram": 2,
+        "dimZ_formal": 1,
+        "irr_End": 1
+      },
+      "infinity": {
+        "slope": "1/2",
+        "ram": 2,
+        "dimZ_formal": 1,
+        "irr_End": 1
+      }
+    },
+    "P5_holds": true
+  },
+  "rule_S": {
+    "rule_S_text": "No Painleve/Sakai surface label reaches VERIFIED without computed selectors plus the Pade convergence screen.",
+    "leg1_selectors": {
+      "rank": 2,
+      "singular_set": [
+        "0",
+        "infinity"
+      ],
+      "n_singular_points": 2,
+      "slopes": {
+        "0": "1/2",
+        "infinity": "1/2"
+      },
+      "ramification": {
+        "0": 2,
+        "infinity": 2
+      },
+      "both_irregular": true,
+      "both_ramified": true,
+      "moduli_dimension": 2
+    },
+    "leg1_dictionary": {
+      "PIII(D6) [D6^(1)]": "(1, 1)",
+      "PIII(D7) [D7^(1)]": "(2, 1)",
+      "PIII(D8) [D8^(1)]": "(2, 2)"
+    },
+    "leg1_unique_match": [
+      "PIII(D8) [D8^(1)]"
+    ],
+    "leg1_pass": true,
+    "leg2_radius_estimate": "0.33333333333333333333333333333333331920955057929167",
+    "leg2_radius_err": "1.41238e-35",
+    "leg2_radius_digits": 34,
+    "leg2_pade_table": [
+      {
+        "order": 20,
+        "nearest_pole": "0.333105375578691651299163322494",
+        "err_vs_1_3": "0.000227958"
+      },
+      {
+        "order": 30,
+        "nearest_pole": "0.333231473377980782803040482022",
+        "err_vs_1_3": "0.00010186"
+      },
+      {
+        "order": 40,
+        "nearest_pole": "0.333277443256264013154206256968",
+        "err_vs_1_3": "5.58901e-5"
+      },
+      {
+        "order": 50,
+        "nearest_pole": "0.333296916082125263867857288132",
+        "err_vs_1_3": "3.64173e-5"
+      },
+      {
+        "order": 60,
+        "nearest_pole": "0.333308010195076173807044512177",
+        "err_vs_1_3": "2.53231e-5"
+      }
+    ],
+    "leg2_pade_converging": true,
+    "leg2_pass": true,
+    "rule_S_pass": true,
+    "grade": "VERIFIED (per RULE S: both legs pass)",
+    "P6_holds": true,
+    "surface_label": "PIII(D8) = Sakai surface D8^(1)"
+  },
+  "P5_rigidity": {
+    "prediction": "rig(H2)=0, moduli dim 2 (Painleve phase space)",
+    "holds": true,
+    "halt_if_false": true
+  },
+  "P6_ruleS": {
+    "prediction": "PIII(D8) candidacy passes RULE S (selectors + Pade screen)",
+    "holds": true,
+    "halt_if_false": false,
+    "note": "failure reroutes 2s2-2 to obstruction report; not a halt"
+  },
+  "reframe_validated": "z=1/3 reproduced by the Pade screen as the dominant Borel-plane singularity of the Gevrey-2 series y; H2 has NO finite nonzero singularity, so z=1/3 is an instanton action, not a singularity of H2.",
+  "ceiling": "A Stokes reframing, a RULE S pass, even an ILP-class formula match would NOT prove transcendence; a match would prove the OPPOSITE (elementarity in an extended Barnes class). Unconditional transcendence of C/kappa is NOT a deliverable of op:cc-3 at any grade.",
+  "references": [
+    "Sakai, Comm. Math. Phys. 220 (2001) 165-229 (surface D8^(1))",
+    "van der Put & Saito, Ann. Inst. Fourier 59 (2009) 2611-2667 (singularity-type <-> Painleve dictionary)",
+    "Ohyama-Kawamuko-Sakai-Okamoto, J. Math. Sci. Univ. Tokyo 13 (2006) 145-204 (PIII(D8) Lax pair)",
+    "Arinkin, Compositio Math. 146 (2010) 1323-1338 (irregular index of rigidity)",
+    "Bloch & Esnault, Asian J. Math. 8 (2004) 587-606 (local Fourier transform / rigidity)"
+  ],
+  "canonical_sha256_of_hashfree_object": "6c8dd5ee9106abbcfadf4c497d154aac80dc0e1b1b10d7592c56a3a14f458a14"
+}

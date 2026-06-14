@@ -1,0 +1,879 @@
+%
+% EBR-IV -- op:ebr4-assemble / ebr4-3 full draft (local artifact).
+% Portable amsart (venue class swapped per ebr4-4 runbook). Compile: pdflatex
+% twice (inline thebibliography, no bibtex/latexmk needed on host).
+% NOTHING in this file is deposited, committed, or submitted.
+%
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+\usepackage{microtype}
+
+\setlength{\emergencystretch}{2em}
+
+% Reproducible-PDF settings: omit embedded timestamps and fix the trailer /ID
+% so the PDF byte-hash is stable across builds (used by the repro manifest;
+% combine with SOURCE_DATE_EPOCH at build time).
+\ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=-1\fi
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Qbar}{\overline{\Q}}
+\newcommand{\GGal}{G_{\mathrm{Gal}}}
+\newcommand{\Gmot}{G_{\mathrm{mot}}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\trdeg}{\operatorname{trdeg}}
+\DeclareMathOperator{\rig}{rig}
+\newcommand{\Htwo}{H_{2}}
+\newcommand{\Cebr}{C_{\mathrm{EBR}}}
+\newcommand{\claim}[1]{\textsf{\small[#1]}}
+\newcommand{\PIII}{P_{\mathrm{III}}}
+
+\begin{document}
+
+\title[The EBR growth constant is a non-classical exponential period]{The
+Edge--Borel growth constant is a non-classical exponential period: an $\SL_{2}$
+monodromy on the Painlev\'e III($D_{8}$) surface and a conditional
+transcendence theorem}
+
+\author{Papanokechi}
+\thanks{Independent Researcher (ORCID 0009-0000-6192-8273). This is a
+preprint; nothing herein is a claim of priority. Every load-bearing statement
+is graded \textsc{proven}/\textsc{structural}/\textsc{verified}/%
+\textsc{conjectured} (\S\ref{sec:grades}); \textsc{proven} is reserved for
+machine-checked Lean~4 cores, of which this paper introduces none (the program
+substrate is the EBR-III cores, \S\ref{sec:lean}).}
+
+\date{\today}
+
+\subjclass[2020]{34M55, 34M40, 34M03, 11J81, 11G09, 33E17}
+
+\keywords{isomonodromy, Painlev\'e III, Sakai surface, exponential period,
+connection coefficient, Stokes constant, differential Galois group,
+resurgence, conditional transcendence, polynomial continued fraction}
+
+\begin{abstract}
+For the positive-coefficient polynomial continued fraction with
+$b(n)=3n^{2}+n+1$, the Edge--Borel growth constant is governed by a single
+transcendental number $\kappa=1.5394948485766410\ldots$, the Stokes/connection
+constant of a rank-$2$ ordinary differential operator $\Htwo$ that arises by a
+Borel--$2$ reduction of the generating function. We identify $\kappa$ inside the
+isomonodromy and period frameworks and assemble, with explicitly graded
+hypotheses, a conditional transcendence theorem for it. First, $\Htwo$ has
+singular set $\{0,\infty\}$ with both points irregular of ramified slope
+$\tfrac12$; its index of rigidity is $\rig(\Htwo)=0$ (non-rigid, moduli
+dimension $2$), and the local ramification data $(2,2)$ select, under a
+surface-type selector we state precisely, the Sakai surface
+$D_{8}^{(1)}$---equivalently $\PIII(D_{8})$. Second, the differential Galois
+group is $\GGal(\Htwo)=\SL_{2}$ (an exact Kovacic computation), so $\Htwo$ is
+irreducible and has no Liouvillian solutions. Third, on the convergent
+Borel--$2$ transform $\Phi$ the constant $\kappa$ is realised \emph{constructively}
+as the connection coefficient $A_{\Phi}$ of an order-$4$ operator with an
+irregular point of slope $\tfrac14$, computed by a monodromy spectral projector
+to $129$ digits and agreeing with two further independent channels; this places
+$\kappa$ in the ring of exponential (rapid-decay) periods of the connection. We
+determine the monodromy point $(\tr M_{0},\kappa)$ with
+$\tr M_{0}=-51.0655631399546\ldots$ (hyperbolic, hence irreducible), survey the
+solved $D_{8}$ connection problems and find that none computes $\kappa$ (a
+tau-side/Lax-side distinction we keep explicit), and record two
+positive-control-validated integer-relation nulls. The point lies off the
+algebraic $\PIII(D_{8})$ locus. Under the Fresan--Jossen period conjecture for
+exponential motives, a differential-to-motivic dimension comparison, and a
+verified non-degeneracy datum, we conclude $\kappa\notin\Qbar$, hence the
+EBR connection coefficient $C=\kappa\sqrt{\pi}/\Gamma(4/3)$ is transcendental.
+We are explicit, throughout and in both directions, that this is a conditional
+statement: neither the large Galois group nor the non-rigidity nor any null
+proves transcendence, and a closed form---had one appeared---would have argued
+the opposite.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{The program and the object}
+This paper continues the Edge--Borel Radius (EBR) program. EBR-I established
+that for a positive-coefficient polynomial continued fraction
+$Q_{n}=b(n)Q_{n-1}+Q_{n-2}$ with $b(n)=\beta_{d}n^{d}+\cdots$, the Borel object
+$G(s)=\sum_{n\ge0}Q_{n}s^{n}/(dn)!$ is holonomic with a dominant singularity at
+$s=R=d^{d}/\beta_{d}$ and local form $G(s)\sim A\,(1-s/R)^{-\gamma}$
+\cite{EBRI}. EBR-II identified the amplitude $A$ as a \emph{connection
+coefficient} of the order-$2d$ operator annihilating $G$ and conjectured it to
+be generically transcendental \cite{EBRII}. EBR-III fixed the smallest
+non-rigid case $d=2$, $b(n)=3n^{2}+n+1$, and proved (structurally, with audited
+Lean cores) that the order-$4$ operator there is not a $G$-operator and has
+differential Galois group $\SL_{4}$; it left the transcendence of the
+connection coefficient explicitly open as the burden of a separate period
+analysis \cite{EBRIII}.
+
+This paper carries out that period analysis for $d=2$. Its object is the single
+constant
+\begin{equation}\label{eq:kappa}
+  \kappa \;=\; 1.53949484857664103484378190338406903821939\ldots,
+\end{equation}
+the Stokes/connection constant controlling the Edge--Borel growth, related to
+the EBR-I/II amplitude by the exact elementary identities
+\begin{equation}\label{eq:kappaC}
+  \kappa=\Gamma(\tfrac43)\,A_{0},\qquad
+  A_{0}=\frac{\Cebr}{\sqrt{\pi}},\qquad
+  C=\Cebr=\frac{\kappa\sqrt{\pi}}{\Gamma(4/3)},
+\end{equation}
+where $A_{0}=\lim_{n}Q_{n}/\bigl((n!)^{2}3^{n}n^{1/3}\bigr)$ and
+$\Cebr=3.0557068078904813\ldots$ is the EBR-III connection coefficient
+\cite{EBRIII}. Thus $\kappa$, $A_{0}$, and $C$ are elementary $\Gamma$-multiples
+of one another, and a transcendence statement for any one of them is a
+transcendence statement for all three.
+
+\begin{remark}[Notation]\label{rem:kappa-name}
+We write $\kappa$ for this constant throughout. The symbol collides
+cosmetically with the Stokes constant ``$K$'' of an unrelated companion family
+(quadratic-growth $V$-family, Painlev\'e~V on the surface $D_{5}^{(1)}$); the
+two are different numbers on different Sakai surfaces, and the present $\kappa$
+is fixed once and for all by~\eqref{eq:kappa}--\eqref{eq:kappaC}.
+\end{remark}
+
+\subsection{Results and their evidential status}\label{sec:grades}
+We organize the paper by a four-class evidence discipline, stated here so the
+reader can audit each assertion against the kind of evidence that supports it.
+\textsc{proven} is reserved for results carrying a machine-checked Lean~4 proof
+with an audited axiom cone; \textsc{structural} denotes a complete mathematical
+argument verified by hand and computer algebra but not formalized;
+\textsc{verified} denotes a reproducible high-precision or exact symbolic
+computation; \textsc{conjectured} denotes an open statement. A grade table
+appears in \S\ref{sec:gradetable}. \emph{This paper introduces no new}
+\textsc{proven} \emph{item}; the only machine-checked substrate in the program
+is the EBR-III Lean cores, cited as such (\S\ref{sec:lean}), and EBR-IV's own
+finitary identities are flagged as Lean-core candidates (\S\ref{sec:open}). The
+principal results are:
+\begin{itemize}
+\item[(R1)] \emph{Reduction and local type.} A Borel--$2$ reduction sends $G$ to
+a rank-$2$ core $\Htwo$ with singular set $\{0,\infty\}$, both irregular of
+slope $\tfrac12$; $\rig(\Htwo)=0$ (non-rigid, moduli dimension $2$), and the
+ramification data select the Sakai surface $D_{8}^{(1)}=\PIII(D_{8})$
+(\S\ref{sec:reduction}--\S\ref{sec:surface}; \textsc{verified}).
+\item[(R2)] \emph{Galois group.} $\GGal(\Htwo)=\SL_{2}$; in particular $\Htwo$
+is irreducible with no Liouvillian solutions (\S\ref{sec:galois};
+\textsc{structural}).
+\item[(R3)] \emph{Constructive exponential period.} On the convergent Borel--$2$
+transform, $\kappa$ equals the connection coefficient $A_{\Phi}$ of an order-$4$
+operator with an irregular point of slope $\tfrac14$, computed to $129$ digits
+by a monodromy spectral projector and confirmed by two further independent
+channels; $\kappa$ lies in the ring of exponential periods of the connection
+(\S\ref{sec:period}; \textsc{structural}, with \textsc{verified} numerics).
+\item[(R4)] \emph{Monodromy point and coverage.} The point is
+$(\tr M_{0},\kappa)$ with $\tr M_{0}=-51.0655631399546\ldots$ (irreducible);
+the solved $D_{8}$ connection problems are tau-side and do not compute the
+Lax-side $\kappa$ (\S\ref{sec:point}; \textsc{verified}).
+\item[(R5)] \emph{Nulls.} Two positive-control-validated integer-relation
+batteries find $\kappa$ neither elementary-$\Gamma$ nor Barnes--Glaisher
+log-linear, to high precision (\S\ref{sec:nulls}; \textsc{verified}).
+\item[(R6)] \emph{Off-locus and the conditional theorem.} $(\tr M_{0},\kappa)$
+lies off the algebraic $\PIII(D_{8})$ locus; under three named hypotheses and a
+verified datum, $\kappa\notin\Qbar$ (\S\ref{sec:locus}--\S\ref{sec:theorem};
+\textsc{verified} off-locus, \textsc{conjectured}-conditional theorem).
+\end{itemize}
+
+\subsection{What we do not claim, and the ceiling}\label{sec:nonclaim}
+We are explicit about the limits of the method, since the temptation to
+overread a large Galois group or a non-rigid surface is precisely the error the
+EBR program guards against.
+\begin{quote}\itshape
+Non-rigidity ($\rig=0$, moduli dimension $2$) does not imply that $\kappa$ is
+transcendental; a large differential Galois group ($\SL_{2}$) does not imply
+that $\kappa$ is transcendental. The differential side targets the group only.
+The transcendence conclusion of \S\ref{sec:theorem} is licensed solely by the
+conjunction of its four named hypotheses, two of which are external,
+well-defined conjectures.
+\end{quote}
+The discipline cuts in both directions, and we state the ceiling once here in
+the form it keeps throughout (it reappears boxed at \S\ref{sec:theorem}):
+\begin{quote}\itshape
+The transcendence of $C$---equivalently of $\kappa=\Gamma(4/3)\,C/\sqrt{\pi}$---%
+remains conjectural unconditionally; it is not established at any grade in this
+paper. Exhibiting $\kappa$ as a constructive exponential period, the off-locus
+verdict, the not-covered survey result, and the two integer-relation nulls
+prove nothing about transcendence; a closed form, had one fired, would have
+argued the opposite---elementarity in an extended class. The relevant period
+conjectures see the exponential provenance of $\kappa$, not the type of its
+singularity.
+\end{quote}
+Accordingly the abstract and this introduction make no transcendence claim of
+any kind, no unqualified statement that $\kappa$ or $C$ ``is a period'', and no
+claim that the group or the surface type forces transcendence.
+
+\section{Reduction to a rank-2 core and the Borel-2 operator}\label{sec:reduction}
+
+\subsection{From the continued fraction to the core $\Htwo$}
+With $b(n)=3n^{2}+n+1$ the numerators satisfy
+$Q_{n}=(3n^{2}+n+1)Q_{n-1}+Q_{n-2}$, $Q_{0}=1$, $Q_{1}=5$. The ordinary
+generating function $y(t)=\sum_{n\ge0}Q_{n}t^{n}$ satisfies the inhomogeneous
+equation
+\begin{equation}\label{eq:ogf}
+  3t^{3}y''+10t^{2}y'+(t^{2}+5t-1)\,y=-1,
+\end{equation}
+verified against the series to high order. Its homogeneous part is the rank-$2$
+operator
+\begin{equation}\label{eq:H2}
+  \Htwo \;=\; 3t^{3}D^{2}+10t^{2}D+(t^{2}+5t-1),\qquad D=\tfrac{d}{dt},
+\end{equation}
+the \emph{core} of the EBR-IV analysis \claim{CC3-2-CORE-CHAIN}.
+
+\subsection{The Borel-2 operator and the home of $\kappa$}\label{sec:borel}
+The series $y$ is Gevrey of order $2$ (the singular point $t=0$ is irregular of
+slope $\tfrac12$, \S\ref{sec:surface}), so its natural resummation passes
+through the \emph{Borel--$2$ transform}
+\begin{equation}\label{eq:Phi}
+  \Phi(z)=\sum_{n\ge0}\frac{Q_{n}}{(n!)^{2}}\,z^{n},
+\end{equation}
+which is convergent (radius $1/3$) and holonomic. Writing $\theta=z\,d/dz$, the
+order-$4$ operator annihilating $\Phi$ is
+\begin{equation}\label{eq:L}
+  L=\theta^{2}(\theta-1)^{2}-z\,(3\theta^{2}+7\theta+5)\,\theta^{2}-z^{2},
+\end{equation}
+equivalently $p_{4}\Phi^{(4)}+\cdots+p_{0}\Phi=0$ with
+$p_{0}=-z^{2}$, $p_{1}=-15z^{2}$, $p_{2}=-z^{2}(47z-2)$,
+$p_{3}=-z^{3}(25z-4)$, $p_{4}=-z^{4}(3z-1)$; $L$ annihilates the series
+\eqref{eq:Phi} to the orders tested (residual zero) \claim{CC3-S6-PMAT}. Its
+finite singular set is $\{0,1/3\}$, with indicial roots $\{0,0,1,1\}$ at $z=0$
+and $\{-\tfrac43,0,1,2\}$ at $z=1/3$, and \emph{the point $z=\infty$ is
+irregular of slope $\tfrac14$}. The last fact is decisive for the arithmetic
+home of the problem:
+\begin{quote}\itshape
+because $L$ is globally irregular, its connection coefficients are exponential
+(rapid-decay) periods in the sense of the irregular Hodge / exponential-motive
+theory, not classical Kontsevich--Zagier periods.
+\end{quote}
+The singularity at $z=1/3$ corresponds, under $z=s/4$ and $s=R\,(\cdot)$, to the
+Borel-plane (instanton-action) singularity of the Gevrey-$2$ series; thus
+$\kappa$ is intrinsically a \emph{Stokes-type} constant, refining the EBR-II
+reading of $A$ as a two-regular-point connection coefficient. By the transfer
+theorem of singularity analysis \cite{FS}, $\kappa$ is the
+$(1-3z)^{-4/3}$-amplitude $A_{\Phi}$ of $\Phi$ at $z=1/3$, whence the exact
+$\kappa=\Gamma(4/3)A_{0}$ of \eqref{eq:kappaC} \claim{CC3-2S2-KAPPA-RES}.
+
+\section{Local structure and the Painlev\'e III($D_{8}$) surface}\label{sec:surface}
+
+\subsection{Formal data and non-rigidity}
+In trace-normal form $\Htwo$ becomes $Y''=r\,Y$ with
+\begin{equation}\label{eq:r}
+  r(t)=\frac{1}{3t^{3}}-\frac{5}{9t^{2}}-\frac{1}{3t},
+\end{equation}
+whose only singular points are $t=0$ and $t=\infty$, \emph{both irregular of
+slope $\tfrac12$, ramification $2$} \claim{CC3-2-CORE-LOCAL}. The index of
+rigidity, computed for two slope-$\tfrac12$ ramified points, is
+\begin{equation}\label{eq:rig}
+  \rig(\Htwo)=(2-2)\cdot 4+(1+1)-(1+1)=0,
+\end{equation}
+so $\Htwo$ is \emph{non-rigid} with a $2$-dimensional moduli space (a Painlev\'e
+phase space) and a single accessory parameter; the control families
+Airy, ${}_{2}F_{1}$, Bessel return $\rig=2$ (rigid)
+\claim{CC3-2S2-RIG},\,\claim{CC3-2-CONV-1}.
+
+\subsection{The surface-type selector and the $D_{8}^{(1)}$ label}\label{sec:rules}
+We assign the Sakai surface type by an explicit selector, computed from the
+local formal data, and we state it here because the label is load-bearing.
+
+\begin{quote}\small\itshape
+\textbf{Surface-type selector (RULE~S).} For a non-rigid rank-$2$ connection
+with two irregular singular points, the Sakai surface type is determined by the
+multiset of local ramification orders. With both legs ramified, the dictionary
+$(1,1)\mapsto D_{6}^{(1)}$, $(2,1)\mapsto D_{7}^{(1)}$,
+$(2,2)\mapsto D_{8}^{(1)}$ is a bijection onto the degenerate Painlev\'e~III
+surfaces. The type is computed from the formal data; it is not assigned by
+matching a solution against a catalogue.
+\end{quote}
+
+For $\Htwo$ the legs are $(2,2)$, so RULE~S selects the Sakai surface
+$D_{8}^{(1)}$, i.e.\ $\PIII(D_{8})$, the surface with symmetry sublattice of
+type $D_{8}^{(1)}$ in Sakai's classification \cite{Sakai}; the assignment is
+consistent with $\rig=0$ and moduli dimension $2$, and with the van der
+Put--Saito treatment of irregular rank-$2$ moduli \cite{vdPutSaito}. An
+independent Pad\'e screen of the second leg reproduces the singular value
+$z=1/3$ to $34$ digits with a converging pole table, corroborating the
+identification numerically \claim{CC3-2S2-RULES}. This is the first
+\textsc{verified} Painlev\'e-surface label in the program; throughout, ``the
+$D_{8}$ surface'' means precisely this selector output.
+
+\section{The differential Galois group}\label{sec:galois}
+
+\subsection{$\GGal(\Htwo)=\SL_{2}$}
+Because $\Htwo$ has trivial determinant character, its Galois group lies in
+$\SL_{2}$. We exclude the three proper possibilities by Kovacic's algorithm
+\cite{Kovacic}, treating $\Htwo$ in its reduced form \eqref{eq:r}:
+\begin{itemize}
+\item \emph{Case 1} (a rational exponential solution) is excluded: the only
+finite singular point $t=0$ carries a half-integer indicial datum, and the
+associated Riccati equation has no solution in $\C(t)$.
+\item \emph{Case 3} (finite imprimitive image) is excluded by the irregular
+slope $\tfrac12$ at both points.
+\item \emph{Case 2} (dihedral / imprimitive over a quadratic cover) is the only
+delicate one. The unique quadratic ramified cover that could split the local
+data is $t=x^{2}$, under which \eqref{eq:r} pulls back to
+$R(x)=\tfrac{4}{3x^{4}}-\tfrac{53}{36x^{2}}-\tfrac43$, with a single finite pole
+at $x=0$ of order $4$. The Riccati equation is then forced into the form
+$a/x^{2}+b/x+c$ with $a^{2}=\tfrac43$; an exhaustive search over the field
+$\Q(\sqrt3)$ generated by the local data is \emph{empty}.
+\end{itemize}
+Hence no case applies and
+\begin{equation}\label{eq:SL2}
+  \GGal(\Htwo)=\SL_{2},
+\end{equation}
+in particular $\Htwo$ is irreducible and has no Liouvillian solutions
+\cite{vdPutSinger} \claim{CC3-2-KOV}. The reduced form exhibits a symmetric
+degenerate confluent Heun (two rank-$1$ irregular points after $t=x^{2}$)
+structure \claim{CC3-2-NF}.
+
+\subsection{The discipline line, first statement}\label{sec:discipline1}
+Equation~\eqref{eq:SL2} is a statement about the \emph{group}. A Zariski-dense
+$\SL_{2}$ does not, by itself, bound the transcendence degree of any single
+connection entry: connection coefficients are not differential-Galois
+invariants. The role of \eqref{eq:SL2} in the conditional theorem
+(\S\ref{sec:theorem}) is to supply, through a separate comparison, a
+\emph{lower bound on the dimension of a motivic group}; it does nothing on its
+own. We return to this at hypothesis (H2).
+
+\section{$\kappa$ as a constructive exponential period}\label{sec:period}
+
+\subsection{The connection coefficient $A_{\Phi}$}\label{sec:Aphi}
+The rank-$2$ solution $y$ is divergent at $t=0$, so the rapid-decay period
+pairing is realised on the convergent Borel--$2$ transform $\Phi$ of
+\eqref{eq:Phi}, governed by $L$ of \eqref{eq:L}. At $z=1/3$ the local exponents
+are $\{-\tfrac43,0,1,2\}$; the three integer exponents form a unipotent block
+killed by $(M-I)^{3}$, where $M$ is the local monodromy, while the $-\tfrac43$
+direction is the eigenvalue $\mu=e^{-2\pi i/3}$. The \emph{monodromy spectral
+projector}
+\begin{equation}\label{eq:proj}
+  A_{\Phi}\,\vec{s}=\frac{(M-I)^{3}\,\vec{\varphi}}{(\mu-1)^{3}},\qquad
+  (M-I)^{3}\vec\varphi=\vec\varphi_{3}-3\vec\varphi_{2}+3\vec\varphi_{1}
+  -\vec\varphi_{0},
+\end{equation}
+extracts the exponent-$(-\tfrac43)$ amplitude of the origin-analytic solution
+$\Phi$ by continuing \emph{only} $\Phi$ through three loops around $z=1/3$. The
+result,
+\begin{equation}\label{eq:AphiVal}
+  A_{\Phi}=1.539494848576641034843781903384\ldots=\kappa,
+\end{equation}
+agrees with \eqref{eq:kappa} to $129$ digits; the deformation-invariance and
+four-component consistency witnesses reach $204$ and $208$ digits respectively,
+and $A_{\Phi}$ is real to $\sim\!2\times10^{-209}$ \claim{CC3-S6-PMAT}. (The
+working precision is set before any module-level constant is created; see the
+methodology note of \S\ref{sec:pointmeth}.)
+
+\subsection{The $\kappa$-bridge}\label{sec:bridge}
+That $A_{\Phi}$ is exactly $\kappa$, and not merely numerically close, follows
+from an explicit Stokes-from-periods bridge, every factor stated. The gauge
+chain of \S\ref{sec:point} sends $\Htwo$ to the companion system
+$B=\bigl[\begin{smallmatrix}0&1\\ R&0\end{smallmatrix}\bigr]$ by a
+\emph{scalar} gauge $y=x^{-17/6}w$; a scalar gauge leaves the Stokes
+\emph{matrices} invariant, so the single off-diagonal multiplier
+$s_{*}(B;x=0)$ of the slope-$\tfrac12$ point equals $s_{*}(\Htwo;t=0)$, which
+for a slope-$\tfrac12$ point is the Borel-plane connection coefficient
+$A_{\Phi}$. Combining with the transfer identity $A_{\Phi}=\Gamma(\tfrac43)A_{0}$,
+\begin{equation}\label{eq:kbridge}
+  \kappa:=\Gamma(\tfrac43)A_{0}=A_{\Phi}=s_{*}(B;x=0),
+\end{equation}
+the factor between $s_{*}$ and $\kappa$ being the identity and that between
+$A_{\Phi}$ and the large-order amplitude $A_{0}$ being exactly
+$\Gamma(\tfrac43)$; the identities hold to $130$, $200$, and $130$ digits
+respectively \claim{CC3-S6-CLOSE}. We record the consequence at the grade it
+earns:
+\begin{proposition}[\textsc{structural}]\label{prop:expperiod}
+$\kappa$ lies in the ring of exponential periods of the $\Htwo/L$ connection,
+constructively: it is the Borel-side connection coefficient $A_{\Phi}$ of
+\eqref{eq:proj}, certified by the explicit integrand chain
+$y\rightsquigarrow\Phi=y\odot I_{0}(2\sqrt z)\rightsquigarrow A_{\Phi}$ together
+with the numerical coefficient \eqref{eq:AphiVal}.
+\end{proposition}
+\noindent The integrand chain uses the modified Bessel kernel $I_{0}(2\sqrt z)$,
+an exponential period by \cite[10.9.19]{DLMF}, paired against the rapid-decay
+cycle in the sense of Hien's duality \cite{Hien}. The full
+exponential-\emph{motive} membership (an abstract object of the
+Fresan--Jossen category with a realisation comparison) is not asserted here; it
+is hypothesis (H2)/(H4) of \S\ref{sec:theorem} and gap G2/G4 of
+\S\ref{sec:gaps}.
+
+\subsection{Three independent channels}\label{sec:channels}
+The value \eqref{eq:AphiVal} is reached by three channels with disjoint inputs,
+which we separate because their mutual independence is the evidential backbone
+of (R3):
+\begin{itemize}
+\item \emph{Channel~A} (large-order): $A_{0}=\lim_{n}Q_{n}/((n!)^{2}3^{n}
+n^{1/3})$ from the integer sequence $Q_{n}$ alone ($N_{\max}=60000$), $\sim\!60$
+digits, with purely $1/n$ corrections (no $n^{-1/3}$, no logarithm), confirming
+a simple dominant Borel singularity.
+\item \emph{Channel~B} (frozen composition): $\kappa=\Gamma(\tfrac43)\Cebr/
+\sqrt\pi$ from the EBR-III $169$-digit $\Cebr$.
+\item \emph{Channel~C} (monodromy projector): \eqref{eq:proj}, $129$ digits,
+using only analytic continuation of $\Phi$.
+\end{itemize}
+Channel~A uses asymptotics of the original sequence, Channel~B an independent
+high-precision computation of $\Cebr$, and Channel~C the local monodromy of
+$L$; they share no intermediate quantity, and they agree
+\claim{CC3-2S2-KAPPA-NUM}.
+
+\section{The monodromy point and the coverage verdict}\label{sec:point}
+
+\subsection{The point $(\tr M_{0},\kappa)$}\label{sec:pointval}
+The topological monodromy of the trace-normal connection \eqref{eq:r} about
+$t=0$ has trace
+\begin{equation}\label{eq:trM0}
+  \tr M_{0}=-51.06556313995466226983167460994566156792\ldots,
+\end{equation}
+a hyperbolic $\SL_{2}$ element ($|\tr M_{0}|\gg2$), so the monodromy is
+\emph{irreducible} and the point lies off every reducibility locus. With
+$\kappa$, this fixes the $2$-dimensional $D_{8}$ character-variety point
+$(\tr M_{0},\kappa)$ \claim{CC3-2S2-2A-COORDS}. The accuracy witness is the
+invariance of \eqref{eq:trM0} under deformation of the integration path,
+radius, and node count (radius-independent to $\sim\!157$ digits, phase to
+$\sim\!177$), \emph{not} the structural relation $\det=1$.
+
+\subsection{A methodology note}\label{sec:pointmeth}
+Two integrator defects were found and fixed in computing \eqref{eq:trM0}, and
+we record them because each produces a plausible but wrong stable value. First,
+an asymmetric loop range silently dropped a node. Second---a named hazard for
+the whole corpus---module-level \texttt{mpf} constants created before the
+working precision is raised are evaluated at the default $15$ digits, which can
+counterfeit a $141$-digit ``stability''. The rule adopted throughout is to set
+the precision before creating any constant \claim{CC3-2S2-2A-METH}.
+
+\subsection{The gauge dictionary and the coverage verdict}\label{sec:coverage}
+The scalar gauge chain of \S\ref{sec:bridge} carries $\Htwo$ to the companion
+$B$ with two rank-$1$ irregular points---the $D_{8}$ shape, a symmetric
+degenerate confluent Heun system \claim{CC3-2S2-2B-DICT}. We then surveyed the
+solved $D_{8}$ connection problems to ask whether any computes $\kappa$. The
+verdict is \emph{not covered}, and the reason is a distinction we keep explicit
+in every crossing sentence:
+\begin{quote}\small\itshape
+\textbf{The tau-side / Lax-side line.} The constant $\kappa$ is a Lax-side
+Stokes multiplier of the linear system. The solved $D_{8}$ results compute
+tau-side objects---functions on the monodromy manifold---taking the monodromy
+data as input.
+\end{quote}
+Concretely: Its--Lisovyy--Prokhorov compute the connection \emph{constant} of a
+Painlev\'e tau function as an explicit Barnes-$G$/$\Gamma$ product of the
+monodromy data \cite{ILP}; Gavrylenko--Lisovyy represent the isomonodromic tau
+function as a Fredholm determinant assembled from the monodromy data
+\cite{GL}. In both, the monodromy (the analogue of $\kappa$) is the
+\emph{input}, never the output; neither yields a closed form for a Stokes
+multiplier. Moreover $\Htwo$ is non-rigid \eqref{eq:rig}, hence outside the
+rigid hypergeometric/Bessel/Airy catalogue where Stokes data are
+$\Gamma$-quotients \cite{FIKN,KatzRLS}. We therefore record \textsc{(iii) not
+covered}: no stated theorem computes the coordinate $\kappa$ at our point
+\claim{CC3-2S2-2C-VERDICT}. By the ceiling, this is not evidence for
+transcendence; it is the absence of a closed form that would have argued
+against it.
+
+\section{Two integer-relation nulls}\label{sec:nulls}
+
+We record two high-precision exclusions, each positive-control-validated, and
+the discipline rule that governs their reading.
+
+\subsection{The elementary null}\label{sec:nullelem}
+To $169$ digits, $\Cebr$ (hence $\kappa$, by \eqref{eq:kappaC}) is not an
+elementary $\Gamma$-quotient on the reflection-normalized $\tfrac{1}{24}\Z$
+grid, not a low-height combination of
+$\{1,\pi,\log2,\log3,\gamma_{E},\text{Catalan},\zeta(3),\zeta(5)\}$, and not
+algebraic of degree $\le8$ at height $\le10^{6}$; the positive controls fire
+\cite{EBRIII} \claim{EBR3-B-GAMMA}\,\claim{EBR3-B-CONST}\,\claim{EBR3-B-ALG}.
+This is the EBR-III frozen battery, cited and not recomputed.
+
+\subsection{The Barnes--Glaisher log-space null}\label{sec:nullbarnes}
+In log space, neither $\log\kappa$ nor $\log A_{0}$ is a $\Z$-linear
+combination over a Barnes-$G$/Glaisher-extended basis with arguments
+$j/m$, $m\in\{2,3,4,6,12\}$, to height $\le10^{12}$ at $150$ digits; the
+positive control $G(1/2)=2^{1/24}\pi^{-1/4}e^{1/8}A^{-3/2}$ fires with
+coefficient vector $[24,-1,6,36,-3]$ \claim{CC3-2S2-3-BARNES}.
+
+\subsection{The null-discipline rule}\label{sec:nulldisc}
+Both nulls are read under a fixed detection-threshold rule, which we state
+because it is twice load-bearing in the program and once caught a live false
+positive.
+\begin{quote}\small\itshape
+\textbf{Null-discipline.} An integer-relation search among $n$ terms with
+coefficient height $\le H$, tolerance $10^{-\tau}$, and working precision $d$
+detects a genuine relation only if $\tau\gg n\log_{10}H$ and $d>\tau$;
+otherwise any relation returned is a precision artifact, recognizable because
+its coefficients have magnitude $\sim10^{\tau/n}$. A null under a
+well-resourced search is a real exclusion bound to the stated height.
+\end{quote}
+In the locus computation of \S\ref{sec:locus} a first-pass degree-$10$ search at
+$\tau=60$ returned coefficients of size $\sim\!6\times10^{5}=10^{60/10}$, the
+artifact signature exactly; re-resourcing to $\tau=72$ with
+$(\deg+1)\log_{10}H\le56$ and $d=85$ returned the correct null
+\claim{EBR4-METH-NULLDISC}. By the ceiling, a null bounds non-elementarity to
+the searched precision and says nothing about $\Qbar$.
+
+\section{Off the classical locus}\label{sec:locus}
+
+The classical/algebraic $\PIII(D_{8})$ locus has two strata: \textbf{(R)}
+reducible monodromy (Riccati / special-function solutions) and \textbf{(A)}
+algebraic solutions (finite braid orbit, algebraic trace coordinates). We
+exclude both at our point.
+
+\paragraph{Stratum (R), unconditional.} By \eqref{eq:SL2} the Galois group is
+Zariski-dense in $\SL_{2}$, so the connection is irreducible and lies in no
+Borel subgroup; there is no reducible/Riccati member to be, and no numerical
+margin is needed \claim{EBR4-1-LOCUS-DIRECT}.
+
+\paragraph{Stratum (A), well-resourced.} For $\PIII(D_{8})$ the only algebraic
+solutions are $q=c\sqrt{t}$ with $c^{4}=1$, a set of at most four solutions
+defined over $\Q(i)$ \cite{OKSO}. The absolute Galois group permutes the four
+$c$'s, so the corresponding character-variety images form a Galois-stable set of
+size $\le4$, and each coordinate---in particular the trace---is an algebraic
+number of degree $\le4$ over $\Q$ whose conjugates are themselves trace
+coordinates of the finite orbit (hence of bounded modulus and small height).
+Now $\tr M_{0}$ of \eqref{eq:trM0} is \emph{not} algebraic of degree $\le4$ at
+height $\le10^{10}$: the PSLQ search is null and well-resourced
+($\tau=72\gg5\log_{10}10^{10}=50$, reinforced at degree $\le6$, $H\le10^{8}$ and
+degree $\le8$, $H\le10^{6}$), with the controls
+$\sqrt2,\,2\cos(2\pi/7),\,2\cos(2\pi/5)$ all firing. The degree-$\le4$ test
+strictly dominates the orbit degree bound, and independently $M_{0}$ has
+infinite order ($|\lambda|=0.0196\neq1$), excluding the finite-order subcase
+outright \claim{EBR4-1-LOCUS-DIRECT}. Therefore $(\tr M_{0},\kappa)$ is not a
+$q=c\sqrt{t}$ point, and the point lies off the locus.
+
+\begin{remark}[the residual, stated honestly]\label{rem:G5}
+Stratum (A) is \emph{hardened, not closed}. The argument assumes the orbit trace
+coordinate has height $\le10^{10}$---overwhelmingly safe, since it is a
+bounded-modulus algebraic integer of degree $\le4$, but not proven here. The
+remaining step is a finite, elementary computation: the explicit
+$q=c\sqrt{t}$ Stokes/monodromy trace. We state it as an open sub-problem
+(\S\ref{sec:open}, item~3), not as a completed exclusion.
+\end{remark}
+
+\section{The conditional theorem}\label{sec:theorem}
+
+\subsection{The named conjecture}\label{sec:namedconj}
+The transcendence input is the \emph{period conjecture for exponential motives}
+of Fresan--Jossen, the exponential analogue of Grothendieck's: for an
+exponential motive $M$,
+\begin{equation}\label{eq:FJ}
+  \trdeg_{\Q}\langle\text{periods}(M)\rangle=\dim\Gmot(M),
+\end{equation}
+every polynomial relation among the exponential periods being of motivic origin
+\cite{FresanJossen,KZ,AndrePanoramas}. (An AI-suggested arXiv identifier for
+this statement was checked and found to point to an unrelated physics paper; we
+cite the work as a book in preparation and attach no preprint number.)
+
+\subsection{The differential-to-motivic comparison}\label{sec:comparison}
+The bridge from \eqref{eq:SL2} to a motivic dimension is a separate statement
+from \eqref{eq:FJ}, and we make it explicit because conflating the two would
+overstate the result. For a motive whose de Rham realisation carries the
+relevant connection, the differential Galois group injects into the motivic
+Galois group as (the identity component of) a normal subgroup, whence
+\begin{equation}\label{eq:comp}
+  \dim\Gmot(M)\ge\dim\GGal=\dim\SL_{2}=3.
+\end{equation}
+This is theorem-grade in the classical (pure, regular-singular) setting
+\cite{AndreIHES,AndrePanoramas,AndreENS}. Here $M$ is an \emph{exponential}
+motive and the connection $L$ is irregular, so \eqref{eq:comp} is applied within
+the Fresan--Jossen framework and is contingent on realising $M$ as a genuine
+object of that category with a Stokes-aware comparison---hypothesis (H2)/(G4).
+We stress that \eqref{eq:comp} and \eqref{eq:FJ} are \emph{logically
+independent}: \eqref{eq:FJ} converts a dimension into a transcendence degree but
+never bounds the dimension from below, while \eqref{eq:comp} bounds the
+dimension but carries no transcendence content. Dropping either leaves the
+conclusion unreachable, as the drop-one analysis below records
+\claim{EBR4-0-HYP}.
+
+\subsection{The theorem}\label{sec:thmstatement}
+We state the result verbatim in its audited four-hypothesis form.
+
+\begin{theorem}[conditional]\label{thm:main}
+Let $M$ be the exponential motive attached to the rank-$2$ connection $\Htwo$
+(realised on the convergent Borel-$2$ transform $\Phi$; order-$4$ operator $L$,
+singular $\{0,1/3\}$, $z=\infty$ irregular of slope $\tfrac14$). Assume:
+\begin{itemize}
+\item[(H1, \textsc{structural})] $\kappa$ is an exponential period of $M$---%
+constructively the connection coefficient $A_{\Phi}=\kappa$
+(Proposition~\ref{prop:expperiod}, $129$ digits).
+\item[(H2, \textsc{conjectured} motivic / \textsc{verified} differential)]
+$\dim\Gmot(M)\ge3$, via $\GGal(\Htwo)=\SL_{2}$ (exact Kovacic, dimension $3$)
+transported to the motivic group by the comparison
+$\dim\Gmot\ge\dim\GGal$ \eqref{eq:comp} (theorem-grade classically
+\cite{AndreIHES,AndrePanoramas}; here contingent on the (G4) realisation and the
+irregular/exponential form of the comparison).
+\item[(H3, \textsc{conjectured} external)] the Fresan--Jossen period conjecture
+\eqref{eq:FJ} for exponential motives.
+\item[(H4, \textsc{verified})] the period-count / non-degeneracy data:
+$\dim H^{1}_{\mathrm{dR}}(\Htwo)=2$, the connection is irreducible ($\SL_{2}$
+Zariski-dense) and lies off the algebraic $\PIII(D_{8})$ locus, and $\kappa$ is
+the non-vanishing off-diagonal connection entry ($A_{\Phi}\neq0$), not a
+diagonal normalisation factor.
+\end{itemize}
+Then $\trdeg_{\Q}\langle\text{periods}(M)\rangle=\dim\Gmot(M)\ge3$ and the
+off-diagonal entry $\kappa$ is not algebraic: $\kappa\notin\Qbar$. Consequently
+the EBR-I/EBR-II connection coefficient $C=\kappa\sqrt{\pi}/\Gamma(4/3)$ is
+transcendental as well (an elementary $\Gamma$-multiple of $\kappa$).
+
+The conclusion is licensed only under the full conjunction
+$\mathrm{H1}\wedge\mathrm{H2}\wedge\mathrm{H3}\wedge\mathrm{H4}$ (drop-one
+analysis: each hypothesis is necessary). Dropping H3 leaves the unconditional
+residue only: $\kappa$ is a non-classical exponential period off the algebraic
+$\PIII(D_{8})$ locus---which says nothing about $\Qbar$.
+\end{theorem}
+
+\begin{proof}[Discussion of necessity (drop-one)]
+Drop H1: if $\kappa$ is not known to be a period of $M$, then \eqref{eq:FJ}
+constrains it not at all. Drop H2: if $\dim\Gmot(M)$ may be small, \eqref{eq:FJ}
+makes the period algebra possibly algebraic, and $\kappa$ possibly algebraic;
+crucially \eqref{eq:FJ} never supplies $\dim\ge3$. Drop H3: then
+$\dim\Gmot(M)\ge3$ is a purely group-theoretic fact with no transcendence
+content. Drop H4: the transcendence could live entirely in other period
+entries while the specific entry $\kappa$ is a diagonal normalisation. Each
+hypothesis is thus necessary, and H2, H3 are mutually non-implying
+\claim{EBR4-0-HYP}\,\claim{CC3-3-CONDITIONAL}. Positively, (H4) is what
+localises the algebra-level bound $\trdeg\ge3$ to $\kappa$ itself: in the
+period-torsor formalism the motivic group acts on the de Rham / rapid-decay
+comparison, an $\SL_{2}$ of dense image fixes no non-constant off-diagonal
+coordinate of the $2$-dimensional realisation, and (H4) certifies $\kappa$ to be
+such an entry (non-vanishing, off-diagonal, not a diagonal normalisation)---so
+$\kappa$ is not in the fixed field $\Qbar$. Without that certificate the
+dimension bound would not descend to the single entry.
+\end{proof}
+
+\subsection{Two facts about $\kappa$, never elided}\label{sec:twofacts}
+Hypothesis (H4) and the conclusion concern the \emph{same} entry $\kappa$, and a
+hostile reading could hear circularity. We therefore separate two facts that are
+genuinely distinct:
+\begin{itemize}
+\item[(a)] $\kappa=A_{\Phi}$ is the \emph{identified, non-vanishing}
+off-diagonal connection entry: $A_{\Phi}\neq0$ to $129$ digits, structurally
+$\Gamma(\tfrac43)\Cebr/\sqrt\pi$ with every factor nonzero. This is
+\textsc{verified} and is an input (H4).
+\item[(b)] The \emph{non-algebraicity} of that entry is what the conjectural
+chain (H1)--(H4) \emph{delivers}; it is the conclusion, not an assumed datum.
+\end{itemize}
+The existence and non-vanishing of the entry are independent of the
+transcendence question: (a) is settled unconditionally by the period-matrix
+computation, while (b) requires the full conjunction. Membership in the ring of
+exponential periods is, by itself, no arithmetic constraint---$\Qbar$ lies
+inside that ring---so (H1) does not pre-judge (b); the non-algebraicity is
+supplied only by the dimension lower bound (H2) feeding the period conjecture
+(H3). Conflating (a) and (b) would be the circularity; keeping them apart is the
+content of the theorem.
+
+\subsection{The ceiling, boxed}\label{sec:ceilingbox}
+\begin{quote}\small\itshape
+\textbf{Ceiling (final form, both directions).} The transcendence of $C$,
+equivalently of $\kappa=\Gamma(4/3)C/\sqrt\pi$, remains conjectural
+unconditionally; Theorem~\ref{thm:main} is the program's ceiling and says so.
+Exhibiting $\kappa$ as a constructive exponential period
+(Proposition~\ref{prop:expperiod}), the off-locus verdict (\S\ref{sec:locus}),
+the not-covered survey (\S\ref{sec:coverage}), and the two nulls
+(\S\ref{sec:nulls}) prove nothing about transcendence; a closed form, had one
+fired, would have argued the opposite---elementarity in an extended class. The
+period conjectures see the exponential provenance of $\kappa$, not its
+singularity type.
+\end{quote}
+
+\subsection{The gap list}\label{sec:gaps}
+The conditional chain rests on three open inputs, which we make a first-class
+artifact (this is the open-problems core, sharpened by the hypothesis audit so
+that the conjectural mass sits in two named, external places):
+\begin{center}
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.42\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+\toprule
+Gap & Statement & What would close it \\
+\midrule
+G1 & The Fresan--Jossen period conjecture \eqref{eq:FJ} is open. & A proof, or
+the single instance for $M$. \\
+G2/G4 & $M$ is not yet built as a Fresan--Jossen-category exponential motive
+with the expected Galois group and a verified irregular realisation comparison
+\eqref{eq:comp}; this is where the conjectural mass concentrates. & Construct
+$M=(X,f)$ and verify the Stokes-aware comparison; the seed is the
+$I_{0}(2\sqrt z)$ kernel. \\
+G5 & The off-locus exclusion of stratum (A) uses a height-$\le10^{10}$ bound on
+the orbit trace coordinate (Remark~\ref{rem:G5}). & The explicit $q=c\sqrt{t}$
+Stokes/monodromy trace---a finite elementary computation. \\
+\bottomrule
+\end{tabular}
+\end{center}
+The merge of the earlier ``genericity'' gap into G2/G4 is the substance of
+\S\ref{sec:twofacts}: entry-wise non-degeneracy is verified, so the only
+residual is the motivic realisation, not a separate non-vanishing hope
+\claim{EBR4-1-LOCUS-DIRECT}.
+
+\section{Four-class grade table}\label{sec:gradetable}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.46\textwidth}l>{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+\toprule
+Result & Grade & Evidence \\
+\midrule
+Core $\Htwo$, Borel-$2$ operator $L$, slope-$\tfrac14$ $\infty$ & V/S &
+\claim{CC3-2-CORE-CHAIN}, \claim{CC3-S6-PMAT} \\
+$\{0,\infty\}$ both slope $\tfrac12$; $\rig(\Htwo)=0$ & V & \claim{CC3-2-CORE-LOCAL},
+\claim{CC3-2S2-RIG} \\
+RULE~S $\Rightarrow$ $D_{8}^{(1)}=\PIII(D_{8})$ & V & \claim{CC3-2S2-RULES} \\
+$\GGal(\Htwo)=\SL_{2}$; non-Liouvillian & S & \claim{CC3-2-KOV} \\
+$\kappa=\Gamma(\tfrac43)A_{0}$ exact; transfer & S & \claim{CC3-2S2-KAPPA-RES} \\
+$A_{\Phi}=\kappa$ to $129$ d (projector); three channels & S/V &
+\claim{CC3-S6-PMAT}, \claim{CC3-2S2-KAPPA-NUM} \\
+$\kappa$ a constructive exponential period ($\kappa$-bridge) & S &
+\claim{CC3-S6-CLOSE} \\
+$\tr M_{0}=-51.0655\ldots$ hyperbolic; dim-$2$ point & V & \claim{CC3-2S2-2A-COORDS} \\
+gauge dictionary $\Htwo\to B$ ($D_{8}$ shape) & S & \claim{CC3-2S2-2B-DICT} \\
+coverage \textsc{(iii) not covered} (tau vs Lax) & V & \claim{CC3-2S2-2C-VERDICT} \\
+elementary $169$-d null & V & \claim{EBR3-B-GAMMA}, \claim{EBR3-B-CONST},
+\claim{EBR3-B-ALG} \\
+Barnes--Glaisher log-space null & V & \claim{CC3-2S2-3-BARNES} \\
+null-discipline rule & V & \claim{EBR4-METH-NULLDISC} \\
+off the algebraic $\PIII(D_{8})$ locus (R uncond., A hardened) & V/S &
+\claim{EBR4-1-LOCUS-DIRECT} \\
+H2$\perp$H3 audit; comparison explicit & V & \claim{EBR4-0-HYP} \\
+\textbf{Conditional theorem:} $\kappa\notin\Qbar$ under H1--H4 & C &
+\claim{CC3-3-CONDITIONAL} \\
+Unconditional transcendence of $C/\kappa$ & C & \claim{CC1-DISCIPLINE} \\
+\bottomrule
+\end{tabular}
+\end{center}
+No row is graded \textsc{proven}: the program's machine-checked cores are those
+of EBR-III (\S\ref{sec:lean}); EBR-IV's finitary identities are Lean-core
+candidates (\S\ref{sec:open}).
+
+\section{On the Lean substrate}\label{sec:lean}
+EBR-IV adds no machine-checked core. The only \textsc{proven} items in the
+program are the four EBR-III Lean~4 / Mathlib cores (degree-bound arithmetic,
+pullback-exponent integrality, eigenvalue-parity bookkeeping, and the parity of
+the relevant $4$-cycle), with axiom cones audited to subsets of
+$\{\textsf{propext},\textsf{Classical.choice},\textsf{Quot.sound}\}$ and no
+\textsf{sorryAx} \cite{EBRIII,Mathlib}. We flag the EBR-IV finitary identities
+that the same template could formalize in \S\ref{sec:open}.
+
+\section{Open problems}\label{sec:open}
+\begin{enumerate}
+\item \emph{Unconditional transcendence of $C/\kappa$} (\texttt{op:cc-transcendence}).
+The ceiling; Theorem~\ref{thm:main} stands on G1 and G2/G4, two named external
+conjectures.
+\item \emph{The motivic realisation} (G2/G4). Construct $M=(X,f)$ as a
+Fresan--Jossen object and verify the irregular realisation comparison
+\eqref{eq:comp}; the seed is the $I_{0}(2\sqrt z)$ kernel of
+\S\ref{sec:bridge}.
+\item \emph{The full off-locus close} (G5). The explicit $q=c\sqrt{t}$
+Stokes/monodromy trace removes the height-$\le10^{10}$ residual of
+Remark~\ref{rem:G5}; this is a finite elementary computation.
+\item \emph{Lean-core candidates for EBR-IV} (\texttt{op:cc3-5}): the
+$L$-operator and indicial data, the $\Htwo\to B$ gauge-chain identity, the
+Kovacic $\Q(\sqrt3)$-emptiness certificate, and the de Rham dimension counts,
+on the template of the EBR-III cores.
+\item \emph{A surface-type synthesis} (flagged). Both program constants---the
+Stokes constant of the quadratic-growth $V$-family on $D_{5}^{(1)}$ and the
+present $\kappa$ on $D_{8}^{(1)}$---are Stokes data of rank-$2$ Painlev\'e Lax
+operators. Whether the Sakai surface type on which a continued fraction's growth
+constant lands predicts the arithmetic of that constant is a question larger
+than this paper; we record it as a pointer, not a result.
+\end{enumerate}
+
+\section*{Reproducibility}
+All computations are reproducible from the accompanying package
+(\texttt{repro\_ebr4/}): the reduction and Borel-$2$ operator, the rigidity and
+RULE~S screen, the Kovacic classification, the period-matrix/connection
+coefficient by the monodromy projector, the monodromy point, the coverage
+survey, the Barnes battery, the hypothesis-independence audit, and the hardened
+locus exclusion, each with a canonical content hash recorded in
+\texttt{HASH\_MANIFEST.json}; a \texttt{README} gives a one-command verification
+path and \texttt{verify.py} re-derives every embedded self-hash and file hash
+(exit code $0$). The three $\kappa$ channels are independently reproducible.
+The frozen EBR-III package is untouched and is cited for the inherited
+$\Cebr$ and the elementary null.
+
+\medskip\noindent
+Load-bearing artifacts are pinned by SHA-256 prefix (full digests in
+\texttt{HASH\_MANIFEST.json}): the period matrix / connection coefficient
+\texttt{cc3\_s6\_1\_period\_matrix\_results.json} begins
+\texttt{56adcb10\dots}; the $\kappa$-bridge
+\texttt{cc3\_s6\_2\_bridge\_results.json} begins \texttt{2cc2f6fb\dots}; the
+hypothesis audit \texttt{ebr4\_0\_hypothesis\_audit\_results.json} begins
+\texttt{d86256cc\dots}; the hardened locus
+\texttt{ebr4\_1\_locus\_hardening\_results.json} begins \texttt{dae56db4\dots};
+and the EBR-III integer-relation null begins \texttt{9a3f942d\dots}.
+
+\begin{thebibliography}{99}
+\bibitem{EBRI} Papanokechi, \emph{An Edge--Borel Radius Theorem for Positive
+Polynomial Continued Fractions}, Zenodo,
+\href{https://doi.org/10.5281/zenodo.20564079}{10.5281/zenodo.20564079}.
+\bibitem{EBRII} Papanokechi, \emph{The EBR Amplitude as a Connection
+Coefficient: Characterization and a Rigidity Dividing-Line Conjecture},
+Zenodo,
+\href{https://doi.org/10.5281/zenodo.20566465}{10.5281/zenodo.20566465}.
+\bibitem{EBRIII} Papanokechi, \emph{The EBR operator at $d=2$ is not a
+$G$-operator and its differential Galois group is $\SL(4)$}, Zenodo (EBR-III);
+concept DOI to be pinned at deposit.
+\bibitem{Sakai} H.~Sakai, \emph{Rational surfaces associated with affine root
+systems and geometry of the Painlev\'e equations}, Comm.\ Math.\ Phys.\
+\textbf{220} (2001), 165--229.
+\bibitem{vdPutSaito} M.~van der Put and M.-H.~Saito, \emph{Moduli spaces for
+linear differential equations and the Painlev\'e equations}, Ann.\ Inst.\
+Fourier (Grenoble) \textbf{59} (2009), 2611--2667.
+\bibitem{OKSO} Y.~Ohyama, H.~Kawamuko, H.~Sakai, and K.~Okamoto, \emph{Studies
+on the Painlev\'e equations V. Third Painlev\'e equations of special type
+$P_{\mathrm{III}}(D_{7})$ and $P_{\mathrm{III}}(D_{8})$}, J.\ Math.\ Sci.\ Univ.\
+Tokyo \textbf{13} (2006), 145--204.
+\bibitem{ILP} A.~Its, O.~Lisovyy, and A.~Prokhorov, \emph{Monodromy dependence
+and connection constants for Painlev\'e tau functions}, Comm.\ Math.\ Phys.\
+\textbf{363} (2018), 1--58.
+\bibitem{GL} P.~Gavrylenko and O.~Lisovyy, \emph{Fredholm determinant and
+Nekrasov sum representations of isomonodromic tau functions}, Comm.\ Math.\
+Phys.\ \textbf{363} (2018), 1--58.
+\bibitem{FIKN} A.~S.~Fokas, A.~R.~Its, A.~A.~Kapaev, and V.~Yu.~Novokshenov,
+\emph{Painlev\'e Transcendents: The Riemann--Hilbert Approach}, Math.\ Surveys
+Monogr.\ \textbf{128}, Amer.\ Math.\ Soc., 2006.
+\bibitem{KatzRLS} N.~M.~Katz, \emph{Rigid Local Systems}, Ann.\ of Math.\ Stud.\
+\textbf{139}, Princeton Univ.\ Press, 1996.
+\bibitem{vdPutSinger} M.~van der Put and M.~F.~Singer, \emph{Galois Theory of
+Linear Differential Equations}, Grundlehren der mathematischen Wissenschaften
+\textbf{328}, Springer, 2003.
+\bibitem{Kovacic} J.~J.~Kovacic, \emph{An algorithm for solving second order
+linear homogeneous differential equations}, J.\ Symbolic Comput.\ \textbf{2}
+(1986), 3--43.
+\bibitem{FS} P.~Flajolet and R.~Sedgewick, \emph{Analytic Combinatorics},
+Cambridge Univ.\ Press, 2009 (Ch.~VI, singularity analysis / transfer).
+\bibitem{Hien} M.~Hien, \emph{Periods for flat algebraic connections}, Invent.\
+Math.\ \textbf{178} (2009), 1--22 (rapid-decay homology and the period pairing).
+\bibitem{DLMF} F.~W.~J.~Olver et al.\ (eds.), \emph{NIST Digital Library of
+Mathematical Functions}, \href{https://dlmf.nist.gov/}{dlmf.nist.gov}, \S10.9.
+\bibitem{FresanJossen} J.~Fres\'an and P.~Jossen, \emph{Exponential Motives}
+(book in preparation).
+\bibitem{KZ} M.~Kontsevich and D.~Zagier, \emph{Periods}, in: \emph{Mathematics
+Unlimited---2001 and Beyond}, Springer, 2001, 771--808.
+\bibitem{AndreIHES} Y.~Andr\'e, \emph{Pour une th\'eorie inconditionnelle des
+motifs}, Publ.\ Math.\ IH\'ES \textbf{83} (1996), 5--49.
+\bibitem{AndrePanoramas} Y.~Andr\'e, \emph{Une introduction aux motifs (motifs
+purs, motifs mixtes, p\'eriodes)}, Panoramas et Synth\`eses \textbf{17}, Soc.\
+Math.\ France, 2004.
+\bibitem{AndreENS} Y.~Andr\'e, \emph{Diff\'erentielles non commutatives et
+th\'eorie de Galois diff\'erentielle ou aux diff\'erences}, Ann.\ Sci.\ \'Ecole
+Norm.\ Sup.\ \textbf{34} (2001), 685--739.
+\bibitem{Mathlib} The Mathlib Community, \emph{The Lean Mathematical Library},
+CPP 2020, 367--381.
+\end{thebibliography}
+
+\end{document}

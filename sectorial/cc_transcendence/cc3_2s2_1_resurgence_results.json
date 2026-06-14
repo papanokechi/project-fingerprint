@@ -1,0 +1,141 @@
+{
+  "op": "cc3-2s2-1-resurgence",
+  "task_id": "op:cc-transcendence/cc3-2s2",
+  "rename": "K -> kappa (CC3-2S2-REN); frozen artifacts keep recorded name 'K' with a rename note.",
+  "bridge_identity": "kappa = Gamma(4/3) * A0,  A0 = lim_{n->inf} Q_n/((n!)^2 3^n n^{1/3})",
+  "bridge_grade": "STRUCTURAL (exact: Flajolet-Sedgewick transfer theorem applied to the cc3-1b definition of kappa as the (1-3z)^{-4/3} amplitude of Phi)",
+  "stokes_interpretation": "A0 is the Borel-plane singularity amplitude at z=1/3 (instanton action); kappa is the associated Stokes-type constant of H2.",
+  "equivalences": {
+    "A0_eq_CEBR_over_sqrtpi": "A0 = C_EBR/sqrt(pi)",
+    "frozen_identity_collapse": "C_EBR = kappa (4/3) sqrt(pi)/Gamma(7/3); Gamma(7/3)=(4/3)Gamma(4/3) => kappa = Gamma(4/3) C_EBR/sqrt(pi) = Gamma(4/3) A0."
+  },
+  "numerical_confirmation": {
+    "frozen_kappa_130": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+    "channel_A_large_order": {
+      "independent_of": "cc3-1b Fuchsian continuation (uses ONLY the Q_n recurrence + exponent 4/3)",
+      "Nmax": 60000,
+      "method": "Richardson on geometric node ladder, x=1/n grid (corrections are PURE integer powers of 1/n: no n^{-1/3} terms, no logs -- corroborates the clean log-free single-dominant Borel singularity)",
+      "agreeing_digits_vs_frozen": 60,
+      "A0_best": "1.72399795138777440647669074957976629134161322",
+      "kappa_est": "1.53949484857664103484378190338406903821939088736891624878067",
+      "stability_table": [
+        {
+          "nodes_used": 8,
+          "nmin": 3511,
+          "A0": "1.72399795138777440647669074957976626500454277",
+          "kappa_est": "1.53949484857664103484378190338406901470092658",
+          "agree_digits_vs_frozen": 34
+        },
+        {
+          "nodes_used": 10,
+          "nmin": 1560,
+          "A0": "1.72399795138777440647669074957976629134162552",
+          "kappa_est": "1.53949484857664103484378190338406903821940187",
+          "agree_digits_vs_frozen": 40
+        },
+        {
+          "nodes_used": 12,
+          "nmin": 693,
+          "A0": "1.72399795138777440647669074957976629134161322",
+          "kappa_est": "1.53949484857664103484378190338406903821939089",
+          "agree_digits_vs_frozen": 46
+        },
+        {
+          "nodes_used": 14,
+          "nmin": 308,
+          "A0": "1.72399795138777440647669074957976629134161322",
+          "kappa_est": "1.53949484857664103484378190338406903821939089",
+          "agree_digits_vs_frozen": 50
+        },
+        {
+          "nodes_used": 16,
+          "nmin": 137,
+          "A0": "1.72399795138777440647669074957976629134161322",
+          "kappa_est": "1.53949484857664103484378190338406903821939089",
+          "agree_digits_vs_frozen": 54
+        },
+        {
+          "nodes_used": 18,
+          "nmin": 60,
+          "A0": "1.72399795138777440647669074957976629134161322",
+          "kappa_est": "1.53949484857664103484378190338406903821939089",
+          "agree_digits_vs_frozen": 57
+        },
+        {
+          "nodes_used": 20,
+          "nmin": 27,
+          "A0": "1.72399795138777440647669074957976629134161322",
+          "kappa_est": "1.53949484857664103484378190338406903821939089",
+          "agree_digits_vs_frozen": 59
+        },
+        {
+          "nodes_used": 22,
+          "nmin": 12,
+          "A0": "1.72399795138777440647669074957976629134161322",
+          "kappa_est": "1.53949484857664103484378190338406903821939089",
+          "agree_digits_vs_frozen": 60
+        }
+      ],
+      "float_guard_digits": 335
+    },
+    "channel_B_frozen_composition": {
+      "formula": "kappa = Gamma(4/3) C_EBR/sqrt(pi)",
+      "C_EBR_used": "3.055706807890481365701912201727681368875542774973830574676375050047173604353962458288292799650089998918200014506258804205163411515501549494446823017585278488893394706741693",
+      "agreeing_digits": 129,
+      "kappa_value": "1.5394948485766410348437819033840690382193908905531487309262945606110930305301264892895955483778371219096778168570270630261033131609",
+      "note": "re-expresses the frozen 171-digit identity; confirms the Gamma-algebra (Gamma(7/3)=(4/3)Gamma(4/3)) to >=100 digits. Adds no NEW content beyond the frozen C_EBR<->kappa identity; the independent content is channel A."
+    },
+    "consistency_A0_eq_CEBR_over_sqrtpi": {
+      "A0_from_C": "1.7239979513877744064766907495797662913416132235659",
+      "A0_from_largeorder": "1.72399795138777440647669074957976629134161322"
+    }
+  },
+  "integrand_chain": [
+    {
+      "step": "S1",
+      "statement": "y(t)=sum Q_n t^n is Gevrey-2: |Q_n| ~ A0 (n!)^2 3^n n^{1/3}, so |Q_n| <= C H^n (n!)^2 (Gevrey order 2).",
+      "grade": "STRUCTURAL",
+      "provenance": "Q_n recurrence + A0 extraction (this script)"
+    },
+    {
+      "step": "S2",
+      "statement": "I0-normalized Borel-2 transform Phi(z)=sum Q_n z^n/(n!)^2 = y (*) I0(2 sqrt z) (Hadamard product); radius 1/3; related to the standard (2n)!-Borel G(s)=sum Q_n s^n/(2n)! by the binom(2n,n) Hadamard factor.",
+      "grade": "STRUCTURAL",
+      "provenance": "Hadamard product; cc3-1A 7762ace0"
+    },
+    {
+      "step": "S3",
+      "statement": "I0(2 sqrt z) = (1/2pi i) oint exp(x + z/x) dx/x  -- the Borel kernel is an EXPONENTIAL PERIOD (classical contour integral).",
+      "grade": "THEOREM (cited)",
+      "provenance": "DLMF 10.9.19 / Watson Bessel 6.2"
+    },
+    {
+      "step": "S4",
+      "statement": "Phi assembles as a Hadamard contour pairing of the Borel-summed y against the I0 kernel; the DIVERGENT-y leg requires Borel-2 summability in arg!=0 (the only singular ray is arg=0, carrying the z=1/3 singularity).",
+      "grade": "STRUCTURAL (summability cited)",
+      "provenance": "Loday-Richaud LNM 2154 (Borel-Laplace)"
+    },
+    {
+      "step": "S5",
+      "statement": "kappa = coefficient of (1-3z)^{-4/3} in Phi at z=1/3 = Stokes datum = discontinuity amplitude across the singular ray = Gamma(4/3) A0.",
+      "grade": "STRUCTURAL",
+      "provenance": "transfer theorem (Flajolet-Sedgewick VI.1) + cc3-1b def"
+    },
+    {
+      "step": "S6",
+      "statement": "=> 'kappa is an exponential period / a Stokes constant of the meromorphic connection L'. Full exponential-MOTIVE membership (Fresan-Jossen) stays CONJECTURED-with-architecture: the rapid-decay-cycle pairing for the divergent-y leg is NOT constructed here (stage-2 Hien work).",
+      "grade": "CONJECTURED-with-architecture",
+      "provenance": "Fresan-Jossen (architecture only)"
+    }
+  ],
+  "supersedes": "the dossier line 'rank-2 rapid-decay pairing not yet built' is replaced by this explicit exponential-period architecture (S1-S6); stage-2 builds the Hien pairing (S4/S6).",
+  "ceiling": "A Stokes reframing / exponential-period architecture proves NOTHING about transcendence; unconditional transcendence of C/kappa is NOT a deliverable of op:cc-3 at any grade.",
+  "references": [
+    "Flajolet & Sedgewick, Analytic Combinatorics, CUP 2009, Thm VI.1 (transfer)",
+    "Dingle, Asymptotic Expansions, Academic Press 1973 (late-terms = singularity amplitude)",
+    "Loday-Richaud, LNM 2154, Springer 2016 (Borel-Laplace summability, Stokes constants)",
+    "DLMF 10.9.19 / Watson, Bessel Functions 6.2 (I0 contour integral)",
+    "Fresan & Jossen, Exponential Motives (in prep.) -- architecture, not a closed theorem here"
+  ],
+  "canonical_sha256_of_hashfree_object": "8f52843c2e389609c932d25a76b79cfcc422782fc31a0c87392edeb1e8c653f9"
+}
