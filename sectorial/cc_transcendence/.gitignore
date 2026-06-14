@@ -1,5 +1,6 @@
 draft/*.aux
 draft/*.log
 draft/*.out
+draft/*.zip
 **/__pycache__/
 **/.lake/

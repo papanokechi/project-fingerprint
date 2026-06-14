@@ -1,4 +1,8 @@
 {
+  "files": [
+    "./ebr3_v1.pdf",
+    "./ebr3_repro.zip"
+  ],
   "metadata": {
     "upload_type": "publication",
     "publication_type": "preprint",
@@ -33,13 +37,13 @@
     "related_identifiers": [
       {
         "identifier": "10.5281/zenodo.20564079",
-        "relation": "isContinuationOf",
+        "relation": "continues",
         "scheme": "doi",
         "resource_type": "publication-preprint"
       },
       {
         "identifier": "10.5281/zenodo.20566465",
-        "relation": "isContinuationOf",
+        "relation": "continues",
         "scheme": "doi",
         "resource_type": "publication-preprint"
       },
