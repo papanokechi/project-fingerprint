@@ -1,0 +1,132 @@
+{
+  "lean": {},
+  "ledger": {
+    "claims_cc.jsonl": "a168f2f791883fc6aaf7144154c6436d852cbed7cad405e039930f682680297f"
+  },
+  "paper": {
+    "ebr4_v0.pdf": "afa69197ce7b53003c561ca717dd6365ac021e869c9f692ce1c293e07c22382b",
+    "ebr4_v0.tex": "aa2bb5a073eade6c508f53c5ad0e4de236eb433219ec5db4d559da1f62c6f168"
+  },
+  "reports": {
+    "REPORT_cc3_2a.md": "7800a2993b43d82adf8be053579863d599aef619c1c5e9641677a199d289683a",
+    "REPORT_cc3_2b.md": "eac792f227874232082e5db00e6b8dccf65798c3fc8640bf91c14c6cc9e3f60b",
+    "REPORT_cc3_2c.md": "c1ca5981baeb06245e134c9296dad80298fb3f689c0824c336812a2aaa5b6fc2",
+    "REPORT_cc3_final.md": "6bd872ff52d08c8351b631d2de3cc994eb0c6d102dfe4697265afa668af73d3e"
+  },
+  "results": {
+    "cc3_2_1_h2_classify_results.json": {
+      "embedded": "e71e915fe616f9447668adf30fd5bd83eede5fcccb122d2c3dc0c131f80f1672",
+      "file_sha256": "e7206e974b56a0e79dfbdcee20f2b0723d17656b5b6550f0e449b095306c6b3f",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "e71e915fe616f9447668adf30fd5bd83eede5fcccb122d2c3dc0c131f80f1672",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_2s2_0_rigidity_ruleS_results.json": {
+      "embedded": "6c8dd5ee9106abbcfadf4c497d154aac80dc0e1b1b10d7592c56a3a14f458a14",
+      "file_sha256": "fb60d57dbeb66e9c418ce920086ad8a8bf2ddac0e606f7af61c4ca6cfdf9e388",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "6c8dd5ee9106abbcfadf4c497d154aac80dc0e1b1b10d7592c56a3a14f458a14",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_2s2_1_resurgence_results.json": {
+      "embedded": "8f52843c2e389609c932d25a76b79cfcc422782fc31a0c87392edeb1e8c653f9",
+      "file_sha256": "0f8c35b3a48e7a8aeea0a1f68234c6e2391a8945158dc0e44996c7bd46be38b1",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "8f52843c2e389609c932d25a76b79cfcc422782fc31a0c87392edeb1e8c653f9",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_2s2_2a_monodromy_results.json": {
+      "embedded": "b1fea3ed41f87e1a11c2a3743057abdb9e1c242ca7e3d60f471894dc61343c81",
+      "file_sha256": "6da9a6fa32a32079c7aa9ad993ff995431863ee8b48fe72da0ceee312b24b2d9",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "b1fea3ed41f87e1a11c2a3743057abdb9e1c242ca7e3d60f471894dc61343c81",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_2s2_2b_dictionary_results.json": {
+      "embedded": "87be6028174634f7253818cbb709ed5ac99199a035cec18160d0bdb21cc5eeff",
+      "file_sha256": "0f447d141e6e9be53a91a8dcb9e61b3b05dfdd7b799d78d0f26efb4712dc0cc6",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "87be6028174634f7253818cbb709ed5ac99199a035cec18160d0bdb21cc5eeff",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_2s2_2c_coverage_results.json": {
+      "embedded": "c72bec8899cf4d2b67cc171935ddf81df22a5f2910c8861e7fda08341503aad7",
+      "file_sha256": "4a763e02924b96aed9d78da0cbe3139e6fdbc08e799ec190830cc66cea476a58",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "c72bec8899cf4d2b67cc171935ddf81df22a5f2910c8861e7fda08341503aad7",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_2s2_3_barnes_battery_results.json": {
+      "embedded": "1887c4103ba5e20a54bed3a45fbcea04acc810406b19510eb0b15e4a3aae6e02",
+      "file_sha256": "82ccee8e6b840251123c916a1fc373610acef219fcf0707bb7b58d87e9c314ad",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "1887c4103ba5e20a54bed3a45fbcea04acc810406b19510eb0b15e4a3aae6e02",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_3_1_locus_results.json": {
+      "embedded": "a6b8d5889f96013394d0911c144ace13f9a70771bfafe51f8237d2c00285c86b",
+      "file_sha256": "2732625d6ffe584866e48f5cce9a67e8728c43c6e70357c9522181483a7e8adf",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "a6b8d5889f96013394d0911c144ace13f9a70771bfafe51f8237d2c00285c86b",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_3_2_conditional_theorem_results.json": {
+      "embedded": "1b15e7ac9a503c30e1cdae8a736677b401c2f1d8c815a2e02a2e0f18908fbfdd",
+      "file_sha256": "9219fb144082797830b60de6daf8cb13a68d6f0f133e0a655f81bbd817e297e3",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "1b15e7ac9a503c30e1cdae8a736677b401c2f1d8c815a2e02a2e0f18908fbfdd",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_3_3_closeout_results.json": {
+      "embedded": "7c5d38e92d9fb835cfb5e3ca4be2faaad1db0a884382620ce116e0205ef822f1",
+      "file_sha256": "4e608612e49bb43a8b914ab99902d2bb901e14672d4bf343c20dae9f10c5e5b0",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "7c5d38e92d9fb835cfb5e3ca4be2faaad1db0a884382620ce116e0205ef822f1",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_s6_1_period_matrix_results.json": {
+      "embedded": "56adcb100d841756d24babb9017bbbb718887a6fc48d301ac45ba1594b3e7fb4",
+      "file_sha256": "59de97b13ef7ddca8d9aafa163fb8b7be380fc45e6597c40938d4e4eb252dd36",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "56adcb100d841756d24babb9017bbbb718887a6fc48d301ac45ba1594b3e7fb4",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "cc3_s6_2_bridge_results.json": {
+      "embedded": "2cc2f6fb8f0c710496d021a321f710f8a15753f66bbeaf2e1d321beb5a73d9d3",
+      "file_sha256": "50ff73e0467ea9aa1f559081414ff5554efaa7bc45d018bd48737f3b48a094e6",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "2cc2f6fb8f0c710496d021a321f710f8a15753f66bbeaf2e1d321beb5a73d9d3",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "ebr4_0_hypothesis_audit_results.json": {
+      "embedded": "d86256cc460e0a45b3c67e2a43b101bcd84402609c06bf1e2c2ecc239156bc87",
+      "file_sha256": "86393d5e9ec1f6ca3e76cdc3a9bfc2981c7b5558abb47d0cb39af0be15ba9e2b",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "d86256cc460e0a45b3c67e2a43b101bcd84402609c06bf1e2c2ecc239156bc87",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    },
+    "ebr4_1_locus_hardening_results.json": {
+      "embedded": "dae56db4215caf40bd5edde4e976280206a295bab142cd056d73f6c7d0d948da",
+      "file_sha256": "afa1bee8a9107932d6b741414ef118cd060f682b7b2607303324b2226a1a7a02",
+      "matched_recipe": "default-seps/no-nl/strip-hashkey",
+      "recomputed_hashfree": "dae56db4215caf40bd5edde4e976280206a295bab142cd056d73f6c7d0d948da",
+      "self_hash_key": "canonical_sha256_of_hashfree_object"
+    }
+  },
+  "scripts": {
+    "cc3_2_1_h2_classify.py": "2aa46a27d75fd42a6ef6b8e27817963356154ae77c60c42a9189ac79ce2fd8bb",
+    "cc3_2s2_0_rigidity_ruleS.py": "440016c1a3c3d65dcd61108f46b8d5943f0e3cf9ee69d16d657b2a8733a9e417",
+    "cc3_2s2_1_resurgence.py": "037af1ef1b0eeffe53174e78c29378d82a3645f021214e334ca75e2853da2bab",
+    "cc3_2s2_2a_monodromy.py": "89fd21ae1ddc750cf17b278dd4d9f99c2a1f2bd2d5822d6e138180cdb72edde1",
+    "cc3_2s2_2b_dictionary.py": "06846582584aa0f5bcdb59253db83d5e8073c64333c803b79320ec44a1cb3604",
+    "cc3_2s2_2c_coverage.py": "f58fcc405dbadecd276e95db2e2ddcf63d82aeb23b18e5f9fa5dbdde9975fde7",
+    "cc3_2s2_3_barnes_battery.py": "fbc4eec0f5c7cad40abbc2a844f0898cad5d733ac290f7c11ccb31d99eb4604a",
+    "cc3_3_1_locus.py": "f5434d6f1431c8e51dae7394bdd79f7ca23b6cdecb03177ad11e81106667f26f",
+    "cc3_3_2_conditional_theorem.py": "24921e57ef2c28026dc1969fae214a745351e8dfd41fab2fcb4389af91b60c16",
+    "cc3_3_3_closeout.py": "4045b22f65e7c1c9c891a8daab219e3b62d9e335cdedc3d2bf11a154508df632",
+    "cc3_s6_1_period_matrix.py": "bb8395da3fce5796e4ecf8863498ce85ca64f18793bb3617f546556fdfd01894",
+    "cc3_s6_2_bridge.py": "edf002198558e83891578ddb088a6f7042da2c1832ca7a95101bd8561557ca1c",
+    "ebr4_0_hypothesis_audit.py": "3e642129a05ab256e5419a1a7b78b78e2f03cf601ac22bae41162c4cdb7dcd21",
+    "ebr4_1_locus_hardening.py": "a31b48bbdd49b50ae3c763db45b7761d325970ccceed5c319841fca050d0276d"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "op": "cc3-4a",
+  "task_id": "op:cc-transcendence/cc3-1c",
+  "objective": "structure-motivated PSLQ null battery on the connection constant K; falsify 'K is polylog-elementary / low-height MZV-class / a MIXED Gamma x polylog combination'.",
+  "precision_policy": {
+    "reliable_digits": 169,
+    "mp_dps": 169,
+    "tol": "1e-150",
+    "guard_digits": 19,
+    "K_source": "EXTENDED from frozen 172-digit C via exact factor K = C*Gamma(7/3)/((4/3)*sqrt(pi)); does NOT overwrite the frozen 130-digit direct value",
+    "K_extension_vs_frozen_direct_residual": "1.04768e-130",
+    "detection_threshold_note": "with N reals known to 169 digits PSLQ reliably resolves relations of height <= ~10^(169/N); each tier's maxcoeff sits inside this bound, so a NULL means no relation of height <= maxcoeff exists."
+  },
+  "skipped_by_argument": {
+    "pure_gamma_monomial": "K = C*[exact Gamma/algebraic factor] => a pure Gamma(k/3) relation on log K is equivalent to one on C, already NULLED at 169 digits by ebr3-b (9a3f942d...). Only MIXED tiers are new.",
+    "bessel_moment_tier": "not added: cc3-1c-3 is NON-RIGID, no Kloosterman/Airy rigid-catalogue match, so Broadhurst-Mellit Bessel-moment adjacency is not motivated."
+  },
+  "targets": {
+    "K": "1.53949484857664103484378190338406903821939089055314873092629",
+    "C_EBR_frozen": "3.05570680789048136570191220172768136887554277497383057467638",
+    "reduction_factor": "(4/3)*sqrt(pi)/Gamma(7/3)"
+  },
+  "positive_controls": {
+    "polylog_Li2_half": {
+      "relation": [
+        -12,
+        1,
+        -6
+      ],
+      "residual": "6.6243373e-170",
+      "expected": "[12,-1,6] (12 Li2(1/2) - pi^2 + 6 log^2 2 = 0)",
+      "detected": true
+    },
+    "algebraic_sqrt2": {
+      "relation": [
+        2,
+        0,
+        -1
+      ],
+      "residual": "0.0",
+      "expected": "[-2,0,1]",
+      "detected": true
+    },
+    "zeta2_pi2": {
+      "relation": [
+        -6,
+        1
+      ],
+      "residual": "1.3248675e-169",
+      "expected": "[6,-1]",
+      "detected": true
+    },
+    "ALL_DETECTED": true
+  },
+  "tier_polylog_weight_graded": {
+    "maxcoeff_1000000000": {
+      "basis": [
+        "K",
+        "1",
+        "log2",
+        "log3",
+        "pi^2",
+        "zeta3",
+        "log^2 3",
+        "log^3 3",
+        "pi^2*log3",
+        "Li2(1/3)",
+        "Li3(1/3)",
+        "Catalan"
+      ],
+      "weight_grading": "<= 3 (log/polylog), cubic args 1/3, quartic Catalan",
+      "height_maxcoeff": 1000000000,
+      "dps": 169,
+      "relation": null,
+      "residual": null,
+      "verdict": "NULL (no relation at this height/dps)"
+    },
+    "maxcoeff_1000000000000": {
+      "basis": [
+        "K",
+        "1",
+        "log2",
+        "log3",
+        "pi^2",
+        "zeta3",
+        "log^2 3",
+        "log^3 3",
+        "pi^2*log3",
+        "Li2(1/3)",
+        "Li3(1/3)",
+        "Catalan"
+      ],
+      "weight_grading": "<= 3 (log/polylog), cubic args 1/3, quartic Catalan",
+      "height_maxcoeff": 1000000000000,
+      "dps": 169,
+      "relation": null,
+      "residual": null,
+      "verdict": "NULL (no relation at this height/dps)"
+    }
+  },
+  "tier_mixed_gamma_polylog": {
+    "maxcoeff_1000000000": {
+      "basis": [
+        "K",
+        "1",
+        "log2",
+        "log3",
+        "pi^2",
+        "zeta3",
+        "log^2 3",
+        "log^3 3",
+        "pi^2*log3",
+        "Li2(1/3)",
+        "Li3(1/3)",
+        "Catalan",
+        "Gamma(1/3)",
+        "Gamma(2/3)",
+        "Gamma(1/6)"
+      ],
+      "height_maxcoeff": 1000000000,
+      "dps": 169,
+      "relation": null,
+      "residual": null,
+      "verdict": "NULL (no relation at this height/dps)"
+    }
+  },
+  "verdict": {
+    "status": "ALL-NULL",
+    "summary": "No integer relation involving K was found in the polylog/MZV weight-graded tier or the mixed Gamma x polylog tier at the declared heights and dps=169; positive controls all fired. To 169 digits K is not polylog-elementary (weight<=3, height <=1e12) and not a low-height mixed Gamma x polylog combination (height<=1e9). Pure-Gamma tiers were skipped by argument (equivalent to already-nulled C tiers).",
+    "grade": "VERIFIED (high-precision null, positive-control-validated)"
+  },
+  "canonical_sha256_of_hashfree_object": "94c3eb916392a87e983bcb9ad82683b1ea05772c904543f5720a13e84558deb2"
+}

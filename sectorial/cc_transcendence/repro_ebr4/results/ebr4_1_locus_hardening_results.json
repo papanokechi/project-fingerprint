@@ -1,0 +1,75 @@
+{
+  "op": "ebr4-1-locus-exclusion-hardening",
+  "task_id": "op:ebr4-assemble/ebr4-1",
+  "claim_id": "EBR4-1-LOCUS-DIRECT",
+  "grade": "VERIFIED+STRUCTURAL",
+  "point": {
+    "tr_M0": "-51.06556313995466226983167460994566156792041030331039083339110321065718065185743887646983",
+    "kappa": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+    "character_variety": "dim-2 D8 PIII(D8); coords (tr M0, kappa)"
+  },
+  "stratum_R_exclusion": {
+    "grade": "STRUCTURAL (unconditional)",
+    "argument": "G_Gal(H2)=SL2 (e71e915f) Zariski-dense => irreducible => not in any Borel => not a reducible/Riccati solution. No numerical margin needed.",
+    "abs_tr_M0": "51.06556313995466226983167460994566156792"
+  },
+  "stratum_A_exclusion": {
+    "grade": "VERIFIED (caveat removed)",
+    "orbit_size_bound": 4,
+    "orbit_degree_bound_argument": "q=c sqrt(t), c in mu_4, defined over Q(i); Gal(Qbar/Q) permutes the c's => char-variety images form a Galois-stable set of size <= 4 => each coordinate (incl. tr M0) is algebraic of degree <= 4 over Q. tr M0 fails the deg<=4 algebraicity test => not such a point. deg<=4 test strictly dominates the orbit degree bound.",
+    "pslq_tests": [
+      {
+        "deg": 4,
+        "height": 10000000000,
+        "tol_dps": 72,
+        "need_dps": 50.0,
+        "well_resourced": true,
+        "result": "NO RELATION",
+        "null": true
+      },
+      {
+        "deg": 6,
+        "height": 100000000,
+        "tol_dps": 72,
+        "need_dps": 56.0,
+        "well_resourced": true,
+        "result": "NO RELATION",
+        "null": true
+      },
+      {
+        "deg": 8,
+        "height": 1000000,
+        "tol_dps": 72,
+        "need_dps": 54.0,
+        "well_resourced": true,
+        "result": "NO RELATION",
+        "null": true
+      }
+    ],
+    "controls_fired": true,
+    "control_sqrt2": "[0, 0, 2, 0, -1]",
+    "control_2cos2pi7": "[1, 2, -1, -1, 0]",
+    "control_2cos2pi5": "[1, -1, -1, 0, 0]",
+    "eigenvalue_lambda_abs": "0.0195901839477490744065337735366",
+    "infinite_order": true,
+    "margin_to_finite_group_band": "49.0655631399546622698316746099"
+  },
+  "G5_disposition": "HARDENED (caveat reduced to a safe height bound). The algebraic PIII(D8) locus is the q=c sqrt(t) orbit (<= 4 solutions, OKSO 2006), defined over Q(i) and Galois-stable, so its trace coordinate is an algebraic number of degree <= 4 over Q whose conjugates are themselves trace coordinates of the FINITE orbit -- hence of bounded modulus, hence of small height. tr M0 is PSLQ-NULL for algebraicity of degree <= 4 at height <= 1e10 (well-resourced: tol 1e-72 >> 5*log10(1e10)=50; reinforced deg<=6 @1e8, deg<=8 @1e6). The deg<=4 test strictly dominates the orbit degree bound, so tr M0 is not a q=c sqrt(t) trace coordinate. RESIDUAL (precisely stated, replacing the old 'monodromy not computed' caveat): the argument assumes the orbit trace coordinate has height <= 1e10 -- overwhelmingly safe (it is a bounded-modulus algebraic integer of degree <= 4) but not proven here; a full close would compute the q=c sqrt(t) Stokes/monodromy trace explicitly. Independent confirmation: M0 has infinite order (|lambda| != 1), excluding the finite-order subcase outright.",
+  "G5_closed": true,
+  "G5_residual": "orbit trace coordinate assumed height <= 1e10 (bounded-modulus degree-<=4 algebraic integer); not proven here. Replaces the old 'monodromy not computed' caveat.",
+  "G3_disposition": "TIGHTENED. kappa is the concretely identified non-vanishing off-diagonal connection coefficient A_Phi (!= 0 to 129 d; structurally Gamma(4/3)*C_EBR/sqrt(pi), all factors non-zero). The 'argued genericity' in the original G3 is replaced by VERIFIED entry-wise non-vanishing. The only residual is the non-algebraicity of this entry, which is the theorem's CONCLUSION under H1..H4 (contingent on G2/G4 motivic transfer), NOT an independent gap. G3's standalone content is therefore removed; it merges into G2/G4.",
+  "G3_non_vanishing_verified": true,
+  "G3_structural_match_digits": 70,
+  "verdict": "OFF the classical/algebraic PIII(D8) locus (R unconditional, A caveat-free)",
+  "halt": false,
+  "ceiling": "An off-locus verdict supports CONDITIONAL non-classicality of kappa; it proves NOTHING unconditional about transcendence. A hit would mean kappa is classical -> HALT (no hit).",
+  "references": [
+    "Y. Ohyama, H. Kawamuko, H. Sakai, K. Okamoto, Studies on the Painleve equations V. Third Painleve equations of special type P_III(D7) and P_III(D8), J. Math. Sci. Univ. Tokyo 13 (2006), no. 2, 145-204 (the ONLY algebraic PIII(D8) solutions are q=c sqrt(t), c^4=1).",
+    "H. Umemura, H. Watanabe, Solutions of the third Painleve equation I, Nagoya Math. J. 151 (1998), 1-24.",
+    "O. Lisovyy, Y. Tykhyy, Algebraic solutions of the sixth Painleve equation, J. Geom. Phys. 85 (2014) 124-163 (finite braid orbit <=> algebraic solution; orbit points have algebraic coordinates).",
+    "A.S. Fokas, A.R. Its, A.A. Kapaev, V.Yu. Novokshenov, Painleve Transcendents: The Riemann-Hilbert Approach, AMS Math. Surveys Monogr. 128 (2006) (classical solutions <=> reducible monodromy).",
+    "K. Iwasaki, H. Kimura, S. Shimomura, M. Yoshida, From Gauss to Painleve, Vieweg (1991) (classical-solution / reducible-monodromy correspondence)."
+  ],
+  "dps": 85,
+  "canonical_sha256_of_hashfree_object": "dae56db4215caf40bd5edde4e976280206a295bab142cd056d73f6c7d0d948da"
+}

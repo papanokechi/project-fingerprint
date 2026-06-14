@@ -1,0 +1,152 @@
+{
+  "op": "cc3-1c-1",
+  "task_id": "op:cc-transcendence/cc3-1c",
+  "test": "projective (gauge) equivalence of L vs pullback of L2 under s = 4 z",
+  "invariant": "exponents mod Z at each corresponding singular point, up to one uniform shift; slopes/ramification/edge at infinity",
+  "finite_points": [
+    {
+      "L2_point": "s=0",
+      "L_point": "z=0",
+      "L2_exponents": [
+        "0",
+        "1/2",
+        "1",
+        "3/2"
+      ],
+      "L_exponents": [
+        "0",
+        "0",
+        "1",
+        "1"
+      ],
+      "L2_residues_mod1": [
+        "0",
+        "0",
+        "1/2",
+        "1/2"
+      ],
+      "L_residues_mod1": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "L2_pairwise_diffs": [
+        "1/2",
+        "1/2",
+        "1/2",
+        "1",
+        "1",
+        "3/2"
+      ],
+      "L_pairwise_diffs": [
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "uniform_shift_match": false,
+      "matching_shift": null
+    },
+    {
+      "L2_point": "s=4/3",
+      "L_point": "z=1/3",
+      "L2_exponents": [
+        "0",
+        "1",
+        "2",
+        "-11/6"
+      ],
+      "L_exponents": [
+        "-4/3",
+        "0",
+        "1",
+        "2"
+      ],
+      "L2_residues_mod1": [
+        "0",
+        "0",
+        "0",
+        "1/6"
+      ],
+      "L_residues_mod1": [
+        "0",
+        "0",
+        "0",
+        "2/3"
+      ],
+      "L2_pairwise_diffs": [
+        "1",
+        "1",
+        "11/6",
+        "2",
+        "17/6",
+        "23/6"
+      ],
+      "L_pairwise_diffs": [
+        "1",
+        "1",
+        "4/3",
+        "2",
+        "7/3",
+        "10/3"
+      ],
+      "uniform_shift_match": false,
+      "matching_shift": null
+    }
+  ],
+  "infinity": {
+    "slope_L2": "1/4",
+    "slope_L": "1/4",
+    "ramification": 4,
+    "slopes_match": true,
+    "L2_edge_c4": "-1/12",
+    "edge_after_s=4z_pullback": "-1/3",
+    "L_edge_lambda4": "-256/3",
+    "edge_ratio_L_over_transported": "256",
+    "edge_consistent": false,
+    "note": "slopes match but the quartic edge invariant differs by a factor 4^4=256 => not the affine pullback's edge"
+  },
+  "verdict": "NOT EQUIVALENT",
+  "equivalent": false,
+  "decisive_reason": "Decisive: at the origin L2 has exponents {0,1/2,1,3/2} (residues mod 1 {0,1/2,0,1/2}) whereas L has {0,0,1,1} (residues {0,0,0,0}); no uniform shift maps one multiset to the other, so L is NOT the affine pullback of L2 up to gauge.  L2 and L are HADAMARD-QUOTIENT partners (g_n=Q_n/(2n)! vs phi_n=Q_n/(n!)^2, ratio binom(2n,n)), not substitution-related.",
+  "consequence": "cc4's irreducibility & G_Gal^0=SL4 do NOT transfer to L by equivalence; L's irreducibility is argued directly below.",
+  "irreducibility_of_L": "L's irreducibility (own argument): at z=inf the formal connection has a single slope 1/4 with ramification 4 and the four exponential determinations lambda*zeta_4^k (lambda^4 = -256/3) form ONE Galois orbit under the ramified Z/4 cover (cyclic permutation of the 4 branches).  A nonzero proper subconnection over C(z) would have a formal type at infinity stable under this Z/4 action and of rank < 4; but the orbit is transitive on all four exponentials, so no proper subset is stable.  Hence the C(z)-connection has no proper subobject => L is IRREDUCIBLE.  (Same slope-1/4/ram-4 transitivity route as cc-1 used for L2.)  STRUCTURAL.",
+  "relationship": "L2 and L are Hadamard-quotient partners by binom(2n,n): g_n = Q_n/(2n)! (operator L2), phi_n = Q_n/(n!)^2 (operator L), g_n = phi_n / binom(2n,n). Hadamard quotient is not a pullback and changes local exponents and rank structure.",
+  "frozen_inputs": {
+    "L2_exponents": {
+      "s=0": [
+        "0",
+        "1/2",
+        "1",
+        "3/2"
+      ],
+      "s=4/3": [
+        "0",
+        "1",
+        "2",
+        "-11/6"
+      ]
+    },
+    "L2_inf": "slope 1/4, ram 4, c^4=-1/12 (cc1/cc2)",
+    "L_exponents": {
+      "z=0": [
+        "0",
+        "0",
+        "1",
+        "1"
+      ],
+      "z=1/3": [
+        "-4/3",
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    "L_inf": "slope 1/4, ram 4, lambda^4=-256/3 (cc3-1b)"
+  },
+  "ceiling": "A Fuchsian relocation does not make K a classical period; provenance, not singularity type, is what the period conjectures see. Unconditional transcendence of C is NOT a deliverable of op:cc-3 at any grade.",
+  "canonical_sha256_of_hashfree_object": "90cdaed3d2055c49ede15c7e6eba84ed3bba9fc7818703883dcdf9c881c88a3d"
+}

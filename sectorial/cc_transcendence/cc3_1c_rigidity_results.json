@@ -1,0 +1,87 @@
+{
+  "op": "cc3-1c-2-rigidity",
+  "task_id": "op:cc-transcendence/cc3-1c",
+  "formula": "rig = (2-#S) n^2 + sum_x dimZ(formal)_x - sum_x irr_x(End E); rigid <=> rig=2",
+  "convention": "rig = 2 - dim H^1(P^1, j_{!*} End E); irreducible => rig <= 2",
+  "controls": {
+    "Airy": {
+      "rig": 2,
+      "expected": 2
+    },
+    "Gauss_2F1": {
+      "rig": 2,
+      "expected": 2
+    },
+    "Bessel": {
+      "rig": 2,
+      "expected": 2
+    },
+    "all_pass": true
+  },
+  "L2_internal_check": {
+    "rig": 0,
+    "note": "EBR Borel operator; non-rigid, accessory 2"
+  },
+  "L": {
+    "n": 4,
+    "singular_set": [
+      "0",
+      "1/3",
+      "infinity"
+    ],
+    "local_data": {
+      "z=0": {
+        "exponents": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "jordan_eig1": [
+          2,
+          2
+        ],
+        "dimZ": 8,
+        "source": "exact Frobenius cc3_1c_frobenius_z0_v2.py 4482b99af1c1f673a80cdebc768f808b431f37b2958ddf8c7173f1def608b8ee"
+      },
+      "z=1/3": {
+        "exponents": [
+          "-4/3",
+          0,
+          1,
+          2
+        ],
+        "jordan_eig1": [
+          1,
+          1,
+          1
+        ],
+        "isolated_eig": "e^{-2 pi i/3}",
+        "dimZ": 10,
+        "source": "numerical monodromy cc3_1c_monodromy.py rank(M-I)=1"
+      },
+      "infinity": {
+        "slope": "1/4",
+        "ramification": 4,
+        "lambda4": "-256/3",
+        "dimZ_formal": 1,
+        "irr_End": 3,
+        "split": "12 nonzero diffs * 1/4 = 3"
+      }
+    },
+    "term_breakdown": {
+      "(2-#S)n^2": -16,
+      "sum dimZ_formal": 19,
+      "sum irr_End": "3",
+      "#S": 3,
+      "n": 4
+    },
+    "index_of_rigidity": 0,
+    "verdict": "NON-RIGID",
+    "accessory_parameter_count_2_minus_rig": 2
+  },
+  "irreducibility": "single slope-1/4 ramification-4 Galois orbit at infinity => irreducible formal type => no proper global subconnection => irreducible; consistent with rig <= 2.",
+  "supersedes_cc3_1b": "cc3-1b's 'z=0 apparent / log-free' is corrected: z=0 carries logs (Jordan [2,2]); the integer block at z=1/3 IS semisimple (cc3-1b correct there).",
+  "ceiling": "A Fuchsian relocation does not make K a classical period; provenance, not singularity type, is what the period conjectures see; rigidity, if found, only sharpens the period home. Unconditional transcendence of C is NOT a deliverable of op:cc-3 at any grade.",
+  "canonical_sha256_of_hashfree_object": "845ee916336d834a5ee0d7c6cd86eb7c48914e03d8e27733a09affca36ea9d22"
+}

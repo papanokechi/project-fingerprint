@@ -1,0 +1,67 @@
+{
+  "op": "cc3-1-routeA",
+  "task_id": "op:cc-transcendence/cc3-1",
+  "title": "Beta-kernel integral representation of G and reduction of C to a Fuchsian connection coefficient",
+  "ceiling": "Unconditional transcendence of C is NOT a deliverable; a large G_Gal or exponential-period classification does not imply transcendence; only a named-conjecture conditional (or new technology) does.",
+  "ogf_ode": {
+    "operator": "3 t^3 y'' + 10 t^2 y' + (t^2+5t-1) y = -1",
+    "verified_terms": 52,
+    "all_zero": true
+  },
+  "phi_operator": {
+    "L": "z^4(1-3z) D^4 + (4z^3-25z^4) D^3 + (2z^2-47z^3) D^2 - 15 z^2 D - z^2",
+    "reproduces_recurrence": true
+  },
+  "phi_radius": {
+    "ratio_phi_400_399": "3.00250625001307523",
+    "radius_estimate": "0.333055093555806995",
+    "expected": "1/3"
+  },
+  "integral_representation": {
+    "formula": "G(s) = int_0^1 [Phi(z) + 2 z Phi'(z)] dt, z = s t (1-t)",
+    "validity": "|s| < R = 4/3 (z_max = s/4 < 1/3)",
+    "dps": 130,
+    "nterm": 1200,
+    "checks": {
+      "1.0": {
+        "G_direct": "29.35310336430014407451045245048725038103146561087562965769785834100238007983884469304920634390249350685",
+        "G_integral": "29.35310336430014407451045245048725038103146561087562965769785834100238007983884469304920634390249350685",
+        "abs_diff": "0.0",
+        "agreement_digits": ">=130"
+      },
+      "1.25": {
+        "G_direct": "438.931583588377800826101989942412238569459146004975862632288440914673421680956680531317012442033373119945",
+        "G_integral": "438.931583588377800826101989942412238569459146004975862632288440914673421680956680531317012442033373119945",
+        "abs_diff": "0.0",
+        "agreement_digits": ">=130"
+      }
+    }
+  },
+  "exponents_at_1_3": {
+    "indicial": "r(r-1)(r-2)(-(r-3)/27 - 13/81)",
+    "exponents": [
+      "-4/3",
+      "0",
+      "1",
+      "2"
+    ],
+    "dominant": "-4/3",
+    "rho": "4/3",
+    "gamma_from_saddle": "11/6",
+    "matches_EBR_gamma_11_6": true
+  },
+  "C_reduction": {
+    "statement": "C_EBR = A = K * (4/3) sqrt(pi)/Gamma(7/3); equivalently K = (3/4) C_EBR Gamma(7/3)/sqrt(pi)",
+    "K_is": "connection coefficient of the FUCHSIAN operator L of Phi between z=0 (exponents {0,0,1,1}) and z=1/3 (exponents {0,1,2,-4/3})",
+    "Gamma_quotient_factor": "(4/3) sqrt(pi)/Gamma(7/3)  (elementary)",
+    "K_numeric_estimate": "1.538506086",
+    "K_numeric_method": "series of Phi near z=1/3 (NE=9000 terms), eps in {1e-2,5e-3,2.5e-3}, Richardson exponent 4/3",
+    "K_predicted_from_C_EBR": "1.539494845",
+    "relative_consistency": "0.0006423",
+    "interpretation": "transcendence of C is RELOCATED (not resolved) to the connection coefficient K of a 4th-order Fuchsian operator; the irregular slope-1/4 structure at s=infinity is bypassed for the dominant singularity, since z=s t(1-t) <= s/4 reaches Phi's singularity z=1/3 only at s=R, t=1/2.",
+    "grade": "STRUCTURAL (exact exponents + saddle) + VERIFIED (integral identity >=100 digits; K consistency low-precision)"
+  },
+  "deliverable_type": "(b) integral/period representation + relocation of the obstruction (Fuchsian K)",
+  "obstruction_note": "No closed elementary form for K (Phi's z=0->z=1/3 connection coefficient) is produced; this is the precise residual obstruction and the input to cc3-2 (exponential/Fuchsian period interpretation of K) and cc3-3 (named-conjecture conditional). Consistent with the 169-digit elementary nulls.",
+  "canonical_sha256_of_hashfree_object": "7762ace08d6980264cb5833959631c2df242eb644688b14e6e684e01ef69112b"
+}

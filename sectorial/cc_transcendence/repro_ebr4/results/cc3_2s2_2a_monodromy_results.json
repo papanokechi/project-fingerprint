@@ -1,0 +1,70 @@
+{
+  "op": "cc3-2s2-2a-monodromy",
+  "task_id": "op:cc-transcendence/cc3-2s2-2",
+  "operator_H2": "3 t^3 D^2 + 10 t^2 D + (t^2 + 5 t - 1)",
+  "reduced_invariant_r": "1/(3 t^3) - 5/(9 t^2) - 1/(3 t)",
+  "formal_data": {
+    "singular_set": [
+      "0",
+      "infinity"
+    ],
+    "type_both_points": "irregular slope 1/2 ramification 2 (single Z/2 orbit)",
+    "instanton_action_a": "2/sqrt(3)",
+    "exponential_factors_at_0": "exp( +- (2/sqrt(3)) t^{-1/2} ) t^{alpha_pm}",
+    "exponent_sum_alpha": "alpha_+ + alpha_- = 3/2 (Wronskian-const argument)",
+    "formal_monodromy": "M_hat = [[0, e^{2 pi i alpha_+}],[e^{2 pi i alpha_-},0]] (swap); tr=0; det=+1",
+    "borel_action_crosscheck": {
+      "relation": "2 sqrt(z0) = a  =>  z0 = (a/2)^2",
+      "z0": "0.33333333333333333333333333333333333333333333333333",
+      "target": "1/3",
+      "passes": true,
+      "meaning": "the formal exponential factor exp(-2/sqrt(3) t^{-1/2}) and the Borel-plane singularity z=1/3 (2s2-0 reframe) are the SAME datum."
+    }
+  },
+  "topological_monodromy_M0": {
+    "equation": "reduced Y''=rY (trace-free => det(M0)=1, SL2)",
+    "method": "Taylor marching around |t|=rho; accuracy witness = cross-(J,nsteps,radius) agreement",
+    "accuracy_witness_note": "det(M0)=1 is preserved STRUCTURALLY by any flow of the trace-free Y''=rY (Wronskian conserved, no Y' term) and is NOT an accuracy proof. The trace is the accuracy-sensitive coordinate. Singular set {0,inf} only => every circle |t|=rho>0 encloses just t=0, so radius-independence of tr(M0) is TOPOLOGICAL INVARIANCE of the monodromy (strongest check). A prior asymmetric range(J+2) Taylor truncation gave a FALSE-STABLE, ~14-digit-WRONG trace; fixed to range(J+3).",
+    "validation_configs": [
+      "rho=1.0 nsteps=240 J=90",
+      "rho=1.0 nsteps=400 J=100",
+      "rho=1.7 nsteps=320 J=90"
+    ],
+    "trace_converged_digits_cross": 141,
+    "det_minus_1_abs": "1.26356e-157",
+    "trace_real": "-51.0655631399546622698316746099456615679204103033103908333911032106571806518574388764698371098154936300216329336894907407799770066449664502316356179556",
+    "trace_imag_abs": "3.37148e-158",
+    "structural_relation": "M0 = S1 S2 M_hat, S1=[[1,s1],[0,1]], S2=[[1,0],[s2,1]], M_hat=[[0,b],[c,0]] (bc=-1) => tr(M0) = s1 c + s2 b (tr(M0) is a function of the LOCAL Stokes multipliers at t=0).",
+    "interpretation": "hyperbolic (loxodromic) SL2 monodromy; |tr|>>2; eigenvalue ~51.0460."
+  },
+  "kappa_as_stokes_datum": {
+    "kappa_frozen_130": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+    "role": "kappa = Gamma(4/3) A0 = Borel-plane amplitude at z=1/3 = Stokes constant of y across arg(t)=0 (2s2-1, STRUCTURAL). An OFF-DIAGONAL STOKES MULTIPLIER / connection datum of the D8 linear problem -- monodromy data, NOT a tau-function connection constant (the named 2c hazard)."
+  },
+  "D8_coordinate_point": {
+    "manifold": "PIII(D8)=D8^(1) monodromy/character variety, dim 2 (rig 0)",
+    "coordinates_reported": {
+      "SL2_trace_tr(M0)": "-51.0655631399546622698316746099456615679204103033103908333911",
+      "Stokes_constant_kappa": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161"
+    },
+    "convention": "trace of the topological SL2 monodromy around t=0 (packages the Stokes matrices via tr(M0)=s1 c + s2 b) PLUS the off-diagonal Stokes constant kappa. Framework: van der Put-Saito (2009); ILT monodromy manifold."
+  },
+  "cross_checks": {
+    "tr_M0_converged_ge_90d_cross_J_nsteps_radius": true,
+    "tr_M0_real": true,
+    "tr_M0_abs_ne_2_irreducible": true,
+    "kappa_ne_0_nontrivial_stokes": true,
+    "z0_eq_1_3_reframe": true,
+    "det_M0_eq_1_SL2_structural_not_accuracy": true,
+    "ALL_PASS": true,
+    "halt_if_fail": "coords inconsistent with rig/SL2 => upstream error, stops the line"
+  },
+  "ceiling": "Placing kappa as a Stokes/monodromy coordinate proves NOTHING about transcendence; a closed form would argue the OPPOSITE (elementarity in an extended class). Unconditional transcendence of C/kappa is NOT a deliverable of op:cc-3 at any grade.",
+  "references": [
+    "van der Put & Saito, Ann. Inst. Fourier 59 (2009) 2611-2667 (moduli/monodromy)",
+    "Its-Lisovyy-Prokhorov, connection constants for Painleve tau functions (D8 monodromy manifold)",
+    "Sakai, Comm. Math. Phys. 220 (2001) 165-229 (surface D8^(1))",
+    "Ohyama-Kawamuko-Sakai-Okamoto, J. Math. Sci. Univ. Tokyo 13 (2006) 145-204 (PIII(D8) Lax pair)"
+  ],
+  "canonical_sha256_of_hashfree_object": "b1fea3ed41f87e1a11c2a3743057abdb9e1c242ca7e3d60f471894dc61343c81"
+}

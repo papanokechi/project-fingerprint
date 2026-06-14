@@ -1,0 +1,57 @@
+{
+  "op": "cc3-S6-1-period-matrix",
+  "task_id": "op:cc-transcendence/cc3-S6",
+  "object_choice": "convergent Borel-2 transform Phi of the rank-2 H2 (y divergent => Borel side); L order 4, finite sing {0,1/3}, z=inf irregular slope 1/4 (exponential connection)",
+  "operator_L": "p4 Phi'''' + p3 Phi''' + p2 Phi'' + p1 Phi' + p0 Phi = 0; p0=-z^2,p1=-15z^2,p2=-z^2(47z-2),p3=-z^3(25z-4),p4=-z^4(3z-1)",
+  "indicial": {
+    "z=0": "{0,0,1,1}",
+    "z=1/3": "{-4/3,0,1,2}"
+  },
+  "method": "monodromy spectral projector P_mu=(M-I)^3/(mu-1)^3 around z=1/3; A_Phi s_vec = (M-I)^3 phi_vec/(mu-1)^3; only Phi continued (3 loops)",
+  "mu": "(-0.5 - 0.8660254037844386467637231707529361834714j)",
+  "connection_coefficient_A_Phi_eq_kappa": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+  "resurgence_amplitude_A0": "1.723997951387774406476690749579766291341613223565851669485576660171209930222475952305631184239330560389168376264235243193384573692",
+  "kappa_period": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+  "kappa_frozen_130": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+  "A_Phi_imag_over_real": "1.941987543e-209",
+  "witnesses": {
+    "marcher_vs_direct_series_digits": 181,
+    "component_consistency_digits": 208,
+    "base_radius_step_invariance_digits": 204,
+    "agreement_vs_frozen_kappa_digits": 129,
+    "achieved_independent_precision_digits": 129,
+    "accuracy_witness_note": "deformation invariance (base/radius/step) + 4-component consistency are the witnesses; no structural/det quantity used (cc3-2s2-2a lesson). dps set before any mpf (dps-ordering control)."
+  },
+  "period_matrix": {
+    "object": "rank-2 H2 connection; period realised on convergent Borel-2 transform Phi (order-4 L)",
+    "de_Rham_basis_dim": 2,
+    "rapid_decay_homology_dim": 2,
+    "de_Rham_basis": "{ [Phi], [theta.Phi] } (Hien Sec.3); equivalently the two formal solutions e^{-a/sqrt t}(...) at t=0, a=2/sqrt3",
+    "rapid_decay_cycles": "{ gamma_+ : Borel-Laplace ray arg t=0^+ (the singular ray carrying z=1/3), gamma_- : the off-singular dual ray } (Hien Sec.2, H1^rd dim 2)",
+    "monodromy_period_point": "the dim-2 D8 character variety point (tr M0, kappa) is now FULLY computed: tr M0 = -51.0655...(2a, b1fea3ed) is the diagonal/trace invariant; kappa is the single nontrivial off-diagonal Stokes/connection entry, computed here as the connection coefficient A_Phi to 129 digits.",
+    "stokes_matrix_structure": "slope-1/2 ramified ==> a single active Stokes ray at z=1/3; the 2x2 connection matrix is [[1, kappa],[0,1]] up to the formal-monodromy diagonal (exchange of the two e^{+-a/sqrt t} sheets, elementary). The ONLY transcendental entry is kappa.",
+    "connection_coefficient_A_Phi_eq_kappa": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+    "resurgence_amplitude_A0": "1.723997951387774406476690749579766291341613223565851669485576660171209930222475952305631184239330560389168376264235243193384573692",
+    "stokes_constant_kappa": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+    "trace_invariant_tr_M0": "-51.06556313995466226983167460994566156792041030331039080833911032106571",
+    "note": "A_Phi = coefficient of the (1-3z)^{-4/3} Frobenius solution at z=1/3 in the z=0-analytic solution Phi; an EXPONENTIAL period of the globally irregular L (z=infinity slope 1/4).  By the transfer theorem A_Phi = Gamma(4/3)*A0_resurgence and the cc3-2s2-1 bridge kappa = Gamma(4/3)*A0, so the connection coefficient A_Phi IS the Stokes constant kappa directly (off-diagonal period entry)."
+  },
+  "S6_status_after_this_op": "constructive exponential-period membership of kappa EXHIBITED as an explicit connection coefficient computed to the stated precision => S6 upgrades CONJECTURED-with-architecture -> STRUCTURAL for the Borel-side connection-coefficient realisation. (Full exponential-MOTIVE membership remains CONJECTURED: the abstract rapid-decay de Rham pairing for the rank-2 t-side is the Hien framework, here realised numerically.)",
+  "ceiling": "Exhibiting kappa as a constructive exponential period proves NOTHING about transcendence; a closed form would argue ELEMENTARITY-in-extended-class, a null neither. Unconditional transcendence of C/kappa is NOT a deliverable of op:cc-3.",
+  "references": [
+    "M. Hien, Periods for flat algebraic connections, Invent. Math. 178 (2009) 1-22, Sec.2-4",
+    "C. Sabbah, Introduction to Stokes structures, LNM 2060 (2013)",
+    "M. Loday-Richaud, LNM 2154 (2016) (Borel-Laplace; alien derivative = Stokes constant)",
+    "Flajolet & Sedgewick, Analytic Combinatorics, CUP 2009, Thm VI.1"
+  ],
+  "params": {
+    "zb": "1/4",
+    "rho": "1/12",
+    "J": 300,
+    "Nser": 1700,
+    "Nfrob": 460,
+    "nsteps": 40,
+    "dps": 210
+  },
+  "canonical_sha256_of_hashfree_object": "56adcb100d841756d24babb9017bbbb718887a6fc48d301ac45ba1594b3e7fb4"
+}

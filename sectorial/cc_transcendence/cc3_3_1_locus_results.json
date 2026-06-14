@@ -1,0 +1,46 @@
+{
+  "op": "cc3-3-1-classical-locus-exclusion",
+  "task_id": "op:cc-transcendence/cc3-3",
+  "claim_id": "CC3-3-LOCUS",
+  "grade": "STRUCTURAL+VERIFIED",
+  "point": {
+    "tr_M0": "-51.06556313995466226983167460994566156792041030331039083339110321065718065185743887646983",
+    "kappa": "1.539494848576641034843781903384069038219390890553148730926294560611093030530126489289595548377837121909677816857027063026103313161",
+    "character_variety": "dim-2 D8 (PIII(D8)); coordinates (tr M0, kappa)"
+  },
+  "locus_characterisation": {
+    "stratum_R_reducible_Riccati": "reducible linear monodromy <=> Riccati/special-function (one-parameter classical) solutions [FIKN 2006]",
+    "stratum_A_algebraic": "algebraic solutions <=> finite nonlinear (braid) orbit; finite-orbit points have ALGEBRAIC trace coordinates; finite linear monodromy group subcase has |tr|<=2. For PIII(D8) the ONLY algebraic solutions are q=c sqrt(t), c^4=1 [OKSO 2006] (finite set)."
+  },
+  "exclusion_R": {
+    "grade": "STRUCTURAL",
+    "argument": "G_Gal(H2)=SL2 (cc3-2a Kovacic, e71e915f) is Zariski-dense => monodromy IRREDUCIBLE; |tr M0|>>2 hyperbolic (b1fea3ed). Off the reducibility/Riccati locus."
+  },
+  "exclusion_A": {
+    "grade": "VERIFIED+STRUCTURAL",
+    "abs_tr_M0": "51.06556313995466226983167460994566156792",
+    "margin_to_finite_group_band": "49.0655631399546622698316746099",
+    "eigenvalue_lambda_abs": "0.0195901839477490744065337735366",
+    "infinite_order": true,
+    "pslq_trM0_deg_le_8": "NO RELATION",
+    "pslq_trM0_deg_le_4": "NO RELATION",
+    "pslq_height_bound": 10000000,
+    "pslq_tol_dps": 70,
+    "controls_fired": true,
+    "control_sqrt2": "[0, 0, 2, 0, -1]",
+    "control_2cos2pi7": "[1, 2, -1, -1, 0]",
+    "argument": "tr M0 has |tr|-2 = 49.06 (M0 infinite order => monodromy group infinite, not the finite-linear-group algebraic subcase) AND is not algebraic of degree<=8 within H<=1e7; finite-braid-orbit (algebraic-solution) points have algebraic trace coordinates, so (tr M0,kappa) is not such a point."
+  },
+  "honest_caveat": "The exact monodromy data of the q=c sqrt(t) solutions was NOT computed for a direct point-vs-point comparison; the exclusion rests on the structural characterisations (reducible<=>Riccati; algebraic=>algebraic coordinates) plus the irreducibility and non-low-degree-algebraicity of our point. The assumption 'finite braid orbit => algebraic trace coordinates' is THEOREM-grade (graded H-aux).",
+  "verdict": "OFF the classical/algebraic locus",
+  "halt": false,
+  "ceiling": "An off-locus verdict supports CONDITIONAL non-classicality of kappa; it proves NOTHING unconditional about transcendence (cc-3 ceiling, both directions).",
+  "references": [
+    "A.S. Fokas, A.R. Its, A.A. Kapaev, V.Yu. Novokshenov, Painleve Transcendents: The Riemann-Hilbert Approach, Math. Surveys Monogr. 128, AMS (2006)",
+    "Y. Ohyama, H. Kawamuko, H. Sakai, K. Okamoto, Studies on the Painleve equations V. Third Painleve equations of special type P_III(D7) and P_III(D8), J. Math. Sci. Univ. Tokyo 13 (2006), no. 2, 145-204",
+    "H. Umemura, H. Watanabe, Solutions of the third Painleve equation I, Nagoya Math. J. 151 (1998), 1-24",
+    "O. Lisovyy, Y. Tykhyy, Algebraic solutions of the sixth Painleve equation, J. Geom. Phys. 85 (2014) 124-163 (finite braid orbits <=> algebraic solutions; algebraic coordinates)"
+  ],
+  "dps": 85,
+  "canonical_sha256_of_hashfree_object": "a6b8d5889f96013394d0911c144ace13f9a70771bfafe51f8237d2c00285c86b"
+}

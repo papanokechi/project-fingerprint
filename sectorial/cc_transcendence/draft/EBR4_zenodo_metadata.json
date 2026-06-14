@@ -1,0 +1,93 @@
+{
+  "files": [
+    "./ebr4_v0.pdf",
+    "./repro_ebr4.zip"
+  ],
+  "metadata": {
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "title": "The Edge-Borel growth constant is a non-classical exponential period: an SL(2) monodromy on the Painleve III(D8) surface and a conditional transcendence theorem",
+    "creators": [
+      {
+        "name": "Papanokechi",
+        "affiliation": "Independent Researcher",
+        "orcid": "0009-0000-6192-8273"
+      }
+    ],
+    "description": "<p>For the positive-coefficient polynomial continued fraction with b(n) = 3n^2 + n + 1, the Edge&ndash;Borel growth constant is governed by a single transcendental number &kappa; = 1.5394948485766410&hellip;, the Stokes/connection constant of a rank-2 ordinary differential operator H<sub>2</sub> that arises by a Borel&ndash;2 reduction of the generating function. We identify &kappa; inside the isomonodromy and period frameworks and assemble, with explicitly graded hypotheses, a conditional transcendence theorem for it.</p><p>We establish, at increasing evidential strength: (i) H<sub>2</sub> has singular set {0, &infin;} with both points irregular of ramified slope 1/2; its index of rigidity is 0 (non-rigid, moduli dimension 2), and the local ramification data (2, 2) <em>select</em>, under a surface-type selector (RULE&nbsp;S) we state precisely, the Sakai surface D<sub>8</sub><sup>(1)</sup> &mdash; equivalently Painlev&eacute;&nbsp;III(D<sub>8</sub>); the selector is computed, not pattern-matched. (ii) The differential Galois group is G<sub>Gal</sub>(H<sub>2</sub>) = SL(2), by an exact Kovacic computation closing the imprimitive case through reducibility over the unique quadratic cover, so H<sub>2</sub> is irreducible with no Liouvillian solutions. (iii) On the convergent Borel&ndash;2 transform &Phi;, the constant &kappa; is realised <em>constructively</em> as the connection coefficient A<sub>&Phi;</sub> of an order-4 operator with an irregular point of slope 1/4, computed by a monodromy spectral projector to 129 digits and agreeing with two further independent channels (a large-order asymptotic channel using only the integer sequence Q<sub>n</sub>, and a frozen-composition channel); this places &kappa; in the ring of exponential (rapid-decay) periods of the connection, with &kappa; = &Gamma;(4/3)&middot;A<sub>0</sub>. (iv) We determine the monodromy point (tr&nbsp;M<sub>0</sub>, &kappa;) with tr&nbsp;M<sub>0</sub> = &minus;51.0655631399546&hellip; (hyperbolic, hence irreducible), survey the solved D<sub>8</sub> connection problems and find that none computes &kappa; (a tau-side/Lax-side distinction we keep explicit), record two positive-control-validated integer-relation nulls, and verify the point lies off the algebraic Painlev&eacute;&nbsp;III(D<sub>8</sub>) locus.</p><p>Under the Fresan&ndash;Jossen period conjecture for exponential motives, a differential-to-motivic dimension comparison, and a verified non-degeneracy datum, we conclude &kappa; &notin; &Qopf;-bar, hence the EBR connection coefficient C = &kappa;&radic;&pi;/&Gamma;(4/3) is transcendental. We are explicit, throughout and in both directions, that this is a <em>conditional</em> statement: neither the large Galois group, nor the non-rigidity, nor any integer-relation null proves transcendence, and a closed form &mdash; had one appeared &mdash; would have argued the opposite. The conditional theorem is the program's ceiling; unconditional transcendence of C/&kappa; remains a conjecture whose only route is a separate period analysis. Each hypothesis is individually graded (STRUCTURAL exponential-period membership; a CONJECTURED-motivic / VERIFIED-differential dimension input; the external CONJECTURED period conjecture; a VERIFIED period-count datum), and a first-class gap list records every place the chain relies on something unproven.</p><p>This is the fourth entry in the Edge&ndash;Borel Radius (EBR) series. PROVEN is reserved for the Lean&nbsp;4 / Mathlib cores established in EBR-III; this paper introduces no new Lean core but flags its finitary identities (the order-4 L-operator and indicial data, the H<sub>2</sub>&rarr;B gauge-chain identity, the Kovacic emptiness certificate, the de Rham dimension counts) as Lean-core candidates. A complete reproducibility package (reproducer scripts, results JSONs with canonical SHA-256 self-hashes, a one-command verifier, and a claims-ledger snapshot) accompanies the deposit; the three independent &kappa; channels are each separately reproducible.</p>",
+    "keywords": [
+      "isomonodromy",
+      "Painleve III",
+      "Sakai surface",
+      "exponential period",
+      "connection coefficient",
+      "Stokes constant",
+      "differential Galois group",
+      "Kovacic algorithm",
+      "monodromy",
+      "transcendence",
+      "Fresan-Jossen period conjecture",
+      "index of rigidity",
+      "polynomial continued fraction",
+      "Borel summation"
+    ],
+    "license": "cc-by-4.0",
+    "access_right": "open",
+    "version": "v1.0",
+    "language": "eng",
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.20564079",
+        "relation": "continues",
+        "scheme": "doi",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.5281/zenodo.20566465",
+        "relation": "continues",
+        "scheme": "doi",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.5281/zenodo.20684732",
+        "relation": "continues",
+        "scheme": "doi",
+        "resource_type": "publication-preprint"
+      },
+      {
+        "identifier": "10.5281/zenodo.20564079",
+        "relation": "cites",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.20566465",
+        "relation": "cites",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.20684732",
+        "relation": "cites",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "10.5281/zenodo.20455089",
+        "relation": "references",
+        "scheme": "doi"
+      }
+    ],
+    "notes": "Concept DOIs cited: EBR-I 10.5281/zenodo.20564079 (v1.0 record 20564080); EBR-II 10.5281/zenodo.20566465 (v1.2 record 20571232); EBR-III 10.5281/zenodo.20684732 (concept DOI; v1.0 record 20684733), linked as continues + cites. Related (referenced, not cited): the V_quad / Painleve V on D5^(1) companion family, concept DOI 10.5281/zenodo.20455089, appears in the surface-type synthesis pointer (open-problem item) and the kappa/K symbol-collision note. PROVEN is reserved for the Lean 4 cores, all of which are EBR-III's (cited); EBR-IV introduces no new Lean core. The conditional theorem (kappa not in Q-bar under the four graded hypotheses) is the program ceiling; transcendence of C/kappa remains CONJECTURED unconditionally, and the ceiling cuts both ways (a closed form would have argued elementarity, a null proves neither). Key SHA-256 hashes: paper PDF afa69197ce7b53003c561ca717dd6365ac021e869c9f692ce1c293e07c22382b; claims-ledger snapshot (92 claims) a168f2f791883fc6aaf7144154c6436d852cbed7cad405e039930f682680297f; conditional-theorem result (canonical, hash-free object) 1b15e7ac9a503c30e1cdae8a736677b401c2f1d8c815a2e02a2e0f18908fbfdd; period-matrix / kappa channel C 56adcb100d841756d24babb9017bbbb718887a6fc48d301ac45ba1594b3e7fb4; kappa-bridge 2cc2f6fb8f0c710496d021a321f710f8a15753f66bbeaf2e1d321beb5a73d9d3.",
+    "_operator_todo": [
+      "DONE 2026-06-14: EBR-III concept DOI 10.5281/zenodo.20684732 inserted into related_identifiers as continues + cites, and into the notes lineage line. NOTE the relation verb is 'continues' -- Zenodo rejects the DataCite term 'isContinuationOf' with HTTP 400 at the metadata step.",
+      "AT MINT: capture EBR-IV's own concept DOI and this version's record DOI; record both in the submission ledger (OneDrive ... siarc/submitted/submission_log.txt) section B, in the SAME session as the mint (standing rule, see OPERATOR_RUNBOOK_ebr4.md).",
+      "OPTIONAL: if a V_quad/D5 deposit version DOI is preferred over the concept DOI for the 'references' link, swap 10.5281/zenodo.20455089 accordingly."
+    ],
+    "_provenance": {
+      "paper_title_latex": "The Edge--Borel growth constant is a non-classical exponential period: an SL_2 monodromy on the Painleve III(D_8) surface and a conditional transcendence theorem",
+      "pdf_sha256": "afa69197ce7b53003c561ca717dd6365ac021e869c9f692ce1c293e07c22382b",
+      "pdf_pages": 16,
+      "build": "MiKTeX pdflatex x2, inline thebibliography (no bibtex), SOURCE_DATE_EPOCH=1718150400, preamble guards \\pdfinfoomitdate=1 / \\pdftrailerid{} / \\pdfsuppressptexinfo=-1; byte-reproducible (verified 3 in-place + 1 pristine-temp-dir builds, identical SHA-256).",
+      "repro_package": "repro_ebr4/ (verify.py exits 0; HASH_MANIFEST.json; claims_cc.jsonl 92 claims at package root); three independent kappa channels each separately reproducible.",
+      "note_on_underscore_keys": "Keys beginning with underscore are operator-only annotations; the siarc _zenodo_uploader.py clean_meta step strips them before the Zenodo API call."
+    }
+  }
+}
