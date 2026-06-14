@@ -14,9 +14,14 @@
   ⊆ {propext, Classical.choice, Quot.sound} with NO `sorryAx`.  The flagship
   theorem `caso_ne_zero` (W n ≠ 0 ∀ n) is therefore PROVEN, and its clean cone
   confirms the A2 finding: the certificate needs ONLY step law + positivity +
-  W₀, not the closed form.  The two STICKING-POINT lemmas (`W_eq_det`,
-  `caso_closed_form`) keep their explicit `sorry` and are OUTSIDE the
-  `caso_ne_zero` cone (`caso_closed_form`'s cone shows `sorryAx`, as expected).
+  W₀, not the closed form.
+
+  UPDATE (CATALAN-SORRYFREE cleanup, 2026-06-15): the two formerly STICKING-POINT
+  auxiliary lemmas (`W_eq_det`, `caso_closed_form`) are now DISCHARGED — both
+  build `sorry`-free with cone ⊆ {propext, Classical.choice, Quot.sound} (verified
+  by the in-file `#print axioms` at a green `lake build Apery3Catalan`, EXIT 0).
+  The module is therefore FULLY `sorry`-free; the certificate never needed them,
+  but they are now proven outright — Instance 1 is now as clean as Instance 2 (ζ4).
 
   BUILD NOTE: the host this session had a non-Lean `dwm` process leaking ~45 GB
   of commit charge, leaving ~1 GB headroom — too little for the full `import
@@ -28,9 +33,11 @@
   cones and additionally typecheck `W_eq_det`'s `Matrix.det` statement.
 
   ANTI-AXIOM-SMUGGLING (corpus rule, cf. `lean/EBR_uplift.lean`): this file
-  introduces ZERO project axioms.  The two unproven results carry an EXPLICIT
-  `sorry` (visible, graded, never silent), not an axiom; the rest are genuine
-  machine-checked proofs.
+  introduces ZERO project axioms.  After the 2026-06-15 cleanup it also carries
+  ZERO `sorry`s — every result is a genuine machine-checked proof.  (Historically
+  the two auxiliary lemmas `W_eq_det`/`caso_closed_form` carried an EXPLICIT,
+  graded `sorry` + a written plan — visible, never silent, never an axiom; both
+  are now discharged.)
 
   Per-declaration grade legend:
     [PROVEN-DRAFT]  — robust, version-stable tactics (`ring`/`nlinarith`/
@@ -67,7 +74,7 @@
     T3  step law:  `A (n+1) · W (n+1) = − B (n+1) · W n`.          [PROVEN]
     T4  flagship certificate:  `W n ≠ 0` for all `n`  ⇒ `{u,v}` linearly
         independent at every window (no closed form needed).      [PROVEN]
-    T3' closed form:  `W n = (−1)ⁿ(20n²+32n+13)/(8(2n+1)²(n+1)²)`. [STICKING-POINT]
+    T3' closed form:  `W n = (−1)ⁿ(20n²+32n+13)/(8(2n+1)²(n+1)²)`. [PROVEN]
 -/
 import Mathlib
 
@@ -161,13 +168,10 @@ def W (n : ℕ) : ℚ := u n * v (n + 1) - u (n + 1) * v n
   norm_num [W]
 
 /-- Casoratian as a `2×2` determinant — the `Matrix.det` form workstream B's
-    fundamental-system layer consumes.
-    [STICKING-POINT] proof plan: `simp only [W, Matrix.det_fin_two]` then `ring`
-    (the matrix-entry simp lemma names were not verifiable against the live
-    library this no-build session). -/
+    fundamental-system layer consumes. [PROVEN] -/
 lemma W_eq_det (n : ℕ) :
     W n = (!![u n, v n; u (n + 1), v (n + 1)]).det := by
-  sorry
+  simp only [W, Matrix.det_fin_two_of]; ring
 
 /-! ## T3 — recurrence-clearing lemmas and the Casoratian step law -/
 
@@ -202,9 +206,12 @@ lemma step_law (n : ℕ) :
 
 /-- **Flagship theorem (linear-independence certificate).** `W n ≠ 0` for every
     `n`: the pair `(u, v)` is a fundamental system of the order-2 recurrence eq (2)
-    at every window.  Proof: induction with base `W 0 = 13/8 ≠ 0` and step the
-    step law `A·W(n+1) = −B·W n` with `A ≠ 0`, `B (n+1) ≠ 0`.  Independent of the
-    closed form. [PROVEN] -/
+    at every window.  Proof: induction with base `W 0 = 13/8 ≠ 0`; the step assumes
+    `W (n+1) = 0`, so the step law `A·W(n+1) = −B·W n` collapses (the `A·W(n+1)`
+    term is annihilated by the hypothesis — leading positivity `A ≠ 0` is NOT used)
+    to `B (n+1)·W n = 0`, closed by `B (n+1) ≠ 0` and the IH.  Minimal hypotheses:
+    only the TRAILING coefficient `B (n+1) ≠ 0` and `W₀ ≠ 0` — not `A ≠ 0`, and not
+    the closed form. [PROVEN] -/
 theorem caso_ne_zero : ∀ n, W n ≠ 0
   | 0 => by simp only [W_zero]; norm_num
   | (n + 1) => by
@@ -218,34 +225,57 @@ theorem caso_ne_zero : ∀ n, W n ≠ 0
       · exact (Bcoef_succ_pos n).ne' h
       · exact (caso_ne_zero n) h
 
-/-! ## T3' — closed form of the Casoratian (auxiliary; NAMED STICKING POINT)
+/-! ## T3' — closed form of the Casoratian (auxiliary)
 
 NOT required for the flagship certificate (`caso_ne_zero` above uses only the step
-law + positivity).  It is the exact value validated numerically in the A1 gate.
-
-[STICKING-POINT] proof plan: induction on `n`.
-  * base `n = 0`: `W 0 = 13/8` (`W_zero`); RHS `(−1)⁰·13/(8·1·1) = 13/8`. `norm_num`.
-  * step: from `step_law n`, `W (n+1) = (− B (n+1) / A (n+1)) · W n` (divide by
-    `A (n+1) ≠ 0`); rewrite `W n` by the IH; then `field_simp` with the explicit
-    `Acoef`/`Bcoef` forms and the nonvanishing denominators, and `ring`.  The
-    telescoping fact is `−B(n+1)/A(n+1) = −(2n+1)²n²·p(n+2)/((2n+3)²(2n+4)²p(n+1))`,
-    and the numerators chain via `20n²+32n+13 = p (n+1)`.  The algebra is heavy
-    (degree-6 `q` is absent here — it cancels in `step_law` — so only `p` and the
-    square factors remain), but elementary; deferred to a shell-live session. -/
+law + trailing positivity + `W₀`).  It is the exact value validated numerically in
+the A1 gate; formalized here by induction on the step law (the `q`-term cancels in
+`step_law`, leaving only `p` and the square factors).  Telescoping fact:
+`20n²+32n+13 = p (n+1)`, so the numerator chains `p (k+1) ↦ p (k+2)` while the
+`(2k+1)²(k+1)²` denominator advances to `(2k+3)²(k+2)²`. [PROVEN] -/
 theorem caso_closed_form (n : ℕ) :
     W n = (-1) ^ n * (20 * (n : ℚ) ^ 2 + 32 * (n : ℚ) + 13)
             / (8 * (2 * (n : ℚ) + 1) ^ 2 * ((n : ℚ) + 1) ^ 2) := by
-  sorry
+  induction n with
+  | zero => norm_num [W_zero]
+  | succ k ih =>
+    have hA : Acoef (k + 1) ≠ 0 := (Acoef_pos (k + 1)).ne'
+    have hstep : Acoef (k + 1) * W (k + 1) = - Bcoef (k + 1) * W k := step_law k
+    have hWk1 : W (k + 1) = - Bcoef (k + 1) * W k / Acoef (k + 1) := by
+      rw [eq_div_iff hA]; linear_combination hstep
+    have hsign : ((-1 : ℚ)) ^ (k + 1) = (-1) ^ k * (-1) := pow_succ (-1) k
+    have hp1 : p (k + 1) ≠ 0 := (p_pos (k + 1)).ne'
+    have hp2 : p (k + 1 + 1) ≠ 0 := (p_pos (k + 1 + 1)).ne'
+    have hN1 : (20 * (k : ℚ) ^ 2 + 32 * (k : ℚ) + 13) = p (k + 1) := by
+      simp only [p]; push_cast; ring
+    have hN2 : (20 * ((k : ℚ) + 1) ^ 2 + 32 * ((k : ℚ) + 1) + 13) = p (k + 1 + 1) := by
+      simp only [p]; push_cast; ring
+    rw [hWk1, ih, hsign]
+    simp only [Acoef, Bcoef]
+    push_cast
+    rw [hN1, hN2]
+    have d1 : (2 * (k : ℚ) + 1) ≠ 0 := by positivity
+    have d2 : ((k : ℚ) + 1) ≠ 0 := by positivity
+    have d3 : (2 * ((k : ℚ) + 1) + 1) ≠ 0 := by positivity
+    have d4 : ((k : ℚ) + 1 + 1) ≠ 0 := by positivity
+    have d5 : (2 * ((k : ℚ) + 1) + 2) ≠ 0 := by positivity
+    have d6 : (2 * ((k : ℚ) + 1) - 1) ≠ 0 := by
+      have h0 : (0 : ℚ) ≤ (k : ℚ) := Nat.cast_nonneg k
+      have hpos : (0 : ℚ) < 2 * ((k : ℚ) + 1) - 1 := by linarith
+      exact hpos.ne'
+    have d7 : (2 * ((k : ℚ) + 1)) ≠ 0 := by positivity
+    field_simp [hp1, hp2, d1, d2, d3, d4, d5, d6, d7]
+    ring
 
 end PcfApery3
 
-/-! ## Phase V — axiom-cone audit (TO RUN WHEN THE SHELL IS LIVE)
+/-! ## Phase V — axiom-cone audit
 
-These are the V-phase checks; they CANNOT be run this no-build session.  When the
-build is green, a PROVEN grade for `caso_ne_zero` requires its cone be
-⊆ {propext, Classical.choice, Quot.sound} with NO `sorryAx`.  Note that until the
-two [STICKING-POINT] lemmas (`W_eq_det`, `caso_closed_form`) are discharged, their
-cones WILL contain `sorryAx` — that is the honest, expected state, not a defect. -/
+Build green (CATALAN-SORRYFREE cleanup, 2026-06-15; `lake build Apery3Catalan`
+EXIT 0): every declaration below — including the two auxiliary lemmas `W_eq_det`
+and `caso_closed_form`, now discharged — reports cone
+⊆ {propext, Classical.choice, Quot.sound} with NO `sorryAx`.  The flagship
+`caso_ne_zero` PROVEN grade is confirmed and the module is fully `sorry`-free. -/
 
 #print axioms PcfApery3.five_mul_p
 #print axioms PcfApery3.p_pos
