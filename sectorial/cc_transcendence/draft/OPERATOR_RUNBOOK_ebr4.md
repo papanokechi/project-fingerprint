@@ -208,7 +208,7 @@ reasoning. Headlines:
 - **Fallbacks:** IMRN (flagship, R3 check) → Letters in Math. Phys. → J. Phys. A.
 
 **Do NOT submit to:**
-- **Nonlinearity** — it **desk-rejected the directly-adjacent V_quad/PIII(D6)
+- **Nonlinearity** — it **desk-rejected the directly-adjacent V_quad/doubly-degenerate PV, Sakai D5^(1), W(A3^(1)) [superseded PIII(D6); corrected LOG-PV-01, 2026-08-03]
   sibling** (ms NON-110708, 28 Apr 2026, content-mute). Same program, same
   desk-screen risk.
 - **Experimental Mathematics** (BLACKLISTED), **NNTDM** (blocked).
@@ -216,7 +216,7 @@ reasoning. Headlines:
   Journal** (Item 32 rejected, theorem-deficit).
 
 **Occupied (do not stack a second concurrent submission):**
-- **SIGMA** — the V_quad/PIII(D5) **sibling** is live there (Item 35, since
+- **SIGMA** — the V_quad/doubly-degenerate PV, Sakai D5^(1), W(A3^(1)) [superseded PIII(D6); corrected LOG-PV-01, 2026-08-03] **sibling** is live there (Item 35, since
   1 Jun 2026). SIGMA becomes a strong option **once V_quad resolves**, not before.
 - **JMP** (WKB-Newton-polygons paper, pending) and **JDE** (active review).
 

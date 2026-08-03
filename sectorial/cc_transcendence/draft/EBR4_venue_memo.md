@@ -29,12 +29,13 @@ paper says so in both directions.
 - **Nonlinearity — EXCLUDED (adjacent desk-reject).** Nonlinearity
   **desk-rejected the directly-adjacent sibling paper** *Painlevé III(D₆) and
   resurgence for a constant from a quadratic polynomial continued fraction*
+  [label as submitted; superseded — see LOG-PV-01]
   (ms NON-110708, REJECTED 28 Apr 2026, content-mute, ~7-day desk screen, no
   reviewer reports). EBR-IV is the same program (a PCF growth constant on a
   Sakai surface); the same scope-screen would fire. The operator's own
   post-reject cascade was **CMP > J. Phys. A**, with Nonlinearity-resubmission
   explicitly excluded. **Do not submit EBR-IV to Nonlinearity.**
-- **SIGMA — OCCUPIED by the adjacent sibling.** The V_quad / PIII(**D₅⁽¹⁾**)
+- **SIGMA — OCCUPIED by the adjacent sibling.** The V_quad / **doubly-degenerate PV, Sakai D₅⁽¹⁾, W(A₃⁽¹⁾)** [superseded PIII(D6); corrected LOG-PV-01, 2026-08-03]
   paper is **live at SIGMA** (Item 35, submitted 1 Jun 2026, direct-PDF route,
   cites V_quad concept DOI 10.5281/zenodo.20455089). EBR-IV is its D₈ companion;
   sending it to SIGMA now puts two papers from one program at the same editorial
