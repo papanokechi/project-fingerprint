@@ -1018,3 +1018,142 @@ the FIT — not in the determinant evaluation, where all the certification
 effort had been spent.
 
 ---
+
+## L-032 — The full `verify` path has now been RUN, from nothing, and it reproduces exactly
+
+**Tag: VERIFIED** (single end-to-end execution; log retained).
+
+Until now the only never-exercised path in Phase 0 was the full rebuild.
+L-025 was the argument for running it: a defect had already been found in that
+path by inspection, which is direct evidence that an untested path harbours
+defects. It was run in a scratch copy of the source containing **no `out/`
+directory at all**, so it began from nothing but mpmath and the code.
+
+    .\verify.ps1 verify        EXIT = 0
+    grid build complete in 12612 s (3.5 h), 142 points
+
+Reproduced, against the committed state (commit 21cb71c):
+
+| quantity | committed | from-scratch rebuild |
+|---|---|---|
+| grid points | 142 | 142 |
+| min certified digits/point | 165.792 | 165.792 |
+| selected order K | 136 | 136 |
+| (E1) order truncation | 1.4105e-72 | 1.4105e-72 |
+| (E2) window sensitivity | 7.81179e-73 | 7.81179e-73 |
+| (E3) data-noise | 3.81039e-114 | 3.81039e-114 |
+| honest digits in c | 71 | 71 |
+| gate agreement | 71.97515 digits | 71.97515 digits |
+| held-out residual (s = 67) | 3.75487e-82 | 3.75487e-82 |
+| PSLQ verdict | REPORTABLE at b = 4 | REPORTABLE at b = 4 |
+| bases 8 and 6 | SKIPPED | SKIPPED |
+
+**Stronger than a summary-statistics match:** the rebuilt grid was compared to
+the canonical snapshot value by value, as decimal strings. All 142 common `s`
+values are present in both and **zero values differ**. The determinant
+evaluation is therefore deterministic and the certification protocol
+reproducible, not merely repeatable in aggregate.
+
+Note what this does and does not cover. It validates the state at commit
+21cb71c — the 142-point spec, `load(headroom=350)`. The revision-5 changes
+(224 points, headroom 800, the singular-solve guard) were made after this run
+started and are NOT covered by it. The scratch tree is retained rather than
+deleted, per the no-deletion rule.
+
+---
+
+## L-033 — Revision-5 grid (224 points): c to 73 honest digits, and a costly negative result
+
+**Tag: VERIFIED.** E1 = 1.00398e-74, E2 = 4.2366e-76, E3 = 6.92354e-107,
+adopted sigma_c = 1.00398e-74, K = 218, working precision 965 dps (again a
+different number). Held-out test at s = 44: 1.59357e-120.
+
+    c = -0.4385011660546906785236563039401605476191507964755840798228440...
+        (73 honest digits)
+
+Gate re-run: **AGREEMENT = 74.13 digits**, |c - candidate| = 7.35787e-75
+against sigma_c = 1.00398e-74, ratio 0.73. Fourth consistency point; the
+sequence of |Delta|/sigma_c is now 1.10, 0.41, 0.75, 0.73 (still only four
+points — L-028 stands).
+
+**THE NEGATIVE RESULT, which is the useful part.** Revision 5 added 82 points
+and bought 2 digits. Compare:
+
+| step | points added | where | digits gained | digits per point |
+|---|---|---|---|---|
+| rev3 -> rev4 | +29 | s in [92,148], HIGH s | +13 | **0.448** |
+| rev4 -> rev5 | +82 | s in [30,45] at 0.125, s in [46,88], LOW/MID s | +2 | **0.024** |
+
+Points added at high s were worth roughly **19x more per point** than points
+added at low s. I chose the low-s points deliberately, on the reasoning that
+they were by far the cheapest per certified digit in Nystrom time (~10 s each
+versus ~150 s at s = 149). That reasoning optimised **cost per point** when
+the objective is **digits per point**, and those are not the same quantity.
+The cheap points were cheap because they are nearly redundant.
+
+Two mechanisms, both now measured rather than argued:
+  * densely spaced low-s points produce near-duplicate rows in the design
+    matrix (relative separation Delta_s/s ~ 4e-3 at the bottom of the grid),
+    which is precisely the conditioning failure of L-031;
+  * E3 degraded from 3.81e-114 to 6.92e-107 -- seven digits worse -- which is
+    the conditioning penalty showing up directly in the noise amplification,
+    even though E3 remains 32 digits below binding.
+
+**This supersedes my reading of L-017 and partially reinstates L-013.** L-017
+concluded from the s_min experiment that the extraction is order-limited, each
+point buying one order. That is true but incomplete: an order bought at low s
+is worth far less than an order bought at high s, and past some density it is
+worth almost nothing while actively degrading conditioning. L-013's original
+instinct -- that extending the range dominates densifying it -- was closer to
+right than the correction I applied to it, though for a reason neither entry
+identified: it is the s-LOCATION of the new points that matters, not the
+count.
+
+**Operational rule for Phase 1:** buy points at the largest s the certification
+budget allows. Do not densify a region already sampled. Cost per point is the
+wrong figure of merit.
+
+---
+
+## L-034 — PSLQ at D = 73: the SIX-element basis is now REPORTABLE
+
+**Tag: VERIFIED.** 246 PSLQ calls logged this run (`out/pslq_calls.json`),
+including every failure and every null-control call.
+
+The threshold sweep in `run_pslq.py` was changed to step 1 across dps 22..55,
+following L-030 -- the previous step-5 sweep resolved T only to +/-5, and
+since P >= T is spent directly out of the digit budget, a 5-digit
+over-estimate of T can skip a basis needlessly.
+
+| basis size | measured T (step-1) | P | P+30 <= 70? | outcome |
+|---|---|---|---|---|
+| 8 | 45 | 45 | 75 > 70 — no | SKIPPED: needs D >= 78 |
+| 6 | 35 | 35 | 65 <= 70 — yes | **REPORTABLE** |
+
+The b = 8 threshold table shows the transition resolved: 3/3 spurious
+relations at dps 43, 2/3 at 43, 1/3 at 44, 0/3 from 45 up. That is a
+stochastic edge, not a sharp constant, and a standalone measurement an hour
+earlier gave 44 rather than 45 for the same basis. T is a small-sample
+estimate of the edge of a random phenomenon.
+
+**Result on the 6-element basis {1, log2, logpi, gamma, zeta'(-1), zeta(3)/pi^2}:**
+
+    +12*c - 1*log2 - 36*zeta'(-1) = 0        i.e.   c = (1/12) log 2 + 3 zeta'(-1)
+
+    (a) found at P = 35, re-found at P+30 = 65, IDENTICAL coefficients  PASS
+    (b) coefficient sup-norm 36 <= 10^4                                 PASS
+    (c) perturbed control c*(1+1e-20): NO RELATION                      PASS
+        random 30-digit control:       NO RELATION                      PASS
+        P = 35 >= measured spurious threshold T = 35                    PASS
+
+This is a strictly stronger adversarial result than L-023's 4-element hit:
+**three** basis elements (`logpi`, `gamma`, `zeta(3)/pi^2`) were available and
+all received coefficient exactly 0. The harness had five opportunities to
+spend a spurious constant and took none.
+
+**L-027 still applies in full.** `log2` and `zeta'(-1)` remain in the basis by
+construction, so this is a stronger validation of the INSTRUMENT, not
+independent evidence about `c`. The zero coefficients are evidence about the
+instrument's selectivity, which is exactly what Phase 1 will depend on.
+
+---

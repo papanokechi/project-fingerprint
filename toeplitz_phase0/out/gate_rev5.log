@@ -1,0 +1,15 @@
+==============================================================================
+PHASE 0.3  CALIBRATION GATE
+==============================================================================
+  c   (VERIFIED, this session, 73 honest digits)
+      = -0.438501166054690678523656303940160547619150796475584079822844
+  sigma_c                       = 1.00398e-74
+  candidate (CONJECTURED form) (1/12)log2 + 3 zeta'(-1)
+      = -0.438501166054690678523656303940160547619150796475584079822844
+  |c - candidate|               = 7.35787e-75
+  AGREEMENT                     = 74.133248 digits
+  gate threshold                = 12 digits
+
+  agreement vs error bar: |c - candidate| <= 10*sigma_c  -> CONSISTENT
+
+  GATE PASSED.  The pipeline reproduces the known constant.

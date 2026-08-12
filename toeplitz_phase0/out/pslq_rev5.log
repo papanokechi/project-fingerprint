@@ -1,0 +1,380 @@
+==============================================================================
+PHASE 0.4  PSLQ HARNESS
+==============================================================================
+  honest digits in c, D            : 73
+  control-(i) sensitivity floor    : P >= 31
+  reconfirmation budget            : P + 30 <= 70
+  diagnostic precision P_max       : 70  (cannot satisfy criterion (a))
+  coefficient sup-norm threshold   : 10000
+
+  P is chosen per basis as the SMALLEST admissible precision,
+  P = max(measured spurious threshold, control-(i) floor),
+  because every digit spent on the search is a digit unavailable
+  for the reconfirmation at P+30.
+
+[1] basis constants recomputed at +30 digits
+    1              agrees to 70.0 digits
+    log2           agrees to 70.0 digits
+    logpi          agrees to 70.0 digits
+    gamma          agrees to 70.0 digits
+    zeta'(-1)      agrees to 70.0 digits
+    zeta(3)/pi^2   agrees to 70.0 digits
+    Catalan        agrees to 70.0 digits
+    log(1+sqrt2)   agrees to 70.0 digits
+    zeta'(-1) vs 1/12 - log(Glaisher): agrees to 80.7977 digits
+
+------------------------------------------------------------------------------
+[basis of 8] ['1', 'log2', 'logpi', 'gamma', "zeta'(-1)", 'zeta(3)/pi^2', 'Catalan', 'log(1+sqrt2)']
+------------------------------------------------------------------------------
+  [2] spurious-relation threshold (random targets, blind to c)
+    [pslq] NULL-random(dps=10,trial=0)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=1)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=2)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=15,trial=0)  dps=15    maxcoeff=10000    -> [1, 3, 2, 0, -3, -1, -14, -2, -1]
+    [pslq] NULL-random(dps=15,trial=1)  dps=15    maxcoeff=10000    -> [-1, -3, 3, 2, -1, 3, 5, 0, 1]
+    [pslq] NULL-random(dps=15,trial=2)  dps=15    maxcoeff=10000    -> [233, -231, -1, 0, -232, -231, -231, -1, -1]
+    [pslq] NULL-random(dps=20,trial=0)  dps=20    maxcoeff=10000    -> [-18, 10, 8, -3, -7, -26, -9, 15, -1]
+    [pslq] NULL-random(dps=20,trial=1)  dps=20    maxcoeff=10000    -> [-8, 5, 4, 5, 4, 0, 23, -20, 12]
+    [pslq] NULL-random(dps=20,trial=2)  dps=20    maxcoeff=10000    -> [-103, 212, -53, 57, 26, -166, -180, -222, 53]
+    [pslq] NULL-random(dps=22,trial=0)  dps=22    maxcoeff=10000    -> [16, -52, 22, 13, -29, -17, -24, -9, 34]
+    [pslq] NULL-random(dps=22,trial=1)  dps=22    maxcoeff=10000    -> [-326, 126, -63, 387, 71, 66, 396, 71, -217]
+    [pslq] NULL-random(dps=22,trial=2)  dps=22    maxcoeff=10000    -> [-14, -23, -32, 25, 33, 9, 40, 2, 13]
+    [pslq] NULL-random(dps=23,trial=0)  dps=23    maxcoeff=10000    -> [-47, 14, 117, -10, 0, -27, -28, 2, -25]
+    [pslq] NULL-random(dps=23,trial=1)  dps=23    maxcoeff=10000    -> [-2, -8, 40, -36, 14, 16, -25, 3, 22]
+    [pslq] NULL-random(dps=23,trial=2)  dps=23    maxcoeff=10000    -> [12, -83, -26, 29, 2, 60, -8, 63, 4]
+    [pslq] NULL-random(dps=24,trial=0)  dps=24    maxcoeff=10000    -> [30, 145, -117, -22, 145, 44, -26, -30, -140]
+    [pslq] NULL-random(dps=24,trial=1)  dps=24    maxcoeff=10000    -> [-23, 30, 9, 26, -12, 18, -5, -24, 1]
+    [pslq] NULL-random(dps=24,trial=2)  dps=24    maxcoeff=10000    -> [4, -11, 36, -84, -16, 6, -49, 17, 85]
+    [pslq] NULL-random(dps=25,trial=0)  dps=25    maxcoeff=10000    -> [10, -13, 24, 0, -131, 66, 31, 62, 7]
+    [pslq] NULL-random(dps=25,trial=1)  dps=25    maxcoeff=10000    -> [35, 0, -24, -43, 74, 128, -68, 61, -61]
+    [pslq] NULL-random(dps=25,trial=2)  dps=25    maxcoeff=10000    -> [26, -49, 30, -55, 13, 23, 63, 22, 11]
+    [pslq] NULL-random(dps=26,trial=0)  dps=26    maxcoeff=10000    -> [6, -92, 88, -5, -8, 79, -57, -57, 116]
+    [pslq] NULL-random(dps=26,trial=1)  dps=26    maxcoeff=10000    -> [-28, 101, -31, 27, 72, 22, -21, -50, -69]
+    [pslq] NULL-random(dps=26,trial=2)  dps=26    maxcoeff=10000    -> [92, -57, 241, -186, -86, 224, -1, -86, 151]
+    [pslq] NULL-random(dps=27,trial=0)  dps=27    maxcoeff=10000    -> [-221, 252, -190, 67, 378, 250, 17, -124, 98]
+    [pslq] NULL-random(dps=27,trial=1)  dps=27    maxcoeff=10000    -> [31, 37, 50, 15, -40, 13, 22, -101, -33]
+    [pslq] NULL-random(dps=27,trial=2)  dps=27    maxcoeff=10000    -> [143, -103, -167, -26, -82, -144, 52, 244, -222]
+    [pslq] NULL-random(dps=28,trial=0)  dps=28    maxcoeff=10000    -> [76, -1, 65, -118, 129, 181, 51, 58, -142]
+    [pslq] NULL-random(dps=28,trial=1)  dps=28    maxcoeff=10000    -> [-282, 139, 68, 239, 179, -192, -105, -204, 45]
+    [pslq] NULL-random(dps=28,trial=2)  dps=28    maxcoeff=10000    -> [-343, 202, 117, -310, 148, 74, 57, 105, 319]
+    [pslq] NULL-random(dps=29,trial=0)  dps=29    maxcoeff=10000    -> [-281, -205, 170, 208, -84, -59, -29, 278, 26]
+    [pslq] NULL-random(dps=29,trial=1)  dps=29    maxcoeff=10000    -> [22, 47, 47, -217, -229, 91, -185, 424, -94]
+    [pslq] NULL-random(dps=29,trial=2)  dps=29    maxcoeff=10000    -> [-206, 6, 256, -147, -44, -75, 51, 129, 228]
+    [pslq] NULL-random(dps=30,trial=0)  dps=30    maxcoeff=10000    -> [-53, -30, 84, 199, -179, 238, -134, -74, 45]
+    [pslq] NULL-random(dps=30,trial=1)  dps=30    maxcoeff=10000    -> [997, 1247, -1246, -2049, -1158, 4114, 129, -12, 1811]
+    [pslq] NULL-random(dps=30,trial=2)  dps=30    maxcoeff=10000    -> [-356, 335, 1070, -747, -955, 1059, -264, 1310, -111]
+    [pslq] NULL-random(dps=31,trial=0)  dps=31    maxcoeff=10000    -> [-18, 245, 47, 147, 81, -25, 129, -353, -182]
+    [pslq] NULL-random(dps=31,trial=1)  dps=31    maxcoeff=10000    -> [169, -334, -57, 658, 118, 213, -563, -102, -661]
+    [pslq] NULL-random(dps=31,trial=2)  dps=31    maxcoeff=10000    -> [1136, -341, -1109, 927, -1218, -694, 431, -680, -339]
+    [pslq] NULL-random(dps=32,trial=0)  dps=32    maxcoeff=10000    -> [-80, -349, -241, 583, -559, -100, 465, 22, 263]
+    [pslq] NULL-random(dps=32,trial=1)  dps=32    maxcoeff=10000    -> [-43, -134, -38, 258, -378, 293, 314, 219, -50]
+    [pslq] NULL-random(dps=32,trial=2)  dps=32    maxcoeff=10000    -> [134, 769, 205, -501, 368, -47, -447, -667, -161]
+    [pslq] NULL-random(dps=33,trial=0)  dps=33    maxcoeff=10000    -> [-770, -1379, -573, 1180, -669, 441, -33, 1066, 890]
+    [pslq] NULL-random(dps=33,trial=1)  dps=33    maxcoeff=10000    -> [-384, -463, 498, 182, 437, -153, -546, 294, 124]
+    [pslq] NULL-random(dps=33,trial=2)  dps=33    maxcoeff=10000    -> [-152, 799, 93, -400, -37, -210, 456, 8, -233]
+    [pslq] NULL-random(dps=34,trial=0)  dps=34    maxcoeff=10000    -> [181, -1256, -173, 700, -1097, -1611, 1804, 2370, -2003]
+    [pslq] NULL-random(dps=34,trial=1)  dps=34    maxcoeff=10000    -> [127, 107, 1257, -546, -511, -64, 568, -655, 282]
+    [pslq] NULL-random(dps=34,trial=2)  dps=34    maxcoeff=10000    -> [2563, 649, -1005, -1287, -2441, -1185, 781, -532, -870]
+    [pslq] NULL-random(dps=35,trial=0)  dps=35    maxcoeff=10000    -> [-200, -1268, -2753, 728, 1258, 9, 1578, -985, 3052]
+    [pslq] NULL-random(dps=35,trial=1)  dps=35    maxcoeff=10000    -> [1043, -821, -632, -653, -534, 961, -1023, -1584, 3027]
+    [pslq] NULL-random(dps=35,trial=2)  dps=35    maxcoeff=10000    -> [-510, -986, -2237, 4846, -1453, -685, -418, -1147, -207]
+    [pslq] NULL-random(dps=36,trial=0)  dps=36    maxcoeff=10000    -> [1336, -289, 165, 213, -747, -162, -568, -359, -801]
+    [pslq] NULL-random(dps=36,trial=1)  dps=36    maxcoeff=10000    -> [384, -1027, -101, 252, 158, 1017, 564, 390, -320]
+    [pslq] NULL-random(dps=36,trial=2)  dps=36    maxcoeff=10000    -> [1386, 170, 1811, -1700, -2623, -348, 3509, 2494, -2945]
+    [pslq] NULL-random(dps=37,trial=0)  dps=37    maxcoeff=10000    -> [-2653, 1385, -310, 990, 702, -2524, 394, 1388, -234]
+    [pslq] NULL-random(dps=37,trial=1)  dps=37    maxcoeff=10000    -> [130, -1110, -2214, 3039, 6173, -2969, 2846, -5354, -634]
+    [pslq] NULL-random(dps=37,trial=2)  dps=37    maxcoeff=10000    -> [-665, -1539, 1136, -578, 1672, 1046, 1247, 1386, 320]
+    [pslq] NULL-random(dps=38,trial=0)  dps=38    maxcoeff=10000    -> [-6294, -5133, 1467, 2784, -3271, -2663, -1672, 9518, 638]
+    [pslq] NULL-random(dps=38,trial=1)  dps=38    maxcoeff=10000    -> [6104, 4727, -2485, 5054, -8991, -3009, 3100, -9898, -5628]
+    [pslq] NULL-random(dps=38,trial=2)  dps=38    maxcoeff=10000    -> [181, 602, -369, 1026, 450, 921, 277, -1764, -398]
+    [pslq] NULL-random(dps=39,trial=0)  dps=39    maxcoeff=10000    -> [1750, 419, -1989, 2848, -2445, 2358, -442, -4646, 950]
+    [pslq] NULL-random(dps=39,trial=1)  dps=39    maxcoeff=10000    -> [567, 2031, -2496, -2291, 3143, 2801, -1842, 817, -691]
+    [pslq] NULL-random(dps=39,trial=2)  dps=39    maxcoeff=10000    -> [-3495, 847, -6301, 3977, 3184, 5281, 5966, 1404, 3134]
+    [pslq] NULL-random(dps=40,trial=0)  dps=40    maxcoeff=10000    -> [-6516, 603, 2683, 7966, -756, -3847, -4015, -1708, -2728]
+    [pslq] NULL-random(dps=40,trial=1)  dps=40    maxcoeff=10000    -> [601, 77, 6240, 993, -5317, 5040, -1425, -752, -1849]
+    [pslq] NULL-random(dps=40,trial=2)  dps=40    maxcoeff=10000    -> [-969, -1454, 8153, 1219, 3163, 1227, 935, -6469, 520]
+    [pslq] NULL-random(dps=41,trial=0)  dps=41    maxcoeff=10000    -> [3537, -3523, 8061, -4324, 2664, -2183, -3585, -865, -1596]
+    [pslq] NULL-random(dps=41,trial=1)  dps=41    maxcoeff=10000    -> [383, -404, 3168, -4843, 539, 6013, -1185, 3131, 1480]
+    [pslq] NULL-random(dps=41,trial=2)  dps=41    maxcoeff=10000    -> [5705, 3352, 5595, -8375, -3142, 7431, 3735, -3623, -1239]
+    [pslq] NULL-random(dps=42,trial=0)  dps=42    maxcoeff=10000    -> [7977, -7739, 5614, -2904, -679, 6483, -2604, 1503, -7933]
+    [pslq] NULL-random(dps=42,trial=1)  dps=42    maxcoeff=10000    -> [1679, 5574, 4125, -6050, -81, -5807, -9741, 1276, -6519]
+    [pslq] NULL-random(dps=42,trial=2)  dps=42    maxcoeff=10000    -> [-4043, -7394, -4784, 8638, 590, 5470, 5599, 7384, -599]
+    [pslq] NULL-random(dps=43,trial=0)  dps=43    maxcoeff=10000    -> [-5509, 6526, -8781, 9570, -2764, -5746, 1860, 1697, -2182]
+    [pslq] NULL-random(dps=43,trial=1)  dps=43    maxcoeff=10000    -> [-4160, 1496, -6626, 9101, 7964, 5346, -7909, 1442, -6224]
+    [pslq] NULL-random(dps=43,trial=2)  dps=43    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=44,trial=0)  dps=44    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=44,trial=1)  dps=44    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=44,trial=2)  dps=44    maxcoeff=10000    -> [-6149, 8870, -15, 4170, -8159, -4854, 8883, -6362, 3808]
+    [pslq] NULL-random(dps=45,trial=0)  dps=45    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=45,trial=1)  dps=45    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=45,trial=2)  dps=45    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=46,trial=0)  dps=46    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=46,trial=1)  dps=46    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=46,trial=2)  dps=46    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=47,trial=0)  dps=47    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=47,trial=1)  dps=47    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=47,trial=2)  dps=47    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=48,trial=0)  dps=48    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=48,trial=1)  dps=48    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=48,trial=2)  dps=48    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=49,trial=0)  dps=49    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=49,trial=1)  dps=49    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=49,trial=2)  dps=49    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=0)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=1)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=2)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=51,trial=0)  dps=51    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=51,trial=1)  dps=51    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=51,trial=2)  dps=51    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=52,trial=0)  dps=52    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=52,trial=1)  dps=52    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=52,trial=2)  dps=52    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=53,trial=0)  dps=53    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=53,trial=1)  dps=53    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=53,trial=2)  dps=53    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=54,trial=0)  dps=54    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=54,trial=1)  dps=54    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=54,trial=2)  dps=54    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=0)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=1)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=2)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=0)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=1)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=2)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=70,trial=0)  dps=70    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=70,trial=1)  dps=70    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=70,trial=2)  dps=70    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=0)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=1)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=2)  dps=80    maxcoeff=10000    -> NO RELATION
+      dps=10    random targets=3 relations found=0
+      dps=15    random targets=3 relations found=3
+      dps=20    random targets=3 relations found=3
+      dps=22    random targets=3 relations found=3
+      dps=23    random targets=3 relations found=3
+      dps=24    random targets=3 relations found=3
+      dps=25    random targets=3 relations found=3
+      dps=26    random targets=3 relations found=3
+      dps=27    random targets=3 relations found=3
+      dps=28    random targets=3 relations found=3
+      dps=29    random targets=3 relations found=3
+      dps=30    random targets=3 relations found=3
+      dps=31    random targets=3 relations found=3
+      dps=32    random targets=3 relations found=3
+      dps=33    random targets=3 relations found=3
+      dps=34    random targets=3 relations found=3
+      dps=35    random targets=3 relations found=3
+      dps=36    random targets=3 relations found=3
+      dps=37    random targets=3 relations found=3
+      dps=38    random targets=3 relations found=3
+      dps=39    random targets=3 relations found=3
+      dps=40    random targets=3 relations found=3
+      dps=41    random targets=3 relations found=3
+      dps=42    random targets=3 relations found=3
+      dps=43    random targets=3 relations found=2
+      dps=44    random targets=3 relations found=1
+      dps=45    random targets=3 relations found=0
+      dps=46    random targets=3 relations found=0
+      dps=47    random targets=3 relations found=0
+      dps=48    random targets=3 relations found=0
+      dps=49    random targets=3 relations found=0
+      dps=50    random targets=3 relations found=0
+      dps=51    random targets=3 relations found=0
+      dps=52    random targets=3 relations found=0
+      dps=53    random targets=3 relations found=0
+      dps=54    random targets=3 relations found=0
+      dps=55    random targets=3 relations found=0
+      dps=60    random targets=3 relations found=0
+      dps=70    random targets=3 relations found=0
+      dps=80    random targets=3 relations found=0
+    -> spurious relations persist below dps 45; basis usable only for P >= 45
+    -> P = max(45, 31) = 45; needs P+30 = 75 <= 70  -> INSUFFICIENT PRECISION
+    -> this basis needs c to >= 78 honest digits; have 73.
+  [3] DIAGNOSTIC search at P_max=70 (not reportable by construction)
+    [pslq] DIAGNOSTIC P_max=70          dps=70    maxcoeff=10000    -> [-12, 0, 1, 0, 0, 36, 0, 0, 0]
+      -12*c +1*log2 +36*zeta'(-1) = 0
+  [4,5] SKIPPED: running them here would be a guaranteed-fail protocol, not a test.
+
+  >>> NOT reportable at basis size 8; shrinking basis per the pre-declared nesting.
+
+------------------------------------------------------------------------------
+[basis of 6] ['1', 'log2', 'logpi', 'gamma', "zeta'(-1)", 'zeta(3)/pi^2']
+------------------------------------------------------------------------------
+  [2] spurious-relation threshold (random targets, blind to c)
+    [pslq] NULL-random(dps=10,trial=0)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=1)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=2)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=15,trial=0)  dps=15    maxcoeff=10000    -> [6, 0, 14, -15, 0, 4, -12]
+    [pslq] NULL-random(dps=15,trial=1)  dps=15    maxcoeff=10000    -> [6, -11, -1, 5, -10, -4, 3]
+    [pslq] NULL-random(dps=15,trial=2)  dps=15    maxcoeff=10000    -> [1463, -1461, -1, -1, -1463, -1462, -1463]
+    [pslq] NULL-random(dps=20,trial=0)  dps=20    maxcoeff=10000    -> [64, -137, -53, 2, 72, -265, 2]
+    [pslq] NULL-random(dps=20,trial=1)  dps=20    maxcoeff=10000    -> [-13, -33, 49, -26, 69, -29, 15]
+    [pslq] NULL-random(dps=20,trial=2)  dps=20    maxcoeff=10000    -> [-10, 1, 32, 31, -85, -29, -35]
+    [pslq] NULL-random(dps=22,trial=0)  dps=22    maxcoeff=10000    -> [18, -41, 27, -17, 30, -77, -61]
+    [pslq] NULL-random(dps=22,trial=1)  dps=22    maxcoeff=10000    -> [-137, 371, -197, -54, 9, 5, 194]
+    [pslq] NULL-random(dps=22,trial=2)  dps=22    maxcoeff=10000    -> [66, 54, -122, -15, -93, -45, 30]
+    [pslq] NULL-random(dps=23,trial=0)  dps=23    maxcoeff=10000    -> [62, -114, 55, -10, -112, -193, 287]
+    [pslq] NULL-random(dps=23,trial=1)  dps=23    maxcoeff=10000    -> [31, -9, -82, -20, 50, -146, -94]
+    [pslq] NULL-random(dps=23,trial=2)  dps=23    maxcoeff=10000    -> [-28, 82, 23, -39, -39, -23, 29]
+    [pslq] NULL-random(dps=24,trial=0)  dps=24    maxcoeff=10000    -> [-88, 130, -92, -68, 174, 1, 209]
+    [pslq] NULL-random(dps=24,trial=1)  dps=24    maxcoeff=10000    -> [-34, 105, -100, 8, -29, -105, 44]
+    [pslq] NULL-random(dps=24,trial=2)  dps=24    maxcoeff=10000    -> [5, -146, 51, 118, -73, 86, 181]
+    [pslq] NULL-random(dps=25,trial=0)  dps=25    maxcoeff=10000    -> [-273, 6, 180, 269, -53, -402, -274]
+    [pslq] NULL-random(dps=25,trial=1)  dps=25    maxcoeff=10000    -> [-348, 555, -2338, 2001, -1171, 1297, 1375]
+    [pslq] NULL-random(dps=25,trial=2)  dps=25    maxcoeff=10000    -> [10, 217, -67, -70, -164, 92, 2]
+    [pslq] NULL-random(dps=26,trial=0)  dps=26    maxcoeff=10000    -> [98, -878, 1286, -425, 583, 277, -21]
+    [pslq] NULL-random(dps=26,trial=1)  dps=26    maxcoeff=10000    -> [599, 412, -850, 3, -1223, -211, 56]
+    [pslq] NULL-random(dps=26,trial=2)  dps=26    maxcoeff=10000    -> [301, -265, -408, -127, 258, -249, 494]
+    [pslq] NULL-random(dps=27,trial=0)  dps=27    maxcoeff=10000    -> [-1037, 1376, -283, 29, 905, 1261, 898]
+    [pslq] NULL-random(dps=27,trial=1)  dps=27    maxcoeff=10000    -> [121, -510, -145, -179, 669, -922, 499]
+    [pslq] NULL-random(dps=27,trial=2)  dps=27    maxcoeff=10000    -> [-377, 165, -62, 122, 527, -524, -209]
+    [pslq] NULL-random(dps=28,trial=0)  dps=28    maxcoeff=10000    -> [4363, 4142, 697, -9792, -1196, -3588, 1911]
+    [pslq] NULL-random(dps=28,trial=1)  dps=28    maxcoeff=10000    -> [-979, 196, 1409, 235, 192, 624, 495]
+    [pslq] NULL-random(dps=28,trial=2)  dps=28    maxcoeff=10000    -> [-119, -189, 202, 527, -830, -1176, -1116]
+    [pslq] NULL-random(dps=29,trial=0)  dps=29    maxcoeff=10000    -> [302, -69, -501, 89, -861, -1847, 745]
+    [pslq] NULL-random(dps=29,trial=1)  dps=29    maxcoeff=10000    -> [929, -922, -129, -751, 41, -1630, 1487]
+    [pslq] NULL-random(dps=29,trial=2)  dps=29    maxcoeff=10000    -> [676, -1125, 1287, -499, -884, 31, 2010]
+    [pslq] NULL-random(dps=30,trial=0)  dps=30    maxcoeff=10000    -> [5462, -4376, -1205, -1211, -729, 219, -373]
+    [pslq] NULL-random(dps=30,trial=1)  dps=30    maxcoeff=10000    -> [635, -46, -2207, -2, 1038, 2036, 1859]
+    [pslq] NULL-random(dps=30,trial=2)  dps=30    maxcoeff=10000    -> [-1579, 208, 4394, 563, -1710, 838, -2186]
+    [pslq] NULL-random(dps=31,trial=0)  dps=31    maxcoeff=10000    -> [-2222, -1804, 4240, 2196, -316, -4243, -5126]
+    [pslq] NULL-random(dps=31,trial=1)  dps=31    maxcoeff=10000    -> [1466, -2071, -2145, -137, 245, -2560, 2216]
+    [pslq] NULL-random(dps=31,trial=2)  dps=31    maxcoeff=10000    -> [-496, 2213, -854, -1481, 1216, -66, 156]
+    [pslq] NULL-random(dps=32,trial=0)  dps=32    maxcoeff=10000    -> [2883, -594, -1207, -3272, -1765, -2050, 2574]
+    [pslq] NULL-random(dps=32,trial=1)  dps=32    maxcoeff=10000    -> [-1673, 44, 1811, 1917, -2009, 2189, 3971]
+    [pslq] NULL-random(dps=32,trial=2)  dps=32    maxcoeff=10000    -> [-1476, 2994, 1018, -2207, 2046, -4399, -2738]
+    [pslq] NULL-random(dps=33,trial=0)  dps=33    maxcoeff=10000    -> [-5439, -4231, 1123, 6400, 6243, 7280, -913]
+    [pslq] NULL-random(dps=33,trial=1)  dps=33    maxcoeff=10000    -> [-6365, -3295, 8828, 5090, 6361, 6442, 142]
+    [pslq] NULL-random(dps=33,trial=2)  dps=33    maxcoeff=10000    -> [-586, -5123, 4898, 1982, 1284, 386, -1251]
+    [pslq] NULL-random(dps=34,trial=0)  dps=34    maxcoeff=10000    -> [-5434, 8292, 4834, 1023, -9162, -6003, 7991]
+    [pslq] NULL-random(dps=34,trial=1)  dps=34    maxcoeff=10000    -> [-4849, -1532, 6417, -1629, 9951, -1781, 8669]
+    [pslq] NULL-random(dps=34,trial=2)  dps=34    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=35,trial=0)  dps=35    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=35,trial=1)  dps=35    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=35,trial=2)  dps=35    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=36,trial=0)  dps=36    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=36,trial=1)  dps=36    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=36,trial=2)  dps=36    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=37,trial=0)  dps=37    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=37,trial=1)  dps=37    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=37,trial=2)  dps=37    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=38,trial=0)  dps=38    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=38,trial=1)  dps=38    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=38,trial=2)  dps=38    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=39,trial=0)  dps=39    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=39,trial=1)  dps=39    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=39,trial=2)  dps=39    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=0)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=1)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=2)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=41,trial=0)  dps=41    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=41,trial=1)  dps=41    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=41,trial=2)  dps=41    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=42,trial=0)  dps=42    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=42,trial=1)  dps=42    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=42,trial=2)  dps=42    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=43,trial=0)  dps=43    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=43,trial=1)  dps=43    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=43,trial=2)  dps=43    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=44,trial=0)  dps=44    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=44,trial=1)  dps=44    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=44,trial=2)  dps=44    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=45,trial=0)  dps=45    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=45,trial=1)  dps=45    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=45,trial=2)  dps=45    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=46,trial=0)  dps=46    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=46,trial=1)  dps=46    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=46,trial=2)  dps=46    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=47,trial=0)  dps=47    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=47,trial=1)  dps=47    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=47,trial=2)  dps=47    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=48,trial=0)  dps=48    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=48,trial=1)  dps=48    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=48,trial=2)  dps=48    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=49,trial=0)  dps=49    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=49,trial=1)  dps=49    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=49,trial=2)  dps=49    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=0)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=1)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=2)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=51,trial=0)  dps=51    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=51,trial=1)  dps=51    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=51,trial=2)  dps=51    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=52,trial=0)  dps=52    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=52,trial=1)  dps=52    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=52,trial=2)  dps=52    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=53,trial=0)  dps=53    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=53,trial=1)  dps=53    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=53,trial=2)  dps=53    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=54,trial=0)  dps=54    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=54,trial=1)  dps=54    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=54,trial=2)  dps=54    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=0)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=1)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=2)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=0)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=1)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=2)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=70,trial=0)  dps=70    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=70,trial=1)  dps=70    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=70,trial=2)  dps=70    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=0)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=1)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=2)  dps=80    maxcoeff=10000    -> NO RELATION
+      dps=10    random targets=3 relations found=0
+      dps=15    random targets=3 relations found=3
+      dps=20    random targets=3 relations found=3
+      dps=22    random targets=3 relations found=3
+      dps=23    random targets=3 relations found=3
+      dps=24    random targets=3 relations found=3
+      dps=25    random targets=3 relations found=3
+      dps=26    random targets=3 relations found=3
+      dps=27    random targets=3 relations found=3
+      dps=28    random targets=3 relations found=3
+      dps=29    random targets=3 relations found=3
+      dps=30    random targets=3 relations found=3
+      dps=31    random targets=3 relations found=3
+      dps=32    random targets=3 relations found=3
+      dps=33    random targets=3 relations found=3
+      dps=34    random targets=3 relations found=2
+      dps=35    random targets=3 relations found=0
+      dps=36    random targets=3 relations found=0
+      dps=37    random targets=3 relations found=0
+      dps=38    random targets=3 relations found=0
+      dps=39    random targets=3 relations found=0
+      dps=40    random targets=3 relations found=0
+      dps=41    random targets=3 relations found=0
+      dps=42    random targets=3 relations found=0
+      dps=43    random targets=3 relations found=0
+      dps=44    random targets=3 relations found=0
+      dps=45    random targets=3 relations found=0
+      dps=46    random targets=3 relations found=0
+      dps=47    random targets=3 relations found=0
+      dps=48    random targets=3 relations found=0
+      dps=49    random targets=3 relations found=0
+      dps=50    random targets=3 relations found=0
+      dps=51    random targets=3 relations found=0
+      dps=52    random targets=3 relations found=0
+      dps=53    random targets=3 relations found=0
+      dps=54    random targets=3 relations found=0
+      dps=55    random targets=3 relations found=0
+      dps=60    random targets=3 relations found=0
+      dps=70    random targets=3 relations found=0
+      dps=80    random targets=3 relations found=0
+    -> spurious relations persist below dps 35; basis usable only for P >= 35
+    -> P = max(35, 31) = 35; needs P+30 = 65 <= 70  -> OK
+  [3] DIAGNOSTIC search at P_max=70 (not reportable by construction)
+    [pslq] DIAGNOSTIC P_max=70          dps=70    maxcoeff=10000    -> [12, 0, -1, 0, 0, -36, 0]
+      +12*c -1*log2 -36*zeta'(-1) = 0
+  [4] gated search at P=35, reconfirmation at P+30
+    [pslq] TARGET c (P=35)              dps=35    maxcoeff=10000    -> [12, 0, -1, 0, 0, -36, 0]
+    [pslq] TARGET c (P+30=65)           dps=65    maxcoeff=10000    -> [12, 0, -1, 0, 0, -36, 0]
+  [5] null controls
+    [pslq] NULL-perturbed c*(1+1e-20)   dps=35    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random 30-digit constant dps=35    maxcoeff=10000    -> NO RELATION
+      null controls PASS
+
+  >>> REPORTABLE at basis size 6: (a) reconfirmed at P+30 with identical coefficients, (b) sup-norm within threshold, (c) both null controls empty, and P is at or above the measured spurious threshold.
+      +12*c -1*log2 -36*zeta'(-1) = 0
+
+wrote out/pslq_result.json and out/pslq_calls.json

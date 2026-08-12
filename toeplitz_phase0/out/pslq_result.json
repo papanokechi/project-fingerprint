@@ -1,6 +1,6 @@
 {
- "honest_digits_c": 71,
- "P_max": 68,
+ "honest_digits_c": 73,
+ "P_max": 70,
  "control_sensitivity_floor": 31,
  "maxcoeff": 10000,
  "stages": [
@@ -16,9 +16,9 @@
     "log(1+sqrt2)"
    ],
    "basis_size": 8,
-   "P": 50,
+   "P": 45,
    "precision_budget_ok": false,
-   "spurious_threshold_dps": 50,
+   "spurious_threshold_dps": 45,
    "spurious_table": [
     {
      "dps": 10,
@@ -36,7 +36,42 @@
      "relations_found": 3
     },
     {
+     "dps": 22,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 23,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 24,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
      "dps": 25,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 26,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 27,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 28,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 29,
      "random_targets": 3,
      "relations_found": 3
     },
@@ -46,12 +81,122 @@
      "relations_found": 3
     },
     {
+     "dps": 31,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 32,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 33,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 34,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 35,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 36,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 37,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 38,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 39,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
      "dps": 40,
      "random_targets": 3,
      "relations_found": 3
     },
     {
+     "dps": 41,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 42,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 43,
+     "random_targets": 3,
+     "relations_found": 2
+    },
+    {
+     "dps": 44,
+     "random_targets": 3,
+     "relations_found": 1
+    },
+    {
+     "dps": 45,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 46,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 47,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 48,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 49,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
      "dps": 50,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 51,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 52,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 53,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 54,
      "random_targets": 3,
      "relations_found": 0
     },
@@ -66,7 +211,7 @@
      "relations_found": 0
     },
     {
-     "dps": 68,
+     "dps": 70,
      "random_targets": 3,
      "relations_found": 0
     },
@@ -91,12 +236,12 @@
    "relation": null,
    "criteria_ab": false,
    "reasons": [
-    "skipped: P+30 exceeds the 71 honest digits available"
+    "skipped: P+30 exceeds the 73 honest digits available"
    ],
    "null_perturbed": null,
    "null_random": null,
    "null_controls_passed": false,
-   "diagnostic_residual": "1.27066e-71",
+   "diagnostic_residual": "8.82944e-74",
    "REPORTABLE": false
   },
   {
@@ -109,9 +254,9 @@
     "zeta(3)/pi^2"
    ],
    "basis_size": 6,
-   "P": 40,
-   "precision_budget_ok": false,
-   "spurious_threshold_dps": 40,
+   "P": 35,
+   "precision_budget_ok": true,
+   "spurious_threshold_dps": 35,
    "spurious_table": [
     {
      "dps": 10,
@@ -129,7 +274,42 @@
      "relations_found": 3
     },
     {
+     "dps": 22,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 23,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 24,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
      "dps": 25,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 26,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 27,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 28,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 29,
      "random_targets": 3,
      "relations_found": 3
     },
@@ -139,12 +319,122 @@
      "relations_found": 3
     },
     {
+     "dps": 31,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 32,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 33,
+     "random_targets": 3,
+     "relations_found": 3
+    },
+    {
+     "dps": 34,
+     "random_targets": 3,
+     "relations_found": 2
+    },
+    {
+     "dps": 35,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 36,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 37,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 38,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 39,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
      "dps": 40,
      "random_targets": 3,
      "relations_found": 0
     },
     {
+     "dps": 41,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 42,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 43,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 44,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 45,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 46,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 47,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 48,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 49,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
      "dps": 50,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 51,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 52,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 53,
+     "random_targets": 3,
+     "relations_found": 0
+    },
+    {
+     "dps": 54,
      "random_targets": 3,
      "relations_found": 0
     },
@@ -159,7 +449,7 @@
      "relations_found": 0
     },
     {
-     "dps": 68,
+     "dps": 70,
      "random_targets": 3,
      "relations_found": 0
     },
@@ -179,99 +469,14 @@
     0
    ],
    "diagnostic_pretty": "+12*c -1*log2 -36*zeta'(-1) = 0",
-   "relation": null,
-   "criteria_ab": false,
-   "reasons": [
-    "skipped: P+30 exceeds the 71 honest digits available"
-   ],
-   "null_perturbed": null,
-   "null_random": null,
-   "null_controls_passed": false,
-   "diagnostic_residual": "1.27066e-71",
-   "REPORTABLE": false
-  },
-  {
-   "basis": [
-    "1",
-    "log2",
-    "gamma",
-    "zeta'(-1)"
-   ],
-   "basis_size": 4,
-   "P": 31,
-   "precision_budget_ok": true,
-   "spurious_threshold_dps": 30,
-   "spurious_table": [
-    {
-     "dps": 10,
-     "random_targets": 3,
-     "relations_found": 0
-    },
-    {
-     "dps": 15,
-     "random_targets": 3,
-     "relations_found": 3
-    },
-    {
-     "dps": 20,
-     "random_targets": 3,
-     "relations_found": 3
-    },
-    {
-     "dps": 25,
-     "random_targets": 3,
-     "relations_found": 3
-    },
-    {
-     "dps": 30,
-     "random_targets": 3,
-     "relations_found": 0
-    },
-    {
-     "dps": 40,
-     "random_targets": 3,
-     "relations_found": 0
-    },
-    {
-     "dps": 50,
-     "random_targets": 3,
-     "relations_found": 0
-    },
-    {
-     "dps": 55,
-     "random_targets": 3,
-     "relations_found": 0
-    },
-    {
-     "dps": 60,
-     "random_targets": 3,
-     "relations_found": 0
-    },
-    {
-     "dps": 68,
-     "random_targets": 3,
-     "relations_found": 0
-    },
-    {
-     "dps": 80,
-     "random_targets": 3,
-     "relations_found": 0
-    }
-   ],
-   "diagnostic_relation": [
-    -12,
-    0,
-    1,
-    0,
-    36
-   ],
-   "diagnostic_pretty": "-12*c +1*log2 +36*zeta'(-1) = 0",
    "relation": [
-    -12,
+    12,
     0,
-    1,
+    -1,
     0,
-    36
+    0,
+    -36,
+    0
    ],
    "criteria_ab": true,
    "reasons": [
@@ -281,9 +486,9 @@
    "null_perturbed": null,
    "null_random": null,
    "null_controls_passed": true,
-   "diagnostic_residual": "1.27066e-71",
-   "relation_pretty": "-12*c +1*log2 +36*zeta'(-1) = 0",
-   "relation_residual": "6.68191e-52",
+   "diagnostic_residual": "8.82944e-74",
+   "relation_pretty": "+12*c -1*log2 -36*zeta'(-1) = 0",
+   "relation_residual": "0.0",
    "REPORTABLE": true
   }
  ],
@@ -291,13 +496,15 @@
   "basis": [
    "1",
    "log2",
+   "logpi",
    "gamma",
-   "zeta'(-1)"
+   "zeta'(-1)",
+   "zeta(3)/pi^2"
   ],
-  "basis_size": 4,
-  "P": 31,
+  "basis_size": 6,
+  "P": 35,
   "precision_budget_ok": true,
-  "spurious_threshold_dps": 30,
+  "spurious_threshold_dps": 35,
   "spurious_table": [
    {
     "dps": 10,
@@ -315,12 +522,92 @@
     "relations_found": 3
    },
    {
+    "dps": 22,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 23,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 24,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
     "dps": 25,
     "random_targets": 3,
     "relations_found": 3
    },
    {
+    "dps": 26,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 27,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 28,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 29,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
     "dps": 30,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 31,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 32,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 33,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 34,
+    "random_targets": 3,
+    "relations_found": 2
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 36,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 37,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 38,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 39,
     "random_targets": 3,
     "relations_found": 0
    },
@@ -330,7 +617,72 @@
     "relations_found": 0
    },
    {
+    "dps": 41,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 42,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 43,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 44,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 46,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 47,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 48,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 49,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
     "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 51,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 52,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 53,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 54,
     "random_targets": 3,
     "relations_found": 0
    },
@@ -345,7 +697,7 @@
     "relations_found": 0
    },
    {
-    "dps": 68,
+    "dps": 70,
     "random_targets": 3,
     "relations_found": 0
    },
@@ -356,19 +708,23 @@
    }
   ],
   "diagnostic_relation": [
-   -12,
+   12,
    0,
-   1,
+   -1,
    0,
-   36
+   0,
+   -36,
+   0
   ],
-  "diagnostic_pretty": "-12*c +1*log2 +36*zeta'(-1) = 0",
+  "diagnostic_pretty": "+12*c -1*log2 -36*zeta'(-1) = 0",
   "relation": [
-   -12,
+   12,
    0,
-   1,
+   -1,
    0,
-   36
+   0,
+   -36,
+   0
   ],
   "criteria_ab": true,
   "reasons": [
@@ -378,9 +734,9 @@
   "null_perturbed": null,
   "null_random": null,
   "null_controls_passed": true,
-  "diagnostic_residual": "1.27066e-71",
-  "relation_pretty": "-12*c +1*log2 +36*zeta'(-1) = 0",
-  "relation_residual": "6.68191e-52",
+  "diagnostic_residual": "8.82944e-74",
+  "relation_pretty": "+12*c -1*log2 -36*zeta'(-1) = 0",
+  "relation_residual": "0.0",
   "REPORTABLE": true
  }
 }

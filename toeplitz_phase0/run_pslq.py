@@ -144,7 +144,14 @@ def main():
         print("-" * 78)
 
         print("  [2] spurious-relation threshold (random targets, blind to c)")
-        sweep = sorted({x for x in {10, 15, 20, 25, 30, 40, 50, 55, 60, 80, P_max}
+        # Step 1 through the band where the threshold actually lands.  L-030:
+        # a step-5 sweep here resolves T only to +/-5 and made a FALSE linear
+        # law T = 5b+10 look exact, because the sampling interval equalled the
+        # fitted slope.  Since T is spent directly out of the digit budget
+        # (P >= T, and P+30 <= D-3), a 5-digit over-estimate of T costs 5
+        # digits of reconfirmation headroom and can skip a basis needlessly.
+        sweep = sorted({x for x in
+                        {10, 15, 20} | set(range(22, 56)) | {60, 70, 80, P_max}
                         if 5 <= x <= P_max + 40})
         thr, table = H.spurious_threshold(sweep, names, vals,
                                           maxcoeff=MAXCOEFF, trials=3)
