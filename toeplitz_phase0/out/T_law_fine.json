@@ -1,0 +1,902 @@
+{
+ "3": {
+  "T": 24,
+  "table": [
+   {
+    "dps": 24,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 26,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 27,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 28,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 29,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 31,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 32,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 33,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 34,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 36,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 37,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 38,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 39,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 41,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 42,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 43,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 44,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 46,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 47,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 48,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 49,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 51,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 52,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ },
+ "4": {
+  "T": 27,
+  "table": [
+   {
+    "dps": 24,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 26,
+    "random_targets": 3,
+    "relations_found": 1
+   },
+   {
+    "dps": 27,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 28,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 29,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 31,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 32,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 33,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 34,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 36,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 37,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 38,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 39,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 41,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 42,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 43,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 44,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 46,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 47,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 48,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 49,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 51,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 52,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ },
+ "5": {
+  "T": 30,
+  "table": [
+   {
+    "dps": 24,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 26,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 27,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 28,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 29,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 31,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 32,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 33,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 34,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 36,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 37,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 38,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 39,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 41,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 42,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 43,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 44,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 46,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 47,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 48,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 49,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 51,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 52,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ },
+ "6": {
+  "T": 35,
+  "table": [
+   {
+    "dps": 24,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 26,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 27,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 28,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 29,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 31,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 32,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 33,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 34,
+    "random_targets": 3,
+    "relations_found": 1
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 36,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 37,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 38,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 39,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 41,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 42,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 43,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 44,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 46,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 47,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 48,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 49,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 51,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 52,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ },
+ "7": {
+  "T": 39,
+  "table": [
+   {
+    "dps": 24,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 26,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 27,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 28,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 29,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 31,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 32,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 33,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 34,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 36,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 37,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 38,
+    "random_targets": 3,
+    "relations_found": 2
+   },
+   {
+    "dps": 39,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 41,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 42,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 43,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 44,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 46,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 47,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 48,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 49,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 51,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 52,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ },
+ "8": {
+  "T": 44,
+  "table": [
+   {
+    "dps": 24,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 26,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 27,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 28,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 29,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 31,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 32,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 33,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 34,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 36,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 37,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 38,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 39,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 41,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 42,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 43,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 44,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 46,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 47,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 48,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 49,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 51,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 52,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ }
+}

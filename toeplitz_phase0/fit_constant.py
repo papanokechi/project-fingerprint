@@ -39,7 +39,7 @@ DATA = "out/certified_data.json"
 OUTPUT = "out/constant.json"
 
 
-def load(path=DATA, headroom=350):
+def load(path=DATA, headroom=800):
     """Load the certified grid.
 
     `headroom` is working precision ABOVE the certified digits of the data,
@@ -50,6 +50,22 @@ def load(path=DATA, headroom=350):
     want.  Too little headroom does not corrupt the answer silently -- it
     inflates E1 and E2, which is the honest direction -- but it wastes the
     data.
+
+    MEASURED, on the 224-point grid (L-030).  Headroom is now the binding
+    constraint on how many orders the grid can support, and the effect is
+    large enough that it must not be guessed.  Bisecting the largest K whose
+    solve is non-singular:
+
+        headroom = 350  (working 515 dps)  ->  max usable K = 155
+        headroom = 800  (working 965 dps)  ->  max usable K = 221, no singularity
+
+    i.e. at headroom 350 the 224-point grid could not use a third of the
+    orders it had paid for.  Densifying the grid raises the conditioning
+    demand in two ways at once: the dynamic range grows with K, and adjacent
+    rows become near-duplicates whose relative separation is only Delta_s/s
+    (0.125/30 ~ 4e-3 at the bottom of this grid).  The default is therefore
+    set to 800; `order_table` records the K at which the solve goes singular,
+    so an insufficient value is loud rather than silent.
 
     NOTE, and this is not a stylistic point: mp.dps MUST be raised BEFORE the
     decimal strings are parsed.  An earlier version of this function parsed
@@ -99,19 +115,35 @@ def order_table(pts, step, Kmax, stride=1):
     order and O(K^4) overall.  Skipping is safe in the honest direction: the
     successive difference then straddles `stride` orders, so it is an
     OVER-estimate of the per-order truncation change, never an under-estimate.
+
+    CONDITIONING LIMIT.  The design matrix carries columns s^-2 ... s^-2K over
+    the grid, and two effects fight the sweep as K grows: the dynamic range
+    (s_max/s_min)^(2K), and -- on a densely spaced grid -- the near-duplication
+    of adjacent rows, whose relative separation is only Delta_s/s.  Past some
+    K the matrix is singular at the working precision and mpmath raises.  That
+    is a genuine measurement of where this grid stops carrying information, so
+    it is RECORDED and the sweep stops, rather than being allowed to abort the
+    run.  Returning a fitted value from a numerically singular solve would be
+    exactly the plausible-wrong-answer failure this pipeline exists to avoid.
     """
     svals = sorted(pts)
     rows = []
     prev = None
+    singular_at = None
     for K in range(0, Kmax + 1, stride):
         if K + 3 > len(svals):
             break
         use = select_points(svals, K + 3)
-        a, b, c, ds = asympt.fit(use, [pts[s] for s in use], K, step)
+        try:
+            a, b, c, ds = asympt.fit(use, [pts[s] for s in use], K, step)
+        except ZeroDivisionError:
+            singular_at = K
+            break
         rows.append({"K": K, "a": a, "b": b, "c": c, "d": ds,
                      "dc": None if prev is None else abs(c - prev)})
         prev = c
-    return rows
+    return rows, singular_at
+
 
 
 def odd_coefficient_test(pts, K=8):
@@ -188,7 +220,10 @@ def main():
     # --- order sweeps --------------------------------------------------------
     stride = 1 if len(svals) <= 100 else 2
     print(f"\n[order sweep, even-only model, stride {stride}]")
-    rows = order_table(pts, 2, len(svals) - 3, stride)
+    rows, singular_at = order_table(pts, 2, len(svals) - 3, stride)
+    if singular_at is not None:
+        print(f"  [conditioning limit] design matrix singular at K = {singular_at}; "
+              f"sweep stopped there (grid exhausted its usable orders before its points)")
     for r in rows:
         dc = "-" if r["dc"] is None else mp.nstr(r["dc"], 4)
         print(f"  K={r['K']:3d}  a={mp.nstr(r['a'],14):>18}  b={mp.nstr(r['b'],14):>18}"
@@ -201,7 +236,7 @@ def main():
 
     # --- error budget --------------------------------------------------------
     sub = {s: pts[s] for s in svals[1:]}
-    rows2 = order_table(sub, 2, len(sub) - 3, stride)
+    rows2, _ = order_table(sub, 2, len(sub) - 3, stride)
     K2 = min(Kbest, max(r["K"] for r in rows2))
     c_shift = min((r for r in rows2 if r["K"] <= K2),
                   key=lambda r: abs(r["K"] - K2))["c"]
@@ -239,6 +274,7 @@ def main():
         "holdout_residual": mp.nstr(res, 6),
         "min_certified_digits_per_point": mp.nstr(cert, 8),
         "grid_points": len(svals),
+        "singular_at_K": singular_at,
     }
     json.dump(out, open(OUTPUT, "w"), indent=1)
     print("\nwrote", OUTPUT)

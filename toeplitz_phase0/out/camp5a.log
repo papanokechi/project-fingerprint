@@ -1,0 +1,123 @@
+s=   30.0 present at 171.773 digits, keeping
+s= 30.125 n0=150   dps0=212   cert=  171.217 digits (node 171.217, dps 189.064)     68.2s
+s=  30.25 present at 170.663 digits, keeping
+s= 30.375 n0=150   dps0=212   cert=  170.112 digits (node 170.112, dps 188.848)     12.8s
+s=   30.5 present at 169.562 digits, keeping
+s= 30.625 n0=152   dps0=212   cert=  173.022 digits (node 173.022, dps 189.06)     51.0s
+s=  30.75 present at 172.47 digits, keeping
+s= 30.875 n0=152   dps0=212   cert=   171.92 digits (node 171.92, dps 188.841)     13.0s
+s=   31.0 present at 171.373 digits, keeping
+s= 31.125 n0=152   dps0=212   cert=  170.827 digits (node 170.827, dps 188.621)      9.6s
+s=  31.25 present at 170.284 digits, keeping
+s= 31.375 n0=152   dps0=213   cert=  169.742 digits (node 169.742, dps 189.231)     41.6s
+s=   31.5 present at 169.203 digits, keeping
+s= 31.625 n0=154   dps0=213   cert=   172.64 digits (node 172.64, dps 189.203)     37.8s
+s=  31.75 present at 172.098 digits, keeping
+s= 31.875 n0=154   dps0=213   cert=  171.558 digits (node 171.558, dps 188.99)     12.1s
+s=   32.0 present at 171.02 digits, keeping
+s= 32.125 n0=154   dps0=213   cert=  170.484 digits (node 170.484, dps 188.777)     10.9s
+s=  32.25 present at 169.95 digits, keeping
+s= 32.375 n0=154   dps0=214   cert=  169.418 digits (node 169.418, dps 188.928)     46.4s
+s=   32.5 present at 168.888 digits, keeping
+s= 32.625 n0=156   dps0=214   cert=  172.304 digits (node 172.304, dps 189.418)     51.0s
+s=  32.75 present at 171.771 digits, keeping
+s= 32.875 n0=156   dps0=214   cert=  171.241 digits (node 171.241, dps 189.201)     12.3s
+s=   33.0 present at 170.712 digits, keeping
+s= 33.125 n0=156   dps0=214   cert=  170.185 digits (node 170.185, dps 188.984)     11.4s
+s=  33.25 present at 169.66 digits, keeping
+s= 33.375 n0=156   dps0=214   cert=  169.137 digits (node 169.137, dps 188.766)     11.0s
+s=   33.5 present at 168.616 digits, keeping
+s= 33.625 n0=156   dps0=215   cert=  168.097 digits (node 168.097, dps 189.128)     45.7s
+s=  33.75 present at 171.487 digits, keeping
+s= 33.875 n0=158   dps0=215   cert=  170.965 digits (node 170.965, dps 189.36)     46.9s
+s=   34.0 present at 170.445 digits, keeping
+s= 34.125 n0=158   dps0=215   cert=  169.927 digits (node 169.927, dps 189.14)     12.8s
+s=  34.25 present at 169.41 digits, keeping
+s= 34.375 n0=158   dps0=215   cert=  168.896 digits (node 168.896, dps 188.919)      9.6s
+s=   34.5 present at 168.383 digits, keeping
+s= 34.625 n0=158   dps0=215   cert=  167.872 digits (node 167.872, dps 188.7)     11.1s
+s=  34.75 present at 171.242 digits, keeping
+s= 34.875 n0=160   dps0=216   cert=  170.728 digits (node 170.728, dps 188.809)     36.3s
+s=   35.0 present at 170.216 digits, keeping
+s= 35.125 n0=160   dps0=216   cert=  169.706 digits (node 169.706, dps 188.593)      8.1s
+s=  35.25 present at 169.198 digits, keeping
+s= 35.375 n0=160   dps0=216   cert=  168.691 digits (node 168.691, dps 188.377)      8.2s
+s=   35.5 present at 168.186 digits, keeping
+s= 35.625 n0=160   dps0=216   cert=  167.683 digits (node 167.683, dps 188.161)      8.1s
+s=  35.75 present at 167.181 digits, keeping
+s= 35.875 n0=162   dps0=217   cert=  170.527 digits (node 170.527, dps 190.132)     36.7s
+s=   36.0 present at 170.023 digits, keeping
+s= 36.125 n0=162   dps0=217   cert=  169.521 digits (node 169.521, dps 189.868)      8.9s
+s=  36.25 present at 169.02 digits, keeping
+s= 36.375 n0=162   dps0=217   cert=  168.521 digits (node 168.521, dps 189.607)      8.7s
+s=   36.5 present at 168.023 digits, keeping
+s= 36.625 n0=162   dps0=217   cert=  167.527 digits (node 167.527, dps 189.352)      7.6s
+s=  36.75 present at 167.033 digits, keeping
+s= 36.875 n0=164   dps0=217   cert=   170.36 digits (node 170.36, dps 189.148)     35.6s
+s=   37.0 present at 169.863 digits, keeping
+s= 37.125 n0=164   dps0=218   cert=  169.368 digits (node 169.368, dps 188.989)     32.7s
+s=  37.25 present at 168.874 digits, keeping
+s= 37.375 n0=164   dps0=218   cert=  168.382 digits (node 168.382, dps 188.772)      9.0s
+s=   37.5 present at 167.891 digits, keeping
+s= 37.625 n0=164   dps0=218   cert=  167.402 digits (node 167.402, dps 188.555)      8.3s
+s=  37.75 present at 166.915 digits, keeping
+s= 37.875 n0=166   dps0=218   cert=  170.225 digits (node 170.225, dps 188.834)     31.6s
+s=   38.0 present at 169.735 digits, keeping
+s= 38.125 n0=166   dps0=219   cert=  169.246 digits (node 169.246, dps 189.721)     32.5s
+s=  38.25 present at 168.759 digits, keeping
+s= 38.375 n0=166   dps0=219   cert=  168.274 digits (node 168.274, dps 189.504)      6.5s
+s=   38.5 present at 167.79 digits, keeping
+s= 38.625 n0=166   dps0=219   cert=  167.307 digits (node 167.307, dps 189.288)      7.1s
+s=  38.75 present at 166.826 digits, keeping
+s= 38.875 n0=166   dps0=219   cert=  166.346 digits (node 166.346, dps 189.071)      9.0s
+s=   39.0 present at 169.635 digits, keeping
+s= 39.125 n0=168   dps0=219   cert=  169.153 digits (node 169.153, dps 188.366)     37.4s
+s=  39.25 present at 168.672 digits, keeping
+s= 39.375 n0=168   dps0=220   cert=  168.193 digits (node 168.193, dps 189.004)     34.1s
+s=   39.5 present at 167.715 digits, keeping
+s= 39.625 n0=168   dps0=220   cert=  167.239 digits (node 167.239, dps 188.789)      9.2s
+s=  39.75 present at 166.764 digits, keeping
+s= 39.875 n0=168   dps0=220   cert=  166.291 digits (node 166.291, dps 188.573)      8.2s
+s=   40.0 present at 169.562 digits, keeping
+s= 40.125 n0=170   dps0=220   cert=  169.086 digits (node 169.086, dps 188.254)     38.8s
+s=  40.25 present at 168.612 digits, keeping
+s= 40.375 n0=170   dps0=220   cert=  168.139 digits (node 168.139, dps 188.039)     10.4s
+s=   40.5 present at 167.667 digits, keeping
+s= 40.625 n0=170   dps0=221   cert=  167.197 digits (node 167.197, dps 189.377)     31.6s
+s=  40.75 present at 166.728 digits, keeping
+s= 40.875 n0=170   dps0=221   cert=   166.26 digits (node 166.26, dps 189.161)      8.6s
+s=   41.0 present at 165.794 digits, keeping
+s= 41.125 n0=172   dps0=221   cert=  169.045 digits (node 169.045, dps 188.632)     41.2s
+s=  41.25 present at 168.577 digits, keeping
+s= 41.375 n0=172   dps0=221   cert=  168.109 digits (node 168.109, dps 188.412)      9.6s
+s=   41.5 present at 167.643 digits, keeping
+s= 41.625 n0=172   dps0=222   cert=  167.178 digits (node 167.178, dps 189.757)     46.3s
+s=  41.75 present at 166.715 digits, keeping
+s= 41.875 n0=172   dps0=222   cert=  166.253 digits (node 166.253, dps 189.55)     13.4s
+s=   42.0 present at 165.792 digits, keeping
+s= 42.125 n0=174   dps0=222   cert=  169.028 digits (node 169.028, dps 188.772)     44.2s
+s=  42.25 present at 168.565 digits, keeping
+s= 42.375 n0=174   dps0=222   cert=  168.103 digits (node 168.103, dps 188.556)     13.3s
+s=   42.5 present at 167.642 digits, keeping
+s= 42.625 n0=174   dps0=222   cert=  167.183 digits (node 167.183, dps 188.339)     13.1s
+s=  42.75 present at 166.725 digits, keeping
+s= 42.875 n0=174   dps0=223   cert=  166.268 digits (node 166.268, dps 189.111)     64.9s
+s=   43.0 present at 165.812 digits, keeping
+s= 43.125 n0=176   dps0=223   cert=  169.033 digits (node 169.033, dps 189.119)     63.7s
+s=  43.25 present at 168.575 digits, keeping
+s= 43.375 n0=176   dps0=223   cert=  168.118 digits (node 168.118, dps 188.903)     11.9s
+s=   43.5 present at 167.663 digits, keeping
+s= 43.625 n0=176   dps0=223   cert=  167.209 digits (node 167.209, dps 188.688)     10.6s
+s=  43.75 present at 166.755 digits, keeping
+s= 43.875 n0=176   dps0=223   cert=  166.304 digits (node 166.304, dps 188.473)     10.6s
+s=   44.0 present at 165.853 digits, keeping
+s= 44.125 n0=176   dps0=224   cert=  165.404 digits (node 165.404, dps 188.66)     43.7s
+s=  44.25 present at 168.606 digits, keeping
+s= 44.375 n0=178   dps0=224   cert=  168.154 digits (node 168.154, dps 189.031)     42.1s
+s=   44.5 present at 167.704 digits, keeping
+s= 44.625 n0=178   dps0=224   cert=  167.254 digits (node 167.254, dps 188.815)     12.0s
+s=  44.75 present at 166.806 digits, keeping
+s= 44.875 n0=178   dps0=224   cert=  166.359 digits (node 166.359, dps 188.6)     11.6s
+s=   45.0 present at 165.913 digits, keeping
+
+grid now 202 points; min certified digits 165.404

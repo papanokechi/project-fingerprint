@@ -1,0 +1,24 @@
+s=   46.0 n0=180   dps0=225   cert=  165.992 digits (node 165.992, dps 188.412)     44.5s
+s=   48.0 n0=184   dps0=227   cert=  166.201 digits (node 166.201, dps 189.164)     44.1s
+s=   50.0 n0=188   dps0=229   cert=  166.472 digits (node 166.472, dps 189.135)     52.1s
+s=   52.0 n0=192   dps0=231   cert=  166.799 digits (node 166.799, dps 189.247)     54.4s
+s=   54.0 n0=196   dps0=232   cert=  167.177 digits (node 167.177, dps 188.685)     51.4s
+s=   56.0 n0=200   dps0=234   cert=  167.601 digits (node 167.601, dps 188.956)     58.9s
+s=   58.0 n0=204   dps0=236   cert=  168.068 digits (node 168.068, dps 189.059)     55.5s
+s=   60.0 n0=208   dps0=237   cert=  168.572 digits (node 168.572, dps 188.827)     64.5s
+s=   62.0 n0=212   dps0=239   cert=  169.112 digits (node 169.112, dps 189.441)     60.9s
+s=   64.0 n0=214   dps0=241   cert=  166.328 digits (node 166.328, dps 188.727)     62.9s
+s=   66.0 n0=218   dps0=243   cert=   166.95 digits (node 166.95, dps 189.262)     68.3s
+s=   68.0 n0=222   dps0=244   cert=  167.599 digits (node 167.599, dps 188.634)     69.0s
+s=   70.0 n0=226   dps0=246   cert=  168.272 digits (node 168.272, dps 190.702)     68.9s
+s=   72.0 n0=230   dps0=248   cert=  168.968 digits (node 168.968, dps 190.117)     84.4s
+s=   74.0 n0=234   dps0=250   cert=  169.684 digits (node 169.684, dps 188.933)     84.6s
+s=   76.0 n0=238   dps0=251   cert=   170.42 digits (node 170.42, dps 188.409)     85.2s
+s=   78.0 n0=242   dps0=253   cert=  171.174 digits (node 171.174, dps 189.426)     88.5s
+s=   80.0 n0=246   dps0=255   cert=  171.944 digits (node 171.944, dps 188.724)     92.6s
+s=   82.0 n0=250   dps0=257   cert=  172.731 digits (node 172.731, dps 189.296)    100.7s
+s=   84.0 n0=254   dps0=258   cert=  173.532 digits (node 173.532, dps 188.529)    108.0s
+s=   86.0 n0=256   dps0=260   cert=  171.187 digits (node 171.187, dps 189.726)    108.7s
+s=   88.0 n0=260   dps0=262   cert=  172.028 digits (node 172.028, dps 189.389)    116.4s
+
+grid now 224 points; min certified digits 165.404
