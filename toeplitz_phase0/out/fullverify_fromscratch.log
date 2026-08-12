@@ -1,0 +1,607 @@
+
+==============================================================================
+RUN  python test_smoke.py
+==============================================================================
+[gl rule]
+  GL n=12: max |quad - exact| over deg<24 = 1.1479e-41
+  GL nodes exactly symmetric: OK
+[parity identity]
+  s=1.0: factored vs full (mpmath),        rel diff = 2.3341e-50
+  s=1.0: factored/gmpy2 vs full/mpmath,    rel diff = 1.6047e-50
+  s=5.0: factored vs full (mpmath),        rel diff = 1.122e-49
+  s=5.0: factored/gmpy2 vs full/mpmath,    rel diff = 9.7778e-50
+[spd diagnostic]
+  under-resolved (s=30, n=40) correctly raised: Cholesky pivot 19 non-positive (-3.0628812795156361817748456058543384084109166379182156447685299988452638999476012548998701658538462767830345558094442108460668150187295282959359706149180903615539910008e-23)
+[timing]
+  n=  60 dps=  60:    1.37s  logdet(10)=-51.0138308426
+  n= 120 dps= 120:    4.14s  logdet(10)=-51.0138308426
+  n= 200 dps= 160:    8.93s  logdet(10)=-51.0138308426
+ALL SMOKE TESTS PASSED
+
+==============================================================================
+RUN  python verify_kernel.py
+==============================================================================
+==============================================================================
+NODE-COUNT CONVERGENCE  (mp.dps fixed at 200; error vs n = 6*s)
+   node counts are relative to s because the kernel bandwidth is ~2s/pi
+==============================================================================
+
+  s = 10   reference n = 60   logdet = -51.0138308426256690286272
+       n    n/s    |logdet(n) - logdet(nref)|   agreeing digits
+      10    1.0  Cholesky pivot 4 non-positive (-8.80298022643747952524829451959973936567100870170742333314610147837962708459958023674427197620147836909138653277672242820658291705973559656901621056288984042151662895566833685595645903904310133608344657059421e-06)                 -
+      16    1.5                   0.000992294           3.00336
+      20    2.0                    1.31012e-8           7.88269
+      24    2.5                   4.35093e-14           13.3614
+      30    3.0                   2.97485e-23           22.5265
+      36    3.5                   2.22686e-33           32.6523
+      40    4.0                   1.37081e-40            39.863
+      44    4.5                   3.96211e-48           47.4021
+
+  s = 20   reference n = 120   logdet = -201.1873558625719014869804
+       n    n/s    |logdet(n) - logdet(nref)|   agreeing digits
+      20    1.0  Cholesky pivot 6 non-positive (-5.05601984441801688275057425486651694167505215231043843872451999070168816165889854746622274760474431295479865535774001696031104983929918263024609450892192119352316896253933198140426555209233363444968147170816e-05)                 -
+      30    1.5                     0.0115375           1.93789
+      40    2.0                   2.10602e-14           13.6765
+      50    2.5                   4.62053e-28           27.3353
+      60    3.0                   2.60457e-43           42.5843
+      70    3.5                    6.4831e-60           59.1882
+      80    4.0                   1.07058e-77           76.9704
+      90    4.5                   1.60821e-96           95.7937
+
+  s = 30   reference n = 180   logdet = -451.2887657407862240163297
+       n    n/s    |logdet(n) - logdet(nref)|   agreeing digits
+      30    1.0  Cholesky pivot 9 non-positive (-2.14262788786875677055761990438982523793541756850178417047895387435286330409479911150901434775357412375648467913174496273359729634455778323063589220700985026715949158791670202175784082372429254745200522399935e-05)                 -
+      44    1.5                      0.116213          0.934744
+      60    2.0                   3.83172e-20           19.4166
+      76    2.5                    5.6213e-42           41.2502
+      90    3.0                   2.59247e-63           62.5863
+     104    3.5                   1.98522e-86           85.7022
+     120    4.0                  9.53424e-115           114.021
+     136    4.5                  7.50164e-145           144.125
+
+  s = 40   reference n = 240   logdet = -801.3607014830324944197159
+       n    n/s    |logdet(n) - logdet(nref)|   agreeing digits
+      40    1.0  Cholesky pivot 11 non-positive (-3.38263109426070442476450093505826903846060274283138512325121569495765981803714515111248795071163296740419455004355408392255983871352041793005913209604232350260163577284089517267726512149129942804816417507845e-06)                 -
+      60    1.5                     0.0126743           1.89708
+      80    2.0                   7.35804e-26           25.1332
+     100    2.5                   5.70678e-53           52.2436
+     120    3.0                    2.7265e-83           82.5644
+     140    3.5                  2.40814e-116           115.618
+     160    4.0                  8.97842e-152           151.047
+     180    4.5                  7.66043e-170           169.116
+
+==============================================================================
+PRECISION CONVERGENCE  (n = 6*s; error vs dps=180)
+   'digit loss' = dps - agreeing digits = conditioning cost of I-K_s
+==============================================================================
+
+  s = 10   (n = 60)
+     dps   |logdet(dps) - logdet(ref)|   agreeing digits   digit loss
+      60                   6.98193e-56            55.156        4.844
+      80                   6.48906e-75           74.1878       5.8122
+     100                    3.8041e-95           94.4197       5.5803
+     120                  8.66777e-115           114.062       5.9379
+     140                  1.45957e-135           134.836       5.1642
+
+  s = 20   (n = 120)
+     dps   |logdet(dps) - logdet(ref)|   agreeing digits   digit loss
+      60                   2.12749e-47           46.6721       13.328
+      80                   1.23168e-66           65.9095        14.09
+     100                   3.05531e-87           86.5149       13.485
+     120                  8.82978e-107           106.054       13.946
+     140                  5.46101e-127           126.263       13.737
+
+  s = 30   (n = 180)
+     dps   |logdet(dps) - logdet(ref)|   agreeing digits   digit loss
+      60                   2.47072e-38           37.6072       22.393
+      80                   6.39646e-58           57.1941       22.806
+     100                   3.83542e-78           77.4162       22.584
+     120                   8.85437e-98           97.0528       22.947
+     140                  8.64228e-118           117.063       22.937
+
+  s = 40   (n = 240)
+     dps   |logdet(dps) - logdet(ref)|   agreeing digits   digit loss
+      60                   7.05039e-30           29.1518       30.848
+      80                   2.51276e-49           48.5998         31.4
+     100                   5.60603e-71           70.2513       29.749
+     120                   8.52596e-90           89.0693       30.931
+     140                  4.19598e-111           110.377       29.623
+
+==============================================================================
+STRUCTURAL CROSS-CHECKS
+==============================================================================
+  GL exactness on polynomials of degree < 24: max err 1.14794e-41
+  parity factorisation vs unfactored determinant: 1.49675e-48
+  mpmath backend vs gmpy2/MPFR backend:           3.77191e-106
+
+wrote out/convergence.json  (296.7s)
+
+==============================================================================
+RUN  python build_grid.py
+==============================================================================
+
+==============================================================================
+GRID BLOCK  s in [30, 45] step 0.25
+==============================================================================
+s=   30.0 n0=150   dps0=211   cert=  171.773 digits (node 171.773, dps 188.563)     36.8s
+s=  30.25 n0=150   dps0=212   cert=  170.663 digits (node 170.663, dps 188.956)     40.2s
+s=   30.5 n0=150   dps0=212   cert=  169.562 digits (node 169.562, dps 188.74)      7.8s
+s=  30.75 n0=152   dps0=212   cert=   172.47 digits (node 172.47, dps 188.951)     45.5s
+s=   31.0 n0=152   dps0=212   cert=  171.373 digits (node 171.373, dps 188.731)     10.8s
+s=  31.25 n0=152   dps0=213   cert=  170.284 digits (node 170.284, dps 189.339)     46.3s
+s=   31.5 n0=152   dps0=213   cert=  169.203 digits (node 169.203, dps 189.124)      9.6s
+s=  31.75 n0=154   dps0=213   cert=  172.098 digits (node 172.098, dps 189.097)     47.1s
+s=   32.0 n0=154   dps0=213   cert=   171.02 digits (node 171.02, dps 188.884)     11.2s
+s=  32.25 n0=154   dps0=213   cert=   169.95 digits (node 169.95, dps 188.67)      9.2s
+s=   32.5 n0=154   dps0=214   cert=  168.888 digits (node 168.888, dps 188.82)     44.3s
+s=  32.75 n0=156   dps0=214   cert=  171.771 digits (node 171.771, dps 189.309)     45.1s
+s=   33.0 n0=156   dps0=214   cert=  170.712 digits (node 170.712, dps 189.092)      9.6s
+s=  33.25 n0=156   dps0=214   cert=   169.66 digits (node 169.66, dps 188.875)      9.9s
+s=   33.5 n0=156   dps0=215   cert=  168.616 digits (node 168.616, dps 189.236)     34.8s
+s=  33.75 n0=158   dps0=215   cert=  171.487 digits (node 171.487, dps 189.47)     33.3s
+s=   34.0 n0=158   dps0=215   cert=  170.445 digits (node 170.445, dps 189.25)      8.1s
+s=  34.25 n0=158   dps0=215   cert=   169.41 digits (node 169.41, dps 189.03)      6.9s
+s=   34.5 n0=158   dps0=215   cert=  168.383 digits (node 168.383, dps 188.81)     10.0s
+s=  34.75 n0=160   dps0=216   cert=  171.242 digits (node 171.242, dps 188.917)     33.2s
+s=   35.0 n0=160   dps0=216   cert=  170.216 digits (node 170.216, dps 188.701)      8.1s
+s=  35.25 n0=160   dps0=216   cert=  169.198 digits (node 169.198, dps 188.485)      6.8s
+s=   35.5 n0=160   dps0=216   cert=  168.186 digits (node 168.186, dps 188.269)      7.3s
+s=  35.75 n0=160   dps0=216   cert=  167.181 digits (node 167.181, dps 188.053)     10.0s
+s=   36.0 n0=162   dps0=217   cert=  170.023 digits (node 170.023, dps 189.999)     31.5s
+s=  36.25 n0=162   dps0=217   cert=   169.02 digits (node 169.02, dps 189.737)      8.4s
+s=   36.5 n0=162   dps0=217   cert=  168.023 digits (node 168.023, dps 189.479)      7.8s
+s=  36.75 n0=162   dps0=217   cert=  167.033 digits (node 167.033, dps 189.225)      7.8s
+s=   37.0 n0=164   dps0=218   cert=  169.863 digits (node 169.863, dps 189.097)     31.5s
+s=  37.25 n0=164   dps0=218   cert=  168.874 digits (node 168.874, dps 188.88)      8.8s
+s=   37.5 n0=164   dps0=218   cert=  167.891 digits (node 167.891, dps 188.664)      7.4s
+s=  37.75 n0=164   dps0=218   cert=  166.915 digits (node 166.915, dps 188.447)      8.7s
+s=   38.0 n0=166   dps0=218   cert=  169.735 digits (node 169.735, dps 188.725)     28.8s
+s=  38.25 n0=166   dps0=219   cert=  168.759 digits (node 168.759, dps 189.612)     35.6s
+s=   38.5 n0=166   dps0=219   cert=   167.79 digits (node 167.79, dps 189.396)      8.1s
+s=  38.75 n0=166   dps0=219   cert=  166.826 digits (node 166.826, dps 189.179)      8.8s
+s=   39.0 n0=168   dps0=219   cert=  169.635 digits (node 169.635, dps 188.474)     33.1s
+s=  39.25 n0=168   dps0=219   cert=  168.672 digits (node 168.672, dps 188.257)      8.8s
+s=   39.5 n0=168   dps0=220   cert=  167.715 digits (node 167.715, dps 188.897)     40.3s
+s=  39.75 n0=168   dps0=220   cert=  166.764 digits (node 166.764, dps 188.681)      7.6s
+s=   40.0 n0=170   dps0=220   cert=  169.562 digits (node 169.562, dps 188.361)     33.1s
+s=  40.25 n0=170   dps0=220   cert=  168.612 digits (node 168.612, dps 188.146)     11.9s
+s=   40.5 n0=170   dps0=221   cert=  167.667 digits (node 167.667, dps 189.485)     37.8s
+s=  40.75 n0=170   dps0=221   cert=  166.728 digits (node 166.728, dps 189.269)      8.5s
+s=   41.0 n0=170   dps0=221   cert=  165.794 digits (node 165.794, dps 189.053)      8.6s
+s=  41.25 n0=172   dps0=221   cert=  168.577 digits (node 168.577, dps 188.522)     55.0s
+s=   41.5 n0=172   dps0=221   cert=  167.643 digits (node 167.643, dps 188.302)     10.5s
+s=  41.75 n0=172   dps0=222   cert=  166.715 digits (node 166.715, dps 189.654)     48.9s
+s=   42.0 n0=172   dps0=222   cert=  165.792 digits (node 165.792, dps 189.447)     12.7s
+s=  42.25 n0=174   dps0=222   cert=  168.565 digits (node 168.565, dps 188.664)     70.4s
+s=   42.5 n0=174   dps0=222   cert=  167.642 digits (node 167.642, dps 188.447)     15.7s
+s=  42.75 n0=174   dps0=223   cert=  166.725 digits (node 166.725, dps 189.218)     50.4s
+s=   43.0 n0=174   dps0=223   cert=  165.812 digits (node 165.812, dps 189.004)     10.1s
+s=  43.25 n0=176   dps0=223   cert=  168.575 digits (node 168.575, dps 189.011)     43.5s
+s=   43.5 n0=176   dps0=223   cert=  167.663 digits (node 167.663, dps 188.796)     11.1s
+s=  43.75 n0=176   dps0=223   cert=  166.755 digits (node 166.755, dps 188.58)     11.3s
+s=   44.0 n0=176   dps0=224   cert=  165.853 digits (node 165.853, dps 188.767)     40.6s
+s=  44.25 n0=178   dps0=224   cert=  168.606 digits (node 168.606, dps 189.138)     42.9s
+s=   44.5 n0=178   dps0=224   cert=  167.704 digits (node 167.704, dps 188.923)     11.0s
+s=  44.75 n0=178   dps0=224   cert=  166.806 digits (node 166.806, dps 188.708)     11.6s
+s=   45.0 n0=178   dps0=224   cert=  165.913 digits (node 165.913, dps 188.492)     10.2s
+
+grid now 61 points; min certified digits 165.792
+
+==============================================================================
+GRID BLOCK  s in [45, 89] step 2
+==============================================================================
+s=   45.0 present at 165.913 digits, keeping
+s=   47.0 n0=182   dps0=226   cert=  166.088 digits (node 166.088, dps 188.895)     42.9s
+s=   49.0 n0=186   dps0=228   cert=  166.329 digits (node 166.329, dps 188.526)     52.8s
+s=   51.0 n0=190   dps0=230   cert=  166.629 digits (node 166.629, dps 189.217)     49.6s
+s=   53.0 n0=194   dps0=231   cert=  166.982 digits (node 166.982, dps 188.341)     51.6s
+s=   55.0 n0=198   dps0=233   cert=  167.384 digits (node 167.384, dps 188.829)     53.4s
+s=   57.0 n0=202   dps0=235   cert=   167.83 digits (node 167.83, dps 189.13)     56.0s
+s=   59.0 n0=206   dps0=237   cert=  168.315 digits (node 168.315, dps 189.754)     58.7s
+s=   61.0 n0=210   dps0=238   cert=  168.838 digits (node 168.838, dps 188.778)     59.4s
+s=   63.0 n0=212   dps0=240   cert=  166.028 digits (node 166.028, dps 188.938)     59.5s
+s=   65.0 n0=216   dps0=242   cert=  166.636 digits (node 166.636, dps 188.962)     67.3s
+s=   67.0 n0=220   dps0=244   cert=  167.272 digits (node 167.272, dps 189.717)     66.2s
+s=   69.0 n0=224   dps0=245   cert=  167.933 digits (node 167.933, dps 189.108)     68.6s
+s=   71.0 n0=228   dps0=247   cert=  168.617 digits (node 168.617, dps 189.257)     78.8s
+s=   73.0 n0=232   dps0=249   cert=  169.323 digits (node 169.323, dps 189.422)     78.2s
+s=   75.0 n0=236   dps0=250   cert=   170.05 digits (node 170.05, dps 188.495)     86.3s
+s=   77.0 n0=240   dps0=252   cert=  170.795 digits (node 170.795, dps 189.182)     88.7s
+s=   79.0 n0=244   dps0=254   cert=  171.557 digits (node 171.557, dps 188.952)     90.1s
+s=   81.0 n0=248   dps0=256   cert=  172.336 digits (node 172.336, dps 189.211)     97.5s
+s=   83.0 n0=252   dps0=257   cert=   173.13 digits (node 173.13, dps 188.554)    106.0s
+s=   85.0 n0=254   dps0=259   cert=  170.771 digits (node 170.771, dps 188.568)    107.9s
+s=   87.0 n0=258   dps0=261   cert=  171.606 digits (node 171.606, dps 189.018)    109.8s
+s=   89.0 n0=262   dps0=263   cert=  172.453 digits (node 172.453, dps 189.293)    129.7s
+
+grid now 83 points; min certified digits 165.792
+
+==============================================================================
+GRID BLOCK  s in [91, 149] step 1
+==============================================================================
+s=   91.0 n0=266   dps0=264   cert=  173.311 digits (node 173.311, dps 188.473)    135.3s
+s=   92.0 n0=268   dps0=265   cert=  173.744 digits (node 173.744, dps 189.022)    146.7s
+s=   93.0 n0=270   dps0=266   cert=  174.179 digits (node 174.179, dps 188.934)    140.3s
+s=   94.0 n0=272   dps0=267   cert=  174.617 digits (node 174.617, dps 189.578)    152.7s
+s=   95.0 n0=274   dps0=268   cert=  175.058 digits (node 175.058, dps 189.34)    151.9s
+s=   96.0 n0=276   dps0=269   cert=  175.501 digits (node 175.501, dps 189.76)    151.0s
+s=   97.0 n0=278   dps0=270   cert=  175.946 digits (node 175.946, dps 189.552)    170.7s
+s=   98.0 n0=280   dps0=270   cert=  176.394 digits (node 176.394, dps 189.43)    157.9s
+s=   99.0 n0=282   dps0=271   cert=  176.843 digits (node 176.843, dps 190.032)    162.3s
+s=  100.0 n0=284   dps0=272   cert=  177.295 digits (node 177.295, dps 188.979)    171.4s
+s=  101.0 n0=286   dps0=273   cert=  177.749 digits (node 177.749, dps 188.769)    179.2s
+s=  102.0 n0=288   dps0=274   cert=  178.205 digits (node 178.205, dps 188.885)    187.7s
+s=  103.0 n0=290   dps0=275   cert=  178.663 digits (node 178.663, dps 189.029)    160.9s
+s=  104.0 n0=292   dps0=276   cert=  179.123 digits (node 179.123, dps 189.259)    120.8s
+s=  105.0 n0=294   dps0=276   cert=  179.584 digits (node 179.584, dps 188.196)    130.6s
+s=  106.0 n0=296   dps0=277   cert=  180.048 digits (node 180.048, dps 188.487)    154.9s
+s=  107.0 n0=296   dps0=278   cert=  177.475 digits (node 177.475, dps 188.841)    161.3s
+s=  108.0 n0=298   dps0=279   cert=  177.946 digits (node 177.946, dps 189.089)    170.7s
+s=  109.0 n0=300   dps0=280   cert=  178.419 digits (node 178.419, dps 189.324)    204.7s
+s=  110.0 n0=302   dps0=281   cert=  178.893 digits (node 178.893, dps 189.417)    204.4s
+s=  111.0 n0=304   dps0=282   cert=  179.369 digits (node 179.369, dps 188.976)    167.9s
+s=  112.0 n0=306   dps0=282   cert=  179.847 digits (node 179.847, dps 189.32)    142.1s
+s=  113.0 n0=308   dps0=283   cert=  180.325 digits (node 180.325, dps 188.353)    138.9s
+s=  114.0 n0=310   dps0=284   cert=  180.806 digits (node 180.806, dps 189.458)    132.3s
+s=  115.0 n0=312   dps0=285   cert=  181.287 digits (node 181.287, dps 188.476)    130.5s
+s=  116.0 n0=314   dps0=286   cert=   181.77 digits (node 181.77, dps 188.907)    134.4s
+s=  117.0 n0=316   dps0=287   cert=  182.254 digits (node 182.254, dps 189.971)    115.4s
+s=  118.0 n0=318   dps0=288   cert=   182.74 digits (node 182.74, dps 188.884)    115.2s
+s=  119.0 n0=320   dps0=289   cert=  183.227 digits (node 183.227, dps 189.069)    132.6s
+s=  120.0 n0=322   dps0=289   cert=  183.715 digits (node 183.715, dps 188.141)    163.1s
+s=  121.0 n0=324   dps0=290   cert=  184.204 digits (node 184.204, dps 188.848)    125.5s
+s=  122.0 n0=326   dps0=291   cert=  184.695 digits (node 184.695, dps 189.224)    114.3s
+s=  123.0 n0=328   dps0=292   cert=  185.186 digits (node 185.186, dps 188.656)    135.5s
+s=  124.0 n0=330   dps0=293   cert=  185.679 digits (node 185.679, dps 189.812)    115.3s
+s=  125.0 n0=332   dps0=294   cert=  186.173 digits (node 186.173, dps 189.251)    161.4s
+s=  126.0 n0=334   dps0=295   cert=  186.669 digits (node 186.669, dps 189.082)    180.6s
+s=  127.0 n0=336   dps0=295   cert=  187.151 digits (node 187.151, dps 191.298)    178.6s
+s=  128.0 n0=338   dps0=296   cert=  187.586 digits (node 187.586, dps 189.145)    168.2s
+s=  129.0 n0=338   dps0=297   cert=   185.21 digits (node 185.21, dps 188.44)    180.5s
+s=  130.0 n0=340   dps0=298   cert=  185.713 digits (node 185.713, dps 188.831)    277.3s
+s=  131.0 n0=342   dps0=299   cert=  186.214 digits (node 186.214, dps 189.906)    197.3s
+s=  132.0 n0=344   dps0=300   cert=  186.718 digits (node 186.718, dps 189.566)    188.0s
+s=  133.0 n0=346   dps0=301   cert=   187.23 digits (node 187.23, dps 190.736)    193.8s
+s=  134.0 n0=348   dps0=302   cert=  187.726 digits (node 187.726, dps 189.968)    179.7s
+s=  135.0 n0=350   dps0=302   cert=  188.571 digits (node 189.505, dps 188.571)    160.0s
+s=  136.0 n0=352   dps0=303   cert=  188.622 digits (node 188.799, dps 188.622)    173.8s
+s=  137.0 n0=354   dps0=304   cert=  189.248 digits (node 189.248, dps 190.462)    162.4s
+s=  138.0 n0=356   dps0=305   cert=  189.164 digits (node 189.164, dps 189.238)    158.4s
+s=  139.0 n0=358   dps0=306   cert=  189.249 digits (node 189.249, dps 189.581)    170.5s
+s=  140.0 n0=360   dps0=307   cert=  189.128 digits (node 189.69, dps 189.128)    188.1s
+s=  141.0 n0=362   dps0=308   cert=  189.018 digits (node 189.018, dps 189.524)    176.4s
+s=  142.0 n0=364   dps0=308   cert=  188.464 digits (node 189.415, dps 188.464)    167.4s
+s=  143.0 n0=366   dps0=309   cert=  188.511 digits (node 188.511, dps 189.186)    169.7s
+s=  144.0 n0=368   dps0=310   cert=   189.26 digits (node 189.487, dps 189.26)    166.0s
+s=  145.0 n0=370   dps0=311   cert=  188.354 digits (node 188.418, dps 188.354)    191.8s
+s=  146.0 n0=372   dps0=312   cert=  188.998 digits (node 188.998, dps 189.255)    195.4s
+s=  147.0 n0=374   dps0=313   cert=  188.838 digits (node 188.838, dps 189.244)    182.4s
+s=  148.0 n0=376   dps0=314   cert=  188.806 digits (node 189.225, dps 188.806)    162.4s
+s=  149.0 n0=378   dps0=315   cert=  189.672 digits (node 189.673, dps 189.672)    169.3s
+
+grid now 142 points; min certified digits 165.792
+
+grid build complete in 12612s
+
+==============================================================================
+RUN  python fit_constant.py
+==============================================================================
+grid: 142 points, s in [30.0, 149.0], min certified digits per point = 165.792
+
+[model class] unrestricted fit: max|odd d_k| = 0.0791589, max|even d_k| = 2.26711, ratio = 0.0349162
+
+[order sweep, even-only model, stride 2]
+  K=  0  a= -0.49999999837759  b= -0.25004237840345  c=  -0.43832371822375122714634287097014525  |dc|=-
+  K=  2  a=              -0.5  b= -0.25000000009858  c=  -0.43850116558517251130793168178948834  |dc|=0.0001774
+  K=  4  a=              -0.5  b=             -0.25  c=  -0.43850116605467874349134935929987266  |dc|=4.695e-10
+  K=  6  a=              -0.5  b=             -0.25  c= -0.438501166054690677148162662383003548  |dc|=1.193e-14
+  K=  8  a=              -0.5  b=             -0.25  c= -0.438501166054690678523162815897254932  |dc|=1.375e-18
+  K= 10  a=              -0.5  b=             -0.25  c= -0.438501166054690678523655836474290505  |dc|=4.93e-22
+  K= 12  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656302838816366  |dc|=4.664e-25
+  K= 14  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303934554497  |dc|=1.096e-27
+  K= 16  a=              -0.5  b=             -0.25  c=  -0.43850116605469067852365630394009238  |dc|=5.538e-30
+  K= 18  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160184  |dc|=6.78e-32
+  K= 20  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160615  |dc|=4.313e-34
+  K= 22  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=6.716e-35
+  K= 24  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160547  |dc|=6.673e-37
+  K= 26  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.74e-37
+  K= 28  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=9.472e-39
+  K= 30  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.05e-40
+  K= 32  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.182e-41
+  K= 34  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.478e-42
+  K= 36  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.079e-43
+  K= 38  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.375e-44
+  K= 40  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.759e-45
+  K= 42  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=4.061e-46
+  K= 44  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=4.54e-47
+  K= 46  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=4.978e-48
+  K= 48  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=5.265e-49
+  K= 50  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.039e-50
+  K= 52  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.842e-51
+  K= 54  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.94e-51
+  K= 56  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=5.233e-52
+  K= 58  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.007e-52
+  K= 60  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.562e-53
+  K= 62  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.277e-54
+  K= 64  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.088e-55
+  K= 66  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.301e-55
+  K= 68  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.174e-56
+  K= 70  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.587e-57
+  K= 72  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.419e-58
+  K= 74  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.547e-58
+  K= 76  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=9.821e-59
+  K= 78  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=7.515e-60
+  K= 80  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=4.253e-60
+  K= 82  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.898e-60
+  K= 84  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.568e-61
+  K= 86  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=7.505e-62
+  K= 88  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=4.495e-62
+  K= 90  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=6.245e-63
+  K= 92  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.743e-63
+  K= 94  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.338e-63
+  K= 96  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=7.323e-65
+  K= 98  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.314e-64
+  K=100  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=4.002e-65
+  K=102  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=6.202e-66
+  K=104  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=6.425e-66
+  K=106  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=5.31e-67
+  K=108  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=7.712e-67
+  K=110  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.057e-67
+  K=112  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=7.601e-68
+  K=114  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=4.119e-68
+  K=116  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=6.062e-69
+  K=118  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=7.483e-69
+  K=120  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.682e-70
+  K=122  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.237e-69
+  K=124  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=8.096e-71
+  K=126  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.112e-70
+  K=128  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=2.536e-71
+  K=130  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=3.941e-71
+  K=132  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=5.236e-72
+  K=134  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=7.539e-72
+  K=136  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.018e-72
+  K=138  a=              -0.5  b=             -0.25  c= -0.438501166054690678523656303940160548  |dc|=1.41e-72
+
+selected K = 136  (flattest 3-order window)
+
+[error budget on c]
+  (E1) order truncation      : 1.4105e-72  -> 71.8506 digits
+  (E2) window sensitivity    : 7.81179e-73  -> 72.1072 digits
+  (E3) data-noise amplified  : 3.81039e-114  -> 113.419 digits
+  ADOPTED sigma_c            : 1.4105e-72
+  HONEST DIGITS IN c         : 71   (working precision was 515 dps -- a different number)
+
+[held-out test] s=67.0 excluded from fit, |prediction - computed| = 3.75487e-82
+
+wrote out/constant.json
+
+==============================================================================
+RUN  python gate.py
+==============================================================================
+==============================================================================
+PHASE 0.3  CALIBRATION GATE
+==============================================================================
+  c   (VERIFIED, this session, 71 honest digits)
+      = -0.438501166054690678523656303940160547619150796475584079822844
+  sigma_c                       = 1.4105e-72
+  candidate (CONJECTURED form) (1/12)log2 + 3 zeta'(-1)
+      = -0.438501166054690678523656303940160547619150796475584079822844
+  |c - candidate|               = 1.05889e-72
+  AGREEMENT                     = 71.97515 digits
+  gate threshold                = 12 digits
+
+  agreement vs error bar: |c - candidate| <= 10*sigma_c  -> CONSISTENT
+
+  GATE PASSED.  The pipeline reproduces the known constant.
+
+==============================================================================
+RUN  python run_pslq.py
+==============================================================================
+==============================================================================
+PHASE 0.4  PSLQ HARNESS
+==============================================================================
+  honest digits in c, D            : 71
+  control-(i) sensitivity floor    : P >= 31
+  reconfirmation budget            : P + 30 <= 68
+  diagnostic precision P_max       : 68  (cannot satisfy criterion (a))
+  coefficient sup-norm threshold   : 10000
+
+  P is chosen per basis as the SMALLEST admissible precision,
+  P = max(measured spurious threshold, control-(i) floor),
+  because every digit spent on the search is a digit unavailable
+  for the reconfirmation at P+30.
+
+[1] basis constants recomputed at +30 digits
+    1              agrees to 68.0 digits
+    log2           agrees to 68.0 digits
+    logpi          agrees to 68.0 digits
+    gamma          agrees to 68.0 digits
+    zeta'(-1)      agrees to 68.0 digits
+    zeta(3)/pi^2   agrees to 68.0 digits
+    Catalan        agrees to 68.0 digits
+    log(1+sqrt2)   agrees to 68.0 digits
+    zeta'(-1) vs 1/12 - log(Glaisher): agrees to 78.3895 digits
+
+------------------------------------------------------------------------------
+[basis of 8] ['1', 'log2', 'logpi', 'gamma', "zeta'(-1)", 'zeta(3)/pi^2', 'Catalan', 'log(1+sqrt2)']
+------------------------------------------------------------------------------
+  [2] spurious-relation threshold (random targets, blind to c)
+    [pslq] NULL-random(dps=10,trial=0)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=1)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=2)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=15,trial=0)  dps=15    maxcoeff=10000    -> [1, 3, 2, 0, -3, -1, -14, -2, -1]
+    [pslq] NULL-random(dps=15,trial=1)  dps=15    maxcoeff=10000    -> [-1, -3, 3, 2, -1, 3, 5, 0, 1]
+    [pslq] NULL-random(dps=15,trial=2)  dps=15    maxcoeff=10000    -> [233, -231, -1, 0, -232, -231, -231, -1, -1]
+    [pslq] NULL-random(dps=20,trial=0)  dps=20    maxcoeff=10000    -> [-18, 10, 8, -3, -7, -26, -9, 15, -1]
+    [pslq] NULL-random(dps=20,trial=1)  dps=20    maxcoeff=10000    -> [-8, 5, 4, 5, 4, 0, 23, -20, 12]
+    [pslq] NULL-random(dps=20,trial=2)  dps=20    maxcoeff=10000    -> [-103, 212, -53, 57, 26, -166, -180, -222, 53]
+    [pslq] NULL-random(dps=25,trial=0)  dps=25    maxcoeff=10000    -> [47, -6, -11, 32, -72, -7, 119, -60, 9]
+    [pslq] NULL-random(dps=25,trial=1)  dps=25    maxcoeff=10000    -> [-69, 49, 37, 1, 9, 83, 7, -16, 54]
+    [pslq] NULL-random(dps=25,trial=2)  dps=25    maxcoeff=10000    -> [-17, -49, 74, 0, 22, 27, 22, 36, -26]
+    [pslq] NULL-random(dps=30,trial=0)  dps=30    maxcoeff=10000    -> [69, 122, -30, 62, 179, 10, 29, 47, -471]
+    [pslq] NULL-random(dps=30,trial=1)  dps=30    maxcoeff=10000    -> [-212, 115, -167, 93, 25, 42, 251, 99, 100]
+    [pslq] NULL-random(dps=30,trial=2)  dps=30    maxcoeff=10000    -> [99, -11, 355, -96, 4, -15, -225, -135, -129]
+    [pslq] NULL-random(dps=40,trial=0)  dps=40    maxcoeff=10000    -> [6174, -8769, -5954, 7812, -2717, -258, 2704, -839, -2369]
+    [pslq] NULL-random(dps=40,trial=1)  dps=40    maxcoeff=10000    -> [-2757, -1897, 2730, 5270, -286, -907, 1657, -219, -2147]
+    [pslq] NULL-random(dps=40,trial=2)  dps=40    maxcoeff=10000    -> [-5963, 7680, -8650, 2517, 4057, 5334, 2298, 5488, 525]
+    [pslq] NULL-random(dps=50,trial=0)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=1)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=2)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=0)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=1)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=2)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=0)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=1)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=2)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=0)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=1)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=2)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=0)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=1)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=2)  dps=80    maxcoeff=10000    -> NO RELATION
+      dps=10    random targets=3 relations found=0
+      dps=15    random targets=3 relations found=3
+      dps=20    random targets=3 relations found=3
+      dps=25    random targets=3 relations found=3
+      dps=30    random targets=3 relations found=3
+      dps=40    random targets=3 relations found=3
+      dps=50    random targets=3 relations found=0
+      dps=55    random targets=3 relations found=0
+      dps=60    random targets=3 relations found=0
+      dps=68    random targets=3 relations found=0
+      dps=80    random targets=3 relations found=0
+    -> spurious relations persist below dps 50; basis usable only for P >= 50
+    -> P = max(50, 31) = 50; needs P+30 = 80 <= 68  -> INSUFFICIENT PRECISION
+    -> this basis needs c to >= 83 honest digits; have 71.
+  [3] DIAGNOSTIC search at P_max=68 (not reportable by construction)
+    [pslq] DIAGNOSTIC P_max=68          dps=68    maxcoeff=10000    -> [-12, 0, 1, 0, 0, 36, 0, 0, 0]
+      -12*c +1*log2 +36*zeta'(-1) = 0
+  [4,5] SKIPPED: running them here would be a guaranteed-fail protocol, not a test.
+
+  >>> NOT reportable at basis size 8; shrinking basis per the pre-declared nesting.
+
+------------------------------------------------------------------------------
+[basis of 6] ['1', 'log2', 'logpi', 'gamma', "zeta'(-1)", 'zeta(3)/pi^2']
+------------------------------------------------------------------------------
+  [2] spurious-relation threshold (random targets, blind to c)
+    [pslq] NULL-random(dps=10,trial=0)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=1)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=2)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=15,trial=0)  dps=15    maxcoeff=10000    -> [6, 0, 14, -15, 0, 4, -12]
+    [pslq] NULL-random(dps=15,trial=1)  dps=15    maxcoeff=10000    -> [6, -11, -1, 5, -10, -4, 3]
+    [pslq] NULL-random(dps=15,trial=2)  dps=15    maxcoeff=10000    -> [1463, -1461, -1, -1, -1463, -1462, -1463]
+    [pslq] NULL-random(dps=20,trial=0)  dps=20    maxcoeff=10000    -> [64, -137, -53, 2, 72, -265, 2]
+    [pslq] NULL-random(dps=20,trial=1)  dps=20    maxcoeff=10000    -> [-13, -33, 49, -26, 69, -29, 15]
+    [pslq] NULL-random(dps=20,trial=2)  dps=20    maxcoeff=10000    -> [-10, 1, 32, 31, -85, -29, -35]
+    [pslq] NULL-random(dps=25,trial=0)  dps=25    maxcoeff=10000    -> [-342, 75, 299, 131, -245, -160, 378]
+    [pslq] NULL-random(dps=25,trial=1)  dps=25    maxcoeff=10000    -> [-271, 303, 185, 8, -85, 141, 237]
+    [pslq] NULL-random(dps=25,trial=2)  dps=25    maxcoeff=10000    -> [353, 159, 245, -824, 232, -112, -173]
+    [pslq] NULL-random(dps=30,trial=0)  dps=30    maxcoeff=10000    -> [-2606, 1754, 128, 1947, -11, 2221, -995]
+    [pslq] NULL-random(dps=30,trial=1)  dps=30    maxcoeff=10000    -> [-977, 1107, 1763, 389, -586, 3947, -2435]
+    [pslq] NULL-random(dps=30,trial=2)  dps=30    maxcoeff=10000    -> [-2102, 2741, 23, -1807, 2611, -2353, 2276]
+    [pslq] NULL-random(dps=40,trial=0)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=1)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=2)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=0)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=1)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=2)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=0)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=1)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=2)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=0)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=1)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=2)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=0)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=1)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=2)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=0)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=1)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=2)  dps=80    maxcoeff=10000    -> NO RELATION
+      dps=10    random targets=3 relations found=0
+      dps=15    random targets=3 relations found=3
+      dps=20    random targets=3 relations found=3
+      dps=25    random targets=3 relations found=3
+      dps=30    random targets=3 relations found=3
+      dps=40    random targets=3 relations found=0
+      dps=50    random targets=3 relations found=0
+      dps=55    random targets=3 relations found=0
+      dps=60    random targets=3 relations found=0
+      dps=68    random targets=3 relations found=0
+      dps=80    random targets=3 relations found=0
+    -> spurious relations persist below dps 40; basis usable only for P >= 40
+    -> P = max(40, 31) = 40; needs P+30 = 70 <= 68  -> INSUFFICIENT PRECISION
+    -> this basis needs c to >= 73 honest digits; have 71.
+  [3] DIAGNOSTIC search at P_max=68 (not reportable by construction)
+    [pslq] DIAGNOSTIC P_max=68          dps=68    maxcoeff=10000    -> [12, 0, -1, 0, 0, -36, 0]
+      +12*c -1*log2 -36*zeta'(-1) = 0
+  [4,5] SKIPPED: running them here would be a guaranteed-fail protocol, not a test.
+
+  >>> NOT reportable at basis size 6; shrinking basis per the pre-declared nesting.
+
+------------------------------------------------------------------------------
+[basis of 4] ['1', 'log2', 'gamma', "zeta'(-1)"]
+------------------------------------------------------------------------------
+  [2] spurious-relation threshold (random targets, blind to c)
+    [pslq] NULL-random(dps=10,trial=0)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=1)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=2)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=15,trial=0)  dps=15    maxcoeff=10000    -> [21, -10, -9, -24, 21]
+    [pslq] NULL-random(dps=15,trial=1)  dps=15    maxcoeff=10000    -> [12, -4, -16, -17, -21]
+    [pslq] NULL-random(dps=15,trial=2)  dps=15    maxcoeff=10000    -> [10, -17, -13, 44, 89]
+    [pslq] NULL-random(dps=20,trial=0)  dps=20    maxcoeff=10000    -> [313, 901, -616, -1607, -205]
+    [pslq] NULL-random(dps=20,trial=1)  dps=20    maxcoeff=10000    -> [-23, 190, -75, -140, 157]
+    [pslq] NULL-random(dps=20,trial=2)  dps=20    maxcoeff=10000    -> [233, -412, 89, 79, -414]
+    [pslq] NULL-random(dps=25,trial=0)  dps=25    maxcoeff=10000    -> [2596, 1190, 853, -5825, 7113]
+    [pslq] NULL-random(dps=25,trial=1)  dps=25    maxcoeff=10000    -> [6167, -6353, 5078, -8363, 8287]
+    [pslq] NULL-random(dps=25,trial=2)  dps=25    maxcoeff=10000    -> [1878, 3382, -5140, -1406, 9537]
+    [pslq] NULL-random(dps=30,trial=0)  dps=30    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=30,trial=1)  dps=30    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=30,trial=2)  dps=30    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=0)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=1)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=40,trial=2)  dps=40    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=0)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=1)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=2)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=0)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=1)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=55,trial=2)  dps=55    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=0)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=1)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=60,trial=2)  dps=60    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=0)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=1)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=68,trial=2)  dps=68    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=0)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=1)  dps=80    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=80,trial=2)  dps=80    maxcoeff=10000    -> NO RELATION
+      dps=10    random targets=3 relations found=0
+      dps=15    random targets=3 relations found=3
+      dps=20    random targets=3 relations found=3
+      dps=25    random targets=3 relations found=3
+      dps=30    random targets=3 relations found=0
+      dps=40    random targets=3 relations found=0
+      dps=50    random targets=3 relations found=0
+      dps=55    random targets=3 relations found=0
+      dps=60    random targets=3 relations found=0
+      dps=68    random targets=3 relations found=0
+      dps=80    random targets=3 relations found=0
+    -> spurious relations persist below dps 30; basis usable only for P >= 30
+    -> P = max(30, 31) = 31; needs P+30 = 61 <= 68  -> OK
+  [3] DIAGNOSTIC search at P_max=68 (not reportable by construction)
+    [pslq] DIAGNOSTIC P_max=68          dps=68    maxcoeff=10000    -> [-12, 0, 1, 0, 36]
+      -12*c +1*log2 +36*zeta'(-1) = 0
+  [4] gated search at P=31, reconfirmation at P+30
+    [pslq] TARGET c (P=31)              dps=31    maxcoeff=10000    -> [-12, 0, 1, 0, 36]
+    [pslq] TARGET c (P+30=61)           dps=61    maxcoeff=10000    -> [-12, 0, 1, 0, 36]
+  [5] null controls
+    [pslq] NULL-perturbed c*(1+1e-20)   dps=31    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random 30-digit constant dps=31    maxcoeff=10000    -> NO RELATION
+      null controls PASS
+
+  >>> REPORTABLE at basis size 4: (a) reconfirmed at P+30 with identical coefficients, (b) sup-norm within threshold, (c) both null controls empty, and P is at or above the measured spurious threshold.
+      -12*c +1*log2 +36*zeta'(-1) = 0
+
+wrote out/pslq_result.json and out/pslq_calls.json
+
+target 'verify' completed
