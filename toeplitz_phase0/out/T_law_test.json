@@ -1,0 +1,136 @@
+[
+ {
+  "b": 5,
+  "T_measured": 35,
+  "T_predicted": 35,
+  "table": [
+   {
+    "dps": 10,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 15,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 20,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 1
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 55,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 60,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 70,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ },
+ {
+  "b": 7,
+  "T_measured": 40,
+  "T_predicted": 45,
+  "table": [
+   {
+    "dps": 10,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 15,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 20,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 25,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 30,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 35,
+    "random_targets": 3,
+    "relations_found": 3
+   },
+   {
+    "dps": 40,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 45,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 50,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 55,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 60,
+    "random_targets": 3,
+    "relations_found": 0
+   },
+   {
+    "dps": 70,
+    "random_targets": 3,
+    "relations_found": 0
+   }
+  ]
+ }
+]

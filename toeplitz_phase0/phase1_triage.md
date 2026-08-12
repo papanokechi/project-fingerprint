@@ -24,41 +24,50 @@ above which the harness returns NOTHING on random targets, read from ABOVE
 (L-019 — reading it from below returns the precision at which PSLQ merely
 fails to converge, which is bug class 3).
 
-**Measured T, at `maxcoeff = 1e4`, 3 random targets per precision:**
+**Measured T, at `maxcoeff = 1e4`, 3 random targets per precision, on a
+STEP-1 sweep over dps 24..52 (see L-030 — an earlier step-5 sweep produced a
+spuriously "exact" linear law and is superseded):**
 
-| basis size b | 3 | 4 | 6 | 8 |
-|---|---|---|---|---|
-| measured T | 25 | 30 | 40 | 50 |
+| basis size b | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|
+| measured T | 24 | 27 | 30 | 35 | 39 | 44 |
 
-These four points are **exactly linear**:
-
-```
-T(b) = 5b + 10          (VERIFIED at b = 3, 4, 6, 8; residual zero)
-```
+Increments are 3, 3, 5, 4, 5 — **concave, not linear**. The earlier claim
+`T(b) = 5b + 10` is FALSIFIED (it predicts 45 at b = 7; the measurement is 39)
+and its apparent zero residual was an artefact of a sweep spaced by 5, equal
+to the fitted slope. No functional form is asserted here to replace it: six
+points over b in [3,8] do not determine one, and the honest statement is the
+table.
 
 Consequences, and this is the Phase 1 entry condition:
 
 | basis size b | T(b) | required honest digits D |
 |---|---|---|
-| 4  | 30 | 64 |
-| 6  | 40 | 73 |
-| 8  | 50 | **83** |
-| 10 | 60 | **93**  (T extrapolated) |
-| 12 | 70 | **103** (T extrapolated) |
+| 4  | 27 | 64 |
+| 6  | 35 | 68 |
+| 7  | 39 | 72 |
+| 8  | 44 | **77** |
+| 10 | **UNMEASURABLE** | unknown |
+| 12 | **UNMEASURABLE** | unknown |
 
-Current capability: **D = 71** (142-point grid). This clears b = 6 and fails
-b = 8. Phase 1 bases will realistically be 8-12 entries, so Phase 1 needs
-**D ~ 83-103**.
+Current capability: **D = 71** (142-point grid). That clears b = 6, and falls
+**6 digits short of the full 8-element basis** — not 12, as the falsified law
+implied.
 
 CAVEATS, stated because the table above is the thing most likely to be misused:
-* `T(b) = 5b + 10` is fitted to four points over a narrow range and is
-  **CONJECTURED** outside `b in [3,8]`. The b = 10 and b = 12 rows are
-  extrapolations and MUST be re-measured before being relied on.
+* **T cannot be measured at b > 8 at all with the present basis, which has
+  only 8 entries.** The b = 10 and b = 12 rows are not "extrapolated", they
+  are undefined: a Phase 1 basis that size requires new constants to be
+  declared FIRST, after which T must be re-measured. Any digit requirement
+  quoted for b > 8 today is fabricated.
 * `T` is measured only at `maxcoeff = 1e4`. Dependence on the coefficient
   bound is unmeasured. A Phase 1 target needing larger coefficients raises `T`
   by an unknown amount.
 * The heuristic `T ~ b*log10(maxcoeff)` under-predicts the measured values by
   ~40-100% and should not be used.
+* T is resolved to +/-1 dps by the step-1 sweep, and rests on only 3 random
+  targets per precision. It is a small-sample estimate of the edge of a
+  stochastic phenomenon, not a constant of nature.
 
 ---
 
@@ -79,7 +88,6 @@ Legend for provenance: `PROVED` (rigorous derivation exists) / `DERIVED`
 | T-2 | Jin-Korepin XX-chain entanglement additive constant | OPERATOR-SUPPLY | OPERATOR-SUPPLY | OPERATOR-SUPPLY | ? | ? | ? | pending |
 | T-3 | Emptiness formation probability (XX / free fermion) constant | OPERATOR-SUPPLY | OPERATOR-SUPPLY | OPERATOR-SUPPLY | ? | ? | ? | pending |
 | T-4 | Widom-Dyson constant (this session's target) | >= 72 (this session) | PROVED (L-026) | YES (Krasovsky; Ehrhardt) | 4 | 64 | 71 | **CALIBRATION ONLY — not a Phase 1 target** |
-
 T-4 is entered deliberately, as the worked example of a row that the table
 should REJECT: the value is proved, independently twice, and now reproduced to
 72 digits. There is no research value left in it. Any Phase 1 candidate whose

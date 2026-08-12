@@ -924,3 +924,97 @@ Two honest qualifications, neither of which the ratio 0.0349 settles:
     that no unmodelled odd tail is present at that scale.
 
 ---
+
+## L-030 — FALSIFIED: my own law T(b) = 5b + 10, and why it looked exact
+
+**Tag: VERIFIED** (step-1 sweep, 3 random targets per precision, maxcoeff 1e4,
+threshold read from above; 522 PSLQ calls logged to `out/pslq_calls_Tfine.json`).
+
+Earlier today I recorded in `phase1_triage.md` that the measured spurious-
+relation thresholds were "exactly linear", `T(b) = 5b + 10`, fitted to b = 3,
+4, 6, 8 with zero residual, and I used it to extrapolate the digits Phase 1
+would need at b = 10 and b = 12. I then tested it at the two basis sizes that
+had never been measured.
+
+**It is false.** At b = 7 the law predicts 45; the measurement gives 40.
+
+Worse, the apparent exactness was an artefact of my own measurement grid. The
+original sweep was `{10,15,20,25,30,40,50,55,60,80}` — spaced by 5 in the
+region where T lands — and the fitted slope was also 5. A law with slope
+equal to the sampling interval will reproduce quantised data exactly whether
+or not it is true. The "zero residual" was carrying no information.
+
+Re-measured on a **step-1** sweep over dps 24..52:
+
+| b | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|
+| T (step 1) | 24 | 27 | 30 | 35 | 39 | 44 |
+| 5b+10 | 25 | 30 | 35 | 40 | 45 | 50 |
+
+The true relation is concave, not linear: increments are 3, 3, 5, 4, 5. The
+old law over-predicts by up to 6 digits, which is the SAFE direction (it asks
+for more precision than needed), but it is wrong, and the b = 10 / b = 12 rows
+I derived from it are unsupported.
+
+**Two corrections that follow:**
+1. `phase1_triage.md` is amended: the b = 10 and b = 12 requirements are
+   withdrawn, and it now records that **T cannot be measured at b > 8 at all
+   with the current basis**, which has only 8 entries. A Phase 1 basis of 10
+   or 12 requires new constants to be declared first, and T re-measured then.
+2. The requirement at b = 8 falls from D >= 83 to **D >= 77** (T = 44, control
+   floor 31, so max(44,31) + 33). The current 71-digit result is 6 short of
+   the full 8-element basis, not 12.
+
+**Method note.** This is the fourth instance of the session's dominant failure
+genus, and the first one I generated myself while writing up: a
+quantity read off a grid too coarse to resolve it, presented as exact. It is
+the same shape as bug 3 (threshold read from below) and L-018 (control run
+below its own resolution). Resolution of the instrument must be checked
+before a number taken from it is quoted -- including when the instrument is a
+sweep I designed an hour earlier.
+
+---
+
+## L-031 — Densifying the grid hit a CONDITIONING wall, and the wall was precision
+
+**Tag: VERIFIED** (bisection on the largest non-singular K; both runs recorded).
+
+Revision 5 extended the grid 142 -> 224 points by densifying `[30,45]` to step
+0.125 and `[45,89]` to step 1 (the cheapest points per certified digit). The
+first fit then **failed outright**:
+
+    ZeroDivisionError: matrix is numerically singular   (asympt.fit, K ~ 155+)
+
+This is the honest failure direction and is worth recording as such: the run
+aborted rather than returning a fitted value from a numerically singular
+solve. Had `lu_solve` merely returned a badly-conditioned answer, this would
+have been another plausible-wrong-number.
+
+Diagnosis by bisection on the largest K whose solve is non-singular:
+
+| headroom above certified digits | working precision | max usable K |
+|---|---|---|
+| 350 | 515 dps | 155 |
+| 800 | 965 dps | 221 (no singularity) |
+
+So the wall is **precision, not information**: at headroom 350 the 224-point
+grid could not use a third of the orders it had already paid for in Nystrom
+time. Densification raises the conditioning demand twice over — the dynamic
+range `(s_max/s_min)^(2K)` grows with K, and adjacent rows become
+near-duplicates separated only by `Delta_s/s`, which is 0.125/30 ~ 4e-3 at the
+bottom of this grid.
+
+Actions: `load()` default headroom 350 -> 800, with the measurement recorded
+in its docstring; `order_table` now CATCHES the singular solve, stops the
+sweep, and reports `singular_at_K` (also written to `constant.json`), so an
+insufficient headroom is loud rather than silent.
+
+**This refines L-017.** L-017 concluded the extraction is order-limited rather
+than s_min-limited, and that each additional point buys an order. That holds
+only while the working precision can carry the order. There is a third regime,
+not previously observed: **precision-limited**, where points are present, the
+orders they would buy are unusable, and the binding resource is `mp.dps` in
+the FIT — not in the determinant evaluation, where all the certification
+effort had been spent.
+
+---
