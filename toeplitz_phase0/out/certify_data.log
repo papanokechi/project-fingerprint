@@ -1,0 +1,34 @@
+s=  30.0  cert=   137.249 digits (node 137.249, dps 137.797)   181.5s
+s=  30.5  cert=   136.816 digits (node 136.816, dps 137.362)    12.0s
+s=  31.0  cert=   136.383 digits (node 136.383, dps 136.927)     8.7s
+s=  31.5  cert=    135.95 digits (node 135.95, dps 136.492)     8.1s
+s=  32.0  cert=   135.517 digits (node 135.517, dps 136.057)     9.3s
+s=  32.5  cert=   135.084 digits (node 135.084, dps 135.622)    10.1s
+s=  33.0  cert=   134.651 digits (node 134.651, dps 135.188)    11.1s
+s=  33.5  cert=   134.218 digits (node 134.218, dps 134.753)    10.0s
+s=  34.0  cert=   133.785 digits (node 133.785, dps 134.319)     8.5s
+s=  34.5  cert=   133.352 digits (node 133.352, dps 133.885)     9.5s
+s=  35.0  cert=   132.919 digits (node 132.919, dps 133.451)     8.0s
+s=  35.5  cert=   132.486 digits (node 132.486, dps 133.017)     7.4s
+s=  36.0  cert=   132.054 digits (node 132.054, dps 132.583)     7.7s
+s=  36.5  cert=   131.621 digits (node 131.621, dps 132.149)     6.7s
+s=  37.0  cert=   131.188 digits (node 131.188, dps 131.715)     7.6s
+s=  37.5  cert=   130.755 digits (node 130.755, dps 131.281)     7.3s
+s=  38.0  cert=   130.322 digits (node 130.322, dps 130.847)     6.9s
+s=  38.5  cert=    129.89 digits (node 129.89, dps 130.413)     9.5s
+s=  39.0  cert=   129.457 digits (node 129.457, dps 129.979)     8.6s
+s=  39.5  cert=   129.024 digits (node 129.024, dps 129.545)     7.8s
+s=  40.0  cert=   128.591 digits (node 128.591, dps 129.112)     8.6s
+s=  40.5  cert=   128.158 digits (node 128.158, dps 128.678)     8.2s
+s=  41.0  cert=   127.725 digits (node 127.725, dps 128.244)     7.4s
+s=  41.5  cert=   127.293 digits (node 127.293, dps 127.81)     7.1s
+s=  42.0  cert=    126.86 digits (node 126.86, dps 127.377)     5.5s
+s=  42.5  cert=   126.427 digits (node 126.427, dps 126.942)     4.5s
+s=  43.0  cert=   125.994 digits (node 125.994, dps 126.509)     5.2s
+s=  43.5  cert=   125.561 digits (node 125.561, dps 126.075)     6.1s
+s=  44.0  cert=   125.128 digits (node 125.128, dps 125.641)     6.4s
+s=  44.5  cert=   124.695 digits (node 124.695, dps 125.207)     6.3s
+s=  45.0  cert=   124.263 digits (node 124.263, dps 124.773)     7.9s
+
+min certified digits over grid: 124.263
+wrote out/certified_data.json in 419.6 s

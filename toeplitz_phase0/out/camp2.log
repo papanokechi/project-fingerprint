@@ -1,0 +1,25 @@
+s=   45.0 present at 165.913 digits, keeping
+s=   47.0 n0=182   dps0=226   cert=  166.088 digits (node 166.088, dps 188.895)     21.5s
+s=   49.0 n0=186   dps0=228   cert=  166.329 digits (node 166.329, dps 188.526)     22.5s
+s=   51.0 n0=190   dps0=230   cert=  166.629 digits (node 166.629, dps 189.217)     23.4s
+s=   53.0 n0=194   dps0=231   cert=  166.982 digits (node 166.982, dps 188.341)     25.2s
+s=   55.0 n0=198   dps0=233   cert=  167.384 digits (node 167.384, dps 188.829)     25.8s
+s=   57.0 n0=202   dps0=235   cert=   167.83 digits (node 167.83, dps 189.13)     24.4s
+s=   59.0 n0=206   dps0=237   cert=  168.315 digits (node 168.315, dps 189.754)    154.5s
+s=   61.0 n0=210   dps0=238   cert=  168.838 digits (node 168.838, dps 188.778)    270.7s
+s=   63.0 n0=212   dps0=240   cert=  166.028 digits (node 166.028, dps 188.938)    334.2s
+s=   65.0 n0=216   dps0=242   cert=  166.636 digits (node 166.636, dps 188.962)     74.8s
+s=   67.0 n0=220   dps0=244   cert=  167.272 digits (node 167.272, dps 189.717)    108.4s
+s=   69.0 n0=224   dps0=245   cert=  167.933 digits (node 167.933, dps 189.108)     46.2s
+s=   71.0 n0=228   dps0=247   cert=  168.617 digits (node 168.617, dps 189.257)     39.5s
+s=   73.0 n0=232   dps0=249   cert=  169.323 digits (node 169.323, dps 189.422)     39.6s
+s=   75.0 n0=236   dps0=250   cert=   170.05 digits (node 170.05, dps 188.495)     38.1s
+s=   77.0 n0=240   dps0=252   cert=  170.795 digits (node 170.795, dps 189.182)     33.2s
+s=   79.0 n0=244   dps0=254   cert=  171.557 digits (node 171.557, dps 188.952)     29.8s
+s=   81.0 n0=248   dps0=256   cert=  172.336 digits (node 172.336, dps 189.211)     31.6s
+s=   83.0 n0=252   dps0=257   cert=   173.13 digits (node 173.13, dps 188.554)     34.2s
+s=   85.0 n0=254   dps0=259   cert=  170.771 digits (node 170.771, dps 188.568)     35.7s
+s=   87.0 n0=258   dps0=261   cert=  171.606 digits (node 171.606, dps 189.018)     34.2s
+s=   89.0 n0=262   dps0=263   cert=  172.453 digits (node 172.453, dps 189.293)     34.1s
+
+grid now 84 points; min certified digits 165.792

@@ -1,0 +1,132 @@
+"""Phase 0.4 driver: run the gated PSLQ harness with adversarial null controls.
+
+Order of operations matters here and is deliberate:
+
+  1. Establish that every basis constant is itself VERIFIED (recomputed at
+     +30 digits, agreeing).
+  2. MEASURE the spurious-relation threshold by running the identical harness
+     against random targets across a range of precisions.  This is done BEFORE
+     looking at the real target, so the acceptance criterion cannot be tuned
+     after seeing the answer.
+  3. Only then search around c, and only then run the two required null
+     controls.
+  4. If the null controls fail, the basis is overcomplete at the available
+     precision.  We do not lower the bar: we shrink the basis along a fixed,
+     pre-declared nesting and re-run the whole gate.
+
+Every PSLQ call, successful or not, is written to out/pslq_calls.json.
+"""
+
+from __future__ import annotations
+
+import json
+from mpmath import mp
+
+import constants
+import pslq_harness as H
+
+CONST = "out/constant.json"
+OUTPUT = "out/pslq_result.json"
+
+#: Pre-declared nesting, largest first.  Declared before any search is run so
+#: that shrinking cannot be steered by what happens to work.
+NESTING = [
+    ["1", "log2", "logpi", "gamma", "zeta'(-1)", "zeta(3)/pi^2", "Catalan", "log(1+sqrt2)"],
+    ["1", "log2", "logpi", "gamma", "zeta'(-1)", "zeta(3)/pi^2"],
+    ["1", "log2", "gamma", "zeta'(-1)"],
+    ["1", "log2", "zeta'(-1)"],
+]
+MAXCOEFF = 10 ** 4
+
+
+def main():
+    d = json.load(open(CONST))
+    nd = int(d["honest_digits_c"])
+    P = max(20, nd - 3)                 # safety margin below the honest digits
+    mp.dps = nd + 60
+    c = mp.mpf(d["c_full"])
+
+    print("=" * 78)
+    print("PHASE 0.4  PSLQ HARNESS")
+    print("=" * 78)
+    print(f"  honest digits in c            : {nd}")
+    print(f"  PSLQ precision P              : {P}   (reconfirmation at P+30)")
+    print(f"  coefficient sup-norm threshold: {MAXCOEFF}")
+
+    print("\n[1] basis constants recomputed at +30 digits")
+    for nm, dg in constants.check_constants(P):
+        print(f"    {nm:<14} agrees to {mp.nstr(dg, 6)} digits")
+    z1, z2, dg = constants.glaisher_cross_check(P)
+    print(f"    zeta'(-1) vs 1/12 - log(Glaisher): agrees to {mp.nstr(dg,6)} digits")
+
+    result = {"honest_digits_c": nd, "P": P, "maxcoeff": MAXCOEFF, "stages": []}
+
+    for names_wanted in NESTING:
+        names, vals = constants.basis_values(P + 60, names_wanted)
+        m = len(names)
+        print("\n" + "-" * 78)
+        print(f"[basis of {m}] {names}")
+        print("-" * 78)
+
+        print("  [2] spurious-relation threshold (random targets, blind to c)")
+        sweep = [x for x in (10, 15, 20, 25, 30, 40, 50, 60, 80, 100, 120) if x <= P + 20]
+        if P not in sweep:
+            sweep.append(P)
+        thr, table = H.spurious_threshold(sorted(sweep), names, vals,
+                                          maxcoeff=MAXCOEFF, trials=3)
+        for row in table:
+            print(f"      dps={row['dps']:<5} random targets={row['random_targets']} "
+                  f"relations found={row['relations_found']}")
+        print(f"    -> lowest swept precision with NO spurious relation: {thr}")
+
+        print("  [3] gated search around c")
+        verdict = H.vet_relation(c, P, names, vals, maxcoeff=MAXCOEFF)
+
+        print("  [4] null controls")
+        nulls = H.null_controls(c, P, names, vals, maxcoeff=MAXCOEFF)
+        print(f"    null controls {'PASS' if nulls['passed'] else 'FAIL'}")
+
+        stage = {
+            "basis": names,
+            "basis_size": m,
+            "spurious_threshold_dps": thr,
+            "spurious_table": table,
+            "relation": verdict["relation"],
+            "relation_reportable_pre_nulls": verdict["reportable"],
+            "reasons": verdict["reasons"],
+            "null_perturbed": None if nulls["perturbed"] is None
+                              else [int(x) for x in nulls["perturbed"]],
+            "null_random": None if nulls["random"] is None
+                           else [int(x) for x in nulls["random"]],
+            "null_controls_passed": nulls["passed"],
+        }
+
+        if verdict["relation"] is not None:
+            res = H.residual(verdict["relation"], c, vals, P)
+            stage["relation_residual"] = mp.nstr(res, 6)
+            stage["relation_pretty"] = H.format_relation(verdict["relation"], names)
+            print(f"    relation: {stage['relation_pretty']}")
+            print(f"    residual: {mp.nstr(res, 6)}")
+
+        reportable = verdict["reportable"] and nulls["passed"]
+        stage["REPORTABLE"] = reportable
+        result["stages"].append(stage)
+
+        if reportable:
+            print("\n  >>> REPORTABLE: (a) reconfirmed, (b) sup-norm ok, "
+                  "(c) both null controls empty.")
+            result["final"] = stage
+            break
+        print("\n  >>> NOT reportable at this basis size; "
+              "shrinking basis per the pre-declared nesting.")
+    else:
+        print("\n  No basis in the nesting produced a reportable relation.")
+        result["final"] = None
+
+    H.flush_log()
+    json.dump(result, open(OUTPUT, "w"), indent=1)
+    print("\nwrote", OUTPUT, "and", H.LOG)
+
+
+if __name__ == "__main__":
+    main()

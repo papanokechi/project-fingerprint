@@ -1,0 +1,31 @@
+s=   93.0 n0=270   dps0=266   cert=  174.179 digits (node 174.179, dps 188.934)     39.3s
+s=   95.0 n0=274   dps0=268   cert=  175.058 digits (node 175.058, dps 189.34)     42.5s
+s=   97.0 n0=278   dps0=270   cert=  175.946 digits (node 175.946, dps 189.552)     44.6s
+s=   99.0 n0=282   dps0=271   cert=  176.843 digits (node 176.843, dps 190.032)     78.4s
+s=  101.0 n0=286   dps0=273   cert=  177.749 digits (node 177.749, dps 188.769)     70.2s
+s=  103.0 n0=290   dps0=275   cert=  178.663 digits (node 178.663, dps 189.029)     47.4s
+s=  105.0 n0=294   dps0=276   cert=  179.584 digits (node 179.584, dps 188.196)     41.8s
+s=  107.0 n0=296   dps0=278   cert=  177.475 digits (node 177.475, dps 188.841)     36.1s
+s=  109.0 n0=300   dps0=280   cert=  178.419 digits (node 178.419, dps 189.324)     36.1s
+s=  111.0 n0=304   dps0=282   cert=  179.369 digits (node 179.369, dps 188.976)     37.0s
+s=  113.0 n0=308   dps0=283   cert=  180.325 digits (node 180.325, dps 188.353)     34.8s
+s=  115.0 n0=312   dps0=285   cert=  181.287 digits (node 181.287, dps 188.476)     35.3s
+s=  117.0 n0=316   dps0=287   cert=  182.254 digits (node 182.254, dps 189.971)     35.6s
+s=  119.0 n0=320   dps0=289   cert=  183.227 digits (node 183.227, dps 189.069)     38.0s
+s=  121.0 n0=324   dps0=290   cert=  184.204 digits (node 184.204, dps 188.848)     36.4s
+s=  123.0 n0=328   dps0=292   cert=  185.186 digits (node 185.186, dps 188.656)     38.1s
+s=  125.0 n0=332   dps0=294   cert=  186.173 digits (node 186.173, dps 189.251)     38.7s
+s=  127.0 n0=336   dps0=295   cert=  187.151 digits (node 187.151, dps 191.298)     53.0s
+s=  129.0 n0=338   dps0=297   cert=   185.21 digits (node 185.21, dps 188.44)     41.7s
+s=  131.0 n0=342   dps0=299   cert=  186.214 digits (node 186.214, dps 189.906)     41.3s
+s=  133.0 n0=346   dps0=301   cert=   187.23 digits (node 187.23, dps 190.736)     43.1s
+s=  135.0 n0=350   dps0=302   cert=  188.571 digits (node 189.505, dps 188.571)     46.4s
+s=  137.0 n0=354   dps0=304   cert=  189.248 digits (node 189.248, dps 190.462)     51.0s
+s=  139.0 n0=358   dps0=306   cert=  189.249 digits (node 189.249, dps 189.581)     51.0s
+s=  141.0 n0=362   dps0=308   cert=  189.018 digits (node 189.018, dps 189.524)     52.5s
+s=  143.0 n0=366   dps0=309   cert=  188.511 digits (node 188.511, dps 189.186)     56.1s
+s=  145.0 n0=370   dps0=311   cert=  188.354 digits (node 188.418, dps 188.354)     76.5s
+s=  147.0 n0=374   dps0=313   cert=  188.838 digits (node 188.838, dps 189.244)    175.3s
+s=  149.0 n0=378   dps0=315   cert=  189.672 digits (node 189.673, dps 189.672)    351.9s
+
+grid now 113 points; min certified digits 165.792

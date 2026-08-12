@@ -1,0 +1,38 @@
+# Phase 0 pipeline: sine-kernel Fredholm determinant asymptotics.
+#
+#   make verify        full rebuild from scratch (~45-60 min): re-derives every
+#                      claim tagged VERIFIED in ledger.md, starting from
+#                      nothing but mpmath.
+#   make verify-fast   same analysis, reusing out/certified_data.json (~2 min).
+#   make test          structural smoke tests only (~1 min).
+#
+# There is deliberately NO clean target.  Session rule: no file deletion
+# without operator approval.  Remove out/*.json by hand if you want a rebuild
+# that cannot reuse cached data; `make verify` regenerates and overwrites the
+# data files it owns in any case.
+
+PY := python
+
+.PHONY: verify verify-fast test data analysis
+
+verify: test data analysis
+
+verify-fast: test analysis
+
+test:
+	$(PY) test_smoke.py
+
+# 0.1 convergence tables (node count AND precision) + structural cross-checks,
+# then the certified production grid and its extension to large s.
+data:
+	$(PY) verify_kernel.py
+	$(PY) certify_data.py
+	$(PY) extend_data.py
+
+# 0.2 extraction with the honest error budget, 0.3 calibration gate,
+# 0.4 PSLQ harness with adversarial null controls.
+# The gate exits non-zero on failure, which stops make -- by design.
+analysis:
+	$(PY) fit_constant.py
+	$(PY) gate.py
+	$(PY) run_pslq.py

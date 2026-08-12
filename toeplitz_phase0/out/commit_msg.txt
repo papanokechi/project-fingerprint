@@ -1,0 +1,27 @@
+Phase 0: sine-kernel Fredholm determinant calibration pipeline
+
+Calibration-only phase. No novel constant attempted.
+
+Pipeline: Nystrom/Gauss-Legendre discretisation of det(I - K_s) on [-1,1]
+in mpmath/gmpy2, every grid point certified by node doubling AND a
++20-digit precision increase; asymptotic extraction of
+log det = a s^2 + b log s + c with a measured three-source error budget.
+
+Results (142-point certified grid, s in [30,149], >=165 certified digits):
+  a = -1/2, b = -1/4 (VERIFIED)
+  c to 71 HONEST digits, sigma_c = 1.41e-72
+    (working precision was 515 dps -- deliberately a different number)
+  0.3 calibration gate PASSED at 71.98 digits vs a 12-digit threshold
+  0.4 PSLQ: reportable relation on a 4-element basis, both adversarial
+      null controls empty; 106/106 PSLQ calls logged including failures
+
+Four bugs found, all of which produced plausible wrong answers rather
+than errors: fitting-window collapse, mp.dps-after-parse truncation, a
+spurious-threshold statistic read from below, and a null control run
+below its own resolution.
+
+Deliverables: ledger.md (append-only), open_questions.md, Makefile and
+verify.ps1 with a verify target that re-derives every VERIFIED claim.
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+Copilot-Session: 336aec8d-d49e-4499-b29f-6c0ba47fdab9
