@@ -754,3 +754,173 @@ because it costs hours. What is established here is that its *specification*
 now matches the data that produced the claims — not that the run succeeds.
 That remains the one untested path in Phase 0, and it is recorded as such
 rather than asserted away.
+
+## L-026 — OS-1 DISCHARGED: attribution and normalisation verified against primary sources
+
+**Tag: STRUCTURAL** (operator-confirmed theorem, and the operator's sourcing
+independently checked against primary text in-session, per their instruction
+that the discipline apply symmetrically to them).
+
+The operator supplied the attribution chain and asked that it be confirmed
+rather than taken on their word. It was checked against the arXiv API record
+and the paper bodies (PDFs fetched and text-extracted locally; the search-engine
+summary channel was NOT used as evidence — see the failure noted below).
+
+**Primary text, Ehrhardt (arXiv:math/0401205v2), verbatim:**
+
+> "log det(I − K_2α) = − α²/2 − log α/4 + log 2/12 + 3ζ′(−1) + o(1), α → ∞."
+
+with `K_α` the integral operator with kernel `sin(x−y)/(x−y)/π` on `[0, α]`.
+
+**Primary text, Krasovsky (arXiv:math/0401258v2), verbatim, eq. (1) and (2):**
+
+> "∆(s) = det[I − K], where K is the integral operator on L²(0, 2s) given by
+>  (Kg)(x) = ∫₀^{2s} sin(x−y)/(π(x−y)) g(y) dy"
+>
+> "ln ∆(s) = − s²/2 − (1/4) ln s + c₀ + O(1/s), s → ∞,  where the constant
+>  term c₀ = (1/12) ln 2 + 3ζ′(−1), and ζ′(x) is the derivative of Riemann's
+>  zeta function."
+
+**Normalisation now verified, and it was not free.** Krasovsky's ABSTRACT says
+the kernel is on "the interval [0,s]", but his BODY defines `K` on `L²(0, 2s)`
+— interval length 2s. Taking the abstract at face value would have introduced
+a factor-4 error in the leading coefficient (length L gives −L²/8, not −L²/2)
+and would have made the two papers appear to contradict each other. The body
+is authoritative and the two papers agree. This session's operator
+`sin(s(x−y))/(π(x−y))` on `[−1,1]` is, by the substitution `u = sx`, the sine
+kernel on `[−s, s]`, length 2s; translation invariance identifies it with
+Ehrhardt's `K_{2α}` at `α = s` and with Krasovsky's `∆(s)`. Term for term:
+a = −1/2, b = −1/4, c = c₀. The operator's claim of no convention mismatch is
+CONFIRMED.
+
+**Independent internal pin on the normalisation (PROVEN, by arithmetic).**
+The literature check is not actually load-bearing for the convention. Because
+b = −1/4, any error by a factor λ in the interval-length convention shifts the
+constant by −(1/4)log λ; for λ = 2 that is 0.1733…, which would destroy
+agreement at the FIRST digit. Agreement to 72 digits therefore excludes every
+such rescaling on its own. The normalisation is pinned by the arithmetic,
+independently of any paper.
+
+**Attribution, per Krasovsky's own introduction (primary, not recalled):**
+des Cloizeaux and Mehta — first two terms; Dyson — full asymptotic expansion
+via inverse scattering, "partly conjectural"; Widom — rigorous derivation of
+the MAIN term; Deift, Its and Zhou — full asymptotics of (d/ds) ln ∆(s), which
+"settled the question up to the constant term"; Krasovsky (that paper) and
+Ehrhardt (independently) — the constant term.
+
+**Three discrepancies with the operator's message, reported rather than absorbed:**
+
+1. The operator cited Krasovsky as "CMP 262, 2006". The arXiv record gives
+   `Int.Math.Res.Not. 2004 (2004), no.25, 1249-1272`. These are different
+   venues and years. The MATHEMATICS is confirmed; the CITATION is not.
+2. The operator wrote that "Widom proved the first- and second-order
+   asymptotics". Krasovsky's introduction assigns Widom the main term, the
+   first two terms to des Cloizeaux–Mehta, and the reduction-to-the-constant
+   to Deift–Its–Zhou. The operator's chain compresses three contributions.
+3. "Deift–Its–Krasovsky" as a third independent proof is NOT confirmed by
+   either primary consulted; it would be a separate paper. Left unverified.
+
+Ehrhardt's venue ("CMP 272, 2007") is not contradicted — the arXiv record
+simply carries no `journal_ref` — and is left unconfirmed.
+
+**Consequence.** The Phase 0.3 target form is upgraded from CONJECTURED to
+STRUCTURAL, and the gate's meaning changes: the pipeline reproduces a PROVED
+literature value to 72 digits, not merely a number seeded from the prompt.
+This is the first STRUCTURAL entry in this ledger.
+
+**Method note, and it is the same failure genus as L-009/L-018.** A
+search-engine summary of Krasovsky returned "[0,s]" together with "−s²/2",
+which is internally inconsistent (those two cannot both hold) and would have
+propagated a factor-4 normalisation error. It was rejected only because the
+inconsistency was checked arithmetically, not because it looked wrong. LLM
+search summaries are a second-hand channel and are treated here as CONJECTURED
+at best; only fetched primary text is admissible.
+
+---
+
+## L-027 — CORRECTION to the framing of L-023: the PSLQ result is harness validation, not evidence about c
+
+**Tag: PROVEN** (the circularity is a fact about the protocol, not a measurement).
+
+L-023 is append-only and stands as written. Its framing is nonetheless
+insufficient and is corrected here.
+
+The relation reported in L-023 is `−12c + log 2 + 36 ζ′(−1) = 0`, which is
+algebraically identical to the 0.3 gate target. Both `log 2` and `ζ′(−1)` were
+placed in the basis BY CONSTRUCTION. The search therefore had exactly two
+possible outcomes: recover that relation, or return nothing. It could not have
+produced independent information about `c`.
+
+What L-023 establishes is therefore:
+  * the harness RECOVERS a true relation when one is present, at a stated
+    precision, with a stated basis, and
+  * it returns NOTHING on a perturbed target and on a random target under the
+    identical protocol.
+
+That is a validated instrument. It is **not** confirmation of the value of `c`,
+and L-023's closing paragraph — which addresses only the weaker point that the
+literature identification was unverified — should not be read as claiming
+otherwise.
+
+This distinction is recorded now because it becomes load-bearing in Phase 1,
+where the basis will be chosen to contain the constants a target is HOPED to
+decompose into. In that setting "PSLQ found the relation I was looking for" is
+close to uninformative unless the null controls and the spurious threshold do
+the work. The instrument is the deliverable; the hit is not.
+
+---
+
+## L-028 — CORRECTION: sigma_c is CONSISTENT WITH calibration, not calibrated
+
+**Tag: VERIFIED** (as a statement about what n = 3 can support).
+
+Earlier entries and the session summary described the error bar as
+"calibrated, not merely safe", on the evidence that |Δ|/σ_c took the values
+1.10, 0.41, 0.75 across grid revisions 1, 3 and 4.
+
+Three ratios cannot distinguish a correctly scaled σ from one wrong by a
+factor of two; with n = 3 the sampling spread of such ratios is wide, and all
+three values would sit unremarkably under either hypothesis. The defensible
+claim is: **the three observed ratios are consistent with a well-scaled error
+bar and show no evidence of systematic over- or under-statement.** They do not
+establish the scale factor.
+
+The stronger reading is withdrawn. Note the direction of the risk: it is the
+UNDER-statement of σ_c that would corrupt a digit count, and nothing here rules
+that out to better than a factor of ~2.
+
+---
+
+## L-029 — The even-only correction series is ALREADY implemented; the proposed gain is already banked
+
+**Tag: VERIFIED** (read directly off the running configuration and artifacts).
+
+The operator proposed, as the highest-value cheap experiment, determining
+empirically whether the correction series runs in 1/s or 1/s², on the grounds
+that an even-only series would buy roughly twice the digits per Richardson
+order and "clears 83 immediately".
+
+That experiment is already in the pipeline and has already been acted on:
+
+  * `fit_constant.main()` calls `order_table(pts, 2, ...)` — `step = 2`, the
+    even-only model — and this is what produced every reported result.
+  * `odd_coefficient_test()` performs exactly the proposed test: an
+    unrestricted `step = 1` fit, reporting max|odd d_k| / max|even d_k|. The
+    recorded value in `out/constant.json` is **0.0349**.
+  * The selected order is K = 136 at step 2, i.e. the fit already annihilates
+    `s^-2 … s^-272`, not ~35 powers.
+
+So the factor-of-two has been banked since before revision 1, and the current
+71 digits are the POST-gain figure, not the pre-gain figure. The shortfall to
+83 must be closed by some other lever.
+
+Two honest qualifications, neither of which the ratio 0.0349 settles:
+  * that ratio is evidence FOR the even-only model, not proof of it, and the
+    docstring says so;
+  * a genuinely nonzero odd part would bias `c` in a way E1 (an order-to-order
+    difference within the even-only model) cannot see. E2, the window
+    sensitivity, is the budget line that would catch it, and E2 = 7.8e-73 sits
+    essentially at E1 = 1.41e-72 rather than above it — which is mild evidence
+    that no unmodelled odd tail is present at that scale.
+
+---
