@@ -207,11 +207,24 @@ def nullspace(rows, tol_exp):
     U, S, V = mp.svd_r(A, full_matrices=False)
     svals = [S[i] for i in range(len(S))]
     smax = max(svals)
-    null = []
-    for i, sv in enumerate(svals):
-        if sv / smax < mp.mpf(10) ** (-tol_exp):
-            null.append([V[i, j] / colnorm[j] for j in range(V.cols)])
-    return null, svals
+    logs = [mp.log10(sv / smax) for sv in svals]
+
+    # Select by the LARGEST SPECTRAL GAP, not by a fixed tolerance.  A fixed
+    # 1e-(dps/2) reported 12 "null directions" here when only one is genuine:
+    # the true one sits at 1e-122 and the next at 1e-76, a 45-order gap, with
+    # the rest a smooth conditioning tail.  Reporting all 12 was not wrong
+    # arithmetic but it was a misleading artefact, and a fixed threshold has
+    # no way to know where the physics stops and the conditioning starts.
+    gaps = [(float(logs[i] - logs[i + 1]), i) for i in range(len(logs) - 1)]
+    best_gap, cut = max(gaps)
+    n_null = len(svals) - (cut + 1)
+    if best_gap < 10:
+        raise RuntimeError(
+            f"no clean spectral gap (largest {best_gap:.1f} decades): the "
+            f"design matrix is conditioning-limited, not information-limited")
+    null = [[V[i, j] / colnorm[j] for j in range(V.cols)]
+            for i in range(cut + 1, len(svals))]
+    return null, svals, (best_gap, n_null)
 
 
 def main():
@@ -244,16 +257,17 @@ def main():
                   f"sigma={mp.nstr(sig, 12)}", flush=True)
 
     tol_exp = dps // 2
-    null, svals = nullspace(rows, tol_exp)
+    null, svals, (gap, n_null) = nullspace(rows, tol_exp)
     smax = max(svals)
     ratios = sorted(float(mp.log10(sv / smax)) for sv in svals)
-    print(f"[svd] {len(null)} null direction(s) at 1e-{tol_exp}")
+    print(f"[svd] {n_null} genuine null direction(s), selected by a spectral "
+          f"gap of {gap:.1f} decades")
     print(f"[svd] log10 sing.value spectrum (smallest 6): "
           f"{[round(r, 2) for r in ratios[:6]]}")
 
     result = {"dps": dps, "maxdeg": maxdeg, "n": nnodes,
               "n_monomials": nm, "n_samples": nsamp,
-              "n_null": len(null),
+              "n_null": n_null, "spectral_gap_decades": round(gap, 3),
               "log10_svals_smallest": [round(r, 3) for r in ratios[:8]],
               "relations": []}
 

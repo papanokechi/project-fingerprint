@@ -1441,3 +1441,29 @@ invisible to every check except printing the configuration and comparing it
 to what was intended.
 
 ---
+
+## L-041  Gap-based selection: replacing a misleading artefact with a self-diagnosing one
+
+sigma_ode.py originally selected null directions by a fixed tolerance of
+1e-(dps/2), and reported "12 null direction(s) at 1e-60" when exactly ONE is
+genuine. The arithmetic was not wrong -- the true vector was in the list, and
+L-036 identified it correctly by taking the smallest singular value -- but the
+printed artefact was misleading, and `out/sigma_ode.json` recorded n_null=12.
+A fixed threshold cannot know where the relation stops and the conditioning
+tail starts.
+
+Replaced by selection on the largest spectral gap, which also RAISES if the
+largest gap is under 10 decades ("conditioning-limited, not
+information-limited"). Re-run reproduces the identical spectrum and now
+reports:
+
+    1 genuine null direction(s), selected by a spectral gap of 45.5 decades
+
+This is the same failure genus as L-025 and L-040(7): the result was right
+and the reported configuration was wrong, which is invisible to any check
+except reading the output and comparing it to what was meant. Recording it
+because Phase 1 will run this same nullspace machinery on relations whose
+correct rank is NOT known in advance, and there a fixed tolerance would not
+merely mislabel -- it would silently manufacture relations.
+
+---
