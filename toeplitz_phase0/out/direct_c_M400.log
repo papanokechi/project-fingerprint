@@ -1,0 +1,20 @@
+[cfg] 200 nonzero derived coefficients, max order 400; dps=400 (working precision only -- NOT the claimed accuracy)
+
+      s  cert.dig    M*      E_trunc       E_data  c (first 60 digits)
+  100.0   177.295   198     4.39e-90    5.07e-178  -0.438501166054690678523656303940160547619150796475584079822844
+  120.0   183.715   238   1.555e-107   1.928e-184  -0.438501166054690678523656303940160547619150796475584079822844
+  140.0   189.128   278   5.665e-125   7.447e-190  -0.438501166054690678523656303940160547619150796475584079822844
+  149.0   189.672   296   8.108e-133   2.128e-190  -0.438501166054690678523656303940160547619150796475584079822844
+
+[cross-s] pairwise |c(s_i) - c(s_j)| vs max(err_i, err_j)
+  s= 100.0 vs  120.0  diff=  3.648e-90  bar=   4.39e-90  ok
+  s= 100.0 vs  140.0  diff=  3.648e-90  bar=   4.39e-90  ok
+  s= 100.0 vs  149.0  diff=  3.648e-90  bar=   4.39e-90  ok
+  s= 120.0 vs  140.0  diff= 1.293e-107  bar= 1.555e-107  ok
+  s= 120.0 vs  149.0  diff= 1.293e-107  bar= 1.555e-107  ok
+  s= 140.0 vs  149.0  diff= 4.711e-125  bar= 5.665e-125  ok
+
+[best] s=149.0  M*=296  honest digits = 132.09
+[gate] |c_derived - ((1/12)log2 + 3 zeta'(-1))| = 6.74396e-133
+[gate] agreement: 131.81 digits   (claimable: 131.81)
+[out] out/direct_c.json

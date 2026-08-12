@@ -1157,3 +1157,287 @@ independent evidence about `c`. The zero coefficients are evidence about the
 instrument's selectivity, which is exactly what Phase 1 will depend on.
 
 ---
+
+## L-035  VERIFIED / STRUCTURAL  Citation correction: I was right on Krasovsky, cannot confirm the fourth proof, and the primary announces THREE authors not four
+
+Operator conceded the CMP 262 misattribution and reassigned that venue to
+Ehrhardt. Applying the discipline symmetrically, I did not accept the
+correction on their word either. Evidence, all from primary PDFs already
+downloaded (`ehr.pdf` = arXiv:math/0401205v2, `kras.pdf` = math/0401258v2):
+
+1. **Ehrhardt's venue remains UNCONFIRMED.** The arXiv API returns *no*
+   `journal_ref` field for math/0401205. I therefore cannot confirm CMP 262
+   (2006) 317-341 any more than I could confirm the operator's earlier CMP
+   272 (2007). Both are third-party claims. OPERATOR-SUPPLY item OS-11.
+   Note the operator has now given two different venues for Ehrhardt across
+   two messages; that is itself a reason to require a primary.
+
+2. **The third proof is announced by the primary, and the author list is
+   Deift-Its-Zhou, NOT Deift-Its-Krasovsky-Zhou.** Krasovsky's own
+   footnote 1, verbatim:
+
+     "As this paper was being prepared for publication, an announcement by
+      T. Ehrhardt claiming the same result as Theorem 1 (by a different
+      method) was posted on the internet. A third solution to the problem
+      by a Riemann-Hilbert approach (related to the present one) is in
+      preparation by P. Deift, A. Its, and X. Zhou."
+
+   So my earlier "unconfirmed by either primary" was too weak -- Krasovsky
+   *does* announce it. But the operator's correction ("Four authors, not
+   three") is contradicted by the primary announcement, which names three
+   and does not include Krasovsky. An author list can of course change
+   between announcement and publication, which is precisely why the
+   published paper is needed rather than inferred. OS-11 covers this too.
+   `arXiv` title/abstract search for "Widom-Dyson constant" returned zero
+   entries across four query forms, so I could not resolve it in-session.
+
+3. **What IS now primary-confirmed:** two independent proofs (Krasovsky by
+   orthogonal polynomials on an arc; Ehrhardt "by a different method",
+   independence attested by Krasovsky himself), plus a third in preparation
+   by RHP. That is the structure the operator described; only the fourth
+   paper's identity is unsettled.
+
+4. **A convention datapoint that costs nothing and pins everything.**
+   Ehrhardt's abstract and eq. (1) verbatim: `K_alpha` on `L^2[0,alpha]`
+   with kernel `sin(x-y)/(pi(x-y))` -- note NO `s` parameter, the interval
+   length carries it -- and the result is stated for `det(I - K_{2alpha})`,
+   i.e. the operator on `[0, 2alpha]`, length `2alpha`. Our kernel is
+   `sin(s(x-y))/(pi(x-y))` on `[-1,1]`; the substitution `u = s x` maps it
+   to `sin(u-v)/(pi(u-v))` on `[-s,s]`, length `2s`. Hence `alpha = s`
+   exactly, with no factor of 2 outstanding, confirming `a=-1/2, b=-1/4`.
+   This is the third independent route to the same normalisation (the
+   others being Krasovsky eq. (1)-(2) and the self-pinning argument of
+   L-026), and it is now derived rather than asserted.
+
+5. **Ehrhardt's abstract independently corroborates OS-9**: "The first and
+   second order asymptotics of this formula have already been proved and
+   higher order asymptotics have also been determined."
+
+**Standing correction to my own record:** L-026 stated the third proof was
+"unconfirmed by either primary". That was wrong -- I had the PDF in hand and
+had not searched it for the announcement. Logged as an instance of failing to
+interrogate evidence already in my possession, which is cheaper to fix than
+any of the compute-bound failures in this ledger and was missed anyway.
+
+---
+
+## L-036  VERIFIED  The sigma-form ODE, DISCOVERED from our own data rather than recalled
+
+The operator proposed subtracting known higher-order terms instead of
+extrapolating them away, and pointed out that if the Painleve-V series can
+supply everything except the constant, then the whole tail is derivable.
+Correct -- but writing the sigma-form ODE down from memory violates HARD
+RULE 1, and accepting it from the operator is the same violation one channel
+removed. So the ODE was not written down. It was DISCOVERED.
+
+**Method.** sigma(s) = s d/ds log det(I - K_s), with derivatives taken
+analytically from the Nystrom matrix, never by finite differences:
+
+    L'   = Tr(A^-1 A'),   L'' = Tr(A^-1 A'') - Tr(X^2),   X = A^-1 A'
+    L''' = Tr(A^-1 A''') - 3 Tr(A^-1 A'' X) + 2 Tr(X^3)
+
+exact because d^r/ds^r of sin(s d)/(pi d) is elementary. Validated against a
+central difference: agreement 5.4e-19, i.e. at the finite-difference
+truncation error, not at a bug.
+
+A design matrix was then built over all 70 monomials in (s, sigma, sigma',
+sigma'') of total degree <= 4, sampled at 82 values of s, and its nullspace
+taken.
+
+**First attempt failed, and failed informatively.** sigma ~ -s^2, so a
+degree-4 monomial spans s^8; sampling s over [0.5,23] gave a design matrix
+whose singular values decayed smoothly with NO gap, and the code reported 34
+"null directions" -- all conditioning noise. Row and column equilibration
+plus a narrow window s in [1,4] fixed it: the spectrum then showed
+log10 singular values of -122.06, -76.55, -74.54, ... i.e. ONE genuine null
+direction and a 45-order gap beneath the noise.
+
+**Result.** Of 70 monomials, exactly six carry non-noise coefficients, and
+all six are exact dyadic rationals; the other 64 sit at ~1e-49:
+
+    -1/2 sigma^2 + 1/8 sigma sigma'^2 + s sigma sigma' - 1/8 s sigma'^3
+    - 1/32 s^2 sigma''^2 - 1/2 s^2 sigma'^2  =  0
+
+Multiplying by -32 and grouping with u = s sigma' - sigma:
+
+    s^2 sigma''^2 + 16 u^2 + 4 u sigma'^2 = 0                        (*)
+
+**Out-of-sample confirmation** (sigma_ode_verify.py), at s far outside the
+discovery window [1,4], relative residual |R|/max|term|:
+
+    s=6   2.8e-79      s=9   1.6e-77     s=12  4.8e-75
+    s=20  5.2e-69      s=30  5.3e-60
+
+**Control, validated against its own resolution before being believed:** the
+same functional with 16 -> 16.0000000001 gives 6.2e-12 at both s=9 and s=20,
+some 48-65 orders above the unperturbed residual. The test has resolution to
+spare, so the near-zero result is evidence rather than an absence of it.
+
+Tag is VERIFIED, not STRUCTURAL: no theorem was cited. (*) is a statement
+about our own numerics, established at stated precision with a working
+control, and it is used below only to generate a tail that is then checked
+against independent data.
+
+---
+
+## L-037  PROVEN (conditional on L-036)  The tail is a recursion; odd orders vanish identically; e_2 = 1/32
+
+Substituting sigma(s) = -s^2 - 1/4 + sum_{m>=1} a_m s^-m into (*) and
+matching powers gives a triangular recursion. **No parity was assumed** --
+all m were carried.
+
+Implementation refused to guess twice, both times correctly:
+  - my first index offset was wrong and the code raised "equation vanished
+    identically" rather than solving something else. Replaced by a loop that
+    SCANS coefficients and picks up whichever unknown is newly present, and
+    raises if two appear at once (non-triangular) or if a quadratic branch
+    ambiguity appears.
+
+**Results.**
+
+    a_1 = 0     a_2 = -1/16     a_3 = 0     a_4 = -5/32     a_5 = 0
+    a_6 = -131/128    a_8 = -6575/512    a_10 = -1080091/4096   ...
+
+  1. **Every odd a_m vanishes identically, to m=400.** The even-only model
+     that fit_constant.py has assumed since revision 1 on numerical evidence
+     (ratio 0.035-0.047, L-029) is now a DERIVED consequence of (*), not a
+     fitted assumption. This is the one place in the project where an
+     evidence-backed modelling choice became a consequence.
+
+  2. **e_2 = 1/32 exactly.** IQ-2 conjectured this from a numerical pattern
+     and is hereby settled by derivation. All denominators are exact powers
+     of two.
+
+  3. The constant c does NOT appear anywhere in this recursion and cannot.
+     sigma = s (log det)' annihilates it. That is the structural reason the
+     constant needed a separate proof thirty years after the series, and it
+     is also why nothing here can be circular about c.
+
+**Two independent implementations.** sigma_recursion.py (sympy, symbolic)
+and sigma_recursion_fast.py (exact Fraction arithmetic, polynomial
+reconstruction by finite differences at a_m = 0,1,2 with an explicit raise if
+the quadratic part is nonzero) agree on all 30 shared even orders with ZERO
+mismatches. The fast path reached m=400 (200 orders) in 70 s after an
+optimisation that stopped recomputing (sigma')^2 over the full series length
+on every call -- a 400x speedup, from 200 s to 0.48 s at M=60.
+
+---
+
+## L-038  VERIFIED  c extracted with NO FIT at 132 digits; E1 is eliminated, not reduced
+
+With the tail exact, the entire Richardson apparatus becomes unnecessary:
+
+    c(s,M) = log det(s) + s^2/2 + (log s)/4 - sum_{m<=M} e_m s^-m
+
+No design matrix, no extrapolation, no fitted nuisance parameters, no
+conditioning wall (L-031), and no E1 budget line. c is read off as the
+integration constant of (*).
+
+**Optimal truncation is real and was predicted before it was measured.** The
+term ratio implies the series turns around at m* ~ 2s; at s=149 the code
+selected M* = 296 against a prediction of 298.
+
+    s      cert.dig   M*    E_trunc      E_data
+    100    177.3     198   4.39e-90     5.07e-178
+    120    183.7     238   1.56e-107    1.93e-184
+    140    189.1     278   5.67e-125    7.45e-190
+    149    189.7     296   8.11e-133    2.13e-190
+
+**The error bar is calibrated, and this is checkable in a way the fit's
+sigma_c never was.** Independent s values must agree to within the truncation
+bar, and they do -- consistently at ~80% of it:
+
+    |c(100)-c(120)| = 3.65e-90   vs bar 4.39e-90
+    |c(120)-c(140)| = 1.29e-107  vs bar 1.56e-107
+    |c(140)-c(149)| = 4.71e-125  vs bar 5.67e-125
+
+Three independent checks, all landing just inside a slightly conservative
+bar. Contrast L-028, where |Delta|/sigma_c over four revisions could not fix
+the scale to better than 2x.
+
+**Result: 132.09 honest digits, agreeing with (1/12)log2 + 3 zeta'(-1) to
+131.81 digits.**
+
+Previous best was 73 honest digits from a 224-point grid and ~4 h of fitting
+(L-033). This is from ONE data point, no fit, and ~70 s of recursion.
+
+**What this says about the entire preceding effort.** Revisions 1-5 bought
+36 -> 73 digits by buying grid points, and L-033 concluded the lever was
+s-location rather than point count. Both were true and both were the wrong
+axis. The binding constraint was never the data -- E_data was already
+1e-190 at s=149, some 117 digits better than the answer we were reporting.
+It was E1, the numerical annihilation of a tail that was analytically
+available the whole time. Every point purchased after revision 3 addressed
+the wrong budget line. The operator's instinct to attack E1 before selecting
+Phase 1 targets was right, and the honest accounting is that ~6 h of grid
+compute in this project bought 2 digits while 70 s of recursion bought 59.
+
+---
+
+## L-039  VERIFIED  The full 8-element basis is REPORTABLE, with five decoys silent
+
+The b=8 basis was the point of the exercise: it is the only basis here
+containing constants with no business in the answer, so it is the only basis
+whose silence carries information. It needed D ~ 77-78 (L-030) and was
+unreachable at 73 digits.
+
+    basis: 1, log2, logpi, gamma, zeta'(-1), zeta(3)/pi^2, Catalan, log(1+sqrt2)
+    P = 92   (>= 78 threshold; P+30 = 122 <= 132 honest digits)
+
+    relation at P=92:    [-12, 1, 0, 0, 36, 0, 0, 0]
+    relation at P+30:    [-12, 1, 0, 0, 36, 0, 0, 0]   IDENTICAL   (a) PASS
+    sup-norm 36 <= 10^4                                            (b) PASS
+    null control, perturbed c*(1+1e-20):  NO RELATION              (c) PASS
+    null control, random 30-digit:        NO RELATION              (c) PASS
+
+i.e. c = (1/12) log 2 + 3 zeta'(-1), with logpi, gamma, zeta(3)/pi^2,
+Catalan and log(1+sqrt2) ALL receiving coefficient exactly zero. Five
+opportunities to spend a spurious constant, none taken.
+
+**L-027 still applies and is not weakened.** log2 and zeta'(-1) remain in the
+basis by construction, so the hit itself is instrument validation, not
+independent evidence about c. What is new is the selectivity: the instrument
+now demonstrably declines five wrong answers at 92 digits. That, and not the
+hit, is what Phase 1 depends on.
+
+---
+
+## L-040  Bug taxonomy, entries 6-8. All three are mine, all from this segment.
+
+**(6) I violated my own newly promoted rule, in the file that cites it.**
+sigma_recursion_check.py compared derived coefficients to certified data and
+included a control perturbing e_2 by 1e-20. It printed results IDENTICAL to
+the unperturbed run at every point. Reason: at s=30 the truncation floor is
+1.3e-15 while a 1e-20 relative perturbation of e_2 moves the sum by 3.5e-25 --
+ten orders BELOW resolution. The control was switched off and reported PASS.
+This is exactly L-024, which I had promoted to a general rule and written
+into that file's own docstring. Fixed by choosing the perturbation FROM the
+measured floor (100x above it); it now degrades by ~99x as it should.
+Lesson: promoting a rule to the spec does not make you follow it. The control
+must compute its own resolution at runtime; a constant chosen by hand will
+eventually be below it.
+
+**(7) Silent basis shrink.** run_pslq_b8.py passed seven names to
+constants.basis_values, four of them misspelled. The function silently
+returns only the names it recognises. The run proceeded on a b=4 basis with
+zeta'(-1) ABSENT and reported "NO RELATION" -- a clean-looking negative that
+was structurally guaranteed. Caught only because b=4 was printed and looked
+wrong. Now guarded with an explicit missing-name check that refuses to run.
+Same genus as L-025: a correct-looking result from a silently wrong
+configuration.
+
+**(8) Vetting budget off by the bump.** P was chosen as honest_digits - 20 =
+110, satisfying P <= digits. But condition (a) re-runs the search at P+30 =
+140, which is ABOVE the 132 honest digits, so the reconfirmation searched our
+own noise and returned NO RELATION -- reporting "not reportable" for a
+relation that was correct and present. The constraint is
+P + bump <= honest_digits, not P <= honest_digits. Fixed; P=92 now
+reconfirms at 122 with identical coefficients.
+
+Note the direction of failure differs across these three: (6) and (7) fail
+REASSURINGLY (a control that cannot fire, a search that cannot hit), while
+(8) fails conservatively. Only the first two are dangerous, and both were
+invisible to every check except printing the configuration and comparing it
+to what was intended.
+
+---

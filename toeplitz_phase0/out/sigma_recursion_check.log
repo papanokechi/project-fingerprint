@@ -1,0 +1,16 @@
+[cfg] dps=120  derived orders M=10  nonzero e_m: [2, 4, 6, 8, 10]
+[cfg] c = -0.43850116605469067852365630394   (closed form; supplies ONLY the constant the ODE cannot see)
+
+       s     log10|resid - sum e_m s^-m|    log10|resid|   digits explained
+    30.0                     1.31621e-15      3.47707e-5               10.4
+    60.0                     3.11287e-19      8.68357e-6               13.4
+    89.0                     2.72814e-21      3.94583e-6               15.2
+   120.0                     7.54167e-23      2.17033e-6               16.5
+   149.0                     5.61073e-24      1.40767e-6               17.4
+
+[control] e_2 -> e_2*(1+1e-20); must degrade sharply
+    30.0                     1.31621e-15
+    60.0                     3.11287e-19
+    89.0                      2.7281e-21
+
+[out] out/sigma_recursion_check.json

@@ -306,3 +306,81 @@ grid, and they silently diverged once already (L-025). A regression test now
 makes the divergence loud (`test_smoke.test_grid_spec_matches_data`), but the
 duplication itself remains. The structurally correct fix is for one to be
 derived from the other. Deferred, not solved.
+
+---
+
+# STATUS UPDATE (this session, post-operator-message 2)
+
+Append-only. Earlier entries above are left exactly as written.
+
+## DISCHARGED
+
+**IQ-2 (`e_1 = 1/32`) -- SETTLED BY DERIVATION.** In our indexing the
+coefficient is `e_2`, and `e_2 = 1/32` exactly, from the recursion in L-037.
+It was previously a numerical pattern; it is now derived from the ODE of
+L-036, with exact rational arithmetic and two independent implementations
+agreeing.
+
+**IQ-7 (Painleve V / JMMS recursion) -- DISCHARGED, and it did not need the
+literature.** The concern was that writing the sigma-form ODE from memory
+violates HARD RULE 1. Resolved by DISCOVERING the ODE as a nullspace over our
+own high-precision data (L-036) and confirming it out of sample. The
+recursion then generated 200 exact even-order coefficients (m <= 400) in 70 s.
+Result: c to 132 honest digits with no fit at all (L-038).
+
+**OS-9 (higher-order asymptotic coefficients) -- NO LONGER NEEDED.** This
+asked the operator for the explicit higher-order coefficients, with the
+caveat that only a recursion would be worth having. We now generate them
+ourselves to arbitrary order in exact rational arithmetic. **Please do not
+spend effort sourcing this.** It is withdrawn as a request.
+
+Note for the record: Ehrhardt's abstract does state that "higher order
+asymptotics have also been determined" (L-035), so the literature values
+exist; we simply no longer need them, and deriving them in-session is
+strictly better than importing them, because an imported list would have been
+CONJECTURED-from-recall while these are derived and independently checked
+against certified data.
+
+## STILL OPEN
+
+**IQ-1 (growth of `e_m`) -- PARTIALLY ANSWERED, one piece left.** The measured
+ratio implies optimal truncation at `m* ~ 2s`, confirmed at s=149 where the
+code chose M* = 296 against a prediction of 298. What remains open is a
+closed-form statement of the growth (the data is consistent with
+`e_{m+2}/e_m ~ (m/2)^2`, which is CONJECTURED). Not blocking: the optimum is
+located numerically per point and cross-checked between s values.
+
+**IQ-3 (exponent 2 in the digit-loss law)** -- unchanged, and now much less
+important, since the fit whose conditioning it described is no longer on the
+critical path for c.
+
+## NEW OPERATOR-SUPPLY ITEMS
+
+**OS-11 -- Publication venues, and one author list.** Two specific gaps, both
+now blocking nothing but both needed before any STRUCTURAL tag is final:
+
+  (a) Ehrhardt, "Dyson's constant in the asymptotics of the Fredholm
+      determinant of the sine kernel". arXiv:math/0401205 carries NO
+      `journal_ref`. Two different venues have been suggested to me across
+      two messages (CMP 272 (2007), then CMP 262 (2006) 317-341). I cannot
+      confirm either from a primary source. What is the published venue?
+
+  (b) The fourth/third proof. Krasovsky's own footnote 1 announces "A third
+      solution to the problem by a Riemann-Hilbert approach ... is in
+      preparation by P. Deift, A. Its, and X. Zhou" -- THREE authors, not
+      including Krasovsky. A four-author paper (Deift, Its, Krasovsky, Zhou,
+      JCAM 202(1) 26-47, 2007) has been suggested to me. Author lists can
+      change between announcement and publication, so both may be correct.
+      What is the published author list and venue?
+
+  I state what I need, not what I think the value is: I have no independent
+  access to either and four arXiv query forms for the title returned nothing.
+
+**OS-12 -- Is the sigma-form ODE of L-036 the known JMMS/Painleve-V equation
+in our normalisation?** We derived `s^2 sigma''^2 + 16 u^2 + 4 u sigma'^2 = 0`
+with `u = s sigma' - sigma`, for `sigma = s (log det)'` with the kernel
+`sin(s(x-y))/(pi(x-y))` on `[-1,1]`. We do NOT need this answered -- the
+relation is independently verified to 79 digits out of sample and the
+downstream results do not depend on its provenance. It is worth asking only
+because a mismatch would be interesting: if the standard form differs by
+more than a rescaling, one of the two is wrong about something.

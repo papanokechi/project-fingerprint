@@ -134,3 +134,76 @@ now so that they cannot be relaxed later in the light of results.
    returned 0.024 digits/point against 0.448 digits/point for extending to
    high `s` — a factor of 19 — while actively degrading conditioning. Cost per
    point is the wrong figure of merit; digits per point is the right one.
+
+---
+
+# REVISION: digit budget after the fit-free extraction (L-036..L-039)
+
+Everything below supersedes the "required D" analysis above, which assumed
+digits had to be bought with grid points.
+
+## What changed
+
+`c` is no longer obtained by fitting. It is read off as the integration
+constant of a VERIFIED ODE after exact subtraction of a DERIVED tail, from a
+single data point. The budget that used to bind (E1, order truncation) no
+longer exists.
+
+    quantity            before          after
+    honest digits       73              132
+    cost                224 pts, ~4 h   1 pt, ~70 s
+    binding budget      E1 (truncation) truncation of the ASYMPTOTIC series
+    error bar           sigma_c, scale  calibrated: 3 cross-s checks land at
+                        unknown to 2x   ~80% of the predicted bar
+
+## Basis reachability, revised
+
+Required precision `D >= max(T, 31) + 33`, with T measured (L-030):
+
+    b       3    4    5    6    7    8
+    T      24   27   30   35   39   44
+    D      57   60   63   68   72   77
+
+At 132 honest digits, **every basis size up to b=8 is now reachable with
+>= 54 digits of margin**, and b=8 is confirmed REPORTABLE with all five
+decoy constants at coefficient zero (L-039).
+
+Extrapolating the measured T (concave, roughly +4 to +5 per element at
+b=7..8), 132 digits should support roughly b=14-16 before the spurious
+threshold binds. That is a large enough basis for a genuine Phase 1 search,
+and it is the first time in this project that basis size has not been the
+limiting factor.
+
+**This must be re-measured, not assumed.** T was fabricated once already by
+reading a law off too coarse a grid (L-030). The b>8 thresholds above are
+CONJECTURED extrapolation; measure them against random controls before
+relying on any of them.
+
+## How to buy more digits now, in cost order
+
+The old rule ("buy points at the largest s") is superseded for `c`-type
+extractions. The new ordering:
+
+  1. **More recursion orders** -- free until the asymptotic optimum `m* ~ 2s`
+     is reached. At s=149 that is m=298 and we are already there.
+  2. **Larger s** -- now the ONLY lever that raises the optimum, since
+     `m* ~ 2s` and the floor falls steeply with it. Going from s=149 to
+     s=300 should roughly double the achievable digits again. This requires
+     Nystrom at large s, which is the expensive direction, but ONE point
+     suffices -- not a grid.
+  3. **Higher certified precision per point** -- currently slack by ~57
+     digits (E_data 1e-190 vs truncation 1e-133), so worth nothing today.
+
+Note the inversion: entry condition #7 ("buy points at the largest s the
+budget allows") survives, but "points" is now singular. There is no grid.
+
+## Entry conditions: status
+
+Conditions 1-6 unchanged. Condition 7 amended as above. One condition is
+ADDED, arising from L-040:
+
+  **8. Every control must compute its own resolution at runtime and assert
+     that it exceeds the floor it is testing.** A hand-chosen perturbation
+     constant will eventually sit below resolution and the control will pass
+     by being switched off. This has now happened twice (L-024, L-040(6)),
+     the second time in a file whose docstring cited the first.

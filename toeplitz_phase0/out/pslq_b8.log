@@ -1,0 +1,16 @@
+[cfg] fit-free c has 132.09 honest digits; P=92, reconfirm at 122 <= 132 (margin 10)
+[cfg] basis (b=8 incl. 1): ['log2', 'logpi', 'gamma', "zeta'(-1)", 'zeta(3)/pi^2', 'Catalan', 'log(1+sqrt2)']
+    [pslq] TARGET c (P=92)              dps=92    maxcoeff=10000    -> [-12, 1, 0, 0, 36, 0, 0, 0]
+    [pslq] TARGET c (P+30=122)          dps=122   maxcoeff=10000    -> [-12, 1, 0, 0, 36, 0, 0, 0]
+
+[vet] found: {'reportable': True, 'relation': [-12, 1, 0, 0, 36, 0, 0, 0], 'reasons': ['(a) reconfirmed at P+30 with identical coefficients', '(b) sup-norm 36 <= 10000']}
+[vet] reconfirmed at P+30: None
+    [pslq] NULL-perturbed c*(1+1e-20)   dps=92    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random 30-digit constant dps=92    maxcoeff=10000    -> NO RELATION
+[controls] {
+  "perturbed": null,
+  "random": null,
+  "passed": true
+}
+
+[out] out/pslq_b8.json  out/pslq_calls_b8.json
