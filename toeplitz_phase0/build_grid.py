@@ -5,13 +5,18 @@ session is required, and no value is read from anywhere except a fresh
 evaluation of the determinant.  The grid layout below is the revision-3 layout
 recorded in ledger.md (L-015).
 
-Layout and why it is shaped this way (measured, see L-013):
-  * s in [30, 45] step 0.25   -- cheap points, each buying one correction order
-  * s in [45, 89] step 2      -- the range extension that bought the most
-                                 digits per point in revision 1
-  * s in [91, 149] step 2     -- further range extension; the extrapolation to
-                                 1/s^2 -> 0 is conditioning-limited, and
-                                 raising s_max/s_min is what relieves it
+Layout and why it is shaped this way (measured, see L-017):
+  * s in [30, 45] step 0.25   -- 61 points
+  * s in [45, 89] step 2      -- 22 further points
+  * s in [91, 149] step 1     -- 59 further points
+
+Total 142 points.  The controlling resource is the NUMBER of points, because
+each one buys one more correction order K and the extraction is order-limited
+rather than s_min-limited: refitting on s >= s_min for increasing s_min makes
+the answer monotonically worse, since dropping low-s points destroys orders
+faster than it improves per-order truncation (L-017).  The high-s blocks are
+nonetheless placed at large s because that is where points are cheap relative
+to the certified digits they yield, once the node count is chosen adaptively.
 
 Runtime is hours, not minutes.  `verify-fast` exists for the case where the
 certified grid is already present and only the analysis needs re-deriving.
@@ -26,7 +31,7 @@ import extend_adaptive as EA
 BLOCKS = [
     ("30", "45", "0.25"),
     ("45", "89", "2"),
-    ("91", "149", "2"),
+    ("91", "149", "1"),
 ]
 
 

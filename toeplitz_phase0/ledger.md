@@ -714,3 +714,43 @@ mode is a confident wrong number, so the controls are not overhead, they are
 the measurement.
 
 **No Phase 1 constant was attempted.**
+
+## L-025 — Reproducibility defect in the rebuild target, found and fixed post-closure
+
+**Tag: VERIFIED** (set equality checked exactly; see below)
+
+Closing check on the `data` target of `make verify`. `build_grid.BLOCKS`
+declared its third block as `s in [91, 149] step 2`, but the grid actually
+used for the revision-4 result was built in two passes — an odd sweep
+`93..149 step 2`, a smoke-test point at `s = 91`, and a later even sweep
+`92..148 step 2` (L-021). The union of those is every integer in `[91, 149]`,
+i.e. step 1, not step 2.
+
+Consequence had this not been caught: `verify` would have rebuilt a
+**113-point** grid and re-derived c to roughly 58 honest digits, while
+`ledger.md` claimed 71. The claim itself was never wrong — the *reproduction
+path* for it was. This is the same failure mode as L-009 and L-018: no
+exception, no warning, a plausible number that silently disagrees with the
+record.
+
+Fix: third block changed to `("91", "149", "1")`. Verified by generating the
+point set from `BLOCKS` symbolically and comparing to the certified grid on
+disk as sets of decimal strings:
+
+    BLOCKS would build: 142 points
+    grid on disk      : 142 points
+    in BLOCKS not on disk: []
+    on disk not in BLOCKS: []
+
+Exact set equality, both directions. The module docstring was also corrected:
+it justified the high-s blocks by "raising s_max/s_min relieves conditioning",
+which is the revision-1 reading that L-017 superseded. The measured reason is
+that the extraction is **order-limited**, and each additional point buys one
+more correction order.
+
+Note the asymmetry this exposes. `verify-fast` was run end to end (EXIT=0) and
+proves the analysis chain; the full `verify` has still never been executed,
+because it costs hours. What is established here is that its *specification*
+now matches the data that produced the claims — not that the run succeeds.
+That remains the one untested path in Phase 0, and it is recorded as such
+rather than asserted away.
