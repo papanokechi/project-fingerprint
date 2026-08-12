@@ -210,3 +210,99 @@ confident wrong verdict rather than an obvious failure:
 Recorded here because the same two failure modes will recur in Phase 1 with a
 different basis and a different target, and neither is detectable from the
 output of a single run.
+
+---
+
+# REVISION 3 — after operator message discharging OS-1 (2026-08-12)
+
+## OS-1 — DISCHARGED. See ledger L-026.
+
+The operator supplied the attribution, and this session verified it against
+primary text (arXiv API records; PDFs fetched and text-extracted locally).
+Both Krasovsky (arXiv:math/0401258v2) and Ehrhardt (arXiv:math/0401205v2)
+were quoted verbatim in L-026, the normalisation was checked term by term and
+matches this session's convention exactly, and the target form is upgraded
+CONJECTURED -> STRUCTURAL.
+
+Residual items from the discharge, NOT blocking:
+  * The operator cited Krasovsky as "CMP 262, 2006"; the arXiv record gives
+    Int. Math. Res. Not. 2004, no. 25, 1249-1272. The mathematics is
+    confirmed, the citation is not. Which does the operator wish to stand
+    behind?
+  * "Deift-Its-Krasovsky" as a third independent proof was not confirmed by
+    either primary consulted. Reference requested if it is to be cited.
+  * Ehrhardt's venue ("CMP 272, 2007") is uncontradicted but unconfirmed (no
+    journal_ref in the arXiv record).
+
+## OS-9 — Explicit higher-order coefficients of the sine-kernel expansion
+
+**Status: would remove E1 as the binding error term, IF the answer is a
+recursion rather than a finite list.**
+
+Ehrhardt's abstract states that "higher order asymptotics have also been
+determined", so explicit coefficients exist in the literature. What is needed
+is the coefficients themselves, in closed form, for
+
+```
+log det(I - K_s) = -s^2/2 - (1/4) log s + c + sum_{m>=1} e_m s^(-2m).
+```
+
+IMPORTANT QUALIFICATION, so that this is not over-valued. The current fit
+already annihilates s^-2 ... s^-272 numerically (K = 136, even-only; L-029).
+Supplying the first few `e_m` in closed form would therefore save a handful of
+orders out of 136 and is worth almost nothing. This item is only valuable if
+what is available is a **recursion or generating function for all m**, which
+would let the tail be subtracted exactly instead of extrapolated.
+
+State which of the two is available. A finite list of the first few
+coefficients should be marked as such, and this item closed as low-value.
+
+## OS-10 — Provenance columns for the Phase 1 triage table
+
+`phase1_triage.md` cannot be completed in-session. For each of the Fisher-
+Hartwig prefactor, the Jin-Korepin XX-chain additive constant, and the
+emptiness-formation-probability constant, the following are needed BEFORE
+target selection:
+  * how many digits the published value carries;
+  * whether the published value is proved, derived non-rigorously, or
+    conjectured;
+  * whether an independent second derivation exists;
+  * which constants the operator expects to appear in the closed form (this
+    fixes the basis size b, hence the required D via T(b) = 5b + 10).
+
+State what is needed, not what the value is believed to be.
+
+---
+
+## IQ-7 — Can the Painleve V representation generate the tail exactly?
+
+**Internal. This is the strongest available lever on E1 and it is untested.**
+
+Both primaries consulted in L-026 record (Ehrhardt, verbatim) that "Jimbo,
+Miwa, Mori and Sato showed that the function sigma(alpha) = alpha d/dalpha
+log det(I - K_alpha)" satisfies an ODE of Painleve V type. If that ODE admits
+a formal large-alpha series solution, its coefficients satisfy a RECURSION,
+and the entire correction tail becomes available in closed form to arbitrary
+order.
+
+That would change the character of the extraction completely: the correction
+series would be SUBTRACTED exactly rather than fitted, `e_m` would stop being
+nuisance parameters, and E1 — currently the binding budget line at 1.41e-72 —
+would be replaced by an error controlled only by where the asymptotic series
+is truncated at optimal order.
+
+It would also settle IQ-2 (`e_1 = 1/32`, currently CONJECTURED from the
+numerical fit) by derivation rather than by pattern, which would make it the
+session's first PROVEN coefficient.
+
+Not attempted here: deriving and verifying the recursion is a piece of
+symbolic work with its own failure modes, and Phase 0 is closed. Flagged as
+the first thing to try if Phase 1 is digit-starved.
+
+## IQ-8 — Two sources of truth for the grid
+
+`build_grid.BLOCKS` and `out/certified_data.json` independently encode the
+grid, and they silently diverged once already (L-025). A regression test now
+makes the divergence loud (`test_smoke.test_grid_spec_matches_data`), but the
+duplication itself remains. The structurally correct fix is for one to be
+derived from the other. Deferred, not solved.

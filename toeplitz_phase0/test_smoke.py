@@ -67,6 +67,49 @@ def test_spd_diagnostic():
     raise AssertionError("under-resolved grid did not trigger the SPD diagnostic")
 
 
+def test_grid_spec_matches_data():
+    """`build_grid.BLOCKS` must generate EXACTLY the grid in certified_data.json.
+
+    This test exists because of L-025.  The rebuild target declared a grid that
+    was not the grid the published claims were computed on -- a CORRECT claim
+    with a WRONG reproduction path.  That defect is invisible to every check
+    except actually running the hours-long rebuild and comparing, which is
+    precisely why it survived to be found by inspection.
+
+    The underlying fragility is that BLOCKS is a SECOND source of truth for the
+    grid, alongside the data file that extend_adaptive.py actually wrote.  Two
+    sources of truth silently diverge whenever the grid is extended.  This test
+    does not remove the duplication, it makes the divergence loud and immediate.
+
+    Skips (rather than fails) when the data file is absent, because `verify`
+    runs the smoke tests BEFORE building the grid from nothing.
+    """
+    import json
+    import os
+
+    import build_grid
+
+    if not os.path.exists("out/certified_data.json"):
+        print("  no certified_data.json yet -- skipped (from-scratch run)")
+        return
+
+    mp.dps = 30
+    want = set()
+    for a, b, st in build_grid.BLOCKS:
+        a, b, st = mp.mpf(a), mp.mpf(b), mp.mpf(st)
+        s = a
+        while s <= b + st / 10:
+            want.add(mp.nstr(+s, 20))
+            s += st
+    have = {r["s"] for r in json.load(open("out/certified_data.json"))["rows"]}
+
+    missing, extra = sorted(want - have), sorted(have - want)
+    print(f"  BLOCKS generates {len(want)} points; data file holds {len(have)}")
+    assert not missing, f"BLOCKS declares {len(missing)} points absent from data: {missing[:5]}"
+    assert not extra, f"data holds {len(extra)} points BLOCKS would never build: {extra[:5]}"
+    print("  rebuild spec and data agree exactly (set equality, both directions)")
+
+
 def bench():
     for (n, dps) in ((60, 60), (120, 120), (200, 160)):
         t = time.time()
@@ -78,5 +121,6 @@ if __name__ == "__main__":
     print("[gl rule]");         test_gl_rule()
     print("[parity identity]"); test_parity_identity()
     print("[spd diagnostic]");  test_spd_diagnostic()
+    print("[grid spec]");       test_grid_spec_matches_data()
     print("[timing]");          bench()
     print("ALL SMOKE TESTS PASSED")
