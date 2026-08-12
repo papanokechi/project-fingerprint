@@ -1,0 +1,70 @@
+==============================================================================
+PHASE 0.4  PSLQ HARNESS
+==============================================================================
+  honest digits in c            : 36
+  PSLQ precision P              : 33   (reconfirmation at P+30)
+  coefficient sup-norm threshold: 10000
+
+[1] basis constants recomputed at +30 digits
+    1              agrees to 33.0 digits
+    log2           agrees to 33.0 digits
+    logpi          agrees to 33.0 digits
+    gamma          agrees to 33.0 digits
+    zeta'(-1)      agrees to 33.0 digits
+    zeta(3)/pi^2   agrees to 33.0 digits
+    Catalan        agrees to 33.0 digits
+    log(1+sqrt2)   agrees to 33.0 digits
+    zeta'(-1) vs 1/12 - log(Glaisher): agrees to 43.47 digits
+
+------------------------------------------------------------------------------
+[basis of 8] ['1', 'log2', 'logpi', 'gamma', "zeta'(-1)", 'zeta(3)/pi^2', 'Catalan', 'log(1+sqrt2)']
+------------------------------------------------------------------------------
+  [2] spurious-relation threshold (random targets, blind to c)
+    [pslq] NULL-random(dps=10,trial=0)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=1)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=10,trial=2)  dps=10    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=15,trial=0)  dps=15    maxcoeff=10000    -> [1, 3, 2, 0, -3, -1, -14, -2, -1]
+    [pslq] NULL-random(dps=15,trial=1)  dps=15    maxcoeff=10000    -> [-1, -3, 3, 2, -1, 3, 5, 0, 1]
+    [pslq] NULL-random(dps=15,trial=2)  dps=15    maxcoeff=10000    -> [233, -231, -1, 0, -232, -231, -231, -1, -1]
+    [pslq] NULL-random(dps=20,trial=0)  dps=20    maxcoeff=10000    -> [-18, 10, 8, -3, -7, -26, -9, 15, -1]
+    [pslq] NULL-random(dps=20,trial=1)  dps=20    maxcoeff=10000    -> [-8, 5, 4, 5, 4, 0, 23, -20, 12]
+    [pslq] NULL-random(dps=20,trial=2)  dps=20    maxcoeff=10000    -> [-103, 212, -53, 57, 26, -166, -180, -222, 53]
+    [pslq] NULL-random(dps=25,trial=0)  dps=25    maxcoeff=10000    -> [47, -6, -11, 32, -72, -7, 119, -60, 9]
+    [pslq] NULL-random(dps=25,trial=1)  dps=25    maxcoeff=10000    -> [-69, 49, 37, 1, 9, 83, 7, -16, 54]
+    [pslq] NULL-random(dps=25,trial=2)  dps=25    maxcoeff=10000    -> [-17, -49, 74, 0, 22, 27, 22, 36, -26]
+    [pslq] NULL-random(dps=30,trial=0)  dps=30    maxcoeff=10000    -> [69, 122, -30, 62, 179, 10, 29, 47, -471]
+    [pslq] NULL-random(dps=30,trial=1)  dps=30    maxcoeff=10000    -> [-212, 115, -167, 93, 25, 42, 251, 99, 100]
+    [pslq] NULL-random(dps=30,trial=2)  dps=30    maxcoeff=10000    -> [99, -11, 355, -96, 4, -15, -225, -135, -129]
+    [pslq] NULL-random(dps=33,trial=0)  dps=33    maxcoeff=10000    -> [2102, -2235, 1744, -206, 1306, 3014, 1260, -4957, 3027]
+    [pslq] NULL-random(dps=33,trial=1)  dps=33    maxcoeff=10000    -> [-5960, -7270, 844, 9647, 7299, 6453, -3292, 6470, -4673]
+    [pslq] NULL-random(dps=33,trial=2)  dps=33    maxcoeff=10000    -> [1450, -1505, -1157, -772, 107, -426, 386, 784, -652]
+    [pslq] NULL-random(dps=40,trial=0)  dps=40    maxcoeff=10000    -> [-2996, 962, -3991, 312, 869, -2109, -1988, 4274, 2004]
+    [pslq] NULL-random(dps=40,trial=1)  dps=40    maxcoeff=10000    -> [2492, -617, -7200, 7186, -3385, 9384, -619, -2521, -366]
+    [pslq] NULL-random(dps=40,trial=2)  dps=40    maxcoeff=10000    -> [-2586, 1334, -1606, -5379, 3502, -2309, 2140, 1443, 7850]
+    [pslq] NULL-random(dps=50,trial=0)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=1)  dps=50    maxcoeff=10000    -> NO RELATION
+    [pslq] NULL-random(dps=50,trial=2)  dps=50    maxcoeff=10000    -> NO RELATION
+      dps=10    random targets=3 relations found=0
+      dps=15    random targets=3 relations found=3
+      dps=20    random targets=3 relations found=3
+      dps=25    random targets=3 relations found=3
+      dps=30    random targets=3 relations found=3
+      dps=33    random targets=3 relations found=3
+      dps=40    random targets=3 relations found=3
+      dps=50    random targets=3 relations found=0
+    -> lowest swept precision with NO spurious relation: 10
+  [3] gated search around c
+    [pslq] TARGET c (P=33)              dps=33    maxcoeff=10000    -> [-12, 0, 1, 0, 0, 36, 0, 0, 0]
+    [pslq] TARGET c (P+30=63)           dps=63    maxcoeff=10000    -> NO RELATION
+  [4] null controls
+    [pslq] NULL-perturbed c*(1+1e-20)   dps=33    maxcoeff=10000    -> [-478, 374, 303, -760, -111, 54, 819, -400, 472]
+    [pslq] NULL-random 30-digit constant dps=33    maxcoeff=10000    -> [398, -611, 544, -93, 103, 298, -671, 115, -189]
+    null controls FAIL
+    relation: -12*c +1*log2 +36*zeta'(-1) = 0
+    residual: 8.63479e-36
+
+  >>> NOT reportable at this basis size; shrinking basis per the pre-declared nesting.
+
+------------------------------------------------------------------------------
+[basis of 6] ['1', 'log2', 'logpi', 'gamma', "zeta'(-1)", 'zeta(3)/pi^2']
+------------------------------------------------------------------------------

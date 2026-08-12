@@ -1,0 +1,392 @@
+{
+ "node": {
+  "10": [
+   {
+    "n": 10,
+    "n_over_s": 1.0,
+    "abs_err": null,
+    "digits": null,
+    "diagnostic": "Cholesky pivot 4 non-positive (-8.80298022643747952524829451959973936567100870170742333314610147837962708459958023674427197620147836909138653277672242820658291705973559656901621056288984042151662895566833685595645903904310133608344657059421e-06)"
+   },
+   {
+    "n": 16,
+    "n_over_s": 1.5,
+    "abs_err": "0.000992294",
+    "digits": "3.00336",
+    "diagnostic": null
+   },
+   {
+    "n": 20,
+    "n_over_s": 2.0,
+    "abs_err": "1.31012e-8",
+    "digits": "7.88269",
+    "diagnostic": null
+   },
+   {
+    "n": 24,
+    "n_over_s": 2.5,
+    "abs_err": "4.35093e-14",
+    "digits": "13.3614",
+    "diagnostic": null
+   },
+   {
+    "n": 30,
+    "n_over_s": 3.0,
+    "abs_err": "2.97485e-23",
+    "digits": "22.5265",
+    "diagnostic": null
+   },
+   {
+    "n": 36,
+    "n_over_s": 3.5,
+    "abs_err": "2.22686e-33",
+    "digits": "32.6523",
+    "diagnostic": null
+   },
+   {
+    "n": 40,
+    "n_over_s": 4.0,
+    "abs_err": "1.37081e-40",
+    "digits": "39.863",
+    "diagnostic": null
+   },
+   {
+    "n": 44,
+    "n_over_s": 4.5,
+    "abs_err": "3.96211e-48",
+    "digits": "47.4021",
+    "diagnostic": null
+   }
+  ],
+  "20": [
+   {
+    "n": 20,
+    "n_over_s": 1.0,
+    "abs_err": null,
+    "digits": null,
+    "diagnostic": "Cholesky pivot 6 non-positive (-5.05601984441801688275057425486651694167505215231043843872451999070168816165889854746622274760474431295479865535774001696031104983929918263024609450892192119352316896253933198140426555209233363444968147170816e-05)"
+   },
+   {
+    "n": 30,
+    "n_over_s": 1.5,
+    "abs_err": "0.0115375",
+    "digits": "1.93789",
+    "diagnostic": null
+   },
+   {
+    "n": 40,
+    "n_over_s": 2.0,
+    "abs_err": "2.10602e-14",
+    "digits": "13.6765",
+    "diagnostic": null
+   },
+   {
+    "n": 50,
+    "n_over_s": 2.5,
+    "abs_err": "4.62053e-28",
+    "digits": "27.3353",
+    "diagnostic": null
+   },
+   {
+    "n": 60,
+    "n_over_s": 3.0,
+    "abs_err": "2.60457e-43",
+    "digits": "42.5843",
+    "diagnostic": null
+   },
+   {
+    "n": 70,
+    "n_over_s": 3.5,
+    "abs_err": "6.4831e-60",
+    "digits": "59.1882",
+    "diagnostic": null
+   },
+   {
+    "n": 80,
+    "n_over_s": 4.0,
+    "abs_err": "1.07058e-77",
+    "digits": "76.9704",
+    "diagnostic": null
+   },
+   {
+    "n": 90,
+    "n_over_s": 4.5,
+    "abs_err": "1.60821e-96",
+    "digits": "95.7937",
+    "diagnostic": null
+   }
+  ],
+  "30": [
+   {
+    "n": 30,
+    "n_over_s": 1.0,
+    "abs_err": null,
+    "digits": null,
+    "diagnostic": "Cholesky pivot 9 non-positive (-2.14262788786875677055761990438982523793541756850178417047895387435286330409479911150901434775357412375648467913174496273359729634455778323063589220700985026715949158791670202175784082372429254745200522399935e-05)"
+   },
+   {
+    "n": 44,
+    "n_over_s": 1.5,
+    "abs_err": "0.116213",
+    "digits": "0.934744",
+    "diagnostic": null
+   },
+   {
+    "n": 60,
+    "n_over_s": 2.0,
+    "abs_err": "3.83172e-20",
+    "digits": "19.4166",
+    "diagnostic": null
+   },
+   {
+    "n": 76,
+    "n_over_s": 2.5,
+    "abs_err": "5.6213e-42",
+    "digits": "41.2502",
+    "diagnostic": null
+   },
+   {
+    "n": 90,
+    "n_over_s": 3.0,
+    "abs_err": "2.59247e-63",
+    "digits": "62.5863",
+    "diagnostic": null
+   },
+   {
+    "n": 104,
+    "n_over_s": 3.5,
+    "abs_err": "1.98522e-86",
+    "digits": "85.7022",
+    "diagnostic": null
+   },
+   {
+    "n": 120,
+    "n_over_s": 4.0,
+    "abs_err": "9.53424e-115",
+    "digits": "114.021",
+    "diagnostic": null
+   },
+   {
+    "n": 136,
+    "n_over_s": 4.5,
+    "abs_err": "7.50164e-145",
+    "digits": "144.125",
+    "diagnostic": null
+   }
+  ],
+  "40": [
+   {
+    "n": 40,
+    "n_over_s": 1.0,
+    "abs_err": null,
+    "digits": null,
+    "diagnostic": "Cholesky pivot 11 non-positive (-3.38263109426070442476450093505826903846060274283138512325121569495765981803714515111248795071163296740419455004355408392255983871352041793005913209604232350260163577284089517267726512149129942804816417507845e-06)"
+   },
+   {
+    "n": 60,
+    "n_over_s": 1.5,
+    "abs_err": "0.0126743",
+    "digits": "1.89708",
+    "diagnostic": null
+   },
+   {
+    "n": 80,
+    "n_over_s": 2.0,
+    "abs_err": "7.35804e-26",
+    "digits": "25.1332",
+    "diagnostic": null
+   },
+   {
+    "n": 100,
+    "n_over_s": 2.5,
+    "abs_err": "5.70678e-53",
+    "digits": "52.2436",
+    "diagnostic": null
+   },
+   {
+    "n": 120,
+    "n_over_s": 3.0,
+    "abs_err": "2.7265e-83",
+    "digits": "82.5644",
+    "diagnostic": null
+   },
+   {
+    "n": 140,
+    "n_over_s": 3.5,
+    "abs_err": "2.40814e-116",
+    "digits": "115.618",
+    "diagnostic": null
+   },
+   {
+    "n": 160,
+    "n_over_s": 4.0,
+    "abs_err": "8.97842e-152",
+    "digits": "151.047",
+    "diagnostic": null
+   },
+   {
+    "n": 180,
+    "n_over_s": 4.5,
+    "abs_err": "7.66043e-170",
+    "digits": "169.116",
+    "diagnostic": null
+   }
+  ]
+ },
+ "dps": {
+  "10": [
+   {
+    "dps": 60,
+    "abs_err": "6.98193e-56",
+    "digits": "55.156",
+    "digit_loss": "4.844",
+    "diagnostic": null
+   },
+   {
+    "dps": 80,
+    "abs_err": "6.48906e-75",
+    "digits": "74.1878",
+    "digit_loss": "5.8122",
+    "diagnostic": null
+   },
+   {
+    "dps": 100,
+    "abs_err": "3.8041e-95",
+    "digits": "94.4197",
+    "digit_loss": "5.5803",
+    "diagnostic": null
+   },
+   {
+    "dps": 120,
+    "abs_err": "8.66777e-115",
+    "digits": "114.062",
+    "digit_loss": "5.9379",
+    "diagnostic": null
+   },
+   {
+    "dps": 140,
+    "abs_err": "1.45957e-135",
+    "digits": "134.836",
+    "digit_loss": "5.1642",
+    "diagnostic": null
+   }
+  ],
+  "20": [
+   {
+    "dps": 60,
+    "abs_err": "2.12749e-47",
+    "digits": "46.6721",
+    "digit_loss": "13.328",
+    "diagnostic": null
+   },
+   {
+    "dps": 80,
+    "abs_err": "1.23168e-66",
+    "digits": "65.9095",
+    "digit_loss": "14.09",
+    "diagnostic": null
+   },
+   {
+    "dps": 100,
+    "abs_err": "3.05531e-87",
+    "digits": "86.5149",
+    "digit_loss": "13.485",
+    "diagnostic": null
+   },
+   {
+    "dps": 120,
+    "abs_err": "8.82978e-107",
+    "digits": "106.054",
+    "digit_loss": "13.946",
+    "diagnostic": null
+   },
+   {
+    "dps": 140,
+    "abs_err": "5.46101e-127",
+    "digits": "126.263",
+    "digit_loss": "13.737",
+    "diagnostic": null
+   }
+  ],
+  "30": [
+   {
+    "dps": 60,
+    "abs_err": "2.47072e-38",
+    "digits": "37.6072",
+    "digit_loss": "22.393",
+    "diagnostic": null
+   },
+   {
+    "dps": 80,
+    "abs_err": "6.39646e-58",
+    "digits": "57.1941",
+    "digit_loss": "22.806",
+    "diagnostic": null
+   },
+   {
+    "dps": 100,
+    "abs_err": "3.83542e-78",
+    "digits": "77.4162",
+    "digit_loss": "22.584",
+    "diagnostic": null
+   },
+   {
+    "dps": 120,
+    "abs_err": "8.85437e-98",
+    "digits": "97.0528",
+    "digit_loss": "22.947",
+    "diagnostic": null
+   },
+   {
+    "dps": 140,
+    "abs_err": "8.64228e-118",
+    "digits": "117.063",
+    "digit_loss": "22.937",
+    "diagnostic": null
+   }
+  ],
+  "40": [
+   {
+    "dps": 60,
+    "abs_err": "7.05039e-30",
+    "digits": "29.1518",
+    "digit_loss": "30.848",
+    "diagnostic": null
+   },
+   {
+    "dps": 80,
+    "abs_err": "2.51276e-49",
+    "digits": "48.5998",
+    "digit_loss": "31.4",
+    "diagnostic": null
+   },
+   {
+    "dps": 100,
+    "abs_err": "5.60603e-71",
+    "digits": "70.2513",
+    "digit_loss": "29.749",
+    "diagnostic": null
+   },
+   {
+    "dps": 120,
+    "abs_err": "8.52596e-90",
+    "digits": "89.0693",
+    "digit_loss": "30.931",
+    "diagnostic": null
+   },
+   {
+    "dps": 140,
+    "abs_err": "4.19598e-111",
+    "digits": "110.377",
+    "digit_loss": "29.623",
+    "diagnostic": null
+   }
+  ]
+ },
+ "cross": {
+  "gl_exactness": "1.14794e-41",
+  "parity_factorisation": "1.49675e-48",
+  "backend_agreement": "3.77191e-106"
+ },
+ "wall_seconds": 147.4
+}
