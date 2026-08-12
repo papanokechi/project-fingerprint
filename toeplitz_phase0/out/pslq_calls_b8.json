@@ -1,0 +1,92 @@
+[
+ {
+  "kind": "TARGET c (P=92)",
+  "dps": 92,
+  "tol": "1e-84",
+  "maxcoeff": 10000,
+  "maxsteps": 1000000,
+  "basis": [
+   "log2",
+   "logpi",
+   "gamma",
+   "zeta'(-1)",
+   "zeta(3)/pi^2",
+   "Catalan",
+   "log(1+sqrt2)"
+  ],
+  "result": [
+   -12,
+   1,
+   0,
+   0,
+   36,
+   0,
+   0,
+   0
+  ],
+  "note": ""
+ },
+ {
+  "kind": "TARGET c (P+30=122)",
+  "dps": 122,
+  "tol": "1e-114",
+  "maxcoeff": 10000,
+  "maxsteps": 1000000,
+  "basis": [
+   "log2",
+   "logpi",
+   "gamma",
+   "zeta'(-1)",
+   "zeta(3)/pi^2",
+   "Catalan",
+   "log(1+sqrt2)"
+  ],
+  "result": [
+   -12,
+   1,
+   0,
+   0,
+   36,
+   0,
+   0,
+   0
+  ],
+  "note": ""
+ },
+ {
+  "kind": "NULL-perturbed c*(1+1e-20)",
+  "dps": 92,
+  "tol": "1e-84",
+  "maxcoeff": 10000,
+  "maxsteps": 1000000,
+  "basis": [
+   "log2",
+   "logpi",
+   "gamma",
+   "zeta'(-1)",
+   "zeta(3)/pi^2",
+   "Catalan",
+   "log(1+sqrt2)"
+  ],
+  "result": null,
+  "note": ""
+ },
+ {
+  "kind": "NULL-random 30-digit constant",
+  "dps": 92,
+  "tol": "1e-84",
+  "maxcoeff": 10000,
+  "maxsteps": 1000000,
+  "basis": [
+   "log2",
+   "logpi",
+   "gamma",
+   "zeta'(-1)",
+   "zeta(3)/pi^2",
+   "Catalan",
+   "log(1+sqrt2)"
+  ],
+  "result": null,
+  "note": ""
+ }
+]

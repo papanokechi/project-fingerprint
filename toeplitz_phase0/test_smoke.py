@@ -124,3 +124,72 @@ if __name__ == "__main__":
     print("[grid spec]");       test_grid_spec_matches_data()
     print("[timing]");          bench()
     print("ALL SMOKE TESTS PASSED")
+
+
+def test_sigma_ode_holds_out_of_sample():
+    """L-036: the discovered ODE must hold far outside its discovery window.
+
+    Cheap version of sigma_ode_verify.py: one point at s=6, which took no
+    part in the nullspace search (window was s in [1,4]).
+    """
+    from mpmath import mp
+    import sigma_ode
+    old = mp.dps
+    try:
+        mp.dps = 50
+        s = mp.mpf(6)
+        sig, sig1, sig2 = sigma_ode.sigma_data(s, 50)
+        u = s * sig1 - sig
+        t1 = s ** 2 * sig2 ** 2
+        t2 = 16 * u ** 2
+        t3 = 4 * u * sig1 ** 2
+        rel = abs(t1 + t2 + t3) / max(abs(t1), abs(t2), abs(t3))
+        assert rel < mp.mpf(10) ** -40, f"sigma ODE residual {mp.nstr(rel,5)}"
+    finally:
+        mp.dps = old
+
+
+def test_recursion_parity_and_first_coefficient():
+    """L-037: odd orders vanish and e_2 = 1/32 exactly, by derivation."""
+    from fractions import Fraction as F
+    import sigma_recursion_fast as SRF
+    res = SRF.solve(12, verbose=False)
+    got = dict(res)
+    assert all(m % 2 == 0 for m in got), "odd order appeared in even-only solve"
+    assert got[2] == F(-1, 16), f"a_2 = {got[2]}, expected -1/16"
+    e2 = -got[2] / 2
+    assert e2 == F(1, 32), f"e_2 = {e2}, expected 1/32 (settles IQ-2)"
+
+
+def test_recursion_matches_certified_data():
+    """L-038: derived coefficients must predict independent determinant data.
+
+    Nothing in the recursion was fitted to certified_data.json, so this is a
+    genuine out-of-sample prediction rather than a consistency check.
+    """
+    import json
+    import os
+    from fractions import Fraction as F
+    from mpmath import mp
+    if not os.path.exists("out/certified_data.json"):
+        return  # verify builds this later; do not fail a from-nothing run
+    import sigma_recursion_fast as SRF
+    old = mp.dps
+    try:
+        mp.dps = 120
+        coeffs = {m: v for m, v in SRF.solve(20, verbose=False)}
+        rows = json.load(open("out/certified_data.json"))["rows"]
+        r = max(rows, key=lambda q: mp.mpf(q["s"]))
+        s = mp.mpf(r["s"])
+        L = mp.mpf(r["value"])
+        c = mp.log(2) / 12 + 3 * mp.zeta(-1, derivative=1)
+        resid = L - (-s ** 2 / 2 - mp.log(s) / 4 + c)
+        pred = mp.mpf(0)
+        for m, a in coeffs.items():
+            e = -a / m
+            pred += (mp.mpf(e.numerator) / mp.mpf(e.denominator)) * s ** (-m)
+        # 20 orders at s>=149 must explain the residual to well beyond 1e-30
+        assert abs(resid - pred) < mp.mpf(10) ** -30, \
+            f"tail prediction off by {mp.nstr(abs(resid - pred), 5)}"
+    finally:
+        mp.dps = old

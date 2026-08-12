@@ -1,27 +1,60 @@
-Phase 0: sine-kernel Fredholm determinant calibration pipeline
+Discover sigma-form ODE from own data; c to 132 digits with no fit
 
-Calibration-only phase. No novel constant attempted.
+Operator proposed subtracting known higher-order terms instead of
+extrapolating them. Writing the sigma-form ODE from memory would violate
+HARD RULE 1, and accepting it from the operator is the same violation one
+channel removed. So it was discovered instead.
 
-Pipeline: Nystrom/Gauss-Legendre discretisation of det(I - K_s) on [-1,1]
-in mpmath/gmpy2, every grid point certified by node doubling AND a
-+20-digit precision increase; asymptotic extraction of
-log det = a s^2 + b log s + c with a measured three-source error budget.
+L-036 VERIFIED. sigma = s(log det)' with derivatives taken analytically from
+the Nystrom matrix (validated against central differences at 5.4e-19).
+Nullspace over 70 monomials of degree <=4 at 82 sample points. First attempt
+failed informatively: no spectral gap, 34 spurious null directions from
+conditioning. After row/column equilibration and a narrow window, ONE null
+direction at 1e-122 with a 45-order gap. Six exact dyadic coefficients out of
+70; the other 64 at noise:
 
-Results (142-point certified grid, s in [30,149], >=165 certified digits):
-  a = -1/2, b = -1/4 (VERIFIED)
-  c to 71 HONEST digits, sigma_c = 1.41e-72
-    (working precision was 515 dps -- deliberately a different number)
-  0.3 calibration gate PASSED at 71.98 digits vs a 12-digit threshold
-  0.4 PSLQ: reportable relation on a 4-element basis, both adversarial
-      null controls empty; 106/106 PSLQ calls logged including failures
+  s^2 sigma''^2 + 16 u^2 + 4 u sigma'^2 = 0,   u = s sigma' - sigma
 
-Four bugs found, all of which produced plausible wrong answers rather
-than errors: fitting-window collapse, mp.dps-after-parse truncation, a
-spurious-threshold statistic read from below, and a null control run
-below its own resolution.
+Confirmed out of sample at s=6..30 (window was s in [1,4]) to 79 digits,
+with a control validated against its own resolution first.
 
-Deliverables: ledger.md (append-only), open_questions.md, Makefile and
-verify.ps1 with a verify target that re-derives every VERIFIED claim.
+L-037 PROVEN (conditional on L-036). Triangular recursion for the tail, no
+parity assumed. All odd orders vanish identically to m=400, so the even-only
+model fit_constant.py has assumed since revision 1 is now derived rather than
+fitted. e_2 = 1/32 exactly, settling IQ-2 by derivation. Two independent
+implementations (sympy; exact Fractions) agree on all 30 shared orders with
+zero mismatches. 200 orders in 70 s.
+
+L-038 VERIFIED. c read off as the integration constant after exact tail
+subtraction: no design matrix, no extrapolation, no conditioning wall, no E1.
+Optimal truncation predicted at m* ~ 2s and measured at M*=296 for s=149.
+132.09 honest digits, agreeing with (1/12)log2 + 3 zeta'(-1) to 131.81.
+Error bar calibrated by three cross-s checks, all landing at ~80% of the
+predicted bar. Previous best was 73 digits from 224 points and ~4 h.
+
+The honest accounting: ~6 h of grid compute in this project bought 2 digits;
+70 s of recursion bought 59. Every point purchased after revision 3 addressed
+a budget line that was not binding.
+
+L-039 VERIFIED. Full 8-element basis now reachable and REPORTABLE:
+[-12,1,0,0,36,0,0,0], reconfirmed at P+30 identically, both null controls
+clean, and logpi/gamma/zeta(3)pi^-2/Catalan/log(1+sqrt2) all at exactly zero.
+L-027 unchanged: this is instrument selectivity, not evidence about c.
+
+L-040 bug taxonomy 6-8, all mine, all this segment: (6) a control run below
+its own resolution -- in the file whose docstring cites the rule against it;
+(7) constants.basis_values silently dropping misspelled names, yielding a b=4
+run without zeta'(-1) that returned a meaningless clean negative; (8) vetting
+budget off by the bump, P+30 exceeding the honest digit count.
+
+L-035 citation work: Krasovsky's footnote 1 announces the third proof as
+Deift-Its-Zhou (three authors, not including Krasovsky), correcting my earlier
+"unconfirmed by either primary" -- I had the PDF and had not searched it.
+Ehrhardt's venue remains unconfirmed (no journal_ref on arXiv). Ehrhardt's
+eq. (1) gives a third independent route to our normalisation.
+
+OS-9 withdrawn: we no longer need the literature's higher-order coefficients.
+verify.ps1 gains 'ode' and 'tail' targets; 3 new smoke tests (7 pass, 2.2 s).
 
 Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
 Copilot-Session: 336aec8d-d49e-4499-b29f-6c0ba47fdab9

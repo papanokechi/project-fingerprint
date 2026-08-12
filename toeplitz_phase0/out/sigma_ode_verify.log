@@ -1,0 +1,13 @@
+[cfg] dps=80  discovery window was s in [1,4]
+       s  nodes      |R|/scale                       sigma
+       6     60    2.81914e-79  -36.251891748974822989772918
+       9     70    1.55573e-77  -81.250797776471984482733652
+      12     80    4.79567e-75  -144.25044194124658931308735
+      20    110    5.19925e-69  -400.25015724308330546015285
+      30    150    5.29924e-60  -900.25006963876960673436156
+
+[control] same points, coefficient 16 -> 16.0000000001
+       9     70    6.23065e-12   <- must be >> the row above
+      20    110    6.24609e-12   <- must be >> the row above
+
+[out] out/sigma_ode_verify.json

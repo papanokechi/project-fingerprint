@@ -1,0 +1,23 @@
+{
+  "P": 92,
+  "honest_digits": 132.09106333881527,
+  "basis": [
+    "log2",
+    "logpi",
+    "gamma",
+    "zeta'(-1)",
+    "zeta(3)/pi^2",
+    "Catalan",
+    "log(1+sqrt2)"
+  ],
+  "vet": {
+    "reportable": "True",
+    "relation": "[-12, 1, 0, 0, 36, 0, 0, 0]",
+    "reasons": "['(a) reconfirmed at P+30 with identical coefficients', '(b) sup-norm 36 <= 10000']"
+  },
+  "controls": {
+    "perturbed": "None",
+    "random": "None",
+    "passed": "True"
+  }
+}
