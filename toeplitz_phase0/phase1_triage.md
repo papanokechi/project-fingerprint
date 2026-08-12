@@ -32,6 +32,11 @@ spuriously "exact" linear law and is superseded):**
 |---|---|---|---|---|---|---|
 | measured T | 24 | 27 | 30 | 35 | 39 | 44 |
 
+A second, independent run of the same measurement inside `run_pslq.py`
+(different sweep list, hence a different random-target sequence) returned
+T = 35 at b = 6 and **45** at b = 8. T is a small-sample estimate of the edge
+of a stochastic phenomenon, reproducible to about +/-1, not a constant.
+
 Increments are 3, 3, 5, 4, 5 — **concave, not linear**. The earlier claim
 `T(b) = 5b + 10` is FALSIFIED (it predicts 45 at b = 7; the measurement is 39)
 and its apparent zero residual was an artefact of a sweep spaced by 5, equal
@@ -41,18 +46,18 @@ table.
 
 Consequences, and this is the Phase 1 entry condition:
 
-| basis size b | T(b) | required honest digits D |
-|---|---|---|
-| 4  | 27 | 64 |
-| 6  | 35 | 68 |
-| 7  | 39 | 72 |
-| 8  | 44 | **77** |
-| 10 | **UNMEASURABLE** | unknown |
-| 12 | **UNMEASURABLE** | unknown |
+| basis size b | T(b) | required honest digits D | status at D = 73 |
+|---|---|---|---|
+| 4  | 27 | 64 | reportable |
+| 6  | 35 | 68 | **REPORTABLE (achieved, L-034)** |
+| 7  | 39 | 72 | reachable |
+| 8  | 44-45 | **77-78** | 5 short |
+| 10 | **UNMEASURABLE** | unknown | — |
+| 12 | **UNMEASURABLE** | unknown | — |
 
-Current capability: **D = 71** (142-point grid). That clears b = 6, and falls
-**6 digits short of the full 8-element basis** — not 12, as the falsified law
-implied.
+Current capability: **D = 73** (224-point grid, L-033). That clears b = 6 —
+achieved and reported — and falls about 5 digits short of the full 8-element
+basis.
 
 CAVEATS, stated because the table above is the thing most likely to be misused:
 * **T cannot be measured at b > 8 at all with the present basis, which has
@@ -124,3 +129,8 @@ now so that they cannot be relaxed later in the light of results.
 6. It is stated in advance which basis the target is expected to decompose in,
    and it is acknowledged in writing that a hit in that basis is
    harness-confirmation, not independent evidence (L-027).
+7. Grid points are bought at the largest `s` the certification budget allows,
+   not at the cheapest `s` (L-033). Densifying an already-sampled region
+   returned 0.024 digits/point against 0.448 digits/point for extending to
+   high `s` — a factor of 19 — while actively degrading conditioning. Cost per
+   point is the wrong figure of merit; digits per point is the right one.

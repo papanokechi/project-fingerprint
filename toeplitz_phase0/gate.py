@@ -5,10 +5,21 @@ Tests the extracted constant c against the candidate closed form
     c  =?=  (1/12) log 2 + 3 zeta'(-1)
 
 supplied by the operator in the task statement.  Both pieces are COMPUTED here
-by mpmath; nothing is transcribed.  The *form* of the candidate is tagged
-CONJECTURED and stays that way until the operator confirms the reference
-(Dyson / Widom, with rigorous proof attributed to Krasovsky and to
-Deift-Its-Krasovsky) -- see open_questions.md, item OS-1.
+by mpmath; nothing is transcribed.
+
+The *form* of the candidate was tagged CONJECTURED for most of this session,
+on the rule that a value entering from the prompt is not evidence.  OS-1 has
+since been discharged (ledger L-026): the operator confirmed the reference,
+and the session independently fetched the primary text of Krasovsky
+(arXiv:math/0401258v2, eq. 1-2) and Ehrhardt (arXiv:math/0401205v2), quoted
+both verbatim, and checked the normalisation term by term against this
+session's convention.  The form is therefore now tagged STRUCTURAL.
+
+Note that the normalisation does not actually rest on that check: since
+b = -1/4, an error of a factor lambda in the interval-length convention would
+shift c by -(1/4)log lambda, which for lambda = 2 is 0.173... and would
+destroy agreement at the first digit.  Agreement to 74 digits excludes every
+such rescaling on its own.
 
 GATE RULE: agreement of fewer than 12 digits => HALT.  In that event the
 conclusion is that the pipeline is wrong, not the literature; this script
@@ -58,7 +69,7 @@ def main():
     print(f"  c   (VERIFIED, this session, {nd} honest digits)")
     print(f"      = {mp.nstr(c, min(nd + 2, 60))}")
     print(f"  sigma_c                       = {mp.nstr(sigma, 6)}")
-    print(f"  candidate (CONJECTURED form) (1/12)log2 + 3 zeta'(-1)")
+    print(f"  candidate (STRUCTURAL, see L-026) (1/12)log2 + 3 zeta'(-1)")
     print(f"      = {mp.nstr(tgt, min(nd + 2, 60))}")
     print(f"  |c - candidate|               = {mp.nstr(diff, 6)}")
     print(f"  AGREEMENT                     = {mp.nstr(agree, 8)} digits")
