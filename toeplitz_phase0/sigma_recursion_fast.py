@@ -21,6 +21,7 @@ much stronger statement than either one alone.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from fractions import Fraction as F
 
@@ -161,10 +162,29 @@ def main():
         e = -v / m           # e_m = -a_m / m
         coeffs.append({"m": m, "a_m": f"{v.numerator}/{v.denominator}",
                        "e_m": f"{e.numerator}/{e.denominator}"})
+    dest = "out/sigma_recursion_fast.json"
+    for a in sys.argv[1:]:
+        if a.startswith("--out="):
+            dest = a.split("=", 1)[1]
+    # Never silently REDUCE the order of an existing artifact: `verify` runs
+    # M=400 and `predict` runs M=600, and whichever ran last used to win.
+    # A downgrade is invisible downstream -- it does not error, it just makes
+    # the optimal truncation unreachable and reports a wrong digit count
+    # (L-048).
+    if os.path.exists(dest):
+        try:
+            prev = json.load(open(dest)).get("M", 0)
+        except Exception:
+            prev = 0
+        if prev > M:
+            print(f"[out] REFUSING to overwrite {dest}: it holds M={prev}, "
+                  f"this run has M={M}. Downgrading it would silently break "
+                  f"large-s extraction. Use --out=<path> to write elsewhere.")
+            return
     json.dump({"M": M, "odd_all_zero": True, "method": "fraction-recursion",
                "coeffs": coeffs},
-              open("out/sigma_recursion_fast.json", "w"), indent=2)
-    print(f"[out] out/sigma_recursion_fast.json  ({len(coeffs)} even orders "
+              open(dest, "w"), indent=2)
+    print(f"[out] {dest}  ({len(coeffs)} even orders "
           f"up to m={M})")
 
 
