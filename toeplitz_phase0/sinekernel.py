@@ -41,6 +41,7 @@ from __future__ import annotations
 
 import functools
 from mpmath import mp
+import math
 
 try:
     import gmpy2
@@ -310,7 +311,7 @@ def log_det(s, n: int, dps: int, factored: bool = True, backend: str = None):
             if not factored:
                 raise NotImplementedError("gmpy2 path is parity-factored only")
             old = gmpy2.get_context().precision
-            gmpy2.get_context().precision = int(dps * 3.3219280948873626) + 20
+            gmpy2.get_context().precision = int(dps * math.log2(10)) + 20
             try:
                 Ap, Am = _blocks_mpfr(s, n)
                 tot = _chol_logdet_mpfr(Ap) + _chol_logdet_mpfr(Am)

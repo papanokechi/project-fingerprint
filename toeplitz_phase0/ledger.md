@@ -2097,3 +2097,229 @@ leak. Standing rule, already in force since L-046: stage by explicit pathspec
 every commit. A miss that happens not to land is still the same miss.
 
 ---
+
+## L-053 -- A and the prefactor exponent DERIVED, not fitted; and C = 1/pi
+
+Tag: PROVEN (A and theta, symbolic) + VERIFIED (beta, and the prefactor check)
+     + CONJECTURED (the identification C = 1/pi)
+
+L-050 MEASURED E_trunc ~ C exp(-2s)/s by fitting 91 honest-digit counts. The
+operator's point: that exponent was derivable a priori from the ODE we already
+have, so my "no algebraic prefactor" claim was refutable before either of us
+looked at a residual. Correct. Three routes now, deliberately disjoint.
+
+ROUTE 1 -- WKB (symbolic, exact). Linearizing s^2 sigma''^2 + 16u^2 + 4u
+sigma'^2 = 0 about the perturbative solution gives a 2nd-order LINEAR ODE for
+delta. Result:
+
+    leading delta' coefficient p0 = 0     <- the cancellation that makes A finite
+    leading delta  coefficient q0 = -4
+    => S0^2 = 4, decaying branch S0 = -2
+    => delta_sigma ~ C s^(1/2) exp(-2 s)
+
+so A = 2 and theta = 1/2, both EXACT RATIONALS out of the Riccati solve.
+Next Riccati orders 5/16, -5/32, 593/1024 -- all rational, which is a check
+in itself. C is a Stokes constant and linearization cannot fix it; that is
+precisely why C must be measured and the exponents must not be.
+
+ROUTE 2 -- large-order growth (uses no differential-equation manipulation).
+With e_m ~ K Gamma(m+beta)/A^m, r_m = e_{m+2}/e_m = (m+beta)(m+beta+1)/A^2,
+so beta = (sqrt(1+4A^2 r_m) - 2m - 1)/2 in closed form. Over the 300 exact
+rational e_m we already hold:
+
+    A free (independent of route 1):  A = 2.000000000000000000  (|diff| 8.1e-33)
+    A = 2 imposed:                    beta = -1/2 to 1.0e-31
+
+    Neville degree     8        12       16       20
+    beta            -0.49999.. -0.5     -0.5     -0.5
+
+The two passes are reported separately ON PURPOSE. Pass (b) imposes route 1's
+A and is therefore NOT an independent confirmation of A; calling it one would
+be L-039 again.
+
+ROUTE 3 -- the measurement, L-050: a = 0.9941 (s>=60) -> 0.9964 (s>=140).
+
+RECONCILIATION, and this is where I had it wrong first. THREE DIFFERENT
+EXPONENTS, and conflating any two is a mistake:
+
+    (i)   trans-series in log det :  s^(beta)      exp(-A s)
+    (ii)  trans-series in sigma   :  s^(1+beta)    exp(-A s)
+    (iii) least term / optimal truncation, which is what an honest digit
+          count measures :          s^(1/2-beta)  exp(-A s)
+
+(ii) is the WKB output. (iii) is L-050. They differ by sqrt(s) AND by the
+derivative. The sqrt is Stirling: m* + beta = A s, and
+Gamma(m*+beta)/(As)^(m*) = sqrt(2 pi) (A s)^(beta-1/2) exp(-A s). So the
+honest-digit count measures something strictly SMALLER than the trans-series
+term, and a naive "check b against the measured a" comparison fails by 1/2
+for reasons that have nothing to do with either being wrong.
+
+MY ERROR, logged rather than quietly corrected: I first wrote the dispersion
+relation with s^(-beta) instead of s^(+beta). That put theta off by exactly 1
+(predicted 3/2 against the WKB's 1/2) and produced beta = -0.607 out of a
+broken extrapolator, which I nearly read as "beta is not a half-integer". Two
+independent defects pointing the same way. The correct relation, from
+e_m = (1/2 pi i) int_0^inf Disc f(w) w^(-m-1) dw with w = 1/s and
+Disc f ~ C w^(-beta) exp(-A/w), is e_m = (C/2 pi i) A^(beta-m) Gamma(m+beta).
+
+SECOND DEFECT, worth its own note: my Richardson was first-order only.
+Repeatedly applying a single 1/m-eliminating step does NOT accelerate -- after
+the first pass the 1/m term is gone and the operator keeps removing a term
+that is not there. Replaced with Neville extrapolation in 1/m, which removes
+1/m, 1/m^2, ... in turn. beta went from -0.607 (unusable) to -0.5 (31 digits)
+with no new data. The data was never the limit; the extrapolator was.
+
+RESULT:  a = 1/2 - beta = 1  EXACTLY, derived from the ODE with no reference
+to any digit count. Measurement converges to it monotonically from below.
+
+PREFACTOR, normalization-free. Rather than argue about what the honest-digit
+count is normalized by, compare the closed-form least term against the
+smallest term of the series actually evaluated:
+
+     s     m*    actual         predicted      ratio
+    149    298   8.108428e-133  8.126588e-133  0.99777
+    200    400   3.043011e-177  3.048087e-177  0.99833
+    250    500   9.059205e-221  9.071292e-221  0.99867
+
+Ratio -> 1 monotonically. The law is confirmed including its prefactor.
+
+C = 1/pi (CONJECTURED). K = lim e_m A^m/Gamma(m+beta) = 0.253974543736964,
+giving C = K sqrt(2 pi) A^(beta-1/2) = 0.31830988618379067153776752674503.
+Agreement with 1/pi, by Neville degree: 26.9, 37.7, 46.8, 54.6, 61.3, 64.2
+digits -- MONOTONE IN THE DEGREE, so the limit is the extrapolator, not a
+discrepancy. At least 64 digits.
+
+ON THE DISCIPLINE HERE, because this is exactly the adjacent target the
+operator warned would eat a Phase 1. I did not go looking for C. It was
+computed to check the prefactor of the measured law, which is legitimate
+validation, and it then landed on a value recognisable by inspection. NO PSLQ
+WAS RUN. No basis was constructed. Reporting the digits of agreement with one
+declared candidate is not a search and consumes no Phase 1 budget; suppressing
+a 64-digit match once seen would be a different kind of dishonesty.
+
+It stays CONJECTURED, and the reason is not modesty: 1/pi is the most
+prior-heavy constant available, so a one-term match against it carries far
+less evidential weight per digit than a vetted PSLQ relation with null and
+positive controls. What would consume Phase 1 is trying to PROVE it. Queued.
+
+---
+
+## L-054 -- Provenance defects propagate into the OPERATOR's reasoning
+
+Tag: STRUCTURAL (the operator stated the rule about their own inference)
+
+The operator inferred a <= 0.22 from a spread of 0.05. That spread was a
+DERIVED COLUMN of prediction_test.py -- an output of the very path under test
+(L-050). Their words: "I reasoned from an output-derived quantity as though it
+were data, which is the input/output-provenance failure applied one level up,
+to me."
+
+Recorded as a rule because it generalises past this session:
+
+  AN OPERATOR'S REASONING INHERITS THE PROVENANCE DEFECTS OF WHATEVER COLUMN
+  IT READS. A derived column handed upward carries no marking that it is
+  derived, so the recipient cannot apply the classification even if they know
+  the rule.
+
+Practical consequence, and it is on ME, not on them: the fix is at the
+producing end. Reported tables must mark each column as measured or derived,
+because the consumer cannot recover that. prediction_test.py now prints the
+prediction formula rather than a bare residual column, for this reason.
+
+This is the eleven-instance bug class escaping the codebase into the
+conversation. It is the same failure -- an assertion (here, an inference)
+whose constraining term came from the path under test -- and the audit tool
+cannot see it, because the tool only reads Python.
+
+---
+
+## L-055 -- Two tool extensions, and both found live defects immediately
+
+Tag: VERIFIED
+
+(A) TRANSCRIBED NUMERIC LITERALS. L-050's root cause was not a circular guard;
+it was a value TRANSCRIBED at authoring time rather than computed at runtime.
+The special rule was "never subtract a rounded prediction"; the general rule
+is NO TRANSCRIBED NUMERICS IN VERIFICATION CODE, and unlike the guard
+criterion it is genuinely grep-able.
+
+Discriminant between a SPECIFICATION and a TRANSCRIPTION is precision: a
+declared threshold is round by construction (10, 1e-17, 0.5), a transcribed
+value carries >= 3 significant digits. Integers are exempted -- they are
+overwhelmingly counts, node numbers and precisions, i.e. inputs.
+
+FIVE FINDINGS ON FIRST RUN, and four are the same constant as L-050:
+
+    extend_adaptive.py:61   0.866 * s        precision budget
+    extend_data.py:41       0.866 * s        precision budget
+    highs_points.py:46,47   0.869 * s        certification target and floor
+    sinekernel.py:313       3.3219280948873626 * dps   (= log2(10))
+
+0.866 and 0.869 are transcribed roundings of 2/ln(10) = 0.8685889638065035 --
+the SAME constant whose rounding produced L-050, used four more times, in the
+code that sizes the precision budget. 0.866 understates the budget by 0.65
+digits at s=250. Not fatal, because the margins are +15..+60, but it is the
+identical defect sitting in the path that decides how much precision to buy.
+
+All five replaced with computed values (a module-level DIGITS_PER_S = 2.0 /
+math.log(10.0), and math.log2(10)). Audit now reports 0. Wired into the exit
+code, so it fails the build.
+
+(B) MUTATION TESTING. The broken/fixed fixture is the general answer to "is
+this checker switched off", and it mechanises: perturb what a check reads and
+require it to notice. A check that survives mutation of its own inputs is
+dead, whatever it prints.
+
+THE HARNESS WAS ITSELF BROKEN TWICE, both times in ways it exists to detect.
+
+  (b1) Scope. A uniform sample over out/ reported 0 kills in 36 -- but out/ is
+       dominated by PSLQ call logs and superseded snapshots, so the sample
+       measured the shape of the directory. Rescoped to the artifacts the test
+       file actually opens, discovered FROM the test source.
+
+  (b2) ITS OWN RESOLUTION -- instance 12's lesson, in the tool built to find
+       instance 12. Run at a single relative perturbation of 1e-6 it reported
+       2 kills of 36. But `assert 0.85 < slope < 0.89` CANNOT notice a 1e-6
+       nudge. "Survived" was conflating no-check-exists with
+       check-is-coarser-than-the-probe, and it fails in the reassuring
+       direction: it makes live checks look dead and invites redundant ones.
+       Replaced the fixed perturbation with an ESCALATING LADDER
+       (1e-6, 1e-3, 1e-1, 1.0) reporting the SENSITIVITY THRESHOLD. Three of
+       the four kills need rel >= 1e-3, so three of four were mis-scored.
+
+THE FINDING THAT MATTERED: certified_data.json rows.N.value SURVIVED A 100%
+MUTATION. The most load-bearing field in the project -- the certified
+determinant values -- was constrained by nothing in the fast suite. Only
+`verify` touched it, at a cost of hours, so between full rebuilds it was
+effectively unchecked. This is not a check that failed; it is a check that was
+never written, and no amount of inspecting existing guards would have found it.
+
+Closed with test_certified_values_are_constrained_by_the_recursion: each row
+compared against -s^2/2 - (1/4)log s + c_closed + sum e_m s^-m, using the
+EXTERNAL closed form and the exact rational coefficients. 0.1 s for the whole
+grid. Agreement runs 20.8 digits at s=30 to 80+ at s=113, truncation-limited
+as it must be. rows.N.value now dies at rel=1e-6.
+
+Stated honestly in the test's own docstring: the sigma-ODE behind those e_m
+was discovered from a subset of this same grid, so this is a CONSISTENCY check
+and cannot promote the values. What it does is detect corruption of any single
+row, because a global smooth relation is violated by a local edit -- which is
+exactly the liveness property that was missing.
+
+AND THE AUDITOR CAUGHT MY NEW TEST. On first write it flagged two guards in
+test_certified_values_..., correctly: `min(hi) > max(lo)` puts the data under
+test on both sides, so a uniformly corrupted grid would satisfy it. In
+flagging it, it also exposed a plain `lo`/`hi` VARIABLE SHADOWING BUG two
+lines up, where the declared range unpack was clobbering the agreement split.
+A tool written to catch a class of bug catching an unrelated bug in code
+written the same hour, by static provenance alone, is the strongest evidence
+so far that the criterion is tracking something real.
+
+Both fixed by anchoring the constraining side on declared floors.
+
+Remaining survivors, recorded rather than closed: wall_seconds, attempts, n0,
+dps0, precision_bump_digits, meta.s_min/s_max/s_step. These are provenance
+metadata, not claims. A field carrying a VERIFIED claim must be killed; a
+field recording how long something took need not be.
+
+---

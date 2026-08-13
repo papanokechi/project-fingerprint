@@ -1,6 +1,6 @@
 {
-  "files": 29,
-  "guards": 69,
+  "files": 31,
+  "guards": 80,
   "circular": [],
   "waived": [
     {
@@ -18,5 +18,7 @@
       ],
       "waiver": "diagnostic only -- the GATE decision is `agree >="
     }
-  ]
+  ],
+  "transcribed": [],
+  "transcribed_waived": 0
 }

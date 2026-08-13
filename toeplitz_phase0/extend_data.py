@@ -28,6 +28,14 @@ from mpmath import mp
 import sinekernel as sk
 from certify_data import agreement_digits
 
+# 2/ln(10): honest digits gained per unit of s, set by the
+# beyond-all-orders remainder exp(-2s) (L-053).  COMPUTED, never
+# transcribed: rounding it to 0.866 understated the budget by 0.65
+# digits at s=250, and a transcribed rounding of this very constant
+# is what produced the L-050 artifact.
+DIGITS_PER_S = 2.0 / math.log(10.0)
+
+
 TARGET_DIGITS = 120
 DPS_BUMP = 20
 BASE = "out/certified_data.json"
@@ -38,7 +46,7 @@ def n_for(s):
 
 
 def dps_for(s):
-    return int(TARGET_DIGITS + math.ceil(0.866 * float(s)) + 15)
+    return int(TARGET_DIGITS + math.ceil(DIGITS_PER_S * float(s)) + 15)
 
 
 def main(argv):
