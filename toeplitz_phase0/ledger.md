@@ -1691,3 +1691,50 @@ says another 100 digits costs ~115 units of s at ~7 min each. Target
 selection is now governed by literature provenance quality alone.
 
 ---
+
+## L-046 -- Near-miss: `git add -A` staged 250+ unrelated files from other projects
+
+Tag: VERIFIED (caught pre-push, reverted)
+
+Recording because it was caught by reading output rather than by any check,
+which makes it the same genus as L-025 and L-041, and because the failure
+mode is worse than the ones already logged.
+
+`git add -A` from inside toeplitz_phase0 stages from the REPOSITORY ROOT, not
+the current directory. This repo hosts several unrelated projects. The commit
+that resulted contained ~250 files from sectorial/, lean/, zenodo/,
+program_graph/ and files/ -- including `check_prod_token.ps1` and
+`set_prod_token.ps1`, i.e. scripts whose names indicate production
+credentials. Reverted with `git reset --mixed 59f3830` (working tree
+untouched, session rule: no deletion) and re-staged as `git add
+toeplitz_phase0/`, giving the correct 15 files.
+
+Three things worth stating plainly.
+
+1. Nothing was pushed, and push is operator-gated by the session rules. The
+   gate that would have contained this is a rule I was given, not a property
+   of anything I built. That is not a defence; it is luck with a policy
+   attached.
+
+2. It was detected ONLY because the command echoed `git status --short` and I
+   read it. Had I written `git add -A; git commit` without the status line,
+   the commit would have been silent and plausible -- the ledger and code
+   changes would all have been present and correct, with the contamination
+   invisible in the summary. Once again: a correct-looking result concealing
+   a wrong path.
+
+3. The general rule this session keeps rediscovering, now in a tenth
+   instance and in a new domain: THE SCOPE OF AN OPERATION IS NOT THE SCOPE
+   OF YOUR ATTENTION. `-A` means the repo; the working directory does not
+   narrow it. The same error shape as the null control that ran below its own
+   resolution and the basis that silently lost an element -- an operation
+   whose actual domain is wider or narrower than the one assumed, failing
+   quietly in the direction that looks fine.
+
+Standing rule for the remainder of this project: stage by explicit path
+(`git add toeplitz_phase0/`), never `-A`, and always print `git diff --cached
+--name-only` before committing. Recorded here rather than only in a config
+file because L-044 established that promoting a rule does not make it
+followed; the check must be in the command that is actually run.
+
+---
