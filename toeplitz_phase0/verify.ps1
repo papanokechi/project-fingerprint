@@ -6,6 +6,7 @@
   .\verify.ps1 test          structural smoke tests only          (~1 min)
   .\verify.ps1 ode           discover + verify the sigma ODE      (~20 min)
   .\verify.ps1 tail          recursion, fit-free c, b=8 PSLQ      (~5 min)
+  .\verify.ps1 predict       M=600 recursion, s=200/250, 0.869*s law (~20 min)
   .\verify.ps1 analysis      re-derive c, gate, PSLQ from grid    (~20 min)
   .\verify.ps1 verify-fast   smoke tests + analysis + tail        (~25 min)
   .\verify.ps1 kernel        0.1 convergence tables               (~15 min)
@@ -29,7 +30,7 @@
   There is deliberately no clean target: session rule, no file deletion
   without operator approval.  Superseded grids are snapshotted, never removed.
 #>
-param([ValidateSet("test", "kernel", "data", "analysis", "ode", "tail",
+param([ValidateSet("test", "kernel", "data", "analysis", "ode", "tail", "predict",
                    "verify", "verify-fast")]
       [string]$Target = "verify")
 
@@ -58,6 +59,9 @@ switch ($Target) {
                     Step "sigma_recursion_check.py"
                     Step "direct_c.py out/sigma_recursion_fast.json"
                     Step run_pslq_b8.py }
+    "predict"     { Step "sigma_recursion_fast.py 600"
+                    Step "highs_points.py 200 250"
+                    Step prediction_test.py }
     "analysis"    { Step fit_constant.py; Step gate.py; Step run_pslq.py }
     "verify-fast" { Step test_smoke.py
                     Step fit_constant.py; Step gate.py; Step run_pslq.py

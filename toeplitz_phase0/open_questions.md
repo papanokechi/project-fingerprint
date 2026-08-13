@@ -384,3 +384,75 @@ relation is independently verified to 79 digits out of sample and the
 downstream results do not depend on its provenance. It is worth asking only
 because a mismatch would be interesting: if the standard form differs by
 more than a rescaling, one of the two is wrong about something.
+
+
+---
+
+# Revision 5 (appended after operator message 4; nothing above removed)
+
+## OS-11 — DISCHARGED. See ledger L-043.
+
+Two distinct Ehrhardt papers, not two venues for one paper: "Dyson's constant"
+(singular, sine kernel, math/0401205, CMP 262 (2006) 317-341) and "Dyson's
+constants" (plural, Wiener-Hopf-Hankel, math/0605003, CMP 272 (2007) 683-698).
+The apparent conflict in L-035 was mine to create by assuming one paper.
+
+Fourth proof: Krasovsky's footnote announces Deift-Its-Zhou; the published
+paper is Deift-Its-Krasovsky-Zhou, JCAM 202(1) 26-47 (2007). Both readings
+correct, about different objects.
+
+Remains STRUCTURAL: I have read neither the plural-title paper nor the JCAM
+paper. Not upgradeable without primaries, and nothing depends on it.
+
+## OS-12 — DISCHARGED. See ledger L-042.
+
+The discovered ODE is JMMS sigma-PV in x = 2s. Derived lambda = 2 myself from
+the coefficient ratio 16 = 4 lambda^2; confirmed symbolically (difference
+exactly 0) and numerically (standard form holds on my data to 71 digits).
+
+The identification with the PUBLISHED JMMS equation remains operator-sourced.
+Since c now flows through this ODE, that residual is load-bearing:
+
+  **OS-13 (NEW, load-bearing) — primary source for the sigma-form Painleve V.**
+  I need the sigma (Hirota) form of PV as it appears in a primary source
+  (Jimbo-Miwa-Okamoto, or Jimbo-Miwa-Mori-Sato for the sine-kernel case),
+  with the boundary condition, in a stated variable convention. What I need
+  is the EQUATION AS PRINTED and where, not a confirmation that mine matches.
+  Until then the derivation chain for the 132-digit c is
+  VERIFIED-with-a-STRUCTURAL-joint, not fully STRUCTURAL.
+
+## OS-9 — remains WITHDRAWN, and L-042 explains why more sharply
+
+Now that the recursion generates coefficients to arbitrary order in exact
+rational arithmetic (M=400 in 70 s), a literature-supplied handful of e_m has
+no value at all. The recursion is the deliverable, as the operator argued.
+
+## Note on the "positive controls" hardening item
+
+Implemented, TESTED AGAINST THE ACTUAL FAILURE, and found not to work as the
+operator described it. See L-044. The corrected version (plant over the
+DECLARED basis, search over the ACTUAL one) does fire. No operator input
+needed; recorded here because the operator proposed the mechanism and should
+see the measurement rather than an acknowledgement.
+
+## PRE-REGISTERED PREDICTION (recorded BEFORE the measurement)
+
+Operator's law, from m* ~ 2s implying a beyond-all-orders residual of order
+e^(-2s):
+
+    digits ~= 2s / ln 10 ~= 0.869 s
+
+Measured anchor: s = 149 gave 132.09 against a predicted 129.4 (excess 2.7,
+consistent with an algebraic prefactor).
+
+Predictions, fixed now:
+    s = 200  ->  ~173.8 + prefactor excess   (expect ~176)
+    s = 250  ->  ~217.3 + prefactor excess   (expect ~220)
+
+Falsification condition, also fixed now: if the achieved digit count comes in
+FLAT (i.e. near 132) rather than scaling, the binding constraint is Nystrom
+evaluation rather than series truncation, and the fix is a different one.
+
+This is recorded before the numbers are in specifically because a law fitted
+after the fact would be unfalsifiable, and this session has already produced
+one fabricated law (L-030).

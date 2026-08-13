@@ -1,0 +1,6 @@
+[build] s=200 target=233 floor=213
+[build] s=200 certified=257.128 n0=512 dps0=427 188.5s
+[out] out/highs_points.json
+[build] s=250 target=277 floor=257
+[build] s=250 certified=301.045 n0=634 dps0=514 425.5s
+[out] out/highs_points.json

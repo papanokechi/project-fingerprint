@@ -193,3 +193,51 @@ def test_recursion_matches_certified_data():
             f"tail prediction off by {mp.nstr(abs(resid - pred), 5)}"
     finally:
         mp.dps = old
+
+
+def test_positive_control_detects_silent_basis_shrink():
+    """L-044: the control must fire on the ACTUAL L-040(7) failure.
+
+    A positive control planted over the passed-in basis passes happily when an
+    element has gone missing -- measured, not supposed.  Only planting over the
+    DECLARED basis detects it.  This test locks in the corrected behaviour, and
+    would fail if the `declared` plumbing were ever dropped.
+    """
+    from mpmath import mp
+    import constants
+    import pslq_harness as H
+
+    P = 40
+    names, vals = constants.basis_values(
+        P + 40, ["log2", "logpi", "gamma", "zeta'(-1)"])
+    declared = list(zip(names, vals))
+
+    intact = H.positive_control(P, names, vals, declared=declared)
+    assert intact["passed"], "intact basis must recover its own plant"
+
+    keep = [i for i, n in enumerate(names) if n != "zeta'(-1)"]
+    shrunk_n = [names[i] for i in keep]
+    shrunk_v = [vals[i] for i in keep]
+
+    # Planting over the shrunken basis: the known false negative.
+    naive = H.positive_control(P, shrunk_n, shrunk_v)
+    assert naive["passed"], "documents the failure mode -- see L-044"
+
+    # Planting over the declared basis: must FAIL.
+    strict = H.positive_control(P, shrunk_n, shrunk_v, declared=declared)
+    assert not strict["passed"], "must flag the missing zeta'(-1)"
+
+
+def test_prediction_law_holds_at_two_points():
+    """L-045: honest digits must scale as ~0.87*s, not sit flat."""
+    import json
+    import os
+    if not os.path.exists("out/prediction_test.json"):
+        import pytest
+        pytest.skip("run prediction_test.py first")
+    d = json.load(open("out/prediction_test.json"))
+    pts = [p for p in d["points"] if not p["saturated"]]
+    assert len(pts) >= 2
+    exc = [p["honest"] - p["predicted"] for p in pts]
+    assert max(exc) - min(exc) < 1.0, f"excess drifts: {exc}"
+    assert 0.85 < d["measured_slope"] < 0.89

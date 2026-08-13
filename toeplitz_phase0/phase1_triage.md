@@ -207,3 +207,81 @@ ADDED, arising from L-040:
      constant will eventually sit below resolution and the control will pass
      by being switched off. This has now happened twice (L-024, L-040(6)),
      the second time in a file whose docstring cited the first.
+
+
+---
+
+# Revision 3 (appended; nothing above removed)
+
+## Precision has stopped being a constraint, and that changes the ranking rule
+
+Measured law, pre-registered and confirmed at three points (L-045):
+
+    honest digits = 0.871 * s + 2.7      (spread 0.05 over s in [149, 250])
+
+Achieved: **220.04 honest digits** at s = 250, agreeing with the closed form
+to 219.765. Cost ~7 min per certified point plus a one-off recursion.
+
+| basis size b | measured T | required D = max(T,31)+33 | headroom at 220 |
+|---|---|---|---|
+| 4  | 27 | 64 | 156 |
+| 6  | 35 | 68 | 152 |
+| 8  | 44 | 77-78 | **142** |
+| 12 | ~55 (CONJECTURED, MUST RE-MEASURE) | ~88 | ~132 |
+| 16 | ~65 (CONJECTURED, MUST RE-MEASURE) | ~98 | ~122 |
+
+The extrapolated T values stay CONJECTURED. A T-law was fabricated once in
+this session and falsified (L-030); the concave fit is not to be trusted off
+the measured range, and re-measurement is cheap relative to a wrong claim.
+
+To buy 100 more digits: +115 units of s, ~7 min/point. Precision is now the
+cheapest input to the whole enterprise.
+
+**Therefore the ranking rule changes.** The "required basis size" and
+"pipeline reach" columns were the discriminating columns in revisions 1-2.
+They no longer discriminate: every plausible Phase 1 target clears the bar.
+Target selection must now be driven almost entirely by LITERATURE PROVENANCE
+QUALITY. Concretely, rank candidates by:
+
+  1. **Published precision.** A constant published to 30+ digits is a
+     calibration opportunity, not a research target. Research value is
+     highest where the published value is low-precision (say < 15 digits).
+  2. **Sourcing multiplicity.** Single-sourced values carry unchecked
+     transcription risk. Two independent derivations => calibration.
+  3. **Derivation status.** Conjectured or numerically-inferred constants are
+     worth more than proved ones, because a high-precision numerical value
+     can materially change their status. A proved constant cannot be improved
+     by more digits.
+  4. **Whether an exact form is claimed at all.** A constant with no proposed
+     closed form is the highest-value case: the PSLQ harness can propose one,
+     and there is now basis headroom to do it honestly.
+
+Scoring: research value is HIGH when (1) is low, (2) is single, (3) is
+conjectural. It is NIL when (1) is high and (2) is multiple -- that is T-4,
+this session's calibration target, by construction.
+
+The point of stating this now: the ranking can be computed FROM the table,
+before any Nystrom time is spent. Discovering after a week of computation
+that the target was already known to 40 digits is the expensive mistake, and
+it is entirely avoidable at the cost of filling in three columns.
+
+## Entry condition #9 (new)
+
+Phase 1 may not begin until the triage table's provenance columns are filled
+from PRIMARY sources for at least the selected target. Operator-supplied
+values enter as CONJECTURED (HARD RULE 2) and cannot by themselves justify
+target selection -- selecting a target BECAUSE the literature value is
+low-precision requires knowing the literature value's precision, which is
+itself a literature claim.
+
+Corollary, and it is not a technicality: if the provenance of a candidate
+cannot be established, that candidate is not disqualified -- it is
+*promoted*, since unclear provenance is exactly the condition Phase 1 exists
+to address. But the unclear provenance must be RECORDED as the finding, not
+resolved by assumption.
+
+## Entry condition #10 (new)
+
+Every control in the harness must be constructed from something the suspect
+path cannot influence. Verified failure of this for positive controls built
+over the passed-in basis (L-044). Applies to any new check added in Phase 1.

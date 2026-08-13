@@ -1467,3 +1467,227 @@ correct rank is NOT known in advance, and there a fixed tolerance would not
 merely mislabel -- it would silently manufacture relations.
 
 ---
+
+## L-042 -- OS-12 discharged: the discovered ODE is JMMS sigma-PV at x = 2s
+
+Tag: PROVEN (the algebra) + STRUCTURAL (the identification, operator-sourced)
+
+The operator supplied the Jimbo-Miwa-Okamoto sigma (Hirota) form as quoted by
+Bornemann,
+
+    x^2 tau''^2 + 4 (x tau' - tau)(x tau' - tau + tau'^2) = 0,
+
+against my nullspace-discovered
+
+    s^2 sigma''^2 + 16 u^2 + 4 u sigma'^2 = 0,   u = s sigma' - sigma.
+
+I did not take the reconciliation on trust. Under x = lambda s with
+sigma~(s) = tau(lambda s): u is invariant, sigma~'^2 = lambda^2 tau'^2, and
+s^2 sigma~''^2 = lambda^2 x^2 tau''^2. Multiplying the standard form by
+lambda^2 therefore moves ONLY the u^2 coefficient, as 4 lambda^2, while the
+u sigma'^2 coefficient is scale-invariant. Hence 16 = 4 lambda^2, lambda = 2.
+
+Checked two ways in-session, both independent of the literature:
+  - symbolically: the difference of the two equations after substitution is
+    EXACTLY 0 (sympy, not a numerical zero);
+  - numerically: with tau(x) = sigma(x/2) the STANDARD form holds on my own
+    certified data to 71 digits.
+
+Two consequences, and the second is the one that matters.
+
+(1) lambda = 2 is a FOURTH confirmation of the normalisation, and the only
+    one that needs no literature convention at all -- it falls out of a
+    coefficient ratio.
+
+(2) DEPENDENCY CLASS CAN CHANGE WITHOUT THE ITEM CHANGING. I filed OS-12 as
+    curiosity, with the explicit note "nothing depends on it", and that was
+    accurate when written: the ODE was VERIFIED out of sample and c still
+    came from a fit. It stopped being accurate the moment I read c off the
+    recursion in L-038, because from then on all 132 digits rested on an
+    equation whose only warrant was a numerical nullspace. Nothing about
+    OS-12 changed; its load-bearingness changed underneath it. I did not
+    notice, and would not have, absent the operator.
+
+    The general rule, for Phase 1 and for the SIARC spec: an open item's
+    priority must be re-derived whenever the dependency graph changes, not
+    only when the item does. Filing is not a terminal state.
+
+Note on tagging. The mathematical content here is PROVEN in-session. What
+remains operator-sourced is only the IDENTIFICATION of the target equation
+with the published JMMS sigma-PV -- i.e. the name, not the algebra. I have
+verified my equation IS the equation the operator quoted; I have NOT
+independently verified that the equation the operator quoted is the one in
+Jimbo-Miwa-Okamoto. That residual stays STRUCTURAL pending a primary source
+and is recorded as such, because the derivation chain for c now passes
+through it.
+
+---
+
+## L-043 -- OS-11 discharged: two Ehrhardt papers, and DIZ -> DIKZ
+
+Tag: STRUCTURAL (operator-sourced, consistent with my primary reads)
+
+My L-035 flagged an apparent venue conflict for Ehrhardt. The operator
+resolves it: there are two papers with near-identical titles.
+
+  "Dyson's constant"   (singular) -- sine kernel        -- math/0401205
+                                  -- CMP 262 (2006) 317-341
+  "Dyson's constants"  (plural)  -- Wiener-Hopf-Hankel  -- math/0605003
+                                  -- CMP 272 (2007) 683-698
+
+I fetched and read the first; the operator's earlier K_{2 alpha} quotation
+came from the second. Neither citation was wrong; they were presented as one
+paper. arXiv carries no journal_ref for either, which is why my primary check
+could neither confirm nor refute and correctly returned "unconfirmed" rather
+than adjudicating.
+
+On the fourth proof, both readings were right about different objects.
+Krasovsky's footnote 1, which I read in the PDF, announces Deift, Its and
+Zhou -- three authors, not including Krasovsky. The operator reports the
+published paper as Deift, Its, Krasovsky, Zhou, JCAM 202(1) 26-47 (2007);
+Krasovsky joined between announcement and publication. My caveat
+"announcement is not publication" was therefore the operative distinction,
+and the disagreement was never a disagreement.
+
+Both items remain STRUCTURAL, not VERIFIED: I have not seen the JCAM paper
+or the plural-title paper, only reports of them.
+
+---
+
+## L-044 -- Positive controls: the operator's mechanism does NOT work as stated, and why
+
+Tag: VERIFIED (measured, both directions)
+
+The operator's hardening item: I have been running null controls only, which
+verify the instrument is silent when nothing is there -- indistinguishable
+from an instrument that is switched off. Add positive controls: plant a known
+relation and require recovery. Stated consequence: this "would have caught the
+missing zeta'(-1) instantly, because a basis that can't find a relation it
+contains is switched off."
+
+I implemented it and tested it against the actual L-040(7) failure. THE CLAIM
+IS FALSE AS STATED, and the measurement is unambiguous.
+
+Planting over the basis that is PASSED IN cannot detect a basis that lost an
+element, because the plant is built from the same shrunken list. Dropping
+zeta'(-1) from b=8 and running the full pair:
+
+    NULL-perturbed c*(1+1e-20)      -> NO RELATION      (null passes)
+    NULL-random 30-digit constant   -> NO RELATION      (null passes)
+    POSITIVE planted #0,#1,#2       -> recovered, recovered, recovered
+    verdict                         -> INSTRUMENT OK
+
+That is a clean bill of health issued to the exact configuration the control
+was introduced to catch. The positive control is a genuine instrument, but it
+measures a different quantity than the operator ascribed to it:
+
+    positive control  -> is the instrument switched on?
+                         (precision, tolerance, coefficient bound)
+    basis-identity    -> is the instrument pointed at the intended basis?
+
+These are orthogonal, and L-040(7) is entirely the second.
+
+THE FIX. Plant over the DECLARED basis and search over the ACTUAL one, with a
+nonzero coefficient forced on any declared element absent from the actual
+list. Then a missing element makes the planted relation unfindable by
+construction. Re-measured on the identical failure:
+
+    POSITIVE planted #0,#1,#2       -> found=None x3
+    verdict                         -> INSTRUMENT FLAGGED
+
+and the intact b=8 basis still passes both halves, so the control is not
+merely trigger-happy. Full b=8 driver re-run with the pair wired in:
+relation [-12, 1, 0, 0, 36, 0, 0, 0] recovered, sup-norm 36, reconfirmed at
+P+30, both controls passed.
+
+The methodological point is larger than the patch. A control inherits its
+validity from what it is built out of. Building a positive control out of the
+suspect object tests the object against itself -- the same circularity as
+L-039's PSLQ hit, which could only ever return the relation its basis
+contained. The rule that generalises: A CONTROL MUST BE CONSTRUCTED FROM
+SOMETHING THE SUSPECT PATH CANNOT INFLUENCE. Null controls satisfy this
+trivially (a random constant is independent of everything). Positive controls
+do not satisfy it by default, and the default is the dangerous case, because
+it fails in the reassuring direction.
+
+This is now the ninth instance in this session of a check producing a
+plausible passing answer rather than an error -- and the first where the
+faulty check was one introduced specifically to prevent that failure mode.
+Recorded as a caution against treating hardening items as self-validating.
+
+---
+
+## L-045 -- Pre-registered prediction CONFIRMED: digits = 0.869*s + 2.7
+
+Tag: VERIFIED (three points, prediction fixed in writing before measurement)
+
+The operator derived, from my own measured optimal truncation m* ~ 2s, that
+the post-truncation residual is the beyond-all-orders term of order e^(-2s),
+hence
+
+    digits ~= 2s / ln 10 ~= 0.8686 s
+
+and predicted ~176 at s=200 and ~220 at s=250, with an explicit falsification
+condition: a FLAT digit count would mean the binding constraint is Nystrom
+evaluation, not series truncation, and would require a different fix.
+
+I wrote the predictions and the falsification condition into
+open_questions.md revision 5 BEFORE running prediction_test.py. This matters
+because this session has already produced one law fitted after the fact and
+then falsified (L-030, the fabricated T(b) = 5b+10); a prediction recorded
+only after the numbers are in is not a prediction.
+
+Measured (prediction_test.py, coefficients to M=600, exact rationals):
+
+      s     cert     M*    2s      E_trunc     honest    pred   excess
+    149  189.672    296   298   8.108e-133    132.09   129.4    2.69
+    200  257.128    398   400   3.043e-177    176.52   173.8    2.72
+    250  301.045    498   500   9.059e-221    220.04   217.3    2.74
+
+Excess spread 0.05 digits over 101 units of s. Measured slope 0.8708 against
+predicted 0.8686 (0.25% high). The law holds, and the constant offset behaves
+exactly as an algebraic prefactor should -- it is an offset, not drift.
+
+Two independent structures fall out and neither was fitted:
+  - M* landed at 296, 398, 498 against 2s = 298, 400, 500. The optimal
+    truncation tracks 2s with an offset of -2 at every point. Predicted
+    before measurement in L-038 at a single s; now confirmed as a law.
+  - E_trunc drops by ~44 decades per 51 units of s, i.e. 0.87/unit, the
+    same slope from a completely different quantity.
+
+CROSS-s CONSISTENCY, which no fit could supply:
+
+    s=149 vs 200: diff 6.744e-133  bar 8.108e-133  ratio 0.832  ok
+    s=149 vs 250: diff 6.744e-133  bar 8.108e-133  ratio 0.832  ok
+    s=200 vs 250: diff 2.532e-177  bar 3.043e-177  ratio 0.832  ok
+
+The ratio is 0.832 at all three pairs. The error bar is therefore not merely
+conservative, it is CALIBRATED to within 20%, and its scale is derived from
+the first omitted term rather than estimated from residuals. Contrast L-028,
+where the fit's sigma_c could not be pinned to better than a factor of 2.
+
+CALIBRATION GATE (0.3), restated at the new precision. Against
+
+    c = (1/12) log 2 + 3 zeta'(-1)
+
+    agreement: 219.765 digits, honest budget 220.04 digits.
+
+The agreement sits AT the error bar, not beyond it -- which is the correct
+outcome and is itself a check: an agreement exceeding the honest budget would
+mean the budget was overstated. Phase 0.3 required 12 digits. We are at 219.8.
+
+Accounting for the session, which is the part worth carrying forward:
+    revision 1-3 grid, ~6 h compute ............  +2 digits
+    sigma-PV recursion, 70 s ...................  +59 digits
+    two extra certified points, ~10 min ........  +88 digits
+The binding budget line moved twice, and both times the expensive activity
+was addressing a line that had already stopped binding. Measure which term
+dominates BEFORE buying more of anything.
+
+Consequence for Phase 1, per the operator: required-basis-size has ceased to
+be a constraint. The measured spurious thresholds give D >= max(T,31)+33, so
+b=8 needs 77-78; at 220 digits there is 142 digits of headroom, and the law
+says another 100 digits costs ~115 units of s at ~7 min each. Target
+selection is now governed by literature provenance quality alone.
+
+---

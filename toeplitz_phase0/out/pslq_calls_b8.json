@@ -88,5 +88,86 @@
   ],
   "result": null,
   "note": ""
+ },
+ {
+  "kind": "POSITIVE-control planted #0",
+  "dps": 92,
+  "tol": "1e-84",
+  "maxcoeff": 10000,
+  "maxsteps": 1000000,
+  "basis": [
+   "log2",
+   "logpi",
+   "gamma",
+   "zeta'(-1)",
+   "zeta(3)/pi^2",
+   "Catalan",
+   "log(1+sqrt2)"
+  ],
+  "result": [
+   -1,
+   -17,
+   -5,
+   28,
+   17,
+   -34,
+   -23,
+   -15
+  ],
+  "note": ""
+ },
+ {
+  "kind": "POSITIVE-control planted #1",
+  "dps": 92,
+  "tol": "1e-84",
+  "maxcoeff": 10000,
+  "maxsteps": 1000000,
+  "basis": [
+   "log2",
+   "logpi",
+   "gamma",
+   "zeta'(-1)",
+   "zeta(3)/pi^2",
+   "Catalan",
+   "log(1+sqrt2)"
+  ],
+  "result": [
+   -1,
+   -27,
+   35,
+   15,
+   29,
+   -17,
+   40,
+   40
+  ],
+  "note": ""
+ },
+ {
+  "kind": "POSITIVE-control planted #2",
+  "dps": 92,
+  "tol": "1e-84",
+  "maxcoeff": 10000,
+  "maxsteps": 1000000,
+  "basis": [
+   "log2",
+   "logpi",
+   "gamma",
+   "zeta'(-1)",
+   "zeta(3)/pi^2",
+   "Catalan",
+   "log(1+sqrt2)"
+  ],
+  "result": [
+   1,
+   1,
+   25,
+   -30,
+   15,
+   27,
+   -7,
+   -11
+  ],
+  "note": ""
  }
 ]
