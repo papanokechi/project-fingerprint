@@ -59,7 +59,8 @@ def main():
     print("\n[vet] found:", res.get("relation_str", res))
     print("[vet] reconfirmed at P+30:", res.get("reconfirmed"))
 
-    ctrl = H.null_controls(c, P, names, vals, maxcoeff=10 ** 4)
+    ctrl = H.controls(c, P, names, vals, maxcoeff=10 ** 4,
+                      declared=list(zip(names, vals)))
     print("[controls]", json.dumps(ctrl, indent=2)[:900])
 
     H.flush_log("out/pslq_calls_b8.json")

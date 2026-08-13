@@ -16,8 +16,9 @@
     "reasons": "['(a) reconfirmed at P+30 with identical coefficients', '(b) sup-norm 36 <= 10000']"
   },
   "controls": {
-    "perturbed": "None",
-    "random": "None",
+    "null": "{'perturbed': None, 'random': None, 'passed': True}",
+    "positive": "{'trials': [{'trial': 0, 'planted': [-17, -5, 28, 17, -34, -23, -15], 'over': ['log2', 'logpi', 'gamma', \"zeta'(-1)\", 'zeta(3)/pi^2', 'Catalan', 'log(1+sqrt2)'], 'found': [-1, -17, -5, 28, 17, -34, -23, -15], 'recovered': True, 'basis_identical': True}, {'trial': 1, 'planted': [-27, 35, 15, 29, -17, 40, 40], 'over': ['log2', 'logpi', 'gamma', \"zeta'(-1)\", 'zeta(3)/pi^2', 'Catalan', 'log(1+sqrt2)'], 'found': [-1, -27, 35, 15, 29, -17, 40, 40], 'recovered': True, 'basis_identical': True}, {'trial': 2, 'planted': [-1, -25, 30, -15, -27, 7, 11], 'over': ['log2', 'logpi', 'gamma', \"zeta'(-1)\", 'zeta(3)/pi^2', 'Catalan', 'log(1+sqrt2)'], 'found': [1, 1, 25, -30, 15, 27, -7, -11], 'recovered': True, 'basis_identical': True}], 'passed': True}",
+    "null_guard": "{'what': 'null control perturbation', 'effect': '4.38501e-21', 'resolution': '1.0e-92', 'margin_ok': True}",
     "passed": "True"
   }
 }
