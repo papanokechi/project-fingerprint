@@ -1790,3 +1790,69 @@ skipped BY DESIGN (running them at that precision would be a guaranteed-fail
 protocol, not a test -- L-020).
 
 ---
+
+## L-048 -- The full verify run exposed TWO defects, one of them in the
+##          prediction test itself. Eleventh instance of the class.
+
+Tag: VERIFIED (both defects reproduced, both fixed, fixes tested)
+
+This is the strongest argument yet for the operator's insistence on running
+the full rebuild before Phase 1: the run did not merely confirm the pipeline,
+it FOUND THINGS. Neither defect was visible from any incremental run.
+
+DEFECT 1 -- targets clobber each other's artifacts.
+`verify` runs `sigma_recursion_fast.py 400`; `predict` runs it at 600. Both
+write out/sigma_recursion_fast.json. Whichever ran last won. The full verify
+therefore silently downgraded the artifact 600 -> 400 AFTER the 220-digit
+result had been produced and committed.
+
+DEFECT 2 -- and this is the bad one. The saturation guard did not fire.
+prediction_test.py already contained a guard for exactly this: a point whose
+optimal truncation lies outside the available series is a lower bound, not a
+measurement, and must be excluded. It tested `M* >= orders[-1]`. With M=400
+and s=250, the search selected M* = 398. 398 >= 400 is FALSE. The point was
+scored as usable and the run reported:
+
+    250  ...  M*=398  215.28 digits   excess -2.02
+    verdict: CONSISTENT ... measured slope 0.8237
+
+A wrong digit count, a wrong slope, a spread of 4.74 that squeaked under a
+threshold of 5, and the word CONSISTENT. No error, no warning. Had I run the
+full verify BEFORE producing L-045 rather than after, I would have published
+0.8237 against a prediction of 0.8686, called it a near-miss, and gone looking
+for physics in an artifact of a truncated coefficient file.
+
+The guard was testing the wrong quantity. `M* >= orders[-1]` asks whether the
+search hit the end of the array; the question is whether the MINIMUM was
+reachable, i.e. whether 2s <= orders[-1]. Off by exactly the two orders
+between 398 and 400.
+
+This is the eleventh instance this session of a check that produces a
+plausible passing answer rather than an error, and the SECOND (after L-044)
+where the faulty check was one I had written specifically to prevent that
+failure mode. The pattern is now unambiguous enough to state as a finding
+rather than a caution: WRITING A GUARD IS NOT EVIDENCE THE GUARD WORKS. In
+both cases the guard was correct in intent, plausible on inspection, and
+wrong in a way that only firing it against a real failure could reveal.
+Every guard needs its own positive control -- the same argument the operator
+made for PSLQ, applied one level up, to the guards themselves.
+
+FIXES, both tested by reproducing the failure and watching it flip:
+  - saturation: `M >= orders[-1] or 2*s > orders[-1]`. Re-run against the
+    M=400 file now prints "SATURATED (need M >= 500), lower bound only",
+    excludes the point, and reports the honest two-point slope 0.8711.
+  - verdict threshold tightened 5 -> 1.0 digits of spread. The true spread is
+    0.05, so 1.0 is 20x margin; 5 was loose enough to pass the broken run.
+  - sigma_recursion_fast.py now REFUSES to overwrite an artifact of higher M
+    and says so, with --out= to write elsewhere. Verified: `600` writes,
+    then `400` refuses.
+
+After restoring M=600 the three-point result reproduces exactly: 132.09,
+176.52, 220.04, excess 2.69/2.72/2.74, slope 0.8708. 9/9 smoke tests pass.
+
+ALSO RECORDED, and it is the good news: certified_data.json rebuilt from
+scratch is BIT-IDENTICAL to the committed file -- 224 rows, zero value
+mismatches, no lost s. The expensive part of the pipeline is exactly
+reproducible; the defects were both in the cheap orchestration around it.
+
+---

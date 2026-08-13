@@ -61,15 +61,20 @@ def main():
             if best is None or omit < best[2]:
                 best = (M, cv, omit)
         M, cv, omit = best
-        # M* at the top of the available range means the truncation minimum
-        # was never reached -- the digit count is then a lower bound, not a
-        # measurement, and must not be compared against the prediction.
-        saturated = M >= orders[-1]
+        # A point is usable only if the optimal truncation m* ~ 2s is INSIDE
+        # the available range.  Testing `M >= orders[-1]` is not enough and
+        # was measured to fail: with M=400 coefficients, s=250 selected
+        # M*=398, so `398 >= 400` was False, the point was scored as usable,
+        # and the run reported 215.28 digits with slope 0.8237 -- a wrong
+        # number, no error raised (L-048).  The honest test is whether the
+        # series was long enough to reach the minimum at all.
+        saturated = bool(M >= orders[-1] or 2 * s_int > orders[-1])
         err = max(omit, mp.mpf(10) ** (-cert))
         honest = -mp.log10(err / max(abs(cv), mp.mpf(1)))
         pred = PREDICTED[s_int]
         res.append((s_int, float(honest), pred, saturated, cv, err, M))
-        flag = "  <-- SATURATED, lower bound only" if saturated else ""
+        flag = ("  <-- SATURATED (need M >= %d), lower bound only" % (2 * s_int)
+                if saturated else "")
         print(f"{s_int:>5} {mp.nstr(cert,6):>8} {M:>5} {2*s_int:>5} "
               f"{mp.nstr(omit,4):>11} {float(honest):>8.2f} {pred:>8.1f} "
               f"{float(honest)-pred:>8.2f}{flag}")
@@ -85,7 +90,7 @@ def main():
     print(f"  excess over 0.869*s: {['%.2f' % e for e in excess]}")
     print(f"  spread {spread:.2f} digits over s in "
           f"[{usable[0][0]}, {usable[-1][0]}]")
-    if spread < 5:
+    if spread < 1.0:
         print("  CONSISTENT with digits = 0.869*s + const (prefactor).")
         print("  Precision is truncation-limited and linear in s.")
     elif usable[-1][1] - usable[0][1] < 5:
