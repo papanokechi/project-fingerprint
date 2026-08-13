@@ -17,7 +17,21 @@ from mpmath import mp
 
 from direct_c import load_coeffs, c_estimate
 
-PREDICTED = {149: 129.4, 200: 173.8, 250: 217.3}
+def predicted(s):
+    """The operator's law, EXACTLY: digits ~ 2s/ln(10).
+
+    This used to be a hardcoded dict {149: 129.4, 200: 173.8, 250: 217.3}.
+    Those are the exact values rounded to one decimal, but rounded in
+    DIFFERENT DIRECTIONS: -0.020, +0.082, +0.153.  That spread injected a
+    spurious -0.173 drift into the excess across s in [149, 250], which very
+    nearly cancelled the real +0.222 drift and made the excess look flat at
+    2.69 / 2.72 / 2.74.  Two errors of opposite sign, and the residue was
+    small enough to read as "a constant prefactor" (L-050).
+
+    Never compare a measurement against a rounded prediction.  The rounding
+    is not small relative to the effect being tested.
+    """
+    return 2 * mp.mpf(s) / mp.log(10)
 
 
 def rows():
@@ -71,13 +85,13 @@ def main():
         saturated = bool(M >= orders[-1] or 2 * s_int > orders[-1])
         err = max(omit, mp.mpf(10) ** (-cert))
         honest = -mp.log10(err / max(abs(cv), mp.mpf(1)))
-        pred = PREDICTED[s_int]
-        res.append((s_int, float(honest), pred, saturated, cv, err, M))
+        pred = predicted(s_int)
+        res.append((s_int, float(honest), float(pred), saturated, cv, err, M))
         flag = ("  <-- SATURATED (need M >= %d), lower bound only" % (2 * s_int)
                 if saturated else "")
         print(f"{s_int:>5} {mp.nstr(cert,6):>8} {M:>5} {2*s_int:>5} "
-              f"{mp.nstr(omit,4):>11} {float(honest):>8.2f} {pred:>8.1f} "
-              f"{float(honest)-pred:>8.2f}{flag}")
+              f"{mp.nstr(omit,4):>11} {float(honest):>8.2f} {float(pred):>8.2f} "
+              f"{float(honest)-float(pred):>8.3f}{flag}")
 
     usable = [x for x in res if not x[3]]
     print("\n[verdict]")
@@ -87,12 +101,19 @@ def main():
         return
     excess = [x[1] - x[2] for x in usable]
     spread = max(excess) - min(excess)
-    print(f"  excess over 0.869*s: {['%.2f' % e for e in excess]}")
-    print(f"  spread {spread:.2f} digits over s in "
+    print(f"  excess over 2s/ln10: {['%.3f' % e for e in excess]}")
+    print(f"  spread {spread:.3f} digits over s in "
           f"[{usable[0][0]}, {usable[-1][0]}]")
-    if spread < 1.0:
-        print("  CONSISTENT with digits = 0.869*s + const (prefactor).")
-        print("  Precision is truncation-limited and linear in s.")
+    import math
+    logdrift = math.log10(usable[-1][0] / usable[0][0])
+    print(f"  log10(s_max/s_min) = {logdrift:.4f};  spread/logdrift = "
+          f"{spread / logdrift:.3f}  <- the exponent a in C*s^-a*exp(-2s)")
+    if spread < 0.02:
+        print("  Excess is flat: remainder is C*exp(-2s), no algebraic term.")
+    elif abs(spread / logdrift - 1.0) < 0.15:
+        print("  Excess drifts by ~1 decade per decade of s: the remainder")
+        print("  carries a 1/s prefactor, C*exp(-2s)/s.  Confirmed against a")
+        print("  91-point fit in excess_structure.py (a -> 1).")
     elif usable[-1][1] - usable[0][1] < 5:
         print("  FLAT: digit count did not scale. Nystrom-limited, NOT")
         print("  truncation-limited -- the law is falsified in this regime.")

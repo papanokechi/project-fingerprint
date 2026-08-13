@@ -4,6 +4,7 @@
 
 .EXAMPLE
   .\verify.ps1 test          structural smoke tests only          (~1 min)
+  .\verify.ps1 audit         mechanical guard audit (L-049)       (~5 sec)
   .\verify.ps1 ode           discover + verify the sigma ODE      (~20 min)
   .\verify.ps1 tail          recursion, fit-free c, b=8 PSLQ      (~5 min)
   .\verify.ps1 predict       M=600 recursion, s=200/250, 0.869*s law (~20 min)
@@ -30,7 +31,7 @@
   There is deliberately no clean target: session rule, no file deletion
   without operator approval.  Superseded grids are snapshotted, never removed.
 #>
-param([ValidateSet("test", "kernel", "data", "analysis", "ode", "tail", "predict",
+param([ValidateSet("test", "audit", "kernel", "data", "analysis", "ode", "tail", "predict",
                    "verify", "verify-fast")]
       [string]$Target = "verify")
 
@@ -51,6 +52,7 @@ function Step([string]$script) {
 
 switch ($Target) {
     "test"        { Step test_smoke.py }
+    "audit"       { Step assertion_audit.py }
     "kernel"      { Step verify_kernel.py }
     "data"        { Step build_grid.py }
     "ode"         { Step "sigma_ode.py 120 4 70"; Step "sigma_ode_verify.py 80" }
@@ -61,16 +63,19 @@ switch ($Target) {
                     Step run_pslq_b8.py }
     "predict"     { Step "sigma_recursion_fast.py 600"
                     Step "highs_points.py 200 250"
-                    Step prediction_test.py }
+                    Step prediction_test.py
+                    Step excess_structure.py }
     "analysis"    { Step fit_constant.py; Step gate.py; Step run_pslq.py }
-    "verify-fast" { Step test_smoke.py
+    "verify-fast" { Step assertion_audit.py
+                    Step test_smoke.py
                     Step fit_constant.py; Step gate.py; Step run_pslq.py
                     Step "sigma_recursion.py 60"
                     Step "sigma_recursion_fast.py 400 --check"
                     Step "sigma_recursion_check.py"
                     Step "direct_c.py out/sigma_recursion_fast.json"
                     Step run_pslq_b8.py }
-    "verify"      { Step test_smoke.py
+    "verify"      { Step assertion_audit.py
+                    Step test_smoke.py
                     Step verify_kernel.py
                     Step build_grid.py
                     Step fit_constant.py; Step gate.py; Step run_pslq.py
@@ -79,7 +84,9 @@ switch ($Target) {
                     Step "sigma_recursion_fast.py 400 --check"
                     Step "sigma_recursion_check.py"
                     Step "direct_c.py out/sigma_recursion_fast.json"
-                    Step run_pslq_b8.py }
+                    Step run_pslq_b8.py
+                    Step sigma_sign_trap.py
+                    Step excess_structure.py }
 }
 
 Write-Host ""

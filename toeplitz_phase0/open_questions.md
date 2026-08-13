@@ -456,3 +456,78 @@ evaluation rather than series truncation, and the fix is a different one.
 This is recorded before the numbers are in specifically because a law fitted
 after the fact would be unfalsifiable, and this session has already produced
 one fabricated law (L-030).
+
+---
+
+## OS-10 — PARTIALLY DISCHARGED. Schema supplied; cells still empty.
+
+The six provenance columns are now written into `phase1_triage.md` section 4
+and the candidate list into section 5. The SCHEMA is discharged. The CELLS
+are not, and cannot be discharged by us: P1-P4 are all statements about the
+literature, so HARD RULE 2 makes every value we could supply CONJECTURED.
+
+The one column we can fill ourselves is P5 (recomputability), because that is
+a question about our own pipeline, not about a paper.
+
+What remains needed, per selected candidate, from a PRIMARY source:
+  - the digit string ACTUALLY PRINTED (P1) — not "known to high precision"
+  - whether the printed digits came from a method other than the derivation
+    they appear in (P3) — this is the column most often absent, and its
+    absence should be recorded as "unknown", never as "no"
+  - whether the normalisation appears in the BODY (P4)
+
+## OS-13 — STILL OPEN at the primary level
+
+**Status: the sigma-form of Painleve V for the sine-kernel determinant.**
+
+Two renderings have now been supplied, and they DISAGREE IN SIGN on the cross
+term. Both are by the same author and both are SECONDARY, citing JMMS 1980
+(Physica D 1, 80-158):
+
+  (P) arXiv:0804.2543:  x^2 s''^2 + 4u^2 + 4u s'^2 = 0, sigma ~ -x/pi - x^2/pi^2,
+                        det = exp(+int sigma/x dx)
+  (M) arXiv:0904.1581:  x^2 s''^2 + 4u^2 - 4u s'^2 = 0, sigma ~ +x/pi + x^2/pi^2,
+                        det = exp(-int sigma/x dx)
+
+These are sigma -> -sigma images of one another, each internally consistent
+(L-051). WE HAVE ADJUDICATED WHICH APPLIES TO OUR CONVENTION FROM OUR OWN
+DATA — sigma < 0 near the origin, so (P) — and the residuals differ by 121
+orders of magnitude, so nothing NUMERICAL waits on this item.
+
+What still waits on it is the TAG. Our ODE was discovered by numerical
+nullspace and is VERIFIED. Matching it to a published theorem is what would
+make the chain STRUCTURAL, and that requires the PRIMARY statement.
+
+WHAT IS NEEDED — and note this is a request for a STATEMENT, not a value:
+  1. The equation as PRINTED IN JMMS 1980, with its variable convention.
+  2. The initial condition as printed there, INCLUDING THE SIGN.
+  3. The determinant representation (which sign in the exponent), from the
+     same source as (1) and (2) — the trap here is precisely that mixing a
+     rendering of (1) with an initial condition from a different rendering
+     gives a wrong answer SILENTLY.
+
+Please supply all three from one source, or state that you cannot.
+
+## OS-14 — NEW. Do the published higher-order coefficients matter now?
+
+**Status: LOW PRIORITY. Probably moot; recorded so it is not silently dropped.**
+
+OS-9 was withdrawn once the sigma-PV recursion let us generate coefficients
+ourselves to arbitrary order (L-042). It stays withdrawn. This is the narrow
+successor question: is there a PUBLISHED statement of the beyond-all-orders
+term for the sine-kernel gap probability?
+
+We have MEASURED its structure (L-050, VERIFIED):
+
+    E_trunc  ~  C * exp(-2s) / s ,     C ~ 10^-2.7 (relative)
+
+with the exponent a = 1 established by a 91-point fit whose rms improves 27x
+as the window moves outward, against a = 0 which is worse by a factor 1300.
+
+If a published form exists, it is a free out-of-sample check on a result we
+obtained without any literature input. If it does not, the measurement stands
+on its own and is a small original observation. Either outcome is fine, which
+is why this is low priority — nothing downstream depends on it.
+
+What would be needed: the exponentially-small correction term to the large-s
+asymptotics, with its prefactor, from a primary source.

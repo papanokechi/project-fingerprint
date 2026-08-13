@@ -1856,3 +1856,244 @@ mismatches, no lost s. The expensive part of the pipeline is exactly
 reproducible; the defects were both in the cheap orchestration around it.
 
 ---
+
+## L-049 -- The assertion audit, and instance 12 exactly where predicted
+
+Tag: PROVEN (the criterion) + VERIFIED (the finding)
+
+The operator's sharpening: L-044 and L-048 are not merely "checks outside
+their validity domain", they are checks whose ASSERTIONS ARE WRITTEN IN
+TERMS OF QUANTITIES THE PATH UNDER TEST PRODUCES. That is checkable by
+inspection rather than by insight, so it can be mechanised -- which matters
+because two of the eleven instances were guards written specifically to
+prevent the failure they then missed. An audit that depends on the auditor
+noticing is the wrong instrument.
+
+Built assertion_audit.py. It required TWO self-corrections, both caught by
+running it against the known-broken and known-fixed guards before trusting
+it -- i.e. by giving the auditor its own positive control, which is the
+lesson of L-044 applied to the auditor.
+
+  Attempt 1: judged each Compare separately. The repaired L-048 guard is
+    `M >= orders[-1] or 2*s > orders[-1]`, a disjunction of sufficient
+    conditions; judging clauses alone flagged the first and declared the
+    FIXED code still broken. Also counted the `-1` in `orders[-1]` as an
+    external referent, so it PASSED the broken guard. Both directions wrong.
+
+  Attempt 2: asked "does the guard mention a declared symbol". On real code
+    this reported 0 findings over 65 guards, because almost everything
+    eventually traces to a parameter. Zero findings from an audit is
+    indistinguishable from an audit that does nothing -- the same shape as a
+    control that passes by being switched off.
+
+  Attempt 3, the criterion that works: ARE THE TWO SIDES OF THE COMPARISON
+    INDEPENDENT? Flag when the measured side and the threshold side share a
+    computed ancestor.
+        L-048: M <- best <- search(coeffs);  orders <- sorted(coeffs)
+        L-044: want <- ks <- vals;           rel <- pslq_search(...) <- vals
+    Both repairs severed exactly that link. The tool reports the shared
+    ancestor by name, which makes each finding actionable rather than
+    advisory.
+
+RESULT over 28 files / 66 guards: 2 findings.
+
+FINDING 1 -- sigma_recursion_check.py, the resolution control. INSTANCE 12,
+and it is a tautology. The perturbation was scaled FROM the floor,
+`eps = 100*floor/term2`, and then the verdict asserted `cerr > 10*floor`.
+Since cerr is ~100*floor by construction, the assertion reduces to
+`100 > 10`. Measured ratios: 101, 99, 99. THE CONTROL COULD NOT FAIL FOR ANY
+INPUT. It printed PASS three times and told us nothing.
+
+This is worse than the L-024 case it was written to fix. There the control
+was below its resolution and silent; here it is above its resolution and
+loud, and still measures nothing, because the thing it compares against is
+derived from the thing it measures. Being 'validated against its own
+resolution' is not sufficient if the validation is circular.
+
+  Replaced with the non-vacuous quantity: the RESOLVING POWER
+  eps_min = floor/term2, the smallest relative error in e_2 the data could
+  detect, compared against a threshold DECLARED IN ADVANCE
+  (E2_RESOLUTION_TARGET = 1e-6). Measured: 4.6e-25, 3.2e-42, 1.4e-52 at
+  s = 30, 60, 89. Plus a two-sided control -- a perturbation a decade ABOVE
+  eps_min must be detected (True) and one a decade BELOW must not (False).
+  Both directions now, so the instrument is shown to be neither deaf nor
+  hallucinating, and the test can genuinely fail.
+
+FINDING 2 -- gate.py, `consistent = diff <= 10*sigma`. Real, and it is L-028
+rediscovered mechanically: sigma_c is produced by the same fit whose accuracy
+it certifies. WAIVED, with the reason written next to the guard, because the
+gate DECISION is `agree >= GATE_DIGITS`, which compares against the external
+closed form and a declared threshold; `consistent` is diagnostic only.
+
+Waivers are counted and PRINTED, never hidden. Accepting a finding by
+deleting the check or loosening the tool would make the audit self-defeating
+in precisely the way this ledger keeps documenting.
+
+Wired into test_smoke.py with BOTH halves: the codebase must be clean AND the
+auditor must still flag the historical L-048 shape. 10/10 pass.
+
+---
+
+## L-050 -- CORRECTION to L-045: the excess is NOT flat, and the error was mine
+
+Tag: VERIFIED (91-point fit, plus a 3-point confirmation)
+
+L-045 reported "excess spread 0.05 digits over 101 units of s ... an offset,
+not drift", and concluded the remainder is a pure prefactor. The operator
+built on that, inferring a constant multiplicative factor with no algebraic
+correction and bounding any power s^-a by |a| <= 0.22.
+
+BOTH CONCLUSIONS ARE WRONG, AND THE CONTAMINATION ENTERED IN MY CODE.
+
+prediction_test.py compared measurements against a hardcoded dict
+    PREDICTED = {149: 129.4, 200: 173.8, 250: 217.3}
+These are 2s/ln(10) rounded to one decimal -- but rounded in DIFFERENT
+DIRECTIONS: -0.020, +0.082, +0.153. That injected a spurious -0.173 drift
+across s in [149, 250], which nearly cancelled the real +0.222 drift and left
+a residue of +0.05 that read as flat.
+
+    s      exact 2s/ln10   hardcoded   round err   excess(exact)  excess(hard)
+    149      129.419756      129.4      -0.0198       2.67024        2.69
+    200      173.717793      173.8      +0.0822       2.80221        2.72
+    250      217.147241      217.3      +0.153        2.89276        2.74
+
+With exact predictions the excess drifts by 0.2225 over the range, against
+log10(250/149) = 0.2248. Ratio 0.998.
+
+INDEPENDENT CONFIRMATION, and it came first. A 3-parameter fit
+    digits(s) = A*s + a*log10(s) + B
+over 91 certified points, s in [60, 250]:
+
+    window     n      A            a          rms
+    s >=  60   91   0.868599146   0.994141   1.97e-5
+    s >=  80   71   0.868596604   0.994979   8.05e-6
+    s >= 100   52   0.868595196   0.995505   3.32e-6
+    s >= 120   32   0.868594215   0.995908   1.73e-6
+    s >= 140   12   0.868593015   0.996430   7.42e-7
+                    2/ln10 = 0.868588964
+
+A converges monotonically to 2/ln(10) and a converges monotonically to 1,
+with the rms residual falling 27x as the window moves out -- the signature of
+an asymptotic law, not a fitted coincidence. Competing hypotheses on 91
+points: a free gives rms 1.97e-5; a = 1/4 gives 0.0194; a = 0 gives 0.0259.
+The a = 0 hypothesis is worse by a factor of 1300.
+
+CONCLUSION (VERIFIED): the beyond-all-orders remainder is
+
+    E_trunc ~ C * exp(-2s) / s        with a = 1, not 0
+
+So there IS an algebraic prefactor, it is 1/s, and the operator's "clean
+structural fact measured for free" was measured off my contaminated numbers.
+
+Three things worth stating.
+
+1. The general rule, and it is new in this session: NEVER COMPARE A
+   MEASUREMENT AGAINST A ROUNDED PREDICTION. The rounding here was 0.15
+   digits against an effect of 0.22 digits -- the same order as the signal.
+   Rounding a prediction for display is fine; storing the rounded value and
+   subtracting it is not.
+
+2. It is the aliasing failure of L-030 in a new costume. There, validation
+   points sat on the lattice used for fitting. Here, the prediction was
+   quantised at a scale comparable to the effect. Both are "the design was
+   confounded with the parameter", and both produced a plausible null.
+
+3. On provenance: the operator's inference was sound given the inputs, and
+   the inputs were mine. The lesson is not that the operator erred; it is
+   that a derived claim inherits the contamination of its inputs silently,
+   and that pre-registering a prediction protects against fitting after the
+   fact but NOT against a biased comparison baseline. The pre-registration in
+   L-045 was genuine and is untouched; what failed was the yardstick.
+
+FIXED: prediction_test.py now computes 2s/ln(10) exactly at full precision;
+the verdict reports spread/log10(s_max/s_min) as a direct estimate of a and
+names the 1/s prefactor. The smoke test now asserts a ~ 1 rather than
+asserting flatness -- the previous assertion would have locked the artifact
+in. New: excess_structure.py, run as part of `verify.ps1 predict`.
+
+The slope claim of L-045 survives unchanged and is strengthened: A agrees
+with 2/ln(10) to 5 significant figures across 91 points. Only the reading of
+the excess is corrected.
+
+---
+
+## L-051 -- The sigma -> -sigma sign trap, resolved by data (2nd instance)
+
+Tag: VERIFIED
+
+The operator supplied a SECOND rendering of the sigma-form, by the same
+author, with the opposite sign on the cross term:
+
+  (P) arXiv:0804.2543   x^2 s'' ^2 + 4u^2 + 4u s'^2 = 0,  sigma ~ -x/pi - x^2/pi^2,
+                        det = exp(+int_0^{pi s} sigma/x dx)
+  (M) arXiv:0904.1581   x^2 s'' ^2 + 4u^2 - 4u s'^2 = 0,  sigma ~ +x/pi + x^2/pi^2,
+                        det = exp(-int_0^{pi s} sigma/x dx)
+      (u = x sigma' - sigma)
+
+Not a contradiction: (M) is the sigma -> -sigma image of (P). Under that map
+u -> -u, so u^2 and x^2 sigma''^2 are invariant while u sigma'^2 flips. Each is
+internally consistent. The hazard is entirely in MIXING them: take the ODE
+from one paper and the initial condition or the exponent sign from the other
+and you get a wrong answer with no error raised.
+
+Both are secondary renderings of JMMS 1980, so OS-13 REMAINS OPEN at the
+primary level. But the trap can be disarmed without resolving OS-13, because
+the discriminant is observable in our own data: the SIGN OF SIGMA NEAR 0.
+
+sigma_sign_trap.py, with tau(x) = sigma(x/2), x = 2s:
+
+     s      sigma(s)      resid (P)     resid (M)
+   0.25    -0.188422       0.0          5.19e-2
+   1.00    -1.260270      -7.7e-121      6.67
+   8.00   -64.251102      -1.8e-114      3.26e4
+
+sigma < 0 near the origin, because log det is DECREASING. Our convention is
+(P) / arXiv:0804.2543, and (P) is satisfied to the ambient precision floor
+while (M) fails by 121 orders of magnitude. No source was consulted to decide
+this; the residual decided it.
+
+SECOND INSTANCE of the rule from L-036: CONVENTION TRAPS ARE ADJUDICATED BY
+THE NUMERICS, NOT BY THE SOURCE. First instance was alpha vs 2*alpha, where a
+factor-lambda error shifts c by -(1/4)log(lambda) and the fit refuses the
+wrong convention. The pattern now has a general form worth stating: whenever a
+target has a KNOWN LOG COEFFICIENT or a known sign structure, the numerics
+adjudicate the normalisation, which inverts the usual dependency on the
+literature. Carry into Phase 1, where XX-chain and EFP conventions are more
+varied than the sine-kernel case.
+
+Consistency check, algebraic and literature-free: multiplying (P) through by
+lambda^2 under x = lambda*s sends the u^2 coefficient 4 -> 4 lambda^2 while
+leaving the u sigma'^2 coefficient fixed. Our numerically-discovered ODE has 16
+and 4, so lambda = 2 exactly -- an independent confirmation of the x = 2s
+normalisation requiring no convention from any source.
+
+DEPENDENCY-CLASS NOTE, which is the operator's point and is general: the 132
+digits rest on an ODE found by numerical nullspace. That was tagged VERIFIED
+and recorded as "nothing depends on it". Reading c off its recursion made it
+load-bearing WITHOUT THE ITEM ITSELF CHANGING. AN ITEM'S DEPENDENCY CLASS CAN
+CHANGE WHILE THE ITEM DOES NOT, so "nothing depends on this" must be re-checked
+whenever anything new is derived, not recorded once.
+
+---
+
+## L-052 -- Credential history check: clean
+
+Tag: VERIFIED
+
+Following L-046 (`git add -A` from a subdirectory stages from the REPO ROOT,
+which nearly committed an unrelated token script), the operator asked the
+sharper question: was it ever committed in EARLIER history?
+
+    git log --all --oneline -- '*set_prod_token*'   -> empty
+    git log --all --oneline -- '*token*'            -> empty
+    git ls-files | findstr /i token                 -> empty
+
+Nothing matching was ever tracked, on any branch or ref. The sibling trees in
+this repository have history but contain no token files.
+
+The near-miss remains a real defect in procedure even though it caused no
+leak. Standing rule, already in force since L-046: stage by explicit pathspec
+(`git add toeplitz_phase0/`) and print `git diff --cached --name-only` before
+every commit. A miss that happens not to land is still the same miss.
+
+---
