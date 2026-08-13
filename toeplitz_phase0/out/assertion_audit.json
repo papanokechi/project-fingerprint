@@ -1,0 +1,22 @@
+{
+  "files": 29,
+  "guards": 69,
+  "circular": [],
+  "waived": [
+    {
+      "file": "gate.py",
+      "func": "main",
+      "line": 85,
+      "kind": "flag:consistent",
+      "severity": "CIRCULAR-COMPARISON",
+      "computed": [
+        "diff",
+        "sigma"
+      ],
+      "declared": [
+        "d"
+      ],
+      "waiver": "diagnostic only -- the GATE decision is `agree >="
+    }
+  ]
+}

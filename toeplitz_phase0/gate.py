@@ -75,6 +75,13 @@ def main():
     print(f"  AGREEMENT                     = {mp.nstr(agree, 8)} digits")
     print(f"  gate threshold                = {GATE_DIGITS} digits")
 
+    # AUDIT-REVIEWED: diagnostic only -- the GATE decision is `agree >=
+    # GATE_DIGITS`, which compares against the external closed form and a
+    # declared threshold. This line does share provenance (sigma_c is produced
+    # by the same fit whose accuracy it certifies) and that is precisely the
+    # L-028 weakness, independently rediscovered by assertion_audit.py. It is
+    # retained as a diagnostic, not relied upon; the externally-validated
+    # error bar is the recursion route's (cross-s ratio 0.832, L-045).
     consistent = diff <= 10 * sigma
     print(f"\n  agreement vs error bar: |c - candidate| {'<=' if consistent else '>'}"
           f" 10*sigma_c  -> {'CONSISTENT' if consistent else 'INCONSISTENT'}")

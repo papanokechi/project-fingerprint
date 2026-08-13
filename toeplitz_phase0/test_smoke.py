@@ -235,9 +235,66 @@ def test_prediction_law_holds_at_two_points():
     if not os.path.exists("out/prediction_test.json"):
         import pytest
         pytest.skip("run prediction_test.py first")
+    import math
     d = json.load(open("out/prediction_test.json"))
     pts = [p for p in d["points"] if not p["saturated"]]
     assert len(pts) >= 2
-    exc = [p["honest"] - p["predicted"] for p in pts]
-    assert max(exc) - min(exc) < 1.0, f"excess drifts: {exc}"
     assert 0.85 < d["measured_slope"] < 0.89
+
+    # The excess is NOT flat.  Asserting flatness was the artifact of the
+    # rounded PREDICTED dict (L-050); against the exact 2s/ln10 the excess
+    # drifts by one decade per decade of s, i.e. the beyond-all-orders
+    # remainder carries a 1/s prefactor.
+    exc = [p["honest"] - p["predicted"] for p in pts]
+    spread = max(exc) - min(exc)
+    lo = min(p["s"] for p in pts)
+    hi = max(p["s"] for p in pts)
+    a = spread / math.log10(hi / lo)
+    assert abs(a - 1.0) < 0.15, f"exponent a={a:.3f}, expected ~1"
+
+
+def test_assertion_audit_is_clean_and_can_still_fail():
+    """L-049: the mechanical guard audit, plus proof it is not switched off.
+
+    An audit that reports zero findings is indistinguishable from an audit
+    that does nothing -- which is the failure this project keeps hitting.  So
+    this test does both halves: the codebase must be clean, AND the auditor
+    must still flag the historical L-048 guard, whose shape is reproduced
+    here verbatim.
+    """
+    import ast
+    import assertion_audit as A
+
+    broken = """
+def main():
+    coeffs = load_coeffs("x.json")
+    orders = sorted(coeffs)
+    best = search(coeffs)
+    M, cv, omit = best
+    saturated = M >= orders[-1]
+"""
+    fixed = """
+def main(s_int):
+    coeffs = load_coeffs("x.json")
+    orders = sorted(coeffs)
+    best = search(coeffs)
+    M, cv, omit = best
+    saturated = bool(M >= orders[-1] or 2 * s_int > orders[-1])
+"""
+
+    def findings(src):
+        tree = ast.parse(src)
+        out = []
+        for fn in [n for n in ast.walk(tree)
+                   if isinstance(n, ast.FunctionDef)]:
+            cls = A.Classifier(set()).run(fn)
+            for _, expr in A.guard_nodes(fn):
+                out += A.audit_expr(expr, cls)
+        return out
+
+    # Positive control on the auditor itself.
+    assert findings(broken), "auditor no longer detects the L-048 shape"
+    assert not findings(fixed), "auditor flags the repaired guard"
+
+    # And the codebase is clean (waivers are allowed but must be explicit).
+    assert A.main() == 0, "unwaived circular guard present; see out/"

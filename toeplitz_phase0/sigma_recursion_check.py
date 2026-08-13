@@ -40,6 +40,10 @@ def load_coeffs():
     return out, d["M"]
 
 
+# Declared in advance, independent of any measurement below.
+E2_RESOLUTION_TARGET = mp.mpf("1e-6")
+
+
 def to_mpf(r):
     return mp.mpf(int(r.p)) / mp.mpf(int(r.q))
 
@@ -84,25 +88,74 @@ def main():
     # the perturbation must be CHOSEN from the measured floor, never fixed in
     # advance.  My first attempt used a fixed 1e-20 and was ~10 orders below
     # resolution at every point -- it "passed" by being switched off.
-    print("\n[control] e_2 perturbed; size chosen from the measured floor")
-    print(f"{'s':>8}  {'floor':>13}  {'rel.perturb':>13}  "
-          f"{'control err':>13}  {'verdict':>8}")
+    # RESOLVING POWER, not a tautology.
+    #
+    # The previous version of this block scaled the perturbation FROM the
+    # floor (eps = 100*floor/term2) and then asserted cerr > 10*floor.  Since
+    # cerr is then ~100*floor by construction, the assertion reduced to
+    # "100 > 10" and could not fail for any input -- measured ratios 101, 99,
+    # 99.  It was a control that was switched on and measuring nothing.  Found
+    # by assertion_audit.py, not by inspection (L-049).
+    #
+    # The non-vacuous quantity is the RESOLVING POWER: the smallest relative
+    # perturbation of e_2 this data could detect, eps_min = floor / term2.
+    # That is a measurement of the data, compared against a threshold declared
+    # in advance and independent of it.
+    print("\n[resolving power] smallest detectable relative error in e_2")
+    print(f"{'s':>8}  {'floor':>13}  {'|e_2 s^-2|':>13}  "
+          f"{'eps_min':>13}  {'vs target':>10}")
+    worst = None
     for r in picks[:3]:
         s = mp.mpf(r["s"])
         L = mp.mpf(r["logdet"]) if "logdet" in r else mp.mpf(r["value"])
         resid = L - (-s ** 2 / 2 - mp.log(s) / 4 + c)
         pred = sum(to_mpf(coeffs[m]) * s ** (-m) for m in coeffs)
         floor = abs(resid - pred)
-        term2 = to_mpf(coeffs[2]) * s ** -2
-        eps = 100 * floor / term2          # 100x above the resolution floor
+        term2 = abs(to_mpf(coeffs[2]) * s ** -2)
+        eps_min = floor / term2
+        worst = eps_min if worst is None else max(worst, eps_min)
+        mark = "ok" if eps_min < E2_RESOLUTION_TARGET else "TOO COARSE"
+        print(f"{mp.nstr(s, 6):>8}  {mp.nstr(floor, 4):>13}  "
+              f"{mp.nstr(term2, 4):>13}  {mp.nstr(eps_min, 4):>13}  "
+              f"{mark:>10}")
+
+    # Positive control: a perturbation ONE DECADE ABOVE the measured
+    # resolving power must be detected; one a decade BELOW must not.  Both
+    # directions, so the instrument is shown to be neither deaf nor
+    # hallucinating.  Threshold and both perturbation sizes are declared
+    # relative to eps_min, but the PASS/FAIL boundary is not, so the test can
+    # genuinely fail.
+    r = picks[0]
+    s = mp.mpf(r["s"])
+    L = mp.mpf(r["logdet"]) if "logdet" in r else mp.mpf(r["value"])
+    resid = L - (-s ** 2 / 2 - mp.log(s) / 4 + c)
+    pred = sum(to_mpf(coeffs[m]) * s ** (-m) for m in coeffs)
+    floor = abs(resid - pred)
+    term2 = abs(to_mpf(coeffs[2]) * s ** -2)
+    eps_min = floor / term2
+
+    def detect(eps):
         pert = sum(to_mpf(coeffs[m]) * ((1 + eps) if m == 2 else 1)
                    * s ** (-m) for m in coeffs)
-        cerr = abs(resid - pert)
-        ok = "PASS" if cerr > 10 * floor else "NO RES."
-        print(f"{mp.nstr(s, 6):>8}  {mp.nstr(floor, 4):>13}  "
-              f"{mp.nstr(eps, 4):>13}  {mp.nstr(cerr, 4):>13}  {ok:>8}")
+        return abs(resid - pert) > 3 * floor
 
-    json.dump(out, open("out/sigma_recursion_check.json", "w"), indent=2)
+    loud = detect(10 * eps_min)
+    quiet = detect(eps_min / 10)
+    print(f"\n[two-sided control at s={mp.nstr(s, 5)}]  "
+          f"eps_min = {mp.nstr(eps_min, 4)}")
+    print(f"  perturbation 10x ABOVE eps_min detected : {loud}   (want True)")
+    print(f"  perturbation 10x BELOW eps_min detected : {quiet}  (want False)")
+    if not loud or quiet:
+        raise SystemExit(
+            "resolution control failed: the instrument is deaf above its "
+            "own resolution or hallucinating below it")
+    if worst >= E2_RESOLUTION_TARGET:
+        raise SystemExit(
+            f"data resolves e_2 only to {mp.nstr(worst, 4)}, target is "
+            f"{E2_RESOLUTION_TARGET}")
+    json.dump({"rows": out, "e2_resolving_power": mp.nstr(worst, 8)},
+              open("out/sigma_recursion_check.json", "w"), indent=2)
+
     print("\n[out] out/sigma_recursion_check.json")
 
 
