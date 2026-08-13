@@ -1738,3 +1738,55 @@ file because L-044 established that promoting a rule does not make it
 followed; the check must be in the command that is actually run.
 
 ---
+
+## L-047 -- Full `verify` run from scratch: clean, no drift
+
+Tag: VERIFIED (complete rebuild, exit code 0)
+
+The operator's argument for not deferring this was L-025: a defect had been
+found in the untested reproduction path BY INSPECTION, which is direct
+evidence that the untested path harbours defects. Run now, before Phase 1, so
+that the baseline is clean when the interesting numbers arrive.
+
+`.\verify.ps1 verify` -- every stage from an empty out/, ~75 min, exit 0.
+Log at out/verify_full.log. Stage results, all matching the incremental runs:
+
+  smoke tests ............ 9/9 passed
+  grid spec .............. BLOCKS generates 224 points; data file holds 224;
+                           set equality both directions -- the L-025 defect
+                           is confirmed fixed on the path that actually runs
+  spd diagnostic ......... under-resolved (s=30,n=40) correctly RAISED
+  node convergence ....... s=20: 13.7 -> 27.3 -> 42.6 -> 59.2 -> 77.0 -> 95.8
+                           agreeing digits at n/s = 2.0 ... 4.5
+  factored vs full ....... rel diff 2.3e-50 (s=1), 1.1e-49 (s=5)
+  gate.py ................ agreement 74.133 digits vs 12-digit threshold;
+                           CONSISTENT with the error bar; GATE PASSED
+  run_pslq.py ............ NOT reportable at b=8 at the fit's precision, so
+                           it shrank the basis per the pre-declared nesting
+                           and reported at b=6. Correct behaviour: the fit
+                           route has ~74 digits and b=8 needs 77-78.
+  sigma_ode.py ........... 1 genuine null direction, gap 45.5 decades
+  recursion .............. a_2 = -1/16, e_2 = 1/32, exact
+  direct_c.py ............ agreement 131.81 digits (claimable 131.81)
+  run_pslq_b8.py ......... reportable, [-12,1,0,0,36,0,0,0], controls passed
+
+Two things worth noting rather than glossing.
+
+1. The two PSLQ drivers DISAGREE on b=8, and that is correct. run_pslq.py is
+   fed the FIT's c (~74 digits) and correctly refuses b=8; run_pslq_b8.py is
+   fed the RECURSION's c (131.81 digits) and correctly reports it. A pipeline
+   in which both reported would be one in which the digit gate was not doing
+   anything. The disagreement is the gate working.
+
+2. The default `verify` target reproduces 131.81 digits, not the 220.04 of
+   L-045, because it uses the shipped grid (s <= 149) and M=400. The 220-digit
+   result is reproduced by the separate `predict` target, which rebuilds the
+   s=200/250 points and the M=600 recursion. Both were run to completion this
+   session and both are reproducible from scratch; they are different targets
+   with different costs, and the digit counts are not interchangeable.
+
+No stage degraded, no stage was skipped except the two PSLQ searches that are
+skipped BY DESIGN (running them at that precision would be a guaranteed-fail
+protocol, not a test -- L-020).
+
+---
