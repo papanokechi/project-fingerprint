@@ -531,3 +531,69 @@ is why this is low priority — nothing downstream depends on it.
 
 What would be needed: the exponentially-small correction term to the large-s
 asymptotics, with its prefactor, from a primary source.
+
+---
+
+## OS-13 -- DOWNGRADED to low priority. Still open; do not spend on it.
+
+The operator corrected their own earlier framing, and the correction is right.
+What is load-bearing is that the ODE is CORRECT, and the evidence for that does
+not route through the literature at all:
+
+  - 79-digit out-of-sample agreement after nullspace discovery
+  - 220-digit agreement at the calibration gate
+  - the lambda = 2 algebraic identity, which needs no convention from any source
+  - the sign trap failing by 121 orders of magnitude (L-051)
+  - and now A = 2 and theta = 1/2 as exact rationals from the linearization,
+    reproduced independently by the large-order growth of the coefficients,
+    with the resulting exponent matching a measurement made by a disjoint code
+    path (L-053)
+
+A primary citation would upgrade the epistemic LABEL and add evidence
+independent of this pipeline, which is not nothing. It cannot move confidence
+much given the above. Bornemann arXiv:0804.2543 already supplies equation,
+initial condition and exponent sign in one self-consistent place, so the
+residual risk is only that a secondary transcribed JMMS wrongly -- a bounded
+and small tail.
+
+STANDING INSTRUCTION: if a primary falls into your lap, take it. Do not hunt.
+Mehta Ch. 21 is the accessible route Bornemann points at.
+
+## OS-15 -- NEW. The Stokes constant C, and why it is NOT being chased
+
+**Status: QUEUED BEHIND PHASE 1 TARGET SELECTION. Deliberately not worked.**
+
+L-053 measured the beyond-all-orders prefactor
+    E_trunc ~ C (A s)^(beta - 1/2) exp(-A s),  A = 2, beta = -1/2
+    C = 0.31830988618379067153776752674503...
+and it agrees with 1/pi to at least 64 digits, monotonically in the
+extrapolation degree.
+
+WHAT WAS DONE: one declared candidate, checked by inspection. No PSLQ, no
+basis, no search. That costs nothing and consumes no Phase 1 budget.
+
+WHAT IS NOT BEING DONE, and this is the point of the entry: establishing it.
+C is a Stokes constant for a Painleve transcendent. Proving or even properly
+vetting the identification is a real piece of work and is exactly the adjacent
+target that would consume a phase. It is queued.
+
+WHAT WOULD BE NEEDED IF IT IS EVER PROMOTED, from a primary source:
+  1. Whether the Stokes constant for the sigma-form of PV at this parameter
+     value is known in closed form, and its value as PRINTED.
+  2. Whether the beyond-all-orders term for the sine-kernel gap probability
+     appears anywhere with its prefactor (this supersedes OS-14, which asked
+     the same question less precisely).
+  3. The convention the source uses for the trans-series normalisation --
+     since L-051 and L-034 both show that convention, not value, is where the
+     silent errors live.
+
+Note the provenance-column scoring, which is why this is interesting rather
+than merely available: if the answer to (1) is "conjectured or absent", C has
+a strong Phase 1 profile -- and unusually, we would arrive with 64 digits in
+hand rather than needing to earn them.
+
+## OS-14 -- SUPERSEDED by OS-15 item 2.
+
+Retained rather than removed (append-only discipline). The question was
+whether a published beyond-all-orders term exists; OS-15 asks it more sharply
+and with the prefactor attached.

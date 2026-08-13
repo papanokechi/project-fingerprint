@@ -1,0 +1,40 @@
+{
+  "A_symbolic": "2",
+  "theta_symbolic": "1/2",
+  "A_largeorder_free": "2.0",
+  "beta": "-0.5",
+  "theta_from_beta": "0.5",
+  "a_derived": "1.0",
+  "K_stokes": "0.25397454373696387914",
+  "C_prefactor": "0.31830988618379067154",
+  "A_agreement": "8.07397e-33",
+  "theta_agreement": "1.0141e-31",
+  "beta_from_half": "1.0141e-31",
+  "least_term_check": [
+    {
+      "s": 149,
+      "m_star": 298,
+      "least_term": "8.10842793475e-133",
+      "predicted": "8.1265881718e-133",
+      "ratio": "0.997765330706"
+    },
+    {
+      "s": 200,
+      "m_star": 400,
+      "least_term": "3.04301112575e-177",
+      "predicted": "3.04808708176e-177",
+      "ratio": "0.998334707679"
+    },
+    {
+      "s": 250,
+      "m_star": 500,
+      "least_term": "9.05920535987e-221",
+      "predicted": "9.07129242055e-221",
+      "ratio": "0.998667548115"
+    }
+  ],
+  "consistent": true,
+  "C_minus_inv_pi": "1.47846e-28",
+  "C_candidate": "1/pi  (CONJECTURED: inspection, one candidate, no PSLQ)",
+  "note": "a_derived comes from the ODE alone; it is NOT fitted to the honest-digit counts of L-050."
+}

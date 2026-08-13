@@ -292,6 +292,69 @@ def _waiver(src_lines, lineno):
     return None
 
 
+
+# --------------------------------------------------------------------------
+# SECOND PASS -- transcribed numeric literals
+# --------------------------------------------------------------------------
+#
+# L-050's root cause was not a circular guard.  It was a hardcoded dict of
+# values TRANSCRIBED AT AUTHORING TIME instead of computed at runtime:
+#
+#     PREDICTED = {149: 129.4, 200: 173.8, 250: 217.3}
+#
+# The transcription rounded 2s/ln(10) inconsistently, injecting a spurious
+# drift the same size as the effect under study.  The special-case rule was
+# "never subtract a rounded prediction"; the general rule is NO TRANSCRIBED
+# NUMERICS IN VERIFICATION CODE, and unlike the guard criterion it really is
+# grep-able.
+#
+# The discriminant between a SPECIFICATION and a TRANSCRIPTION is precision.
+# A declared threshold is round by construction -- 10, 1e-17, 1e4, 0.5.  A
+# transcribed value carries the fingerprint of a computation someone ran
+# elsewhere: three or more significant digits.  That is the test applied here.
+
+SIGDIG_LIMIT = 3        # declared: >= this many sig digits reads as transcribed
+
+
+def _sigdigits(v):
+    """Significant digits in a numeric literal, ignoring sign and exponent."""
+    if isinstance(v, bool) or not isinstance(v, (int, float)):
+        return 0
+    if v == 0:
+        return 0
+    s = repr(abs(v))
+    if "e" in s or "E" in s:
+        s = s.split("e")[0].split("E")[0]
+    s = s.replace(".", "").lstrip("0").rstrip("0")
+    return len(s)
+
+
+def numeric_transcriptions(tree, src_lines, fname):
+    """Numeric literals precise enough to be transcribed results."""
+    out = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Constant):
+            continue
+        if isinstance(node.value, bool) or not isinstance(
+                node.value, (int, float)):
+            continue
+        n = _sigdigits(node.value)
+        if n < SIGDIG_LIMIT:
+            continue
+        # Integers are overwhelmingly counts, node numbers, precisions and
+        # array sizes -- 120 dps, M=600, s=149.  Those are inputs, and an
+        # input is exactly what a check SHOULD be anchored to.  The failure
+        # mode is a transcribed non-integer.
+        if isinstance(node.value, int):
+            continue
+        ln = getattr(node, "lineno", 0)
+        out.append({"file": fname, "line": ln, "value": repr(node.value),
+                    "sigdigits": n,
+                    "src": src_lines[ln - 1].strip()[:90] if ln else "",
+                    "waiver": _waiver(src_lines, ln)})
+    return out
+
+
 def main():
     root = os.path.dirname(os.path.abspath(__file__))
     files = sorted(f for f in os.listdir(root) if f.endswith(".py"))
@@ -328,6 +391,16 @@ def main():
                                      "computed": comp, "declared": decl,
                                      "waiver": _waiver(src_lines, ln)})
 
+    transcriptions = []
+    for f in files:
+        src = open(os.path.join(root, f), encoding="utf-8").read()
+        try:
+            tree = ast.parse(src)
+        except SyntaxError:
+            continue
+        transcriptions += numeric_transcriptions(tree, src.splitlines(), f)
+    tr_hard = [x for x in transcriptions if not x["waiver"]]
+
     waived = [x for x in findings if x["waiver"]]
     hard = [x for x in findings
             if x["severity"] == "CIRCULAR-COMPARISON" and not x["waiver"]]
@@ -341,6 +414,12 @@ def main():
     print(f"  guard expressions ........ {n_guards}")
     print(f"  CIRCULAR-COMPARISON ...... {len(hard)}   <-- the L-044/L-048 class")
     print(f"  waived (reviewed) ........ {len(waived)}")
+    print(f"  TRANSCRIBED NUMERICS ..... {len(tr_hard)}   <-- the L-050 class")
+    print(f"    (waived transcriptions)  {len(transcriptions) - len(tr_hard)}")
+    for x in tr_hard[:20]:
+        print(f"      {x['file']}:{x['line']}  {x['value']} "
+              f"({x['sigdigits']} sig digits)")
+        print(f"          {x['src']}")
 
 
     if hard:
@@ -360,10 +439,12 @@ def main():
             print(f"  {x['file']}:{x['line']}  {x['func']}()")
             print(f"      {x['waiver']}")
     json.dump({"files": len(files), "guards": n_guards,
-               "circular": hard, "waived": waived},
+               "circular": hard, "waived": waived,
+               "transcribed": tr_hard,
+               "transcribed_waived": len(transcriptions) - len(tr_hard)},
               open("out/assertion_audit.json", "w"), indent=2)
     print("\n[out] out/assertion_audit.json")
-    return 1 if hard else 0
+    return 1 if (hard or tr_hard) else 0
 
 
 if __name__ == "__main__":

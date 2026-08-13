@@ -26,6 +26,15 @@ import time
 from mpmath import mp
 
 import extend_adaptive as EA
+import math
+
+# 2/ln(10): honest digits gained per unit of s, set by the
+# beyond-all-orders remainder exp(-2s) (L-053).  COMPUTED, never
+# transcribed: rounding it to 0.866 understated the budget by 0.65
+# digits at s=250, and a transcribed rounding of this very constant
+# is what produced the L-050 artifact.
+DIGITS_PER_S = 2.0 / math.log(10.0)
+
 
 OUT = "out/highs_points.json"
 
@@ -43,8 +52,8 @@ def main():
         # Certify comfortably above the predicted requirement so the data
         # never becomes the binding budget (it is currently slack by ~57
         # digits at s=149 and we want to keep it that way).
-        target = int(0.869 * s_int) + 60
-        floor = int(0.869 * s_int) + 40
+        target = int(DIGITS_PER_S * s_int) + 60
+        floor = int(DIGITS_PER_S * s_int) + 40
         t0 = time.time()
         print(f"[build] s={s_int} target={target} floor={floor}", flush=True)
         row = EA.build_point(s, target=target, floor=floor)
