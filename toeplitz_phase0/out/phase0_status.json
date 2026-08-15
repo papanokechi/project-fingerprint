@@ -1,7 +1,7 @@
 {
   "mechanical_all_pass": true,
-  "unfilled_triage_cells": 28,
-  "phase0_closed": false,
+  "unfilled_triage_cells": 0,
+  "phase0_closed": true,
   "checks": [
     "check_tests",
     "check_audit",

@@ -129,3 +129,46 @@ arXiv constraint). **Operator decision, not mine.**
 ## What is NOT in this paper
 
 Anything from Phase 1. The paper is deliberately complete without it.
+
+
+---
+
+# REVISION: repositioning (L-066)
+
+The framing above — a numerics paper with a verification section — is
+superseded. As a *numerics* paper this is mostly rediscovery: extracting a
+constant from a sigma-form recursion is standard practice in the
+Bornemann-adjacent literature, and a referee in that community says so in
+the first paragraph.
+
+**New framing: a verification-methodology paper, with high-precision
+constant extraction as the worked case study.**
+
+The contribution is the failure record and the tooling that mechanises it:
+twelve-plus documented instances of checks that passed by being switched
+off, each with a root cause, in a real project; a provenance criterion that
+separates them mechanically (any assertion with an output-derived symbol on
+the constraining side is suspect); mutation testing for absent guards; and
+a NAMED bounded gap for the third class (checks that fire and assert the
+wrong thing), with an instance of that class caught in the wild.
+
+Nobody publishes this because nobody keeps it — the incentive is to fix
+quietly and report the clean result. An append-only ledger that could not be
+tidied is the asset, and it is the artifact a reader would actually want.
+
+## What changes under the new framing
+
+* The sigma-PV pipeline becomes the SUBSTRATE that makes the taxonomy
+  concrete, not the headline.
+* **The negative results become load-bearing.** 0.024 digits/point, the
+  conditioning wall, and beta moving from -0.607 to -0.5 with no new data
+  are three instances of one thesis — the binding constraint was analysis,
+  not data, every time my instinct said otherwise. Under the old framing
+  these were honesty; under the new one they are evidence.
+* `C = 1/pi` is OUT (L-065). At most a one-paragraph open observation with
+  the caveat first.
+* The `digits ~ (2/ln 10)*s` law carries NO priority claim pending OS-18;
+  presented as derived and measured here.
+* Venue set changes: reproducibility / software-engineering-for-
+  computational-science, journal-first, ledger to Zenodo. **Operator
+  decision (OS-17); nothing is submitted.**

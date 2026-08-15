@@ -2582,3 +2582,156 @@ conflict: provenance auditing asks "could this guard be circular", mutation
 asks "could this guard fire", and a field needs an answer to both.
 
 Kill count 5 -> 6; no field carrying a VERIFIED claim now survives.
+
+
+---
+
+## L-063 — The deadlock was mine, not the operator's, and it was a category error about my own rules
+
+Tag: **STRUCTURAL** (process correction).
+
+I wrote that entry condition #11 "CANNOT BE DISCHARGED FROM INSIDE THE
+SESSION" and printed it as a verdict. That was wrong, and the error is
+instructive because it is the *inverse* of the failure I have been hunting
+all session. Everywhere else I found checks that passed by being switched
+off. Here I built a check that FAILED by being switched off — a gate that
+could never open, reported as an external block.
+
+The distinction I collapsed: HARD RULE 2 forbids provenance taken from
+RECALL, mine or the operator's. It says nothing about READING. Provenance
+columns are facts printed in a body — digits shown, second proofs cited,
+where the normalisation is stated — and bodies are fetchable. I had already
+proved this to myself in L-026 by fetching and quoting a primary, and then
+wrote a gate premised on it being impossible.
+
+Note also that I had recorded the correct position in this very file:
+`phase1_triage.md` said these cells are "*fetchable*, not merely *askable*",
+and then deferred on the ground that fetching them "is target selection, and
+target selection is the first act of Phase 1". That reasoning is circular —
+it makes the last act of Phase 0 unreachable by defining it as Phase 1 work.
+
+Generalisation worth keeping: **a blocked-on-operator item should be
+classified by what kind of thing it needs, not by how hard it feels.**
+Blocked-on-a-FACT is discharged by reading. Blocked-on-JUDGEMENT or
+-PERMISSION genuinely requires the operator. I had one of the first kind
+filed as the second for four rounds.
+
+## L-064 — Triage table filled from primaries; PHASE 0 CLOSED
+
+Tag: **STRUCTURAL** (theorem statements read directly from bodies) with the
+search-scope caveat below tagged **VERIFIED** (a listing query I ran).
+
+Bodies read via ar5iv: arXiv:2002.06370 (Pearcey, Thm 1.1), arXiv:2209.12524
+(hard edge Pearcey, Thm 1.1), arXiv:2108.04495 (two-interval Airy, Thm 1).
+Listing queries against the arXiv API for currency. Full table in
+`phase1_triage.md`, REVISION 5.
+
+Three findings:
+
+**(1) The gamma < 1 / gamma = 1 pattern is confirmed from primaries and is
+currently exceptionless** across Pearcey, hard edge Pearcey, tacnode, hard
+edge tacnode, and confluent hypergeometric: the thinned/deformed constant is
+done in every case, the unthinned one in none. arXiv:2007.12691 states the
+deformed result "complements our previous work on the undeformed case",
+i.e. the authors themselves treat gamma = 1 as the case they could not do.
+This was handed to me as a heuristic to falsify. It survived falsification,
+and from primaries rather than from the recollection that produced it.
+
+**(2) P1 = 0 for every live candidate — a stronger condition than the column
+was built to detect.** The column was designed to find low-precision
+published values that a high-precision recomputation could challenge. The
+actual state is that NO DIGIT STRING EXISTS. P3 is therefore not "no" but
+*undefined*. This removes transcription risk entirely and also removes any
+possibility of calibrating against the target — which is a real cost, not
+only a benefit: on the Phase 1 object there is nothing to check the answer
+against, and the sine kernel's calibration does not transfer.
+
+**(3) The frontier is later than the picture I was given and moves the same
+way.** Most recent hit arXiv:2606.17771 (June 2026): constant term again for
+the generating-function/thinned object. arXiv:2508.10463 (Aug 2025) still
+says "up to an undetermined constant". Four years after 2002.06370 wrote
+"we will leave this issue to a future publication", no such publication
+appears in the listing.
+
+**Scope caveat, stated because a NEGATIVE result is being claimed.** The
+arXiv API `abs:`/`all:` fields index metadata, not full text. A
+determination published without an arXiv posting, or with an abstract not
+using these phrases, would be MISSED. The defensible claim is: *no arXiv
+posting whose metadata matches these queries announces a value for the
+gamma = 1 constants as of 2026-08-16*. It is NOT "these constants are open".
+
+**Selection: C-1, the Pearcey determinant constant at gamma = 1**
+(arXiv:2002.06370, Thm 1.1). Recorded before any Pearcey determinant has
+been evaluated, per entry condition #2. Decisive reasons: P5 checked by us
+rather than asserted (on arg t = pi/4 one has t^4 = -|t|^4, so q's integrand
+decays — both p and q are absolutely convergent 1-D integrals of entire
+integrands); and it carries a FREE INPUT-DERIVED CONTROL, since Theorem 1.1
+states C is independent of rho while four other terms depend on it.
+Computing C at several rho and demanding agreement is a check whose
+constraining side comes from a published theorem rather than from our own
+output — entry condition #10 satisfied by construction, which is rare.
+
+Entry conditions 1, 2, 9, 10, 11 CLEAR. Conditions 3-6 are measurements on
+the Phase 1 object and performing them IS Phase 1.
+
+**PHASE 0 IS CLOSED.** `phase0_status.py` prints CLOSED. Per L-059 the queue
+is now the default destination, and per the operator's instruction Phase 1
+is to be chartered as a NEW PROGRAM WITH ITS OWN LEDGER — not as a
+continuation of this one. The four-round expansion happened because
+everything landed inside Phase 0's boundary; a fresh charter is the
+structural fix, and adding a boundary is more reliable than adding
+discipline.
+
+## L-065 — Queue decisions forced by scope, not deferred again
+
+Tag: **STRUCTURAL** (decisions).
+
+**OS-13 (primary source for sigma-PV): CLOSED, won't-do.** Not queued.
+Bornemann arXiv:0804.2543 supplies equation, initial condition and exponent
+sign in one self-consistent place; the ODE's correctness is attested by
+79-digit out-of-sample agreement, 220-digit gate agreement, the lambda = 2
+algebraic identity, and the sign trap failing by 121 orders — none of which
+routes through the literature. Residual risk is a secondary having
+transcribed JMMS wrongly, which is bounded and small.
+
+**C = 1/pi: OUT of the methods paper.** Deciding this by my own caveat, as
+the operator argued. The measured invariant is `sqrt2 * pi^(-3/2)`; "1/pi"
+is that times sqrt(2 pi)/2, so part of the simplicity is manufactured by the
+normalisation, and a referee would be right to attack it. It appears, if at
+all, as a one-paragraph open observation with the caveat stated FIRST.
+
+**Two-instanton test: NOT RUN, and now for a decided reason rather than a
+deferred one.** Its value was conditional on C = 1/pi being claimed. It is
+not being claimed, so the test buys nothing the paper needs. This is a
+cleaner state than "queued": the dependency was resolved instead of
+postponed. If C = 1/pi is ever promoted to a claim, the test becomes
+MANDATORY, not optional.
+
+## L-066 — Repositioning the paper: the taxonomy is the contribution
+
+Tag: **STRUCTURAL** (operator judgement, accepted).
+
+The operator's argument, which I accept: as a *numerics* paper this is
+mostly rediscovery — extracting a constant from a sigma-form recursion is
+standard practice in the Bornemann-adjacent literature and a referee says so
+in paragraph one. What is unusual is the failure record: twelve-plus
+documented instances of checks that passed by being switched off, with root
+causes, in a real project, with two mechanical tools covering two of the
+three classes and a NAMED bounded gap for the third.
+
+Nobody publishes that because nobody keeps it — the incentive is to fix
+quietly and report the clean result. An append-only ledger that could not be
+tidied is the asset.
+
+So: **a verification-methodology paper with high-precision constant
+extraction as the worked case study**, not a constant-extraction paper with
+a testing appendix. This makes the negative results load-bearing rather than
+decorative: 0.024 digits/point and the conditioning wall become evidence for
+the thesis (three times the binding constraint was analysis, not data)
+instead of things I am being honest about.
+
+One item to CHECK before claiming, flagged by the operator and not yet done:
+whether `digits ~ (2/ln 10) * s` is stated anywhere as a design rule. The
+trans-series derivation behind it is textbook resurgence and folklore status
+is likely. **Recorded as an open verification item for the paper, not as a
+claim.**

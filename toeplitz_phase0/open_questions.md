@@ -597,3 +597,67 @@ hand rather than needing to earn them.
 Retained rather than removed (append-only discipline). The question was
 whether a published beyond-all-orders term exists; OS-15 asks it more sharply
 and with the prefactor attached.
+
+
+---
+
+# CLOSING STATUS (Phase 0 closed, see L-063..L-066)
+
+## Discharged this round
+
+**OS-10 / OS-2..OS-5 (literature provenance for triage): DISCHARGED BY
+READING.** These were misfiled as blocked-on-operator. HARD RULE 2 bars
+provenance from RECALL; it does not bar READING a primary. All P1-P6 cells
+for the selected candidate are filled from bodies. See `phase1_triage.md`
+REVISION 5.
+
+## Closed as won't-do
+
+**OS-13 (primary JMMS source for the sigma-PV form): CLOSED.** Not queued,
+not deferred. Bornemann arXiv:0804.2543 is self-consistent on equation,
+initial condition and exponent sign; the ODE's correctness is attested by
+four pieces of evidence that do not route through the literature. A primary
+would upgrade the epistemic label and add nothing to confidence. If Mehta
+Ch. 21 falls into our lap, take it. Do not hunt.
+
+**OS-15 (Stokes constant C = 1/pi): CLOSED FOR THE PAPER.** C = 1/pi is not
+being claimed, on its own caveat: the measured invariant is
+`sqrt2 * pi^(-3/2)` and the simplicity of "1/pi" is partly manufactured by
+normalisation. Consequently the two-instanton test is NOT RUN — its value
+was conditional on the claim being made. This is a resolved dependency, not
+a postponement. **If C = 1/pi is ever promoted to a claim, the two-instanton
+test becomes MANDATORY.**
+
+## Open, and genuinely operator-gated (judgement or permission, not fact)
+
+**OS-16. Charter for Phase 1.** OPERATOR-SUPPLY: permission to open a new
+program with its own ledger, targeting C-1 (Pearcey determinant constant at
+gamma = 1, arXiv:2002.06370 Thm 1.1). Phase 0 does not authorise this;
+selection is recorded, not acted on. This is blocked-on-PERMISSION, which is
+the kind of block that reading cannot discharge.
+
+**OS-17. Venue and submission.** OPERATOR-SUPPLY: HARD RULE 5 forbids
+external submission. The repositioned paper (L-066) targets
+reproducibility / software-engineering-for-computational-science rather than
+numerical analysis, journal-first, with the ledger to Zenodo as the evidence
+base. All of that is an operator decision.
+
+## Open, and dischargeable by us (facts, filed correctly this time)
+
+**OS-18. Is `digits ~ (2/ln 10)*s` stated anywhere as a design rule?**
+Needed before claiming it as a contribution. The trans-series derivation
+behind it is textbook resurgence and FOLKLORE STATUS IS LIKELY. Discharge by
+reading, not by asking. Until discharged, the law is presented as *derived
+and measured here*, with no priority claim.
+
+**OS-19. Body of arXiv:2508.10463** (confluent hypergeometric, n = 1) — read
+if C-1 proves harder to evaluate than expected. Filled from abstract only,
+marked `[abs]` in the table, and an abstract-filled cell is explicitly
+weaker evidence.
+
+**OS-20. Scope limit on the negative result.** The claim "no arXiv posting
+whose metadata matches these queries announces a value for the gamma = 1
+constants as of 2026-08-16" rests on metadata search, NOT full text. A
+journal-only or differently-phrased determination would be missed. Before
+any Phase 1 write-up claims novelty, this needs a citation-graph check on
+arXiv:2002.06370 (who cites it, and does any citer determine C).
