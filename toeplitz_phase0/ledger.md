@@ -2735,3 +2735,48 @@ whether `digits ~ (2/ln 10) * s` is stated anywhere as a design rule. The
 trans-series derivation behind it is textbook resurgence and folklore status
 is likely. **Recorded as an open verification item for the paper, not as a
 claim.**
+
+
+---
+
+## L-067 — Pushed, and the reproduction claim graduated on a FRESH CLONE
+
+Tag: **VERIFIED** (run from a clean checkout, not from the working tree).
+
+Operator authorised the push, discharging the standing HARD RULE 5 block on
+this action only. Branch `log-pv-01` -> origin, 10 commits, first time
+anything has left this machine.
+
+What that made testable, and what was then measured. Clone from origin into
+a temp directory, run the check path there:
+
+    git clone --branch log-pv-01 <origin> <tmp>
+    cd <tmp>/toeplitz_phase0
+    python -m pytest test_smoke.py -q     -> 11 passed
+    python assertion_audit.py             -> 0 circular, 0 transcribed
+    python phase0_status.py               -> PHASE 0: CLOSED
+    out/ artifacts present in fresh clone -> 70 files
+
+This matters because until now "reproducible" was a property of a directory
+I had been editing for the whole session. Every prior run inherited
+untracked state, stale artifacts and my shell environment. The fresh clone
+removes all three, and it is the first evidence that the repository CONTAINS
+the reproduction rather than merely describing it.
+
+**Scoped honestly, because this is exactly where an overclaim would go.**
+What ran from the clone is the CHECK path (tests, audit, closure verdict),
+which reads committed artifacts. The multi-hour REBUILD path (`verify.ps1
+verify`, which regenerates those artifacts from scratch) was run once
+locally at L-032 and has NOT been re-run from the clone. So:
+
+  * "the checks and their verdicts reproduce from a clean checkout" —
+    **VERIFIED, just now**
+  * "the artifacts can be regenerated from scratch on a clean machine" —
+    still **STRUCTURAL**, resting on one local run. A different machine
+    could differ in mpmath version, and nothing here pins dependencies.
+
+There is **no CI workflow in this repository** — I checked, `.github/` has
+none. So there was no CI claim to graduate; that item in the operator's list
+does not exist. Recording the absence rather than quietly dropping it: a
+pinned-dependency file plus a workflow running the check path is the obvious
+next hardening, and it is now cheap because the push exists.
