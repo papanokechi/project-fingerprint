@@ -149,16 +149,27 @@ def main():
     mech = all(results)
     print(f"\n  mechanical conditions: {'ALL PASS' if mech else 'INCOMPLETE'}")
 
-    # The operator-gated condition.  This cannot be checked from here and must
-    # not be inferred: entry condition #11 requires PRIMARY provenance, and
-    # HARD RULE 2 makes anything we could supply CONJECTURED.
+    # Entry condition #11 requires PRIMARY provenance.  I originally wrote
+    # this as operator-gated and unreachable in-session.  That was WRONG, and
+    # the operator caught it: HARD RULE 2 forbids taking provenance from
+    # RECALL (mine or the operator's), but READING a primary is not recall.
+    # Provenance columns are facts printed in a body -- how many digits are
+    # shown, whether a second proof is cited, where the normalisation is
+    # stated -- and bodies are fetchable.  The condition is discharged by
+    # reading, and was.
     tri = open("phase1_triage.md", encoding="utf-8").read()
-    unfilled = tri.count("| ? |")
-    print(f"\n  [GATED] entry condition #11: provenance cells filled from "
-          f"primaries")
-    print(f"          triage table still shows unfilled cells; "
-          f"'| ? |' occurrences: {unfilled}")
-    print("          THIS CANNOT BE DISCHARGED FROM INSIDE THE SESSION.")
+    # Only the ACTIVE table counts.  Superseded revisions are retained
+    # verbatim (nothing in this project is deleted), and their unfilled
+    # cells are history, not outstanding work.
+    marker = "<!-- ACTIVE-TRIAGE -->"
+    active = tri.split(marker, 1)[1] if marker in tri else tri
+    unfilled = active.count("| ? |")
+    print(f"\n  [#11]  provenance cells filled from primaries")
+    print(f"         unfilled cells in the ACTIVE triage table: {unfilled}")
+    if unfilled:
+        print("         Fill them by READING primaries.  Recall is barred;")
+        print("         reading is not.  Any row that cannot be filled from a")
+        print("         primary is marked UNFILLABLE and the candidate drops.")
 
     closed = mech and unfilled == 0
     print("\n" + "-" * 74)

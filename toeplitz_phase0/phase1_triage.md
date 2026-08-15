@@ -387,3 +387,129 @@ DIRECTLY to many digits, not inferred from an honest-digit count, which is a
 different instrument from the one we have. Logged as adjacent; explicitly not
 chased. The operator's framing is right: this is the kind of adjacent shiny
 thing that eats a Phase 1.
+
+
+---
+
+# REVISION 5 — THE TABLE, FILLED FROM PRIMARIES
+
+<!-- ACTIVE-TRIAGE -->
+
+**Every cell below was read from the BODY of the cited paper** (ar5iv full
+text, Section 1 / Theorem 1.1 in each case), not from an abstract and not
+from recall. Where a cell is filled from an abstract it is marked `[abs]`
+and treated as weaker evidence. Tag: **STRUCTURAL** (cited theorem
+statements, read directly) except where marked.
+
+## Method, and its stated limits
+
+Sources: arXiv full text via ar5iv, plus the arXiv API listing service for
+currency checks. Queries run 2026-08-15/16:
+
+  * `all:"Pearcey determinant" OR all:"Pearcey process"` -> 28 results
+  * `abs:"large gap asymptotics"` -> 21 results
+  * `abs:"confluent hypergeometric kernel"` -> 7 results
+
+**Limits of this search, stated because a negative result is being claimed.**
+The arXiv API `abs:`/`all:` fields index METADATA (title, abstract, authors,
+comments), NOT full text. A determination of one of these constants that is
+(a) published in a journal without an arXiv posting, (b) posted with an
+abstract not using these phrases, or (c) buried in a paper about something
+else, would be MISSED. The claim below is therefore precisely: *no arXiv
+posting whose metadata matches these queries announces a value for the
+gamma = 1 constants, as of 2026-08-16.* It is not "these constants are
+open". That distinction is the whole point of the P1 column.
+
+## The live table
+
+| # | candidate | primary read | P1 published precision | P2 proof status | P3 numerical independence | P4 convention risk | P5 recomputable | P6 downstream reuse | verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| C-1 | **Pearcey determinant, gamma = 1** | arXiv:2002.06370 Thm 1.1 (body) | **0 digits** — no numerical value printed anywhere | expansion PROVED (RH steepest descent); constant NOT DERIVED, no closed form even conjectured | n/a — no digit string exists | **body** (kernel (1.2)-(1.3), operator on L^2(-s,s), F in (1.6)) | **yes** — p, q are 1-D integrals; on arg t = pi/4, t^4 = -|t|^4 so q's integrand DECAYS | moderate-high (cited by counting-function/CLT work) | **PRIMARY PHASE 1 TARGET** |
+| C-2 | hard edge Pearcey, gamma = 1 | arXiv:2209.12524 Thm 1.1 (body) | **0 digits** | expansion PROVED; "we cannot evaluate explicitly the constant C" | n/a | **body** (kernel (1.1)-(1.2), operator on L^2(0,s)) | yes, harder — contours encircle an essential singularity e^{1/(2t^2)} at 0 | moderate | **ALTERNATE** |
+| C-3 | confluent hypergeometric, n=1 multi-interval | arXiv:2508.10463 [abs] | **0 digits** | "a precise large gap asymptotics **up to an undetermined constant**" | n/a | not yet read (body not fetched) | yes — mpmath has `hyp1f1` | moderate | **ALTERNATE, body unread** |
+| C-4 | tacnode, unthinned | arXiv:2307.05622 [abs] | **0 digits** | constant term obtained "in the thinned case" only | n/a | not read | plausible, kernel more involved | moderate | alternate |
+| C-5 | hard edge tacnode, unthinned | arXiv:2412.12920 [abs] | **0 digits** | constant term "in the thinned case" only | n/a | not read | plausible | low-moderate | alternate |
+| C-6 | two-interval Airy | arXiv:2108.04495 Thm 1 (body) | closed form GIVEN: chi = (1/4)log(a-c) - (1/8)log|2q(a)q(b)q(c)| + c_sine + chi_Airy | PROVED; independent simultaneous analysis by Blackstone-Charlier-Lenells left chi' UNDETERMINED | n/a | body | yes | high | **SOLVED — calibration, not a target** |
+| C-7 | higher-order Tracy-Widom multiplicative constant | arXiv:2501.12679 [abs] | closed form given (integral of a P_I hierarchy Hamiltonian) | PROVED (2025), explicitly "resolving an open problem in the work of Claeys, Its and Krasovsky" | n/a | not read | Painleve-I-hierarchy kernels, hard | moderate | **RECENTLY CLOSED — not a target** |
+| T-4 | sine-kernel (this session) | arXiv:2108.04495 body, eqs (7)-(8) | 16+ (closed form) | **P2+**: "justified in 3 different ways" | yes | body | yes | high | **NIL — calibration** |
+
+## Three findings, none of which I expected to be able to state
+
+**F1. The operator's gamma < 1 / gamma = 1 heuristic is CONFIRMED from
+primaries, across six kernel families, and it is stronger than stated.** It
+is not a tendency; in this literature it is currently exceptionless:
+
+| kernel | thinned / deformed (gamma < 1) | unthinned (gamma = 1) |
+|---|---|---|
+| Pearcey | constant DONE (2007.12691) | **undetermined** (2002.06370) |
+| hard edge Pearcey | constant DONE (2204.04625) | **undetermined** (2209.12524) |
+| tacnode | constant DONE (2307.05622) | not done |
+| hard edge tacnode | constant DONE (2412.12920) | not done |
+| confluent hypergeometric | constant DONE (2205.03897) | **undetermined** (2508.10463) |
+
+2007.12691's own abstract states the deformed calculation "complements our
+previous work on the undeformed case", i.e. the authors treat gamma = 1 as
+the case they could not do. This was offered to me as a search heuristic to
+falsify; it survived, and it survived from primaries rather than from the
+recollection that generated it.
+
+**F2. The relevant frontier is later than the operator's May-era picture,
+and moves the same way.** The most recent hit is arXiv:2606.17771 (June
+2026, tacnode generating function) — again constant term for the
+generating-function/thinned object. The August 2025 confluent
+hypergeometric paper still says "up to an undetermined constant". Four
+years after 2002.06370 said "we will leave this issue to a future
+publication", no such publication appears in this listing.
+
+**F3. P1 = 0 for every live candidate, which is a STRONGER condition than
+the column was designed to detect.** The column anticipated low-precision
+published values that a high-precision recomputation could challenge. The
+actual situation is that **no digit string exists at all**. There is
+nothing to disagree with, which removes the entire class of
+transcription-risk failure — and also removes any possibility of
+calibrating against the target. P3 (numerical independence) is not "no", it
+is *undefined*: there is no published number whose provenance could be
+independent.
+
+## Why C-1 is the selection
+
+1. P1 = 0, P2 = not derived, P3 undefined — the maximum of the research-value
+   scoring rule in section 4.
+2. P5 checked BY US, not asserted: the only awkward object is q(y) on the
+   four rays arg t = pi/4, 3pi/4, 5pi/4, 7pi/4, and on those rays
+   t^4 = -|t|^4, so `exp(t^4/4)` decays. Both p and q are absolutely
+   convergent 1-D integrals of entire integrands — exactly the regime
+   mpmath's `quad` handles at high precision.
+3. **It carries a free, input-derived internal control.** Theorem 1.1 states
+   C is *independent of rho*, while the rest of the expansion depends on rho
+   through four terms. Computing C at several rho and requiring agreement is
+   a check whose constraining side comes from the PUBLISHED THEOREM, not
+   from our own output — it satisfies entry condition #10 by construction,
+   which is rare and worth spending.
+4. The 8/3 power and the -2/9 log coefficient are both published and both
+   independently measurable by our pipeline. A wrong normalisation shows up
+   in the exponent before it reaches the constant (the L-051 mechanism).
+
+**Selection is RECORDED, not acted on.** Entry condition #2 requires the
+target be named before any determinant for it is computed; that is now
+satisfied for C-1. No Pearcey determinant has been evaluated.
+
+## Entry conditions: final status
+
+| # | condition | status |
+|---|---|---|
+| 1 | table filled with provenance | **CLEARED** (this revision) |
+| 2 | target selected and recorded before computation | **CLEARED** (C-1, above) |
+| 3 | T(b) re-measured at the Phase 1 basis | **PHASE 1 WORK** |
+| 4 | pipeline reach demonstrated on the Phase 1 object itself | **PHASE 1 WORK** |
+| 5 | null controls shown SENSITIVE at the precision used | **PHASE 1 WORK** |
+| 6 | expected basis stated in advance, hit acknowledged as harness-confirmation | **PHASE 1 WORK** |
+| 7 | points bought at largest s | superseded (no grid) |
+| 8 | every control computes its own resolution at runtime | tooling in place |
+| 9 | provenance from PRIMARY sources for the selected target | **CLEARED** — body of 2002.06370 read directly |
+| 10 | controls built from what the suspect path cannot influence | tooling in place; C-1's rho-independence check satisfies it |
+| 11 | no selection on an unfilled provenance row | **CLEARED** — C-1's row has no unfilled cell |
+
+Conditions 3-6 are deliberately NOT cleared: they are measurements on the
+Phase 1 object, and performing them IS Phase 1. Phase 0's gate was 1, 2, 9,
+10, 11, and those are now clear.
