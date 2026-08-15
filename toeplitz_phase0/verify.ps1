@@ -7,6 +7,8 @@
   .\verify.ps1 audit         mechanical guard audit (L-049/L-055)  (~5 sec)
   .\verify.ps1 mutate        mutation test: are the checks live?  (~3 min)
   .\verify.ps1 trans         derive A, theta, beta from the ODE   (~2 min)
+  .\verify.ps1 pi            pi-provenance audit of C (L-056)      (~10 sec)
+  .\verify.ps1 status        PHASE 0 CLOSURE VERDICT (L-059)       (~5 min)
   .\verify.ps1 ode           discover + verify the sigma ODE      (~20 min)
   .\verify.ps1 tail          recursion, fit-free c, b=8 PSLQ      (~5 min)
   .\verify.ps1 predict       M=600 recursion, s=200/250, 0.869*s law (~20 min)
@@ -33,7 +35,7 @@
   There is deliberately no clean target: session rule, no file deletion
   without operator approval.  Superseded grids are snapshotted, never removed.
 #>
-param([ValidateSet("test", "audit", "mutate", "trans", "kernel", "data", "analysis", "ode", "tail", "predict",
+param([ValidateSet("test", "audit", "mutate", "trans", "pi", "status", "kernel", "data", "analysis", "ode", "tail", "predict",
                    "verify", "verify-fast")]
       [string]$Target = "verify")
 
@@ -57,6 +59,8 @@ switch ($Target) {
     "audit"       { Step assertion_audit.py }
     "mutate"      { Step mutation_test.py }
     "trans"       { Step trans_series.py }
+    "pi"          { Step pi_bookkeeping.py }
+    "status"      { Step phase0_status.py }
     "kernel"      { Step verify_kernel.py }
     "data"        { Step build_grid.py }
     "ode"         { Step "sigma_ode.py 120 4 70"; Step "sigma_ode_verify.py 80" }
@@ -78,7 +82,8 @@ switch ($Target) {
                     Step "sigma_recursion_check.py"
                     Step "direct_c.py out/sigma_recursion_fast.json"
                     Step run_pslq_b8.py
-                    Step trans_series.py }
+                    Step trans_series.py
+                    Step pi_bookkeeping.py }
     "verify"      { Step assertion_audit.py
                     Step test_smoke.py
                     Step verify_kernel.py
@@ -93,7 +98,9 @@ switch ($Target) {
                     Step sigma_sign_trap.py
                     Step excess_structure.py
                     Step trans_series.py
-                    Step mutation_test.py }
+                    Step pi_bookkeeping.py
+                    Step mutation_test.py
+                    Step phase0_status.py }
 }
 
 Write-Host ""

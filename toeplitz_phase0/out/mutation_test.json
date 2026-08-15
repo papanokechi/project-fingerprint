@@ -1,6 +1,14 @@
 {
   "killed": [
     [
+      "certified_data.json:rows.178.certified_digits",
+      1e-06
+    ],
+    [
+      "certified_data.json:rows.65.node_doubling_digits",
+      1e-06
+    ],
+    [
       "certified_data.json:rows.4.s",
       1e-06
     ],
@@ -24,14 +32,12 @@
   "survived": [
     "certified_data.json:rows.100.attempts",
     "certified_data.json:meta.certification_target",
-    "certified_data.json:rows.178.certified_digits",
     "certified_data.json:rows.206.dps0",
     "certified_data.json:meta.dps1",
     "certified_data.json:meta.grid_points",
     "certified_data.json:meta.min_certified_digits",
     "certified_data.json:rows.166.n0",
     "certified_data.json:meta.n1",
-    "certified_data.json:rows.65.node_doubling_digits",
     "certified_data.json:rows.166.precision_bump_digits",
     "certified_data.json:meta.s_max",
     "certified_data.json:meta.s_min",

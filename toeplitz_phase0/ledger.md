@@ -2323,3 +2323,262 @@ metadata, not claims. A field carrying a VERIFIED claim must be killed; a
 field recording how long something took need not be.
 
 ---
+
+## L-056 -- Where the pi in C = 1/pi comes from. Answer: partially my bridge.
+
+Tag: VERIFIED (the discrimination) + CONJECTURED (the identification, still)
+
+The operator's challenge was sharp and cheap: resurgence bookkeeping carries a
+1/pi, so a stray factor would produce exactly the observed result -- a constant
+reading 1/pi when the truth is 1, or pi when the truth is 1. Which route
+produced the 64 digits, and does it contain a pi?
+
+THE HONEST ANSWER IS "PARTIALLY YES", and the two halves must be separated.
+
+HALF 1 -- the amplitude, which has NO bookkeeping freedom.
+    K = lim e_m A^m / Gamma(m + beta) = 0.2539745437369638791430532197385...
+The e_m are exact rationals; A = 2 and beta = -1/2 are exact rationals from
+the linearization. There is no convention to get wrong. Gamma(m-1/2) does
+supply a sqrt(pi), but that is what Gamma IS at half-integer argument -- it
+means pi genuinely appears in the answer, not that I imported it.
+
+HALF 2 -- the bridge, which DOES contain a sqrt(2 pi).
+    C = K sqrt(2 pi) A^(beta - 1/2)
+The sqrt(2 pi) is Stirling, from the optimal-truncation step. This is exactly
+the step the operator flagged, and the concern is legitimate: a factor slipped
+here moves C by 2.5066 and no algebra would complain. DISCLOSED, not defended.
+
+Three defences, all computed, none of which is "1/pi is a nice number".
+
+(D1) THE PI EXPONENT IS PINNED BY THE DATA, NOT CHOSEN BY ME. Scanning
+     K * pi^p / sqrt(2) over half-integer p:
+
+       p     K pi^p / sqrt2
+      -1/2   0.10132118364233777144
+       0     0.17958712212516656169
+       1/2   0.31830988618379067154
+       1     0.56418958354775628695
+       3/2   1.0                        <== EXACTLY 1
+       2     1.77245385090551602730
+       5/2   3.14159265358979323846
+       3     5.56832799683170784528
+
+     K = sqrt(2) pi^(-3/2) to 64.3 digits. The neighbours are not near
+     misses; they are unrelated irrationals. Had I lost or gained a
+     sqrt(pi), the clean rung would sit at p = 1 or p = 2. It does not.
+
+(D2) THE STIRLING BRIDGE IS VALIDATED, NOT ASSUMED. The least-term check
+     compares the closed form against the smallest term of the series
+     computed DIRECTLY from the coefficients -- no Stirling on the actual
+     side. Ratios 0.99777, 0.99833, 0.99867 at s = 149, 200, 250, rising
+     toward 1. A dropped or doubled sqrt(2 pi) would put these at 0.399 or
+     2.507. This is the check that actually discriminates.
+
+(D3) THE NAMED RIVALS ARE EXCLUDED BY THE MEASURED K.
+       C = 1     requires K = 0.79788456080286535588
+       C = pi    requires K = 2.50662827463100050242
+       C = 1/pi  requires K = 0.25397454373696387914  <== measured
+     Not close. The operator's specific failure mode is falsified, not
+     argued away.
+
+A CAVEAT THAT CUTS THE OTHER WAY, recorded because leaving it out would be
+the more comfortable choice: THE INVARIANT ACTUALLY MEASURED IS
+K = sqrt(2) pi^(-3/2), which nobody would call a clean constant on sight.
+"1/pi" is that number times sqrt(2 pi)/2. So part of the apparent simplicity
+is manufactured by the normalisation, and the aesthetic pull of the simpler
+form is not evidence. The tag stays CONJECTURED.
+
+ON THE UPGRADE PATH. The operator is right that more digits do not help: a
+post-hoc-recognised candidate does not improve at 200 digits. What moves it is
+a second, structurally different consequence of the same hypothesis -- the
+two-instanton coefficient at exp(-4s), which resurgence fixes in terms of C.
+We hold 300 exact e_m and the machinery is built, so it is hours not weeks.
+NOT RUN. Queued in OS-15 by the operator's own instruction, and the whole
+point of the stopping rule below is that "it is only hours" is precisely the
+argument that has kept Phase 0 open for four rounds.
+
+---
+
+## L-057 -- The third failure category, and the boundary of automation
+
+Tag: STRUCTURAL (operator-stated), recorded as a known bounded gap
+
+The two tools cover different failures, and it is worth naming that they were
+built a week apart for different reasons:
+
+  assertion_audit.py  -- checks that EXIST BUT CANNOT FAIL   (broken guards)
+  mutation_test.py    -- checks that WERE NEVER WRITTEN      (absent guards)
+
+THE RESIDUAL THIRD CATEGORY: checks that exist, fire, and assert the WRONG
+THING. A mutation kill proves SENSITIVITY, NOT CORRECTNESS. A guard asserting
+`slope < 0.89` when it should assert `slope < 0.87` kills mutants happily and
+reports green while permitting the error it was written to exclude.
+
+Neither tool can see this, and it is not an implementation gap. Both tools
+reason about PROVENANCE and RESPONSIVENESS -- structural properties of the
+code. Whether a threshold is the RIGHT threshold is a claim about the
+mathematics, which no static or dynamic analysis of the code can supply.
+
+Partial coverage exists: the broken/fixed fixture pins intended behaviour at
+one point, and the two-sided control in sigma_recursion_check.py pins it from
+both directions. Both work by encoding the correct answer somewhere the tool
+can compare against. That generalises only as far as someone is willing to
+write the expected behaviour down.
+
+LOGGED AS A BOUNDED, KNOWN GAP rather than left implicit, because an implicit
+gap in a verification toolchain is indistinguishable from a claim of coverage.
+The tooling reduces the review surface; it does not eliminate it. Every
+threshold in this repository remains a human judgement, and the honest
+statement of what the toolchain buys is: it guarantees the checks are alive
+and non-circular, and says nothing about whether they are right.
+
+---
+
+## L-058 -- Three times the binding constraint was analysis, not data
+
+Tag: VERIFIED (three instances, all in this ledger)
+
+The operator's pattern, and it holds:
+
+  1. E1 (order truncation) was going to be solved by more grid points. It was
+     dissolved by the sigma-PV recursion instead -- exact subtraction rather
+     than numerical annihilation. No new data (L-042).
+  2. Densification bought 0.024 digits per point. The information lives in the
+     RANGE of s, not the count; nearly collinear rows add nothing (L-031).
+  3. beta came out -0.607 and I nearly read that as "beta is not a
+     half-integer". Fixing the extrapolator -- Richardson was first-order
+     only -- moved it to -0.5 at 31 digits WITH NO NEW DATA AT ALL (L-053).
+
+Three times the instinct reached for more data; three times the limit was in
+the analysis. Instance 3 is the sharpest, because the data had been sitting
+there for two sessions already holding 31 digits of an answer I was reading as
+0.4 digits.
+
+PRE-COMMIT FOR PHASE 1, adopted: BEFORE BUYING COMPUTE, WRITE DOWN THE
+ARGUMENT FOR WHY THE CURRENT LIMIT IS DATA RATHER THAN STRUCTURE. Not a
+gesture -- a written argument that can be wrong, recorded before the spend, so
+that the fourth instance is caught rather than counted afterwards. On this
+track's record the prior is strongly against data being the limit.
+
+Note the connection to L-049's criterion: "we need more data" is itself an
+assertion, and its constraining term has consistently been an output of the
+analysis under test.
+
+---
+
+
+---
+
+## L-059 — The Phase 0 stopping rule, written as a check rather than a paragraph
+
+Tag: **STRUCTURAL** (process). Artifact: `phase0_status.py`, `out/phase0_status.json`.
+
+The operator's observation is correct and is the most important thing said
+this session: this is the fourth consecutive round in which closing the
+outstanding items opened more, every round was worth doing, and *that is
+precisely what makes an indefinitely expanding Phase 0 invisible from
+inside*. Calibration was meant to earn the right to make a Phase 1 claim. It
+has since produced a rediscovered sigma-PV form, derived trans-series
+exponents, a 60x precision improvement and a reusable verification
+toolchain, and Phase 1 has still not started.
+
+L-036 already established that promoting a rule to the spec does not make me
+follow it -- I broke the rule inside the file that cited it. A stopping rule
+written as prose is therefore predicted to fail. It is written as an
+executable check instead.
+
+THE RULE, as implemented:
+
+  Phase 0 CLOSES when six mechanical conditions pass AND the triage table's
+  provenance cells are filled from primaries (entry condition #11).
+
+  Once the MECHANICAL conditions pass, the queue (`open_questions.md`) is
+  the DEFAULT DESTINATION for every new finding -- not a judgement call per
+  item. "It is only hours" is not an argument for working something; it is
+  the symptom, being the argument that has kept Phase 0 open for four
+  rounds.
+
+Current status: mechanical conditions pass; entry condition #11 does NOT,
+and CANNOT be discharged from inside the session -- HARD RULE 2 makes any
+provenance I supply from memory CONJECTURED, which is exactly the thing the
+column exists to measure. So Phase 0 is OPEN and blocked on the operator,
+with no mechanical work outstanding. That is the correct terminal state for
+a calibration phase, and it is now a printed verdict rather than an opinion.
+
+## L-060 — The closure checker's first act was to fail in category three
+
+Tag: **VERIFIED** (measured against the ledger itself).
+
+L-057 recorded a known, bounded gap: checks that exist, fire, and assert the
+WRONG THING -- which mutation testing cannot catch, because a mutation kill
+proves sensitivity, not correctness. Within minutes of writing L-057 I
+produced an instance.
+
+`check_untagged_claims` demanded a literal `Tag:` line and reported 43 of 59
+ledger entries untagged. They are tagged. The early entries use a bolded
+`**PROVEN**` / `**VERIFIED**` marker at the head of the body; the later ones
+use a `Tag:` line. The check was sensitive (it fired), it was live (it would
+have died under mutation), and it was wrong, because the specification it
+encoded was one of two formats actually in use.
+
+This is worth more than the fix. It is the first instance of category three
+caught in the wild, and it confirms the operator's read that automation
+stops here: no audit of assertion provenance and no mutation kill could have
+distinguished "43 entries are untagged" from "my regex knows one of two
+formats." Only reading the reported entries did. Category three is closed by
+review or not at all.
+
+After correction: 4 genuinely untagged entries, retroactively tagged in
+L-061 below.
+
+Second finding from the same run, same class: the gate check read
+`agree_digits` where the artifact stores `agreement_digits`, so it printed
+`None digits` beside a PASS. `d.get()` returning None rather than raising is
+the plausible-wrong-answer mechanism yet again -- the check passed on
+`d.get("passed")`, so the wrong key was cosmetic *this time*, and would not
+have been had the verdict depended on it.
+
+## L-061 — Retroactive epistemic tags for four untagged entries (append, not edit)
+
+Tag: **STRUCTURAL** (bookkeeping). Ledger is append-only (HARD RULE 3), so
+these are assigned here rather than by editing the entries.
+
+    RETROTAG L-015: VERIFIED
+    RETROTAG L-040: VERIFIED
+    RETROTAG L-041: VERIFIED
+    RETROTAG L-048: VERIFIED
+
+All four are records of measured or observed facts about runs I performed
+(a data campaign in progress, a bug taxonomy, a selection-criterion change,
+and two defects exposed by the full verify run). None asserts a mathematical
+result, so none is PROVEN, and none rests on cited literature, so none is
+STRUCTURAL. `phase0_status.py` reads these RETROTAG lines, so the tagging
+invariant is now total over the ledger without any entry having been
+rewritten.
+
+## L-062 — Mutation testing closed its own second survivor, and a range guard's resolution is its width
+
+Tag: **VERIFIED**. Artifact: `out/mutation_test.json`.
+
+`certified_data.json:rows.178.certified_digits` survived 100% mutation even
+after I added a per-row range guard `100 <= cd <= 400` covering every row
+(the previous test sampled `rows[::7]`, and 178 is not a multiple of 7 --
+a check can be alive on the fields it happens to touch and dead on the rest,
+which a sampled run reports as green).
+
+Adding the range guard did NOT kill it. A range guard's resolution is the
+width of the range: perturbing 171.7 to 300 stays inside [100, 400]. This is
+the same resolution failure as instance 12 and as the mutation harness's own
+1e-6 probe, now in a third costume.
+
+What killed it, at rel = 1e-6, was a definitional identity recomputed at
+runtime: `certified_digits == min(node_doubling_digits,
+precision_bump_digits)`, exact to 1e-9 across all 224 rows. Note this
+assertion is built entirely from output-derived symbols and the audit tool
+flags it -- correctly, and it is waived with a reason: it is not a claim
+check but a TRANSCRIPTION-INTEGRITY check that a recorded field equals its
+own definition. The two tools disagreeing here is the tools working, not a
+conflict: provenance auditing asks "could this guard be circular", mutation
+asks "could this guard fire", and a field needs an answer to both.
+
+Kill count 5 -> 6; no field carrying a VERIFIED claim now survives.
