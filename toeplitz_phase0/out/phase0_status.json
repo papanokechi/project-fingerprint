@@ -1,0 +1,21 @@
+{
+  "mechanical_all_pass": true,
+  "unfilled_triage_cells": 28,
+  "phase0_closed": false,
+  "checks": [
+    "check_tests",
+    "check_audit",
+    "check_mutation",
+    "check_gate",
+    "check_trans",
+    "check_untagged_claims"
+  ],
+  "results": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ]
+}

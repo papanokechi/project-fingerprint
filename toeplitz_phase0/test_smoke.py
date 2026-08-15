@@ -340,6 +340,32 @@ def test_certified_values_are_constrained_by_the_recursion():
 
     rows = d["rows"]
     assert len(rows) > 50
+
+    # certified_digits is checked on EVERY row, not the sampled ones.  The
+    # mutation harness found rows.178.certified_digits surviving because the
+    # sample step of 7 skipped it -- a check can be alive on the fields it
+    # happens to touch and dead on the rest, which a sampled mutation run
+    # reports as a survivor and a sampled test reports as green.
+    for r in rows:
+        cd_all = float(r["certified_digits"])
+
+        # AUDIT-REVIEWED: every symbol here is output-derived, and that is
+        # correct for this assertion.  It is not a claim check -- it is a
+        # TRANSCRIPTION-INTEGRITY check that the recorded field equals its own
+        # definition, min(node doubling, precision bump).  The preceding range
+        # guard fires but cannot kill a mutant, because a range guard's
+        # resolution is the width of the range: perturbing 171.7 -> 300 stays
+        # inside [100, 400].  Sensitivity, not existence, is what mutation
+        # testing measures, and this identity is exact.
+        assert abs(cd_all - min(float(r["node_doubling_digits"]),
+                                float(r["precision_bump_digits"]))) < 1e-9, (
+            f"row s={r['s']}: certified_digits={cd_all} does not equal "
+            f"min(node_doubling, precision_bump)")
+
+        assert CERT_DIGITS_LO <= cd_all <= CERT_DIGITS_HI, (
+            f"row s={r['s']} claims {cd_all} certified digits, outside the "
+            f"declared range [{CERT_DIGITS_LO}, {CERT_DIGITS_HI}]")
+
     agreements = []
     for r in rows[::7]:
         s_ = mpf(r["s"])
@@ -351,11 +377,6 @@ def test_certified_values_are_constrained_by_the_recursion():
         assert dg >= VALUE_MIN_AGREE, (
             f"row s={float(s_)} reproduces only {dg:.2f} digits "
             f"(floor {VALUE_MIN_AGREE})")
-        cd = float(r["certified_digits"])
-        assert CERT_DIGITS_LO <= cd <= CERT_DIGITS_HI, (
-            f"row s={float(s_)} claims {r['certified_digits']} certified "
-            f"digits, outside the declared range "
-            f"[{CERT_DIGITS_LO}, {CERT_DIGITS_HI}]")
 
     # Agreement is truncation-limited, so it must IMPROVE with s.  The
     # obvious way to write that -- min(high-s) > max(low-s) -- puts the data

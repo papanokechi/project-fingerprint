@@ -1,0 +1,53 @@
+{
+  "K": "0.2539745437369638791430532197385440806202",
+  "K_closed_form": "sqrt(2)*pi^(-3/2)",
+  "K_agreement_digits": 64.31,
+  "pi_exponent_ladder": [
+    {
+      "p": "-0.5",
+      "value": "0.10132118364233777144387946"
+    },
+    {
+      "p": "0.0",
+      "value": "0.17958712212516656168908198"
+    },
+    {
+      "p": "0.5",
+      "value": "0.31830988618379067153776753"
+    },
+    {
+      "p": "1.0",
+      "value": "0.56418958354775628694807945"
+    },
+    {
+      "p": "1.5",
+      "value": "1.0"
+    },
+    {
+      "p": "2.0",
+      "value": "1.7724538509055160272981675"
+    },
+    {
+      "p": "2.5",
+      "value": "3.1415926535897932384626434"
+    },
+    {
+      "p": "3.0",
+      "value": "5.568327996831707845284818"
+    },
+    {
+      "p": "3.5",
+      "value": "9.869604401089358618834491"
+    }
+  ],
+  "C": "0.3183098861837906715377675267450287240689",
+  "C_minus_inv_pi": "6.12274e-65",
+  "bridge_contains_pi": true,
+  "bridge_factor": "sqrt(2*pi) from Stirling, validated by the least-term check to ~0.2%",
+  "amplitude_contains_pi": "only via Gamma at half-integer argument, which is definitional, not bookkeeping",
+  "rivals_excluded": [
+    "C=1 requires K=0.7979",
+    "C=pi requires K=2.5066"
+  ],
+  "tag": "CONJECTURED"
+}
