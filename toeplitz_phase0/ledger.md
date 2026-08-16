@@ -2780,3 +2780,98 @@ none. So there was no CI claim to graduate; that item in the operator's list
 does not exist. Recording the absence rather than quietly dropping it: a
 pinned-dependency file plus a workflow running the check path is the obvious
 next hardening, and it is now cheap because the push exists.
+
+
+---
+
+## L-068 — Phase 1 charter drafted and NOT authorized; the calibration gap is its central problem
+
+Tag: **STRUCTURAL** (design, from cited theorem statements + operator
+judgement). Artifact: `phase1_charter.md`.
+
+OS-16 is blocked on PERMISSION, and the operator has explicitly declined to
+grant it on the grounds that they are not the operator. So Phase 1 does not
+begin. The charter is written anyway, for one reason: **entry conditions
+written before a phase are the only ones that bind.** Phase 0 demonstrated
+that a rule added mid-flight gets broken in the file that cites it (L-036),
+and that a gate written to be unreachable simply never opens (L-063).
+
+The charter's central issue is one I identified in L-064 and initially
+recorded as a benefit: **P1 = 0 removes transcription risk AND removes the
+gate.** Everything Phase 0 earned came from task 0.3 — a known answer the
+pipeline had to reproduce before anything downstream counted. C-1 has no
+such answer, by construction, because that is why it was selected.
+
+Resolution adopted: **calibration moves to a sibling.** No C-1 evaluation
+until the identical code reproduces a PROVED constant on a kernel it was not
+developed against — Airy first (χ_Airy = (1/24)log 2 + ζ′(−1), read from
+the body of arXiv:2108.04495 eq. (6), proved in two independent places per
+that paper's §1), Bessel second. **The sine kernel does not count**: it is
+the kernel this pipeline was tuned against for the whole of Phase 0, and
+re-running it would be the L-039 circularity at the scale of an entire
+phase.
+
+## L-069 — A sharpening of the rho control: it is not only a check, it is required for identification
+
+Tag: **PROVEN** (reading off the published expansion; one line, no
+computation).
+
+I recorded rho-independence as a control whose constraining side comes from
+a published theorem. The operator strengthened it: every term in Theorem
+1.1 except C carries an s-dependence, a rho-dependence, or both, so a
+2-D scan catches an error in ANY published coefficient, C being by
+construction the only term constant in both variables. That is correct and
+it is a near-complete self-check on the one thing Phase 1 cannot avoid
+importing.
+
+**What both of us missed on first reading.** The term `rho^4/216` is
+independent of s but NOT of rho. At fixed rho != 0 the extraction cannot
+separate it from C: what is measured is `C + rho^4/216`. So the rho-scan is
+not merely a control, it is REQUIRED FOR IDENTIFICATION, and the design
+follows immediately:
+
+  * evaluate at **rho = 0** to isolate C, where the term vanishes identically;
+  * use **rho != 0** as the control, requiring `C(rho) - rho^4/216` to be
+    rho-independent to the claimed precision.
+
+Reading a rho != 0 extraction as if it gave C directly would be a convention
+trap of exactly the L-034 (alpha vs 2*alpha) and L-051 (sigma vs -sigma)
+shape: a plausible wrong answer, not an error. It is disarmed here BEFORE
+any computation rather than after a wrong number — which is the first time
+in this project that a member of this bug class has been caught in advance
+rather than in the wreckage.
+
+## L-070 — Loose ends: what I can close, and what I must not touch
+
+Tag: **VERIFIED** (inspected) / **STRUCTURAL** (scope decision).
+
+**Track B: OUT OF MY SCOPE, and acting on it would reproduce L-046.**
+Inspected: `lean/` is a subdirectory of THIS repository, not a separate git
+repo (`lean/.git` does not exist). The only workflow files under it belong
+to VENDORED Lake packages (`aesop`, `batteries`) inside
+`.lake/packages/` — they are dependencies' CI, not ours. There is still no
+workflow of our own anywhere in this repository.
+
+More importantly, `git status` shows a working tree carrying substantial
+uncommitted work from OTHER tracks (`sectorial/`, `agent-tasks/`, `files/`,
+and a `check_prod_token.ps1` that must not be committed). Staging or pushing
+any of it would be precisely the L-046 near-miss — `git add -A` from a
+subdirectory staging 250+ unrelated files — executed deliberately this time.
+I do not know Track B's state, it is not my work, and "closing out means
+both tracks" cannot license me to commit another track's uncommitted tree.
+**Recorded as outstanding, deliberately not acted on.** The Track B CI claim
+and the Mathlib PR split remain open and belong to whoever owns that track.
+
+**The credential file.** `check_prod_token.ps1` is present and UNTRACKED.
+L-052 verified `git log --all -- '*token*'` is empty, so nothing of this kind
+has ever been committed. It stays untracked; the pathspec-limited
+`git add toeplitz_phase0/` used throughout this session is what keeps it
+that way, and it is now the fourth session in which that discipline has been
+load-bearing rather than decorative.
+
+**OS-20 is promoted to BLOCKING.** The operator is right that metadata
+search establishes only that no arXiv posting *announces* a value. Openness
+is a different claim and requires the forward-citation graph of
+arXiv:2002.06370, because C may have been evaluated incidentally in a paper
+about something else. Written into the charter as a pre-writing block, not
+a post-hoc check.
