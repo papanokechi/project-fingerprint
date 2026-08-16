@@ -178,3 +178,22 @@ Phase 0's certified data, digit-loss law, and `m* ≈ 2s` truncation optimum
 are properties of the **sine kernel**. A different kernel has different
 conditioning and a different digit-loss law (entry condition #4). Nothing in
 `out/certified_data.json` is evidence about Pearcey.
+
+
+---
+
+## FREEZE (L-073)
+
+**This charter is CLOSED TO ADDITIONS.** C-0 through C-4 are the entry
+conditions for Phase 1. No further condition may be added before the Airy
+calibration of C-0 has actually been RUN.
+
+Rationale, which is the opposite of the usual one: the demonstrated risk to
+this project is not loose conditions but an indefinitely deferred start.
+Phase 0 stayed open for six rounds of individually worthwhile hardening.
+Anything that would have become C-5 goes to `open_questions.md` and is
+considered only once there is a number to discuss.
+
+Note that this freeze is a REMOVAL of future work, not another condition. A
+condition forbidding conditions would be the failure mode wearing the
+uniform of its own remedy.

@@ -2875,3 +2875,99 @@ is a different claim and requires the forward-citation graph of
 arXiv:2002.06370, because C may have been evaluated incidentally in a paper
 about something else. Written into the charter as a pre-writing block, not
 a post-hoc check.
+
+
+---
+
+## L-071 — On this project's record, re-reading beat computing
+
+Tag: **VERIFIED** (retrospective over the session's own record; every
+instance is an existing ledger entry).
+
+Five results, and none came from acquiring more data:
+
+| result | what produced it |
+|---|---|
+| E1 dissolved | structure (the recursion), not grid points (L-036..L-038) |
+| beta: -0.607 -> -1/2 | fixing Richardson order to Neville; NO new data (L-053) |
+| the precision law | linearising an ODE already in hand (L-053) |
+| L-063 (the false gate) | re-reading `phase1_triage.md`, which already said the cells were "fetchable, not merely askable" |
+| the rho^4/216 term | re-reading a theorem already quoted in the triage table |
+
+Densifying the grid, by contrast, bought 0.024 digits/point and degraded
+conditioning (L-031). The two findings that most changed the trajectory —
+L-063 and L-069 — came from files that ALREADY CONTAINED THE CORRECT
+POSITION and had been written by me.
+
+Carried into Phase 1 as a heuristic with a measured base rate behind it:
+**when stuck, re-read what is already written before buying compute.** The
+temptation to buy Nystrom time will be far larger on Pearcey than it was
+here, and this is the record that argues against it.
+
+## L-072 — THE ASYMMETRY IS THE FINDING, and there is a selection effect that explains it
+
+Tag: **VERIFIED** (property of the thirteen logged instances) +
+**STRUCTURAL** (the selection argument, operator-supplied, accepted).
+
+Every one of the thirteen instances failed IN THE REASSURING DIRECTION.
+Not one failed loudly:
+
+  * controls printed PASS by being switched off (L-018, L-024, L-040, L-049)
+  * a positive control read the basis it was meant to audit (L-044)
+  * a saturation guard tested an output of the path under test (L-048)
+  * a fitted law showed ZERO residual because the sweep aliased its own
+    slope (L-030)
+  * a prediction test cancelled a real drift against a rounded constant
+    (L-050)
+  * a mutation harness reported 34/36 survivors from probing below its own
+    resolution (L-055)
+  * a gate reported an EXTERNAL BLOCK by being unopenable (L-063)
+  * a tag checker reported 43 false positives by knowing one of two formats
+    (L-060)
+
+**The explanation is a selection effect, and it is the sharpest claim the
+methods paper can make.** Checks that fail loudly get fixed within minutes
+and never reach a ledger. The surviving population of recorded defects is
+therefore SELECTED FOR QUIET FAILURE. This upgrades the taxonomy from an
+anecdote about one project into an argument about why this bug class is
+systematically under-reported across computational science: the failures
+that get written down are, by construction, the ones that did not announce
+themselves.
+
+It also explains why both mechanical tools were necessary and why neither
+sufficed. Provenance auditing and mutation testing are both instruments for
+detecting SILENCE — a guard that cannot fail, a field nothing constrains.
+Neither can detect a guard that fires and asserts the wrong thing (L-057),
+because that failure is not silent, it is merely wrong; and the one instance
+of it caught in the wild (L-060) was caught by reading, which is consistent
+with L-071.
+
+## L-073 — The charter is FROZEN; the closing risk is adding conditions, not loose ones
+
+Tag: **STRUCTURAL** (process decision, operator caution accepted).
+
+The operator's closing caution, accepted without argument: the adversarial
+rhythm is productive AND self-sustaining. There is always another instance
+to find and another guard to audit. Phase 0 stayed open six rounds that way
+and every round was worth it, which is exactly why it is invisible from
+inside. The risk to Phase 1 is NOT that C-0..C-4 are too loose — it is that
+the same care that produced them will keep generating C-5 through C-9 before
+anything is ever evaluated.
+
+The correct response to that caution is NOT another condition. Adding a
+condition against adding conditions would be the failure wearing the
+uniform of its own remedy. So this is a freeze, which REMOVES future work
+rather than adding it:
+
+> **`phase1_charter.md` is closed to additions. C-0..C-4 are the entry
+> conditions. No further conditions are to be added before the Airy
+> calibration has been RUN.** Anything that would have been C-5 goes to
+> `open_questions.md` and is considered only after there is a number to
+> discuss.
+
+Recorded here rather than only in the charter, because the charter is the
+document the rule constrains, and a rule stored only inside the thing it
+governs is how L-036 happened.
+
+**Phase 1 remains unauthorized (OS-16, blocked on permission).** The next
+act is running Airy — under a charter, when one is granted. Not before.
