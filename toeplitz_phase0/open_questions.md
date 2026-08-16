@@ -661,3 +661,17 @@ constants as of 2026-08-16" rests on metadata search, NOT full text. A
 journal-only or differently-phrased determination would be missed. Before
 any Phase 1 write-up claims novelty, this needs a citation-graph check on
 arXiv:2002.06370 (who cites it, and does any citer determine C).
+
+
+**OS-21. Track B closure.** OPERATOR-SUPPLY / other-track owner. Track B is
+unpushed and its CI claim is STRUCTURAL; the Mathlib PR split is unfiled.
+NOT actionable by this session: `lean/` is a subdirectory of this repo with
+no git repo of its own, the workspace carries uncommitted work from several
+other tracks, and staging it would be a deliberate L-046. See L-070.
+
+**OS-22. Contact the authors of arXiv:2002.06370.** OPERATOR-SUPPLY
+(permission). They explicitly deferred evaluating C to "a future
+publication", so a high-precision determination is plausibly welcome, and an
+acknowledged or collaborative route into a journal has particular value
+here. HARD RULE 5 forbids external contact; having a value in hand would not
+change that. Not to be done unilaterally, and not before OS-20 clears.
