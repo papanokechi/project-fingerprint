@@ -172,3 +172,25 @@ tidied is the asset, and it is the artifact a reader would actually want.
 * Venue set changes: reproducibility / software-engineering-for-
   computational-science, journal-first, ledger to Zenodo. **Operator
   decision (OS-17); nothing is submitted.**
+
+
+## The design principle underneath the taxonomy (L-075)
+
+One sentence the paper should not omit, because it is what makes thirteen
+instances generalise beyond one project:
+
+> **Append-only is a cost mechanism, not a provenance mechanism.** It
+> changes the relative cost of the two responses to being wrong. Most
+> epistemic hygiene fails because it tries to make hiding *wrong* rather
+> than making it *expensive*.
+
+Supporting evidence already in the record: L-036 (a rule promoted to the
+spec was broken inside the file citing it — hiding made wrong, still cheap)
+against L-050 (a wrong claim corrected by appending, the error still
+readable, deletion structurally unavailable). The mechanical audits belong
+to the same family: they make "this check is broken" producible in seconds
+rather than an accusation requiring effort.
+
+This also states the paper's portability claim honestly. A reader who
+adopts neither the provenance audit nor mutation testing can adopt
+append-only and per-claim tagging tomorrow, and gets most of the effect.
