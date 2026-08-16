@@ -2971,3 +2971,74 @@ governs is how L-036 happened.
 
 **Phase 1 remains unauthorized (OS-16, blocked on permission).** The next
 act is running Airy — under a charter, when one is granted. Not before.
+
+
+---
+
+## L-074 — The freeze's first test arrived immediately, and the discriminator for when Airy surfaces something
+
+Tag: **STRUCTURAL** (operator judgement, accepted).
+
+The operator's note on the freeze is itself the first thing that could be
+folded into the charter, and the disciplined answer is that it goes HERE and
+not there. `phase1_charter.md` is closed to additions (L-073); a
+clarification of the freeze is not an exception to it, and recording that
+distinction is cheaper than defending it later.
+
+**The predicted pressure.** Airy will surface something — it always has.
+When it does, the argument for making it a charter condition will be GOOD:
+it will be a real finding that genuinely bears on C-1. That is exactly the
+moment the freeze exists for, and a bad argument would not need a freeze to
+resist.
+
+**The discriminator, which is the operator's and is sharper than mine:**
+
+> Does the finding change what COUNTS as a valid C-1 evaluation, or only
+> what I would LIKE to check first?
+
+Only the former was ever charter material. The latter is `open_questions.md`
+by default. And after the freeze, **even the former waits for a number** —
+because "this changes what counts as valid" is precisely the form every
+worthwhile Phase 0 expansion took, and six rounds of it were individually
+correct.
+
+Note the family resemblance to L-059's rule: "it is only hours" is not an
+argument for doing something, it is the symptom. "It genuinely bears on the
+target" is the same shape one level up.
+
+## L-075 — Append-only is a COST mechanism, not a provenance mechanism
+
+Tag: **STRUCTURAL** (operator-supplied design principle, accepted).
+Destination: the methods paper.
+
+The operator's generalisation of this session's closing line, and it is the
+most portable thing produced here:
+
+> Append-only is not primarily a provenance feature. It changes the
+> RELATIVE COST of the two responses to being wrong. Most epistemic hygiene
+> fails because it tries to make hiding WRONG rather than making it
+> EXPENSIVE.
+
+This is the design principle underneath all thirteen instances, and it
+explains why the tooling worked where exhortation did not:
+
+  * L-036 established that promoting a rule to the spec does not make it
+    binding — I broke a rule inside the file that cited it. That is hiding
+    being made *wrong* and remaining *cheap*.
+  * Append-only made a wrong claim stay visible: L-045 was corrected by
+    appending L-050, and the erroneous entry is still readable. Deleting it
+    would have been the cheap move and was structurally unavailable.
+  * Per-claim tagging made load-bearing claims identifiable, so "an item's
+    dependency class can change without the item changing" (L-042) was
+    detectable at all.
+  * The mechanical audits made "I checked and this is broken" a sentence
+    producible in seconds rather than an accusation requiring effort.
+
+Each of those lowers the cost of admitting error or raises the cost of
+concealing it. None of them forbids anything.
+
+For the paper (L-066 framing): this is the sentence that makes the taxonomy
+generalise. The thirteen instances are evidence FOR a design principle, not
+a list of one project's mistakes — and the principle is more portable than
+either tool, because a reader who adopts neither `assertion_audit.py` nor
+mutation testing can still adopt append-only and per-claim tagging tomorrow.
