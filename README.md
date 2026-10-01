@@ -5,6 +5,8 @@ generation, finitary structural cores, and Lean 4 machine-verified proofs.
 
 Status: **infrastructure / day-one.** No mathematical claims yet.
 
+License: `lean/` is Apache-2.0 (see [`lean/LICENSE`](lean/LICENSE); this covers `lean/EBR_uplift.lean`, archived on Zenodo). The rest of this repository is unlicensed.
+
 ---
 
 ## What this project is
